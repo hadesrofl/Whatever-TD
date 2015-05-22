@@ -12,11 +12,9 @@ class Tower{
   Damage damage;
   
   Tower(){
-    target = new Target();
-    target.iwas();
   }
   Target shoot(Minion minion){
-    
+    return this.target;
   }
   void sell(){
     

@@ -5,7 +5,6 @@ class Game{
   
   Game(){
     board = new Map<String, String>();
-    
   }
   /**
    * 
