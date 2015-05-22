@@ -1,5 +1,4 @@
 part of tower;
-import 'package:tower/damage.dart' as Damage;
 class Tower{
   int x;
   int y;
@@ -13,7 +12,6 @@ class Tower{
   Damage damage;
   
   Tower(){
-    
   }
   
 }
