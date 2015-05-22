@@ -1,7 +1,7 @@
 part of tower;
 
-class Damage{
-  double damage;
+class damage{
+  double dmg;
   int damageType;
   bool applyCondition;
   
@@ -11,10 +11,10 @@ class Damage{
     this.setDamageType(damageType);
   }
   double getDamage(){
-    return this.damage;
+    return this.dmg;
   }
   void setDamage(double dmg){
-    this.damage = dmg;
+    this.dmg = dmg;
   }
   int getDamageType(){
     return this.damageType;
