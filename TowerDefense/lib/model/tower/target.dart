@@ -1,4 +1,4 @@
-import 'damage.dart';
+part of tower;
 
 class Target{
   Damage damage;

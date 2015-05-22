@@ -1,6 +1,5 @@
-import 'target.dart';
-import 'damage.dart';
-
+part of tower;
+import 'package:tower/damage.dart' as Damage;
 class Tower{
   int x;
   int y;

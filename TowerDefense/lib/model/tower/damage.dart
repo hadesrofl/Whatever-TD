@@ -1,3 +1,4 @@
+part of tower;
 class Damage{
   double damage;
   int damageType;
