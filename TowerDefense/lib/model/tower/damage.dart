@@ -5,8 +5,10 @@ class Damage{
   int damageType;
   bool applyCondition;
   
-  Damage(){
-    
+  Damage(double damage, int damageType, bool applyCondition){
+    this.setApplayCondition(applyCondition);
+    this.setDamage(damage);
+    this.setDamageType(damageType);
   }
   double getDamage(){
     return this.damage;
