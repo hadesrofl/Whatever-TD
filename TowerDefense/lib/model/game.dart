@@ -1,24 +1,45 @@
 class Game{
-  Map<int, int> board;
+  Map<String, String> board;
+  final row = 22;
+  final col = 22;
   
   Game(){
-    board = new Map<int, int>();
+    board = new Map<String, String>();
+    
   }
+  /**
+   * 
+   */
   void startGame(){
     
   }
+  /**
+   * 
+   */
   void runGame(){
     
   }
+  /**
+   * 
+   */
   void endOfGame(){
     
   }
+  /**
+   * 
+   */
   void updateView(){
     
   }
+  /**
+   * 
+   */
   void endOfLevel(){
     
   }
+  /**
+   * 
+   */
   void calculateHighScore(){
     
   }
