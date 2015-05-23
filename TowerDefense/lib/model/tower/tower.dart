@@ -1,6 +1,6 @@
 part of tower;
 
-class tower{
+class Tower{
   int x;
   int y;
   int range;
@@ -9,10 +9,10 @@ class tower{
   int sellingPrice;
   int upgradeLevel;
   double attackSpeed;
-  target target;
-  damage damage;
+  Target target;
+  Damage damage;
   
-  tower(int x, int y, int range, int attackField, int price, int sellingPrice, 
+  Tower(int x, int y, int range, int attackField, int price, int sellingPrice, 
       int upgradeLevel){
     this.setX(x);
     this.setY(y);
@@ -21,11 +21,11 @@ class tower{
     this.setPrice(price);
     this.setSellingPrice(sellingPrice);
     this.setUpgradeLevel(upgradeLevel);
-    this.target = new target();
-    this.damage = new damage();
+    this.target = new Target();
+    this.damage = new Damage();
   }
   
-  target shoot(minion minion){
+  Target shoot(Minion minion){
     return this.target;
   }
   void sell(){

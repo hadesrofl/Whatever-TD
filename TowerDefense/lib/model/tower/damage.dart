@@ -1,6 +1,6 @@
 part of tower;
 
-class damage{
+class Damage{
   double dmg;
   int damageType;
   bool applyCondition;

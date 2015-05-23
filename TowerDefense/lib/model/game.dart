@@ -1,19 +1,20 @@
 import "tower/towerAdmin.dart";
 import "level/levelAdmin.dart";
-import 'package:html5lib/parser.dart';
+import "dart:io";
 
 class game{
-  towerAdmin tAdmin;
-  levelAdmin lAdmin;
-  var levels;
+  TowerAdmin tAdmin;
+  LevelAdmin lAdmin;
+  File levels;
   Map<String, String> board;
   final row = 22;
   final col = 22;
   
   game(){
-    levels = parse(level.xml);
-    tAdmin = new towerAdmin();
-    lAdmin = new levelAdmin(levels);
+    //TODO: Enter concrete FilePath
+    levels = new File(Platform.script.toFilePath());;
+    tAdmin = new TowerAdmin();
+    lAdmin = new LevelAdmin(levels);
     board = new Map<String, String>();
   }
   /**

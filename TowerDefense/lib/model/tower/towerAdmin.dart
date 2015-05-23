@@ -1,23 +1,23 @@
 library tower;
-
+import "../level/levelAdmin.dart";
 import '../level/levelAdmin.dart';
 
 part 'target.dart';
 part 'damage.dart';
 part 'tower.dart';
 
-class towerAdmin{
+class TowerAdmin{
   
-  List<tower> allTower;
+  List<Tower> allTower;
   
-  towerAdmin(){
-    allTower = new List<tower>();
+  TowerAdmin(){
+    allTower = new List<Tower>();
   }
   /**
    * 
    */
-  List<target> attack(Map<String, minion> minions){
-    List<target> targets = new List<target>();
+  List<Target> attack(Map<String, Minion> minions){
+    List<Target> targets = new List<Target>();
     return targets;
   }
   /**

@@ -1,10 +1,10 @@
 part of tower;
 
-class target{
-  damage damage;
-  minion minion;
+class Target{
+  Damage damage;
+  Minion minion;
   
-  target(){
+  Target(){
   }
 
 }
