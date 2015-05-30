@@ -1,6 +1,6 @@
 library tower;
 import "../level/levelAdmin.dart";
-import '../level/levelAdmin.dart';
+import "../field.dart";
 
 part 'target.dart';
 part 'damage.dart';

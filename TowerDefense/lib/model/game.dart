@@ -1,12 +1,13 @@
 import "tower/towerAdmin.dart";
 import "level/levelAdmin.dart";
+import "field.dart";
 import "dart:io";
 
 class game{
   TowerAdmin tAdmin;
   LevelAdmin lAdmin;
   File levels;
-  Map<String, String> board;
+  Map<String, Field> board;
   final row = 22;
   final col = 22;
   
@@ -15,7 +16,7 @@ class game{
     levels = new File(Platform.script.toFilePath());;
     tAdmin = new TowerAdmin();
     lAdmin = new LevelAdmin(levels);
-    board = new Map<String, String>();
+    board = new Map<String, Field>();
   }
   /**
    * 
