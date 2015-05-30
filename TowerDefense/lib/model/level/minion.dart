@@ -45,7 +45,7 @@ class Minion {
    */
   bool spawned;
   /**
-   * Current Position on our path he has to follow
+   * Steps the minion took on the path (index for the path)
    */
   int stepsOnPath;
 
