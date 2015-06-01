@@ -1,6 +1,6 @@
 part of tower;
 
-class Tower{
+class Tower {
   int range;
   Field attackField;
   int price;
@@ -10,84 +10,84 @@ class Tower{
   Target target;
   Damage damage;
   Field position;
-  
-  Tower(int range, Field attackField, int price, int sellingPrice, 
-      int upgradeLevel){
+
+  Tower(int range, Field attackField, int price, int sellingPrice,
+      int upgradeLevel) {
     this.setRange(range);
     this.setAttackField(attackField);
     this.setPrice(price);
     this.setSellingPrice(sellingPrice);
     this.setUpgradeLevel(upgradeLevel);
     //this.target = new Target();
-   // this.damage = new Damage();
+    // this.damage = new Damage();
   }
-  
-  Target shoot(Minion minion){
+
+  Target shoot(Minion minion) {
     return this.target;
   }
- 
-  void setCoordinates(Field f){
+
+  void setCoordinates(Field f) {
     position = f;
   }
-  
+
   /**
    * Upgrades the tower with the upcoming level factor
    */
-  void upgrade(){
-    for(int i = 1; i <= this.getUpgradeLevel(); i++){
-      if(this.getUpgradeLevel() == i){
-        this.setPrice(this.getPrice() + (500 * i));
-        this.setAttackSpeed(this.getAttackSpeed() * (i + 1));
-        this.setRange(this.getRange() + (i + 1));
-        this.setUpgradeLevel(this.getUpgradeLevel() + 1);
-        this.setSellingPrice(this.getSellingPrice() * (i + 1));
-        break;
-      }
-    }
-    
-    
+  void upgrade() {
+    this.setPrice(this.getPrice() + (500 * this.getUpgradeLevel()));
+    this.setAttackSpeed(this.getAttackSpeed() * (this.getUpgradeLevel() + 1));
+    this.setRange(this.getRange() + (this.getUpgradeLevel() + 1));
+    this.setUpgradeLevel(this.getUpgradeLevel() + 1);
+    this.setSellingPrice(this.getSellingPrice() * (this.getUpgradeLevel() + 1));
   }
-  bool abilityCalculation(){
+
+  bool abilityCalculation() {
     return null;
   }
-  
+
   // --------------getter-/setter methods-----------------//
-  
-  int getRange(){
+
+  int getRange() {
     return this.range;
   }
-  void setRange(int range){
+  void setRange(int range) {
     this.range = range;
   }
-  Field getAttackField(){
+  Field getAttackField() {
     return this.attackField;
   }
-  void setAttackField(Field attackField){
+  void setAttackField(Field attackField) {
     this.attackField = attackField;
   }
-  int getPrice(){
+  int getPrice() {
     return this.price;
   }
-  void setPrice(int price){
+  void setPrice(int price) {
     this.price = price;
   }
-  int getSellingPrice(){
+  int getSellingPrice() {
     return this.sellingPrice;
   }
-  void setSellingPrice(int p){
+  void setSellingPrice(int p) {
     this.sellingPrice = p;
   }
-  int getUpgradeLevel(){
+  int getUpgradeLevel() {
     return this.upgradeLevel;
   }
-  void setUpgradeLevel(int ul){
+  void setUpgradeLevel(int ul) {
     this.upgradeLevel = ul;
   }
-  double getAttackSpeed(){
+  double getAttackSpeed() {
     return this.attackSpeed;
   }
-  void setAttackSpeed(double as){
+  void setAttackSpeed(double as) {
     this.attackSpeed = as;
   }
-  
+
+  /*
+   * 
+   */
+  int newPriceAfterUpgrade() {
+    return this.getPrice() + (this.getUpgradeLevel() * 500);
+  }
 }
