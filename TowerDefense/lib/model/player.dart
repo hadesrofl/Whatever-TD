@@ -1,9 +1,9 @@
-class player{
+class Player{
   String name;
   int gold;
   int highscore;
   
-  player(String name){
+  Player(String name){
     this.setName(name);
     this.setGold(5000);
     this.setHighscore(0);

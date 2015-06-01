@@ -8,6 +8,7 @@ class game{
   LevelAdmin lAdmin;
   File levels;
   Map<String, Field> board;
+  Map<int, String> images;
   final row = 22;
   final col = 22;
   

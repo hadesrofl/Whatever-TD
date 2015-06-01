@@ -4,7 +4,10 @@ class Target{
   Damage damage;
   Minion target;
   
-  Target(){
+  Target(Damage damage, Minion target){
+    this.damage = damage;
+    this.target = target;
+   
   }
 
 }

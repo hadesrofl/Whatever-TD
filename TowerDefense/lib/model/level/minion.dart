@@ -74,6 +74,7 @@ class Minion {
     switch (this.armor.value) {
       //Light Armor
       case 1:
+        //TODO: getter einbauen
         //DamageType = Siege
         if (damage.damageType == 1) {
           dmgToMinion = damage.getDamage() * 0.75;

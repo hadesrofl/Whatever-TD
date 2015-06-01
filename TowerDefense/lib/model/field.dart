@@ -18,7 +18,10 @@ class Field{
    * Bool if this field is a field of the path the minions have to follow
    */
   bool pathField;
-  
+  /**
+   * Bool if this fiel is covered with a tower or not
+   */
+  bool covered;
   /**
    * Constructor
    * @param x - x coordinate of this field
@@ -29,6 +32,7 @@ class Field{
     this.x = x;
     this.y = y;
     this.pathField = pathField;
+    this.covered = false;
   }
   /**
    * Checks if a given field object is the same as this field object
@@ -75,5 +79,15 @@ class Field{
    */
   bool isPathField(){
     return this.pathField;
+  }
+  /**
+   * Checks if this field is covered
+   *  
+   */
+  bool isCovered(){
+    return this.covered;
+  }
+  void setCovered(bool covered){
+    this.covered = covered;
   }
 }
