@@ -2,6 +2,7 @@ library level;
 
 import "package:xml/xml.dart";
 import "../tower/towerAdmin.dart";
+import "../field.dart";
 import "dart:io";
 
 part "condition.dart";
@@ -18,63 +19,143 @@ class LevelAdmin {
    */
   XmlDocument levelFile;
   /**
-   * The number of slain minions this level
-   */
-  int deadMinions;
-  /**
    * The number of the current level
    */
-  int level;
-  
+  int currentLevel;
+  /**
+   * The number of the current wave
+   */
+  int currentWave;
+  /**
+   * List of Minions active on the board
+   */
+  List<Minion> minions = new List<Minion>();
+  /**
+   * Map of all Waves of this current Level
+   * Key - integer of the wave number
+   * Value - the wave
+   */
+  Map<int, Wave> waves = new Map<int, Wave>();
+/**
+ * Path the minions have to follow
+ */
+  List<Field> path = new List<Field>();
+
   /**
    * Constructor for the Level Administration object
    * @param levelFile - XML Document containing the information about the levels of this game
    */
   LevelAdmin(File levelFile) {
     this.levelFile = parse(levelFile.readAsStringSync());
-    this.deadMinions = 0;
-    this.level = 1;
+    this.currentLevel = 1;
+    this.currentWave = 1;
   }
   /**
    * Method to calculate the hitpoints of every single Minion
    * @param targets - a list of targets from the tower administation
    */
-  void calculateHP(List<Target> targets) {}
+  void calculateHPOfMinions(List<Target> targets) {
+    targets.forEach((target) {
+      bool foundMinion = false;
+      for (int i = 0; i < minions.length; i++) {
+        /* Didn't found the minion yet */
+        if (foundMinion == false) {
+          /* found minion */
+          if (minions[i].equals(target.getTarget()) == true) {
+            /* minion has 0 or lower hp => dead */
+            if(minions[i].calculateHitPoints(target.getDamage()) <= 0){
+            minions.removeAt(i);
+            }
+            /* mark minion as found */
+            foundMinion = true;
+          }
+        }
+      }
+    });
+  }
   /**
    * Method to spawn a new minion
    */
-  void minionSpawn() {}
+  void minionSpawn() {
+    bool foundMinion = false;
+    for (int i = 0; i < minions.length; i++) {
+      if (foundMinion == false) {
+        if (minions[i].isSpawned() == false) {
+          minions[i].spawn();
+          foundMinion = true;
+        }
+      }
+    }
+  }
   /**
    * Method to move minions
    */
-  void moveMinion() {}
-  /**
-   * Method to delete a minion if he is dead (hitpoints <= 0)
-   */
-  void deleteMinion() {}
+  void moveMinions() {
+    minions.forEach((m) {
+      if (m.isSpawned()) {
+        m.move(path[m.getStepsOnPath()]);
+      }
+    });
+  }
   /**
    * Method to....well...dunno
    * TODO: what the fuck does this method ö.ö
    */
-  void updateMinion() {}
-  /**
-   * Method to increase the counter of the dead minions
-   */
-  void incDeadMinions() {
-    this.deadMinions++;
-  }
-  /**
-   * Method to clear the dead minions counter
-   */
-  void clearDeadMinions() {
-    this.deadMinions = 0;
-  }
+  void updateMinions() {}
   /**
    * Method to get all necessary informations of the XML File
    */
+  /** TODO: Implement */
   void evaluateFile() {}
   /**
   * Method to load the next level
   */
+  /** TODO: Implement */
   void loadNextLevel() {}
+  /**
+   * Creates the board of this level
+   * @return a map of this level
+   */
+  Map<String, Field> createBoard() {
+    Map<String, Field> board = new Map<String, Field>();
+    /** TODO: Implement */
+    return board;
+  }
+  /**
+   * ---------------Getter and Setter Methods---------------------
+   */
+  /**
+   * Returns the number of this current level
+   * @return the number of this current level as integer
+   */
+  int getLevelNumber() {
+    return currentLevel;
+  }
+  /**
+   * Checks if the Wave is clear
+   * @return true if the wave is clear else false
+   */
+  bool isWaveClear() {
+    return waves[currentWave].isWaveClear();
+  }
+  /**
+   * Checks if the Level ends
+   * @return true if the wave is clear and it was the final wave else false
+   */
+  bool isLevelEnd() {
+    bool levelEnd;
+    if (isWaveClear() == true && waves[currentWave].isFinalWave()) {
+      levelEnd = true;
+    } else {
+      levelEnd = false;
+    }
+    return levelEnd;
+  }
+  /**
+   * Returns the List of Minions of this wave and Level
+   * @return list of all minions
+   */
+  List<Minion> getMinions() {
+    return this.minions;
+  }
 }
