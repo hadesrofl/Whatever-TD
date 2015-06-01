@@ -22,8 +22,13 @@ class TowerAdmin{
   /**
    * calculates all the targets which the tower can reach
    */
-  List<Target> attack(Map<String, Minion> minions){
+  List<Target> attack(List< Minion> minions){
     List<Target> targets = new List<Target>();
+    allTower.forEach((tower){
+      minions.forEach((minion){
+      minion.getPosition();
+      });
+    });
     return targets;
   }
   
@@ -118,8 +123,13 @@ class TowerAdmin{
   /**
    * 
    */
-  void upgradeTower(){
-    
+  void upgradeTower(Tower tower, Player player){
+    // Problem: "if" checks only if the player can pay the old price of the tower
+    // but we have to check if the player can pay the NEW price
+    if(enoughMoney(tower,player)){
+      tower.upgrade();
+      player.setGold(player.getGold() - tower.getPrice());
+    }
   }
   
 }

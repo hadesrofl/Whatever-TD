@@ -29,7 +29,22 @@ class Tower{
   void setCoordinates(Field f){
     position = f;
   }
+  
+  /**
+   * Upgrades the tower with the upcoming level factor
+   */
   void upgrade(){
+    for(int i = 1; i <= this.getUpgradeLevel(); i++){
+      if(this.getUpgradeLevel() == i){
+        this.setPrice(this.getPrice() + (500 * i));
+        this.setAttackSpeed(this.getAttackSpeed() * (i + 1));
+        this.setRange(this.getRange() + (i + 1));
+        this.setUpgradeLevel(this.getUpgradeLevel() + 1);
+        this.setSellingPrice(this.getSellingPrice() * (i + 1));
+        break;
+      }
+    }
+    
     
   }
   bool abilityCalculation(){

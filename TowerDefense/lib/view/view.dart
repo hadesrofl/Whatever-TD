@@ -29,9 +29,9 @@ TableElement board;
    * will be displayed in the view as images
    */
 View(Map<String,String> board){
-nameInput = querySelector("#nameInput");
-start = querySelector("#startButton");
-stop = querySelector("#stopButton");
+nameInput = querySelector("#playerName");
+start = querySelector("#start");
+stop = querySelector("#stop");
 this.board = createBoard(board);
 }
 /**
