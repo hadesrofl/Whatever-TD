@@ -2,7 +2,7 @@ part of tower;
 
 class Target{
   Damage damage;
-  Minion minion;
+  Minion target;
   
   Target(){
   }

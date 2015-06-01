@@ -1,6 +1,5 @@
 library tower;
 import "../level/levelAdmin.dart";
-import '../level/levelAdmin.dart';
 
 part 'target.dart';
 part 'damage.dart';
@@ -24,6 +23,8 @@ class TowerAdmin{
    * 
    */
   void buyTower(){
+    Tower newTower = new Tower();
+    allTower.addAll(newTower);
     
   }
   /**
