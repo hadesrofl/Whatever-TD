@@ -22,12 +22,11 @@ class TowerAdmin {
   /**
    * calculates all the targets which the tower can reach
    */
-  List<Target> attack(List<Minion> minions) {
-    List<Target> targets = new List<Target>();
+  Map<Tower,Target> attack(List<Minion> minions) {
+    Map<Tower,Target> targets = new Map<Tower,Target>();
     allTower.forEach((tower) {
-      minions.forEach((minion) {
-        minion.getPosition();
-      });
+      Target newTarget = tower.shoot(minions);
+      targets.putIfAbsent(tower, ()=>newTarget);
     });
     return targets;
   }

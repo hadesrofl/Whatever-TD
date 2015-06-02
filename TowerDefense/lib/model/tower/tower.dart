@@ -1,6 +1,6 @@
 part of tower;
 
-class Tower {
+ abstract class Tower {
   int range;
   Field attackField;
   int price;
@@ -10,21 +10,28 @@ class Tower {
   Target target;
   Damage damage;
   Field position;
+  double basicDamage;
 
   Tower(int range, Field attackField, int price, int sellingPrice,
-      int upgradeLevel) {
+      int upgradeLevel, double basicDamage) {
     this.setRange(range);
     this.setAttackField(attackField);
     this.setPrice(price);
     this.setSellingPrice(sellingPrice);
     this.setUpgradeLevel(upgradeLevel);
+    this.setBasicDamage(basicDamage);
     //this.target = new Target();
-    // this.damage = new Damage();
+     //this.damage = new Damage();
   }
-
-  Target shoot(Minion minion) {
-    return this.target;
-  }
+/**
+ * shooot
+ * 
+ */
+    Target shoot(List<Minion> minions);
+   // this.damage = new Damage(this.getBasicDamage(), 0)
+   // target = new Target()
+   // return this.target;
+  
 
   void setCoordinates(Field f) {
     position = f;
@@ -39,6 +46,7 @@ class Tower {
     this.setRange(this.getRange() + (this.getUpgradeLevel() + 1));
     this.setUpgradeLevel(this.getUpgradeLevel() + 1);
     this.setSellingPrice(this.getSellingPrice() * (this.getUpgradeLevel() + 1));
+    this.setBasicDamage(this.getBasicDamage() * (this.getUpgradeLevel() + 1));
   }
 
   bool abilityCalculation() {
@@ -82,6 +90,12 @@ class Tower {
   }
   void setAttackSpeed(double as) {
     this.attackSpeed = as;
+  }
+  double getBasicDamage(){
+    return this.basicDamage;
+  }
+  void setBasicDamage(double bSD){
+    this.basicDamage = bSD;
   }
 
   /*
