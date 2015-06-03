@@ -39,9 +39,7 @@ class Tower {
     });
     return null;
   }
-  void init(Map<String, Field> board, final row, final col) {
-    findFieldsToAttack(board, row, col);
-  }
+  
   void findFieldsToAttack(Map<String, Field> board, final row, final col) {
     int startX = this.getPosition().getX() - this.getRange();
     int startY = this.getPosition().getY() - this.getRange();
