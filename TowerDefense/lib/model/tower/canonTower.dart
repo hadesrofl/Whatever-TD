@@ -6,7 +6,7 @@ class CanonTower extends Tower {
 
   CanonTower(Field attackField, int price, int sellingPrice, int upgradeLevel,
       double attackSpeed, this.target, Damage damage, double basicDamage,
-      splashRadius)
+      this.splashRadius)
       : super(4, attackField, price, sellingPrice, upgradeLevel, basicDamage);
 
   Target shoot(List<Minion> minion) {

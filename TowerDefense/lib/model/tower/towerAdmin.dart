@@ -103,9 +103,10 @@ class TowerAdmin {
   /**
    * selects the tower by the given field
    */
-  bool setTowerChoords(Tower tower, Field f) {
+  bool setTowerChoords(Tower tower, Field f, Map<String,Field>board, final row, final col) {
     if (!f.isPathField() || !f.isCovered()) {
       tower.setCoordinates(f);
+      tower.init(board, row, col);
       f.setCovered(true);
       return true;
     } else {

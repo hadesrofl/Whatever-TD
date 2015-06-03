@@ -7,7 +7,4 @@ class ArrowTower extends Tower{
         super(4,attackField,price,sellingPrice,upgradeLevel, basicDamage){
   }
   
-  Target shoot(List<Minion> minions){
-    return this.target;
-  }
 }

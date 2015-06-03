@@ -1,8 +1,7 @@
 part of tower;
 
- abstract class Tower {
+class Tower {
   int range;
-  Field attackField;
   int price;
   int sellingPrice;
   int upgradeLevel;
@@ -11,27 +10,59 @@ part of tower;
   Damage damage;
   Field position;
   double basicDamage;
+  int damageType;
+  List<Field> attackFields;
 
-  Tower(int range, Field attackField, int price, int sellingPrice,
-      int upgradeLevel, double basicDamage) {
+  Tower(int range, int price, int sellingPrice, int upgradeLevel,
+      double basicDamage, int damageType) {
     this.setRange(range);
-    this.setAttackField(attackField);
     this.setPrice(price);
     this.setSellingPrice(sellingPrice);
     this.setUpgradeLevel(upgradeLevel);
     this.setBasicDamage(basicDamage);
-    //this.target = new Target();
-     //this.damage = new Damage();
+    this.damageType = 1;
   }
 /**
  * shooot
  * 
  */
-    Target shoot(List<Minion> minions);
-   // this.damage = new Damage(this.getBasicDamage(), 0)
-   // target = new Target()
-   // return this.target;
-  
+  Target shoot(List<Minion> minions) {
+    minions.forEach((minion) {
+      attackFields.forEach((fields) {
+        if (minion.getPosition().equals(fields)) {
+          this.damage = new Damage(this.getBasicDamage(), this.damageType,
+              this.abilityCalculation());
+          this.target = new Target(this.damage, minion);
+          return this.target;
+        }
+      });
+    });
+    return null;
+  }
+  void init(Map<String, Field> board, final row, final col) {
+    findFieldsToAttack(board, row, col);
+  }
+  void findFieldsToAttack(Map<String, Field> board, final row, final col) {
+    int startX = this.getPosition().getX() - this.getRange();
+    int startY = this.getPosition().getY() - this.getRange();
+    int endX = this.getPosition().getX() + this.getRange();
+    int endY = this.getPosition().getY() + this.getRange();
+
+    if (startX < 0) startX = 1;
+    if (startY < 0) startY = 1;
+    if (endX > row) endX = row;
+    if (endY > col) endY = col;
+    // runtime O(n^3) because we are working on objects, so we cannot instantiate
+    // new field objects
+    for (int x = startX; x <= endX; x++) {
+      for (int y = startY; y <= endY; y++) {
+        board.forEach((str, field) {
+          if (field.getX() == x && field.getY() == y) this.attackFields
+              .add(field);
+        });
+      }
+    }
+  }
 
   void setCoordinates(Field f) {
     position = f;
@@ -50,7 +81,7 @@ part of tower;
   }
 
   bool abilityCalculation() {
-    return null;
+    return true;
   }
 
   // --------------getter-/setter methods-----------------//
@@ -60,12 +91,6 @@ part of tower;
   }
   void setRange(int range) {
     this.range = range;
-  }
-  Field getAttackField() {
-    return this.attackField;
-  }
-  void setAttackField(Field attackField) {
-    this.attackField = attackField;
   }
   int getPrice() {
     return this.price;
@@ -91,11 +116,14 @@ part of tower;
   void setAttackSpeed(double as) {
     this.attackSpeed = as;
   }
-  double getBasicDamage(){
+  double getBasicDamage() {
     return this.basicDamage;
   }
-  void setBasicDamage(double bSD){
+  void setBasicDamage(double bSD) {
     this.basicDamage = bSD;
+  }
+  Field getPosition() {
+    return this.position;
   }
 
   /*
