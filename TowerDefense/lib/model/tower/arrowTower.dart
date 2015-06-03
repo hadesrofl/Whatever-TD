@@ -1,10 +1,13 @@
 part of tower;
-class ArrowTower extends Tower{
-  Target target;
-  
-  ArrowTower(Field attackField,int price,int sellingPrice,
-      int upgradeLevel,double attackSpeed,Target target,Damage damage, double basicDamage):
-        super(4,attackField,price,sellingPrice,upgradeLevel, basicDamage){
+
+class ArrowTower extends Tower {
+  ArrowTower() {
+    this.setRange(5);
+    this.setPrice(150);
+    this.setSellingPrice(110);
+    this.setUpgradeLevel(1);
+    this.setAttackSpeed(1.2);
+    this.setBasicDamage(22.0);
+    this.setDmgType(2);
   }
-  
 }

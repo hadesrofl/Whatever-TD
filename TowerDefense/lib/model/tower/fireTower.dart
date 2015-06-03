@@ -2,14 +2,20 @@ part of tower;
 
 class FireTower extends Tower {
   bool ignite;
-  Target target;
 
-  FireTower(int range, Field attackField, int price,
-      int sellingPrice, int upgradeLevel, double attackSpeed, Target target,
-      Damage damage,double basicDamage, this.ignite)
-      : super(range, attackField, price, sellingPrice, upgradeLevel,basicDamage);
-  
-  Target shoot(List<Minion> minions){
-    return this.target;
+  FireTower() {
+    this.setRange(4);
+    this.setPrice(120);
+    this.setSellingPrice(90);
+    this.setUpgradeLevel(1);
+    this.setAttackSpeed(1.1);
+    this.setBasicDamage(21.0);
+    this.setDmgType(3);
   }
+  bool isIgnited() {
+      return this.ignite;
+    }
+    void setIgnite(bool ig) {
+      this.ignite = ig;
+    }
 }

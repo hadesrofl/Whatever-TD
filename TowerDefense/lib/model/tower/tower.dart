@@ -13,17 +13,17 @@ class Tower {
   int damageType;
   List<Field> attackFields;
 
-  Tower(int range, int price, int sellingPrice, int upgradeLevel,
-      double basicDamage, int damageType) {
-    this.setRange(range);
-    this.setPrice(price);
-    this.setSellingPrice(sellingPrice);
-    this.setUpgradeLevel(upgradeLevel);
-    this.setBasicDamage(basicDamage);
-    this.damageType = 1;
+  Tower() {
+    //int price, int sellingPrice, int upgradeLevel,
+    //      double basicDamage, int damageType
+    //this.setRange(3);
+    //this.setPrice(100);
+    //this.setSellingPrice(sellingPrice);
+    //this.setUpgradeLevel(upgradeLevel);
+    //this.setBasicDamage(basicDamage);
+    //this.damageType = 1;
   }
 /**
- * shooot
  * 
  */
   Target shoot(List<Minion> minions) {
@@ -122,6 +122,9 @@ class Tower {
   }
   Field getPosition() {
     return this.position;
+  }
+  void setDmgType(int dmgType){
+    this.damageType = dmgType;
   }
 
   /*
