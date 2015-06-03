@@ -34,7 +34,7 @@ class TowerAdmin {
   /**
    * updates money of the player and adds the new Tower to the AllTower-List
    */
-  Tower buyTower(int towerDescription, Player player) {
+  void buyTower(int towerDescription, Player player) {
     Tower newTower;
     switch (towerDescription) {
       // case 1 = CanonTower
@@ -89,7 +89,6 @@ class TowerAdmin {
       default:
         break;
     }
-    return newTower;
   }
 
   /**

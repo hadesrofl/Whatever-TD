@@ -1,31 +1,51 @@
 part of tower;
 
 class Tower {
+  /**
+   * 
+   */
   int range;
+  /**
+   * 
+   */
   int price;
+  /**
+   * 
+   */
   int sellingPrice;
+  /**
+   * 
+   */
   int upgradeLevel;
+  /**
+   * 
+   */
   double attackSpeed;
+  /**
+   * 
+   */
   Target target;
+  /**
+   * 
+   */
   Damage damage;
+  /**
+   * 
+   */
   Field position;
+  /**
+   * 
+   */
   double basicDamage;
+  /**
+   * 
+   */
   int damageType;
+  /**
+   * 
+   */
   List<Field> attackFields;
 
-  Tower() {
-    //int price, int sellingPrice, int upgradeLevel,
-    //      double basicDamage, int damageType
-    //this.setRange(3);
-    //this.setPrice(100);
-    //this.setSellingPrice(sellingPrice);
-    //this.setUpgradeLevel(upgradeLevel);
-    //this.setBasicDamage(basicDamage);
-    //this.damageType = 1;
-  }
-/**
- * 
- */
   Target shoot(List<Minion> minions) {
     minions.forEach((minion) {
       attackFields.forEach((fields) {
@@ -128,7 +148,7 @@ class Tower {
   }
 
   /*
-   * 
+   * TODO: 500 need to be fixed by this.getPrice()
    */
   int newPriceAfterUpgrade() {
     return this.getPrice() + (this.getUpgradeLevel() * 500);
