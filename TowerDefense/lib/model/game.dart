@@ -16,16 +16,17 @@ class game {
 
   game() {
     //TODO: Enter concrete FilePath
-    levels = new File(Platform.script.toFilePath());
-    tAdmin = new TowerAdmin();
-    lAdmin = new LevelAdmin(levels);
-    board = new Map<String, Field>();
+    this.levels = new File(Platform.script.toFilePath());
+    this.tAdmin = new TowerAdmin();
+    this.lAdmin = new LevelAdmin(levels);
+    this.board = new Map<String, Field>();
   }
   /**
    * 
    */
   void startGame() {
     this.board = lAdmin.createBoard(this.row, this.col);
+    this.view = new View(convertBoard());
   }
   /**
    * 
@@ -47,4 +48,18 @@ class game {
    * 
    */
   void calculateHighScore() {}
+  /**
+   * converts the Map from <String, Field> to <String, String> to create a HTML-Table
+   */
+  Map<String, String> convertBoard() {
+    Map<String, String> htmlBoard = new Map<String, String>();
+    String keySet;
+    var str;
+    this.board.forEach((key, value) {
+      keySet = value.getX().toString() + " " + value.getY().toString();
+      str = keySet.split(" ");
+      htmlBoard.putIfAbsent(str[0], () => str[1]);
+    });
+    return htmlBoard;
+  }
 }
