@@ -1,7 +1,6 @@
 part of tower;
 
 class FireTower extends Tower {
-  bool ignite;
 
   FireTower() {
     this.setRange(4);
@@ -11,11 +10,7 @@ class FireTower extends Tower {
     this.setAttackSpeed(1.1);
     this.setBasicDamage(21.0);
     this.setDmgType(3);
+    this.setAbility(false);
+    this.setAbilityFactor(25);
   }
-  bool isIgnited() {
-      return this.ignite;
-    }
-    void setIgnite(bool ig) {
-      this.ignite = ig;
-    }
 }

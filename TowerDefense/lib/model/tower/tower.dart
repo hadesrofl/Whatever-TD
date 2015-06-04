@@ -1,5 +1,6 @@
 part of tower;
 
+
 class Tower {
   /**
    * 
@@ -45,7 +46,15 @@ class Tower {
    * 
    */
   List<Field> attackFields;
-
+  /**
+   * 
+   */
+  bool ability;
+  /**
+   * 
+   */
+  int abilityFactor;
+  
   Target shoot(List<Minion> minions) {
     minions.forEach((minion) {
       attackFields.forEach((fields) {
@@ -90,16 +99,19 @@ class Tower {
    * Upgrades the tower with the upcoming level factor
    */
   void upgrade() {
-    this.setPrice(this.getPrice() + (500 * this.getUpgradeLevel()));
-    this.setAttackSpeed(this.getAttackSpeed() * (this.getUpgradeLevel() + 1));
-    this.setRange(this.getRange() + (this.getUpgradeLevel() + 1));
     this.setUpgradeLevel(this.getUpgradeLevel() + 1);
-    this.setSellingPrice(this.getSellingPrice() * (this.getUpgradeLevel() + 1));
-    this.setBasicDamage(this.getBasicDamage() * (this.getUpgradeLevel() + 1));
+    this.setPrice(this.getPrice() + (500 * this.getUpgradeLevel()));
+    this.setAttackSpeed(this.getAttackSpeed() * (this.getUpgradeLevel()));
+    this.setRange(this.getRange() + (this.getUpgradeLevel()));
+    this.setSellingPrice(this.getSellingPrice() * (this.getUpgradeLevel()));
+    this.setBasicDamage(this.getBasicDamage() * (this.getUpgradeLevel()));
+    this.setAbilityFactor(this.getAbilityFactor() + 5);
   }
 
   bool abilityCalculation() {
-    return true;
+    Random r = new Random();
+    if(r.nextInt(100) < this.getAbilityFactor())return true;
+    return false;
   }
 
   // --------------getter-/setter methods-----------------//
@@ -145,6 +157,18 @@ class Tower {
   }
   void setDmgType(int dmgType){
     this.damageType = dmgType;
+  }
+  bool getAbility(){
+    return this.ability;
+  }
+  void setAbility(bool ability){
+    this.ability = ability;
+  }
+  int getAbilityFactor(){
+    return this.abilityFactor;
+  }
+  void setAbilityFactor(int abF){
+    this.abilityFactor = abF;
   }
 
   /*
