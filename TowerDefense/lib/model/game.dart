@@ -2,8 +2,9 @@ import "tower/towerAdmin.dart";
 import "level/levelAdmin.dart";
 import "field.dart";
 import "dart:io";
+import "../view/view.dart";
 
-class game{
+class game {
   TowerAdmin tAdmin;
   LevelAdmin lAdmin;
   File levels;
@@ -11,10 +12,11 @@ class game{
   Map<int, String> images;
   final row = 22;
   final col = 22;
-  
-  game(){
+  View view;
+
+  game() {
     //TODO: Enter concrete FilePath
-    levels = new File(Platform.script.toFilePath());;
+    levels = new File(Platform.script.toFilePath());
     tAdmin = new TowerAdmin();
     lAdmin = new LevelAdmin(levels);
     board = new Map<String, Field>();
@@ -22,37 +24,27 @@ class game{
   /**
    * 
    */
-  void startGame(){
-    
+  void startGame() {
+    this.board = lAdmin.createBoard(this.row, this.col);
   }
   /**
    * 
    */
-  void runGame(){
-    
-  }
+  void runGame() {}
   /**
    * 
    */
-  void endOfGame(){
-    
-  }
+  void endOfGame() {}
   /**
    * 
    */
-  void updateView(){
-    
-  }
+  void updateView() {}
   /**
    * 
    */
-  void endOfLevel(){
-    
-  }
+  void endOfLevel() {}
   /**
    * 
    */
-  void calculateHighScore(){
-    
-  }
+  void calculateHighScore() {}
 }

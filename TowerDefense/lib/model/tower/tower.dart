@@ -1,6 +1,5 @@
 part of tower;
 
-
 class Tower {
   /**
    * 
@@ -54,7 +53,7 @@ class Tower {
    * 
    */
   int abilityFactor;
-  
+
   Target shoot(List<Minion> minions) {
     minions.forEach((minion) {
       attackFields.forEach((fields) {
@@ -62,13 +61,12 @@ class Tower {
           this.damage = new Damage(this.getBasicDamage(), this.damageType,
               this.abilityCalculation());
           this.target = new Target(this.damage, minion);
-          return this.target;
         }
       });
     });
-    return null;
+    return this.target;
   }
-  
+
   void findFieldsToAttack(Map<String, Field> board, final row, final col) {
     int startX = this.getPosition().getX() - this.getRange();
     int startY = this.getPosition().getY() - this.getRange();
@@ -110,7 +108,7 @@ class Tower {
 
   bool abilityCalculation() {
     Random r = new Random();
-    if(r.nextInt(100) < this.getAbilityFactor())return true;
+    if (r.nextInt(100) < this.getAbilityFactor()) return true;
     return false;
   }
 
@@ -155,19 +153,19 @@ class Tower {
   Field getPosition() {
     return this.position;
   }
-  void setDmgType(int dmgType){
+  void setDmgType(int dmgType) {
     this.damageType = dmgType;
   }
-  bool getAbility(){
+  bool getAbility() {
     return this.ability;
   }
-  void setAbility(bool ability){
+  void setAbility(bool ability) {
     this.ability = ability;
   }
-  int getAbilityFactor(){
+  int getAbilityFactor() {
     return this.abilityFactor;
   }
-  void setAbilityFactor(int abF){
+  void setAbilityFactor(int abF) {
     this.abilityFactor = abF;
   }
 

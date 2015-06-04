@@ -63,8 +63,8 @@ class LevelAdmin {
           /* found minion */
           if (minions[i].equals(target.getTarget()) == true) {
             /* minion has 0 or lower hp => dead */
-            if(minions[i].calculateHitPoints(target.getDamage()) <= 0){
-            minions.removeAt(i);
+            if (minions[i].calculateHitPoints(target.getDamage()) <= 0) {
+              minions.removeAt(i);
             }
             /* mark minion as found */
             foundMinion = true;
@@ -116,9 +116,13 @@ class LevelAdmin {
    * Creates the board of this level
    * @return a map of this level
    */
-  Map<String, Field> createBoard() {
+  Map<String, Field> createBoard(final row, final col) {
     Map<String, Field> board = new Map<String, Field>();
-    /** TODO: Implement */
+    for (int i = 1; i <= row; i++) {
+      for (int j = 1; j <= col; j++) {
+        board.putIfAbsent((i + j).toString(), () => new Field(i, j, false));
+      }
+    }
     return board;
   }
   /**

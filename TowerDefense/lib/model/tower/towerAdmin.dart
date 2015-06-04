@@ -23,11 +23,11 @@ class TowerAdmin {
   /**
    * calculates all the targets which the tower can reach
    */
-  Map<Tower,Target> attack(List<Minion> minions) {
-    Map<Tower,Target> targets = new Map<Tower,Target>();
+  Map<Tower, Target> attack(List<Minion> minions) {
+    Map<Tower, Target> targets = new Map<Tower, Target>();
     allTower.forEach((tower) {
       Target newTarget = tower.shoot(minions);
-      targets.putIfAbsent(tower, ()=>newTarget);
+      targets.putIfAbsent(tower, () => newTarget);
     });
     return targets;
   }
@@ -97,13 +97,15 @@ class TowerAdmin {
    */
   void sellTower(Tower tower, Player player) {
     player.setGold(player.getGold() + tower.getSellingPrice());
+    this.allTower.remove(tower);
     tower = null;
   }
 
   /**
    * selects the tower by the given field
    */
-  bool setTowerChoords(Tower tower, Field f, Map<String,Field>board, final row, final col) {
+  bool setTowerChoords(
+      Tower tower, Field f, Map<String, Field> board, final row, final col) {
     if (!f.isPathField() || !f.isCovered()) {
       tower.setCoordinates(f);
       tower.findFieldsToAttack(board, row, col);
@@ -117,7 +119,8 @@ class TowerAdmin {
   /**
    * 
    */
-  void upgradeTower(Tower tower, Player player, Map<String,Field>board, final row, final col) {
+  void upgradeTower(Tower tower, Player player, Map<String, Field> board,
+      final row, final col) {
     // Problem: "if" checks only if the player can pay the old price of the tower
     // but we have to check if the player can pay the NEW price
     // => fixed, method saves the upcoming price and compares
