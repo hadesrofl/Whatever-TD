@@ -1,4 +1,5 @@
 library game;
+
 import '../tower/towerAdmin.dart';
 import '../level/levelAdmin.dart';
 import '../../view/view.dart';
@@ -11,8 +12,8 @@ class Game {
   String levels;
   Map<Field, String> board;
   Map<int, String> images;
-  final row = 22;
-  final col = 22;
+  final row = 11;
+  final col = 11;
   View view;
   Player player;
 
@@ -58,7 +59,8 @@ class Game {
   Map<String, String> convertBoard() {
     Map<String, String> htmlBoard = new Map<String, String>();
     this.board.forEach((key, value) {
-      htmlBoard.putIfAbsent(key.getX().toString() + key.getY().toString(), () => value);
+      htmlBoard.putIfAbsent(
+          key.getX().toString() + key.getY().toString(), () => value);
     });
     return htmlBoard;
   }
@@ -69,28 +71,28 @@ class Game {
    * Gets the number of rows of the board
    * @return the number of rows
    */
-  int getRow(){
+  int getRow() {
     return row;
   }
   /**
    * Gets the number of cols of the board
    * @return the number of cols
    */
-  int getCol(){
+  int getCol() {
     return col;
   }
   /**
    * Sets a view object to the game
    * @param view - the view object to interact with
    */
-  void setView(View view){
+  void setView(View view) {
     this.view = view;
   }
   /**
    * Sets a player to this game
    * @param name - is the name of the player
    */
-  void setPlayer(String name){
+  void setPlayer(String name) {
     this.player = new Player(name);
   }
 }
