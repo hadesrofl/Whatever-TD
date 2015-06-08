@@ -1,0 +1,20 @@
+#navigation > ul{   
+  padding: 4px;
+  list-style-type: none;
+}
+#navigation{
+   float: left;
+   background-color: green;
+   border-style: solid;
+}
+#highscoreTable{
+  float: right;
+   background-color: grey;
+   border-style: solid;
+}
+#stop{
+    background: #262626;
+}
+#board{
+   
+}
