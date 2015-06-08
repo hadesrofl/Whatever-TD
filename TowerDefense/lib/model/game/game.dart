@@ -101,8 +101,8 @@ class Game {
   /**
    * Sets the Path of the images to the keys of the objects
    */
-  void setImagesToMap(){
-    this.images.putIfAbsent("Amazon", () => "img/amazon.png");
+  void setImagesToMap() {
+    this.images.putIfAbsent("Amazon", () => "/img/amazon.png");
     this.images.putIfAbsent("Apple", () => "img/apple.png");
     this.images.putIfAbsent("CookieMonster", () => "img/cookiemonster.jpg");
     this.images.putIfAbsent("Dart", () => "img/dart.jpg");
@@ -112,6 +112,5 @@ class Game {
     this.images.putIfAbsent("Kratzke", () => "img/kratzke.jpeg");
     this.images.putIfAbsent("Twitter", () => "img/twitter.png");
     this.images.putIfAbsent("Whatsapp", () => "img/whatsapp.png");
-    
   }
 }
