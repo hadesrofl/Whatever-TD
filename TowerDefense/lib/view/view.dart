@@ -71,7 +71,7 @@ class View {
     nameLabel = querySelector("#player");
     menuContainer = querySelector("#navigation");
     highScoreContainer = querySelector("#highscore");
-    
+
     stop.hidden = true;
     menuContainer.hidden = true;
     highScoreContainer.hidden = true;
@@ -120,7 +120,7 @@ class View {
   }
   void createHighScoreTable() {
     this.highScoreContainer.hidden = false;
-    this.highScoreContainer.innerHtml = "Highscore";
+    this.highScoreContainer.innerHtml = "<strong>Highscore</strong>";
     this.highScoreTable = new OListElement();
     this.highScoreTable.id = "highscoreTable";
     this.highScoreContainer.append(this.highScoreTable);
@@ -131,19 +131,26 @@ class View {
     }
   }
   void createMenu() {
+    ButtonElement buy = new ButtonElement();
+    ButtonElement sell = new ButtonElement();
+    ButtonElement upgrade = new ButtonElement();
+
     this.menuContainer.hidden = false;
-    this.menuContainer.innerHtml = "Menu";
+    this.menuContainer.innerHtml = "<strong>Menu</strong>";
     this.menu = new UListElement();
     this.menu.id = "menu";
     this.menuContainer.append(menu);
-    LIElement buy = new LIElement();
+    LIElement Buy = new LIElement();
+    Buy.append(buy);
     buy.text = "Buy";
-    LIElement sell = new LIElement();
+    LIElement Sell = new LIElement();
+    Sell.append(sell);
     sell.text = "Sell";
-    LIElement upgrade = new LIElement();
+    LIElement Upgrade = new LIElement();
+    Upgrade.append(upgrade);
     upgrade.text = "Upgrade";
-    this.menu.append(buy);
-    this.menu.append(sell);
-    this.menu.append(upgrade);
+    this.menu.append(Buy);
+    this.menu.append(Sell);
+    this.menu.append(Upgrade);
   }
 }
