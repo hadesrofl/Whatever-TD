@@ -1,8 +1,9 @@
 part of tower;
 
-class LighteningTower extends Tower {
+class LightningTower extends Tower {
 
-  LighteningTower() {
+  LightningTower() {
+    this.setName("LightningTower");
     this.setRange(4);
     this.setPrice(100);
     this.setSellingPrice(70);

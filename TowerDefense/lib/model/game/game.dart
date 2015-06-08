@@ -11,7 +11,10 @@ class Game {
   LevelAdmin lAdmin;
   String levels;
   Map<Field, String> board;
-  Map<int, String> images;
+  /**
+   * Map with Images - The Key is the Name of a Tower or Minion, the value is the path to that image
+   */
+  Map<String, String> images;
   final row = 11;
   final col = 11;
   View view;
@@ -22,7 +25,7 @@ class Game {
     this.tAdmin = new TowerAdmin();
     this.lAdmin = new LevelAdmin(levels);
     this.board = new Map<Field, String>();
-    this.view;
+    this.setImagesToMap();
   }
   /**
    * 
@@ -94,5 +97,21 @@ class Game {
    */
   void setPlayer(String name) {
     this.player = new Player(name);
+  }
+  /**
+   * Sets the Path of the images to the keys of the objects
+   */
+  void setImagesToMap(){
+    this.images.putIfAbsent("Amazon", () => "img/amazon.png");
+    this.images.putIfAbsent("Apple", () => "img/apple.png");
+    this.images.putIfAbsent("CookieMonster", () => "img/cookiemonster.jpg");
+    this.images.putIfAbsent("Dart", () => "img/dart.jpg");
+    this.images.putIfAbsent("Docker", () => "img/docker.png");
+    this.images.putIfAbsent("Facebook", () => "img/facebook.png");
+    this.images.putIfAbsent("Google", () => "img/google.png");
+    this.images.putIfAbsent("Kratzke", () => "img/kratzke.jpeg");
+    this.images.putIfAbsent("Twitter", () => "img/twitter.png");
+    this.images.putIfAbsent("Whatsapp", () => "img/whatsapp.png");
+    
   }
 }

@@ -2,6 +2,10 @@ part of tower;
 
 class Tower {
   /**
+   * Name of the Tower
+   */
+  String name;
+  /**
    * 
    */
   int range;
@@ -167,6 +171,9 @@ class Tower {
   }
   void setAbilityFactor(int abF) {
     this.abilityFactor = abF;
+  }
+  void setName(String name){
+    this.name = name;
   }
 
   /*

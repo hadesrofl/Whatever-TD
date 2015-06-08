@@ -12,7 +12,7 @@ class View {
   ButtonElement upgrade;
   ImageElement canonTower;
   ImageElement arrowTower;
-  ImageElement lighteningTower;
+  ImageElement lightningTower;
   ImageElement fireTower;
 /**
    * An inputElement so that the user can type in his name
@@ -144,7 +144,7 @@ class View {
     upgrade = new ButtonElement();
     canonTower = new ImageElement();
     arrowTower = new ImageElement();
-    lighteningTower = new ImageElement();
+    lightningTower = new ImageElement();
     fireTower = new ImageElement();
 
     this.menuContainer.hidden = true;
@@ -170,7 +170,7 @@ class View {
     aTower.append(arrowTower);
     aTower.hidden = true;
 
-    lTower.append(lighteningTower);
+    lTower.append(lightningTower);
     lTower.hidden = true;
 
     fTower.append(fireTower);

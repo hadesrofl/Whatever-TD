@@ -2,6 +2,7 @@ part of tower;
 
 class CanonTower extends Tower {
   CanonTower() {
+    this.setName("Canon Tower");
     this.setRange(4);
     this.setPrice(100);
     this.setSellingPrice(70);

@@ -30,7 +30,7 @@ class Controller {
     view.buy.onClick.listen((ev) {
       view.arrowTower.hidden = false;
       view.canonTower.hidden = false;
-      view.lighteningTower.hidden = false;
+      view.lightningTower.hidden = false;
       view.fireTower.hidden = false;
     });
   }

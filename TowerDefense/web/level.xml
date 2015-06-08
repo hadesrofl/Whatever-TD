@@ -1,2 +1,144 @@
 <allLevels>
+	<levels>
+		<level no="1" finalLevel="false">
+			<wave no="1" numberOfMinions="10" finalWave="false">
+				<minion ref="WeakKratzke"></minion>
+			</wave>
+			<wave no="2" numberOfMinions="20" finalWave="false">
+				<minion ref="InternetExplorer"></minion>
+			</wave>
+			<wave no="3" numberOfMinions="5" finalWave="false">
+				<minion ref="Docker"></minion>
+			</wave>
+			<wave no="4" numberOfMinions="15" finalWave="false">
+				<minion ref="Dart"></minion>
+			</wave>
+			<wave no="5" numberOfMinions="1" finalWave="true">
+				<minion ref="CookieMonster"></minion>
+			</wave>
+		</level>
+		<level no="2" finalLevel="false">
+			<wave no="1" numberOfMinions="20" finalWave="false">
+				<minion ref="Docker"></minion>
+			</wave>
+			<wave no="2" numberOfMinions="25" finalWave="false">
+				<minion ref="Dart"></minion>
+			</wave>
+			<wave no="3" numberOfMinions="15" finalWave="false">
+				<minion ref="Twitter"></minion>
+			</wave>
+			<wave no="4" numberOfMinions="10" finalWave="false">
+				<minion ref="Whatsapp"></minion>
+			</wave>
+			<wave no="5" numberOfMinions="1" finalWave="true">
+				<minion ref="Amazon"></minion>
+			</wave>
+		</level>
+		<level no="3" finalLevel="true">
+			<wave no="1" numberOfMinions="10" finalWave="false">
+				<minion ref="CookieMonster"></minion>
+			</wave>
+			<wave no="2" numberOfMinions="20" finalWave="false">
+				<minion ref="Facebook"></minion>
+			</wave>
+			<wave no="3" numberOfMinions="15" finalWave="false">
+				<minion ref="Apple"></minion>
+			</wave>
+			<wave no="4" numberOfMinions="10" finalWave="false">
+				<minion ref="Google"></minion>
+			</wave>
+			<wave no="5" numberOfMinions="1" finalWave="true">
+				<minion ref="StrongKratzke"></minion>
+			</wave>
+		</level>
+	</levels>	
+<minions>
+	<minion name="WeakKratzke">
+		<hitpoints>25</hitpoints>
+		<armor>light</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>25</droppedGold>
+	</minion>
+	<minion name="InternetExplorer">
+		<hitpoints>20</hitpoints>
+		<armor>light</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>20</droppedGold>
+	</minion>
+	<minion name="Docker">
+		<hitpoints>50</hitpoints>
+		<armor>medium</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>50</droppedGold>
+	</minion>
+	<minion name="Dart">
+		<hitpoints>50</hitpoints>
+		<armor>light</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>30</droppedGold>
+	</minion>
+	<minion name="CookieMonster">
+		<hitpoints>1000</hitpoints>
+		<armor>heavy</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>500</droppedGold>
+	</minion>
+	<minion> name="Twitter">
+		<hitpoints>40</hitpoints>
+		<armor>medium</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>30</droppedGold>
+	</minion>
+	<minion name="Whatsapp">
+		<hitpoints>60</hitpoints>
+		<armor>medium</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>40</droppedGold>
+	</minion>
+	<minion name="Facebook">
+		<hitpoints>100</hitpoints>
+		<armor>heavy</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>60</droppedGold>
+	</minion>
+	<minion name="Amazon">
+		<hitpoints>2500</hitpoints>
+		<armor>heavy</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>1000</droppedGold>
+	</minion>
+	<minion name="Apple">
+		<hitpoints>150</hitpoints>
+		<armor>heavy</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>200</droppedGold>
+	</minion>
+	<minion name="Google">
+		<hitpoints>200</hitpoints>
+		<armor>heavy</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>300</droppedGold>
+	</minion>
+	<minion name="StrongKratzke">
+		<hitpoints>5000</hitpoints>
+		<armor>light</armor>
+		<movementSpeed>1.0</movementSpeed>
+		<droppedGold>10000</droppedGold>
+	</minion>
+</minions>
+<highscores>
+	<level no="1">
+			<player name="Peter">
+				<points>500</points>
+			</player>
+			<player name="Robin">
+				<points>1000</points>
+			</player>
+	</level>
+	<level no="2">
+		<player name="Peter">
+			<points>1200</points>
+		</player>
+	</level>
+</highscores>
 </allLevels>

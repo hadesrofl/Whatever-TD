@@ -8,7 +8,7 @@ part 'target.dart';
 part 'damage.dart';
 part 'tower.dart';
 part 'canonTower.dart';
-part 'lighteningTower.dart';
+part 'lightningTower.dart';
 part 'fireTower.dart';
 part 'arrowTower.dart';
 
@@ -75,7 +75,7 @@ class TowerAdmin {
         break;
       // case 4 = LighteningTower
       case 4:
-        newTower = new LighteningTower();
+        newTower = new LightningTower();
         if (!enoughMoney(newTower, player)) {
           //TODO: print befehl ausgabe im HTML Dokument evtl returnType bool
           print("Not enough money to buy the Tower");
