@@ -1,24 +1,25 @@
 import "tower/towerAdmin.dart";
 import "level/levelAdmin.dart";
 import "field.dart";
-import "dart:io";
 import "../view/view.dart";
+import "player.dart";
 
 class Game {
   TowerAdmin tAdmin;
   LevelAdmin lAdmin;
-  File levels;
+  String levels;
   Map<Field, String> board;
   Map<int, String> images;
   final row = 22;
   final col = 22;
   View view;
+  Player player;
 
-  Game() {
+  Game(String levels) {
     //TODO: Enter concrete FilePath
-    //this.levels = new File(Platform.script.toFilePath());
+    this.levels = levels;
     this.tAdmin = new TowerAdmin();
-    //this.lAdmin = new LevelAdmin(levels);
+    this.lAdmin = new LevelAdmin(levels);
     this.board = new Map<Field, String>();
     this.view;
   }
@@ -61,14 +62,32 @@ class Game {
     });
     return htmlBoard;
   }
-  
+  /**
+   * ---------------Getter and Setter Methods---------------------
+   */
+  /**
+   * Gets the number of rows of the board
+   * @return
+   */
   int getRow(){
     return row;
   }
+  /**
+   * 
+   */
   int getCol(){
     return col;
   }
+  /**
+   * 
+   */
   void setView(View view){
     this.view = view;
+  }
+  /**
+   * 
+   */
+  void setPlayer(String name){
+    this.player = new Player(name);
   }
 }

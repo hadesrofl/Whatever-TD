@@ -6,16 +6,12 @@ import "../view/view.dart";
 class Controller{
   View view;
   Game game;
-  Controller(){
-    game = new Game();
+  Controller(String levels){
+    game = new Game(levels);
     view = new View(game.getRow(), game.getCol());
     game.setView(view);
-    
-  }
-  void listenOnClick(){
-    
-  }
-  void listenOnChane(){
-    
-  }
+    view.start.onClick.listen((ev){
+      view.nameInput.text;
+    });
+    }
 }

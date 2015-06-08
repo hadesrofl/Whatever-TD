@@ -3,6 +3,8 @@ library level;
 import "package:xml/xml.dart";
 import "../tower/towerAdmin.dart";
 import "../field.dart";
+import "dart:html";
+import "dart:async";
 
 part "condition.dart";
 part "minion.dart";
@@ -16,7 +18,7 @@ class LevelAdmin {
   /**
    * The File containing all informations for the levels of this game
    */
-  XmlDocument levelFile;
+  var levelFile;
   /**
    * The number of the current level
    */
@@ -45,8 +47,8 @@ class LevelAdmin {
    * Constructor for the Level Administration object
    * @param levelFile - XML Document containing the information about the levels of this game
    */
-  LevelAdmin(File levelFile) {
-    this.levelFile = parse(levelFile.readAsStringSync());
+  LevelAdmin(String levelFile) {
+    this.levelFile = parse(levelFile);
     this.currentLevel = 1;
     this.currentWave = 1;
   }
