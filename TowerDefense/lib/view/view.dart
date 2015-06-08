@@ -6,6 +6,13 @@ import "dart:html";
    * This Class handles the appearance of our game and manipulates the DOM-Tree of HTML
    */
 class View {
+  ButtonElement buy;
+  ButtonElement sell;
+  ButtonElement upgrade;
+  ImageElement canonTower;
+  ImageElement arrowTower;
+  ImageElement lighteningTower;
+  ImageElement fireTower;
 /**
    * An inputElement so that the user can type in his name
    */
@@ -131,22 +138,46 @@ class View {
     }
   }
   void createMenu() {
-    ButtonElement buy = new ButtonElement();
-    ButtonElement sell = new ButtonElement();
-    ButtonElement upgrade = new ButtonElement();
+    buy = new ButtonElement();
+    sell = new ButtonElement();
+    upgrade = new ButtonElement();
+    canonTower = new ImageElement();
+    arrowTower = new ImageElement();
+    lighteningTower = new ImageElement();
+    fireTower = new ImageElement();
 
-    this.menuContainer.hidden = false;
+    this.menuContainer.hidden = true;
     this.menuContainer.innerHtml = "<strong>Menu</strong>";
     this.menu = new UListElement();
     this.menu.id = "menu";
     this.menuContainer.append(menu);
+
     LIElement Buy = new LIElement();
+    LIElement cTower = new LIElement();
+    LIElement aTower = new LIElement();
+    LIElement lTower = new LIElement();
+    LIElement fTower = new LIElement();
+    LIElement Sell = new LIElement();
+    LIElement Upgrade = new LIElement();
+
     Buy.append(buy);
     buy.text = "Buy";
-    LIElement Sell = new LIElement();
+
+    cTower.append(canonTower);
+    cTower.hidden = true;
+
+    aTower.append(arrowTower);
+    aTower.hidden = true;
+
+    lTower.append(lighteningTower);
+    lTower.hidden = true;
+
+    fTower.append(fireTower);
+    fTower.hidden = true;
+
     Sell.append(sell);
     sell.text = "Sell";
-    LIElement Upgrade = new LIElement();
+
     Upgrade.append(upgrade);
     upgrade.text = "Upgrade";
     this.menu.append(Buy);
