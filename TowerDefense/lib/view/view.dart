@@ -33,14 +33,14 @@ class View {
     nameInput = querySelector("#playerName");
     start = querySelector("#start");
     stop = querySelector("#stop");
-    this.board = createBoard(board);
+    this.board = createHTMLTable(board);
   }
 /**
    * Method to create a board 
    * @param board - contains all information which shall be displayed in the view
    * @return is a table element for the DOM-Tree
    */
-  TableElement createBoard(Map<String, String> board) {
+  TableElement createHTMLTable(Map<String, String> board) {
 //TODO: Do fancy creating stuff
     return null;
   }
@@ -56,5 +56,11 @@ class View {
    */
   void updatePage() {
 //TODO: Do fancy updating stuff _ rev 2
+  }
+
+  //-------------------getter-/setterMethods---------------------------//
+
+  InputElement getPlayerName() {
+    return this.nameInput;
   }
 }

@@ -3,6 +3,7 @@ import "level/levelAdmin.dart";
 import "field.dart";
 import "dart:io";
 import "../view/view.dart";
+import "player.dart";
 
 class game {
   TowerAdmin tAdmin;
@@ -13,6 +14,7 @@ class game {
   final row = 22;
   final col = 22;
   View view;
+  Player player;
 
   game() {
     //TODO: Enter concrete FilePath
@@ -27,6 +29,7 @@ class game {
   void startGame() {
     this.board = lAdmin.createBoard(this.row, this.col);
     this.view = new View(convertBoard());
+    this.player = new Player(this.view.getPlayerName().toString());
   }
   /**
    * 
