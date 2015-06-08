@@ -1,6 +1,7 @@
 library view;
 
 import "dart:html";
+/* TODO: DeathCounter for Minions */
 
 /**
    * This Class handles the appearance of our game and manipulates the DOM-Tree of HTML

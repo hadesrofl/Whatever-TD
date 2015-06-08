@@ -17,6 +17,10 @@ class Minion {
    */
   double movementSpeed;
   /**
+   * Amount of gold dropped on death
+   */
+  int droppedGold;
+  /**
    * List of conditions of this minion
    */
   List<Condition> conditions = new List<Condition>();
@@ -57,10 +61,11 @@ class Minion {
    * @param x - x-coordinate a minion is starting at
    * @param y - y-coordinate a minion is starting at
    */
-  Minion(double hitpoints, Armor armor, double movementSpeed) {
+  Minion(double hitpoints, Armor armor, double movementSpeed, int droppedGold) {
     this.hitpoints = hitpoints;
     this.armor = armor;
     this.movementSpeed = movementSpeed;
+    this.droppedGold = droppedGold;
     this.roundCounter = 0;
     this.stepsOnPath = 0;
     this.spawned = false;
@@ -297,5 +302,12 @@ void setY(int y){
    */
   List<Condition> getConditions() {
     return this.conditions;
+  }
+  /**
+   * Returns the amount of gold dropped on death
+   * @return the amount of gold
+   */
+  int getDroppedGold(){
+    return this.droppedGold;
   }
 }
