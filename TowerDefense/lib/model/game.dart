@@ -4,29 +4,30 @@ import "field.dart";
 import "dart:io";
 import "../view/view.dart";
 
-class game {
+class Game {
   TowerAdmin tAdmin;
   LevelAdmin lAdmin;
   File levels;
-  Map<String, Field> board;
+  Map<Field, String> board;
   Map<int, String> images;
   final row = 22;
   final col = 22;
   View view;
 
-  game() {
+  Game() {
     //TODO: Enter concrete FilePath
-    this.levels = new File(Platform.script.toFilePath());
+    //this.levels = new File(Platform.script.toFilePath());
     this.tAdmin = new TowerAdmin();
-    this.lAdmin = new LevelAdmin(levels);
-    this.board = new Map<String, Field>();
+    //this.lAdmin = new LevelAdmin(levels);
+    this.board = new Map<Field, String>();
+    this.view;
   }
   /**
    * 
    */
   void startGame() {
     this.board = lAdmin.createBoard(this.row, this.col);
-    this.view = new View(convertBoard());
+    this.view = new View(row, col);
   }
   /**
    * 
@@ -39,9 +40,11 @@ class game {
   /**
    * 
    */
-  void updateView() {}
+  void updateView() {
+    view.updateBoard(convertBoard());
+  }
   /**
-   * 
+   * s
    */
   void endOfLevel() {}
   /**
@@ -53,13 +56,19 @@ class game {
    */
   Map<String, String> convertBoard() {
     Map<String, String> htmlBoard = new Map<String, String>();
-    String keySet;
-    var str;
     this.board.forEach((key, value) {
-      keySet = value.getX().toString() + " " + value.getY().toString();
-      str = keySet.split(" ");
-      htmlBoard.putIfAbsent(str[0], () => str[1]);
+      htmlBoard.putIfAbsent(key.getX().toString() + key.getY().toString(), () => value);
     });
     return htmlBoard;
+  }
+  
+  int getRow(){
+    return row;
+  }
+  int getCol(){
+    return col;
+  }
+  void setView(View view){
+    this.view = view;
   }
 }

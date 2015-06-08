@@ -1,5 +1,5 @@
-import '../lib/model/tower/towerAdmin.dart';
+import "package:TowerDefense/towerDefense.dart";
 
 main(){
-
+Controller controller = new Controller();
 }
