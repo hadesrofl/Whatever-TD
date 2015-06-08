@@ -25,6 +25,7 @@ class Game {
     this.tAdmin = new TowerAdmin();
     this.lAdmin = new LevelAdmin(levels);
     this.board = new Map<Field, String>();
+    this.images = new Map<String,String>();
     this.setImagesToMap();
   }
   /**
@@ -101,6 +102,7 @@ class Game {
   /**
    * Sets the Path of the images to the keys of the objects
    */
+<<<<<<< HEAD
   void setImagesToMap() {
     this.images.putIfAbsent("Amazon", () => "/img/amazon.png");
     this.images.putIfAbsent("Apple", () => "img/apple.png");
@@ -112,5 +114,19 @@ class Game {
     this.images.putIfAbsent("Kratzke", () => "img/kratzke.jpeg");
     this.images.putIfAbsent("Twitter", () => "img/twitter.png");
     this.images.putIfAbsent("Whatsapp", () => "img/whatsapp.png");
+=======
+  void setImagesToMap(){
+    this.images["Amazon"] = "img/amazon.png";
+    this.images["Apple"] = "img/apple.png";
+    this.images["CookieMonster"] = "img/cookiemonster.jpg";
+    this.images["Dart"] = "img/dart.jpg";
+    this.images["Docker"] = "img/docker.png";
+    this.images["Facebook"] = "img/facebook.png";
+    this.images["Google"] = "img/google.png";
+    this.images["Kratzke"] = "img/kratzke.jpeg";
+    this.images["Twitter"] = "img/twitter.png";
+    this.images["Whatsapp"] = "img/whatsapp.png";
+    
+>>>>>>> 54c468c7957b5d4fda77b7cf4e7dc05b4d3a28a8
   }
 }
