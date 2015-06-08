@@ -3,7 +3,6 @@ library level;
 import "package:xml/xml.dart";
 import "../tower/towerAdmin.dart";
 import "../field.dart";
-import "dart:io";
 
 part "condition.dart";
 part "minion.dart";
@@ -40,6 +39,7 @@ class LevelAdmin {
  * Path the minions have to follow
  */
   List<Field> path = new List<Field>();
+  Map<Field, String> board;
 
   /**
    * Constructor for the Level Administration object
@@ -116,11 +116,11 @@ class LevelAdmin {
    * Creates the board of this level
    * @return a map of this level
    */
-  Map<String, Field> createBoard(final row, final col) {
-    Map<String, Field> board = new Map<String, Field>();
+  Map<Field, String> createBoard(final row, final col) {
+    Map<Field, String> board = new Map<Field, String>();
     for (int i = 1; i <= row; i++) {
       for (int j = 1; j <= col; j++) {
-        board.putIfAbsent((i + j).toString(), () => new Field(i, j, false));
+        board.putIfAbsent(new Field(i, j, false), () => "");
       }
     }
     return board;

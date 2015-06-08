@@ -67,7 +67,7 @@ class Tower {
     return this.target;
   }
 
-  void findFieldsToAttack(Map<String, Field> board, final row, final col) {
+  void findFieldsToAttack(Map<Field, String> board, final row, final col) {
     int startX = this.getPosition().getX() - this.getRange();
     int startY = this.getPosition().getY() - this.getRange();
     int endX = this.getPosition().getX() + this.getRange();
@@ -81,7 +81,7 @@ class Tower {
     // new field objects
     for (int x = startX; x <= endX; x++) {
       for (int y = startY; y <= endY; y++) {
-        board.forEach((str, field) {
+        board.forEach((field, str) {
           if (field.getX() == x && field.getY() == y) this.attackFields
               .add(field);
         });

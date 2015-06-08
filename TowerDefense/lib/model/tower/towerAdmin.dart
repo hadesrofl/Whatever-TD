@@ -105,7 +105,7 @@ class TowerAdmin {
    * selects the tower by the given field
    */
   bool setTowerChoords(
-      Tower tower, Field f, Map<String, Field> board, final row, final col) {
+      Tower tower, Field f, Map<Field, String> board, final row, final col) {
     if (!f.isPathField() || !f.isCovered()) {
       tower.setCoordinates(f);
       tower.findFieldsToAttack(board, row, col);
@@ -119,7 +119,7 @@ class TowerAdmin {
   /**
    * 
    */
-  void upgradeTower(Tower tower, Player player, Map<String, Field> board,
+  void upgradeTower(Tower tower, Player player, Map<Field, String> board,
       final row, final col) {
     // Problem: "if" checks only if the player can pay the old price of the tower
     // but we have to check if the player can pay the NEW price
