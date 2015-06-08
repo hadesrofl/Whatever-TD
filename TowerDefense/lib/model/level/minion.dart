@@ -5,6 +5,10 @@ part of level;
    */
 class Minion {
   /**
+   * Name of the Minion
+   */
+  String name;
+  /**
    * Hitpoints of this minion. If <= 0 minion dies
    */
   double hitpoints;
@@ -61,7 +65,8 @@ class Minion {
    * @param x - x-coordinate a minion is starting at
    * @param y - y-coordinate a minion is starting at
    */
-  Minion(double hitpoints, Armor armor, double movementSpeed, int droppedGold) {
+  Minion(String name, double hitpoints, Armor armor, double movementSpeed, int droppedGold) {
+    this.name = name;
     this.hitpoints = hitpoints;
     this.armor = armor;
     this.movementSpeed = movementSpeed;
@@ -309,5 +314,12 @@ void setY(int y){
    */
   int getDroppedGold(){
     return this.droppedGold;
+  }
+  /**
+   * Returns the name of the minion
+   * @return the name
+   */
+  String getName(){
+    return this.name;
   }
 }
