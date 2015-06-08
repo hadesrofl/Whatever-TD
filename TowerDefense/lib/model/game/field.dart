@@ -1,3 +1,5 @@
+part of game;
+
 /**
  * Class to represent a field on our board
  */

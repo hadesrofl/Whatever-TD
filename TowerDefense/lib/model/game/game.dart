@@ -1,8 +1,9 @@
-import "tower/towerAdmin.dart";
-import "level/levelAdmin.dart";
-import "field.dart";
-import "../view/view.dart";
-import "player.dart";
+library game;
+import '../tower/towerAdmin.dart';
+import '../level/levelAdmin.dart';
+import '../../view/view.dart';
+part "field.dart";
+part "player.dart";
 
 class Game {
   TowerAdmin tAdmin;
@@ -16,7 +17,6 @@ class Game {
   Player player;
 
   Game(String levels) {
-    //TODO: Enter concrete FilePath
     this.levels = levels;
     this.tAdmin = new TowerAdmin();
     this.lAdmin = new LevelAdmin(levels);
@@ -67,25 +67,28 @@ class Game {
    */
   /**
    * Gets the number of rows of the board
-   * @return
+   * @return the number of rows
    */
   int getRow(){
     return row;
   }
   /**
-   * 
+   * Gets the number of cols of the board
+   * @return the number of cols
    */
   int getCol(){
     return col;
   }
   /**
-   * 
+   * Sets a view object to the game
+   * @param view - the view object to interact with
    */
   void setView(View view){
     this.view = view;
   }
   /**
-   * 
+   * Sets a player to this game
+   * @param name - is the name of the player
    */
   void setPlayer(String name){
     this.player = new Player(name);

@@ -1,31 +1,55 @@
+#top{
+  text-align: center;
+}
+
 #navigation > ul{   
   padding: 4px;
   list-style-type: none;
 }
+
+#nameInput{
+  margin-left: 50%;
+  margin-right: 50%;
+}
 #navigation{
    float: left;
-   background-color: green;
+   text-align: center;
+   text-style: bold;
+   background-color: lightgreen;
    border-style: solid;
+   margin: 45px 15px 15px 15px;
+   text-align: center;
+}
+#highscore{
+   float: right;
+   text-align: center;
+   text-style: bold;
+   background-color: lightgrey;
+   border-style: solid;
+   margin-right: 25px;
 }
 #highscoreTable{
-  float: right;
-   background-color: grey;
-   border-style: solid;
+  margin-right: 10px;
 }
 #stop{
-    background: #262626;
+   /* background: #262626; */
+    background: lightgrey;
     margin-left: 50%;
     margin-right: 50%;
 }
 #board{
-   margin-left: 100px;
-   margin-right: 300px;
+   margin-left: 200px;
+   margin-right: 400px;
    border-style:none;
 }
 td {
   padding: 8px;
   text-align: right;
   background-color: lightgrey;
+}
+#player{
+  margin-left: 200px;
+
 }
 #gameHeader{
 }

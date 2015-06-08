@@ -2,9 +2,7 @@ library level;
 
 import "package:xml/xml.dart";
 import "../tower/towerAdmin.dart";
-import "../field.dart";
-import "dart:html";
-import "dart:async";
+import "../game/game.dart";
 
 part "condition.dart";
 part "minion.dart";

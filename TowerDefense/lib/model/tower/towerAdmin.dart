@@ -1,8 +1,7 @@
 library tower;
 
 import "../level/levelAdmin.dart";
-import "../field.dart";
-import "../player.dart";
+import "../game/game.dart";
 import 'dart:math';
 
 part 'target.dart';

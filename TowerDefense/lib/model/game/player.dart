@@ -1,3 +1,5 @@
+part of game;
+
 class Player {
   String name;
   int gold;
