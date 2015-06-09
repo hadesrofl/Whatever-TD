@@ -37,9 +37,7 @@ class Game {
   /**
    * 
    */
-  void runGame() {
-    //tAdmin.buyTower(towerDescription, player);
-  }
+  void runGame() {}
   /**
    * 
    */
@@ -119,5 +117,20 @@ class Game {
     this.images.putIfAbsent("Whatsapp", () => "img/minions/whatsapp.png");
     this.images.putIfAbsent(
         "StrongKratzke", () => "img/minions/strongkratzke.jpg");
+    this.images.putIfAbsent("ArrowTower1", () => "img/towers/arrowtower.jpg");
+    this.images.putIfAbsent("ArrowTower2", () => "img/towers/arrowtower2.jpg");
+    this.images.putIfAbsent("ArrowTower3", () => "img/towers/arrowtower3.jpg");
+    this.images.putIfAbsent("CanonTower1", () => "img/towers/canontower.jpg");
+    this.images.putIfAbsent("CanonTower2", () => "img/towers/canontower2.jpg");
+    this.images.putIfAbsent("CanonTower3", () => "img/towers/canontower3.jpg");
+    this.images.putIfAbsent(
+        "LightningTower1", () => "img/towers/lightningtower.jpg");
+    this.images.putIfAbsent(
+        "LightningTower2", () => "img/towers/lightningtower2.png");
+    this.images.putIfAbsent(
+        "LightningTower3", () => "img/towers/lightningtower3.jpg");
+    this.images.putIfAbsent("FireTower1", () => "img/towers/firetower.jpg");
+    this.images.putIfAbsent("FireTower2", () => "img/towers/firetower2.jpg");
+    this.images.putIfAbsent("FireTower3", () => "img/towers/firetower3.png");
   }
 }

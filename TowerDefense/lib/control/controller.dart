@@ -11,6 +11,7 @@ class Controller {
   View view;
   Game game;
   Controller(String levels) {
+    //Initializing the Game
     game = new Game(levels);
     view = new View(game.getRow(), game.getCol());
     game.setView(view);
@@ -28,6 +29,10 @@ class Controller {
       view.nameInput.hidden = true;
       view.createHighScoreTable();
       view.menuContainer.hidden = false;
+
+      //Start the Game
+      game.startGame();
+      game.runGame();
     });
     view.buy.onClick.listen((ev) {
       view.buyMenu.hidden = false;
@@ -44,5 +49,24 @@ class Controller {
         }
       }
     });
+    view.sell.onClick.listen((ev) {
+      for (int i = 0; i < game.getCol(); i++) {
+        for (int j = 0; j < game.getRow(); j++) {
+          view.board.children.elementAt(i).children.elementAt(j).onClick
+              .listen((ev) {
+            print("Feld " +
+                view.board.children.elementAt(i).children.elementAt(j).text +
+                " wurde angeklickt");
+          });
+        }
+      }
+    });
+    view.upgrade.onClick.listen((ev) {});
+    for (int i = 0; i < game.getCol(); i++) {
+      for (int j = 0; j < game.getRow(); j++) {
+        view.board.children.elementAt(i).children.elementAt(j).onClick
+            .listen((ev) {});
+      }
+    }
   }
 }
