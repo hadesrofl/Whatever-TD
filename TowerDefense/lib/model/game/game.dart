@@ -33,7 +33,6 @@ class Game {
    */
   void startGame() {
     this.board = lAdmin.createBoard(this.row, this.col);
-    this.view = new View(row, col);
   }
   /**
    * 
@@ -104,28 +103,16 @@ class Game {
    */
 
   void setImagesToMap() {
-    this.images.putIfAbsent("Amazon", () => "/img/amazon.png");
+    this.images.putIfAbsent("Amazon", () => "img/amazon.png");
     this.images.putIfAbsent("Apple", () => "img/apple.png");
     this.images.putIfAbsent("CookieMonster", () => "img/cookiemonster.jpg");
     this.images.putIfAbsent("Dart", () => "img/dart.jpg");
     this.images.putIfAbsent("Docker", () => "img/docker.png");
     this.images.putIfAbsent("Facebook", () => "img/facebook.png");
     this.images.putIfAbsent("Google", () => "img/google.png");
-    this.images.putIfAbsent("Kratzke", () => "img/kratzke.jpeg");
+    this.images.putIfAbsent("WeakKratzke", () => "img/weakkratzke.jpeg");
     this.images.putIfAbsent("Twitter", () => "img/twitter.png");
     this.images.putIfAbsent("Whatsapp", () => "img/whatsapp.png");
-
-    void setImagesToMap() {
-      this.images["Amazon"] = "img/amazon.png";
-      this.images["Apple"] = "img/apple.png";
-      this.images["CookieMonster"] = "img/cookiemonster.jpg";
-      this.images["Dart"] = "img/dart.jpg";
-      this.images["Docker"] = "img/docker.png";
-      this.images["Facebook"] = "img/facebook.png";
-      this.images["Google"] = "img/google.png";
-      this.images["Kratzke"] = "img/kratzke.jpeg";
-      this.images["Twitter"] = "img/twitter.png";
-      this.images["Whatsapp"] = "img/whatsapp.png";
-    }
+    this.images.putIfAbsent("StrongKratzke", () => "img/strongkratzke.jpg");
   }
 }

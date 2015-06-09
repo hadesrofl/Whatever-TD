@@ -10,10 +10,11 @@ class View {
   ButtonElement buy;
   ButtonElement sell;
   ButtonElement upgrade;
-  ImageElement canonTower;
-  ImageElement arrowTower;
-  ImageElement lightningTower;
-  ImageElement fireTower;
+  ButtonElement canonTower;
+  ButtonElement arrowTower;
+  ButtonElement lightningTower;
+  ButtonElement fireTower;
+  TableElement buyMenu;
 /**
    * An inputElement so that the user can type in his name
    */
@@ -138,14 +139,14 @@ class View {
       this.highScoreTable.append(le);
     }
   }
-  void createMenu() {
+  void createMenu(Map<String, String> images) {
     buy = new ButtonElement();
     sell = new ButtonElement();
     upgrade = new ButtonElement();
-    canonTower = new ImageElement();
-    arrowTower = new ImageElement();
-    lightningTower = new ImageElement();
-    fireTower = new ImageElement();
+    canonTower = new ButtonElement();
+    arrowTower = new ButtonElement();
+    lightningTower = new ButtonElement();
+    fireTower = new ButtonElement();
 
     this.menuContainer.hidden = true;
     this.menuContainer.innerHtml = "<strong>Menu</strong>";
@@ -154,35 +155,63 @@ class View {
     this.menuContainer.append(menu);
 
     LIElement Buy = new LIElement();
-    LIElement cTower = new LIElement();
-    LIElement aTower = new LIElement();
-    LIElement lTower = new LIElement();
-    LIElement fTower = new LIElement();
     LIElement Sell = new LIElement();
     LIElement Upgrade = new LIElement();
 
     Buy.append(buy);
     buy.text = "Buy";
-
-    cTower.append(canonTower);
-    cTower.hidden = true;
-
-    aTower.append(arrowTower);
-    aTower.hidden = true;
-
-    lTower.append(lightningTower);
-    lTower.hidden = true;
-
-    fTower.append(fireTower);
-    fTower.hidden = true;
-
     Sell.append(sell);
     sell.text = "Sell";
-
     Upgrade.append(upgrade);
     upgrade.text = "Upgrade";
+
     this.menu.append(Buy);
     this.menu.append(Sell);
     this.menu.append(Upgrade);
+
+    buyMenu = new TableElement();
+    TableRowElement firstRow = new TableRowElement();
+    TableRowElement secondRow = new TableRowElement();
+
+    TableCellElement cTower = new TableCellElement();
+    TableCellElement fTower = new TableCellElement();
+    TableCellElement lTower = new TableCellElement();
+    TableCellElement aTower = new TableCellElement();
+
+    setStylesToNavigationMenu(images);
+
+    cTower.append(canonTower);
+    fTower.append(fireTower);
+    lTower.append(lightningTower);
+    aTower.append(arrowTower);
+
+    firstRow.append(cTower);
+    firstRow.append(fTower);
+    secondRow.append(lTower);
+    secondRow.append(aTower);
+
+    buyMenu.append(firstRow);
+    buyMenu.append(secondRow);
+
+    Buy.append(buyMenu);
+    buyMenu.hidden = true;
+  }
+  void setStylesToNavigationMenu(Map<String, String> images) {
+    canonTower.style..backgroundImage = "url(" + images["Amazon"] + ")";
+    canonTower.style..height = "32px";
+    canonTower.style..width = "32px";
+    canonTower.style..backgroundRepeat = "no-repeat";
+    fireTower.style..backgroundImage = "url(" + images["WeakKratzke"] + ")";
+    fireTower.style..height = "32px";
+    fireTower.style..width = "32px";
+    fireTower.style..backgroundRepeat = "no-repeat";
+    lightningTower.style..backgroundImage = "url(" + images["Docker"] + ")";
+    lightningTower.style..height = "32px";
+    lightningTower.style..width = "32px";
+    lightningTower.style..backgroundRepeat = "no-repeat";
+    arrowTower.style..backgroundImage = "url(" + images["Google"] + ")";
+    arrowTower.style..height = "32px";
+    arrowTower.style..width = "32px";
+    arrowTower.style..backgroundRepeat = "no-repeat";
   }
 }

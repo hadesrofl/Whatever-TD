@@ -12,7 +12,7 @@ class Controller {
     game = new Game(levels);
     view = new View(game.getRow(), game.getCol());
     game.setView(view);
-    view.createMenu();
+    view.createMenu(game.images);
     view.start.onClick.listen((ev) {
       /* TODO: Check for following characters only? a-zA-Z0-9 */
       game.setPlayer(view.nameInput.value);
@@ -28,6 +28,7 @@ class Controller {
       view.menuContainer.hidden = false;
     });
     view.buy.onClick.listen((ev) {
+      view.buyMenu.hidden = false;
       view.arrowTower.hidden = false;
       view.canonTower.hidden = false;
       view.lightningTower.hidden = false;

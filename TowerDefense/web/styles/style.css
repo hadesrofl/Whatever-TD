@@ -4,6 +4,9 @@
 
 #navigation > ul{   
   padding: 4px;
+  
+}
+#navigation ul{
   list-style-type: none;
 }
 
