@@ -1,3 +1,6 @@
+body{
+  background-image: url(../img/background/background.gif);
+}
 #top{
   text-align: center;
 }
@@ -41,9 +44,12 @@
     margin-right: 50%;
 }
 #board{
+  /*TODO: responsive*/
    margin-left: 200px;
-   margin-right: 400px;
+   margin-right: 678px;
    border-style:none;
+   background-color: black;
+   
 }
 td {
   padding: 8px;

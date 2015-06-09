@@ -37,7 +37,9 @@ class Game {
   /**
    * 
    */
-  void runGame() {}
+  void runGame() {
+    //tAdmin.buyTower(towerDescription, player);
+  }
   /**
    * 
    */
@@ -103,16 +105,19 @@ class Game {
    */
 
   void setImagesToMap() {
-    this.images.putIfAbsent("Amazon", () => "img/amazon.png");
-    this.images.putIfAbsent("Apple", () => "img/apple.png");
-    this.images.putIfAbsent("CookieMonster", () => "img/cookiemonster.jpg");
-    this.images.putIfAbsent("Dart", () => "img/dart.jpg");
-    this.images.putIfAbsent("Docker", () => "img/docker.png");
-    this.images.putIfAbsent("Facebook", () => "img/facebook.png");
-    this.images.putIfAbsent("Google", () => "img/google.png");
-    this.images.putIfAbsent("WeakKratzke", () => "img/weakkratzke.jpeg");
-    this.images.putIfAbsent("Twitter", () => "img/twitter.png");
-    this.images.putIfAbsent("Whatsapp", () => "img/whatsapp.png");
-    this.images.putIfAbsent("StrongKratzke", () => "img/strongkratzke.jpg");
+    this.images.putIfAbsent("Amazon", () => "img/minions/amazon.png");
+    this.images.putIfAbsent("Apple", () => "img/minions/apple.png");
+    this.images.putIfAbsent(
+        "CookieMonster", () => "img/minions/cookiemonster.jpg");
+    this.images.putIfAbsent("Dart", () => "img/minions/dart.jpg");
+    this.images.putIfAbsent("Docker", () => "img/minions/docker.png");
+    this.images.putIfAbsent("Facebook", () => "img/minions/facebook.png");
+    this.images.putIfAbsent("Google", () => "img/minions/google.png");
+    this.images.putIfAbsent(
+        "WeakKratzke", () => "img/minions/weakkratzke.jpeg");
+    this.images.putIfAbsent("Twitter", () => "img/minions/twitter.png");
+    this.images.putIfAbsent("Whatsapp", () => "img/minions/whatsapp.png");
+    this.images.putIfAbsent(
+        "StrongKratzke", () => "img/minions/strongkratzke.jpg");
   }
 }

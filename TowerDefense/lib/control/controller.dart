@@ -5,6 +5,8 @@ import "../view/view.dart";
 
 import "dart:html";
 
+// TODO: Problem, ob Eingaben während der Wellen vom Nutzer aus möglich sind
+// oder nicht
 class Controller {
   View view;
   Game game;
@@ -33,6 +35,14 @@ class Controller {
       view.canonTower.hidden = false;
       view.lightningTower.hidden = false;
       view.fireTower.hidden = false;
+      for (int i = 0; i < game.getCol(); i++) {
+        for (int j = 0; j < game.getRow(); j++) {
+          view.board.children.elementAt(i).children.elementAt(j).onClick
+              .listen((ev) {
+            view.buyMenu.hidden = true;
+          });
+        }
+      }
     });
   }
 }
