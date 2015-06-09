@@ -61,12 +61,13 @@ class Controller {
         }
       }
     });
-    view.upgrade.onClick.listen((ev) {});
-    for (int i = 0; i < game.getCol(); i++) {
-      for (int j = 0; j < game.getRow(); j++) {
-        view.board.children.elementAt(i).children.elementAt(j).onClick
-            .listen((ev) {});
+    view.upgrade.onClick.listen((ev) {
+      for (int i = 0; i < game.getCol(); i++) {
+        for (int j = 0; j < game.getRow(); j++) {
+          view.board.children.elementAt(i).children.elementAt(j).onClick
+              .listen((ev) {});
+        }
       }
-    }
+    });
   }
 }

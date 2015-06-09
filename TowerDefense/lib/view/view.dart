@@ -197,19 +197,20 @@ class View {
     buyMenu.hidden = true;
   }
   void setStylesToNavigationMenu(Map<String, String> images) {
-    canonTower.style..backgroundImage = "url(" + images["Amazon"] + ")";
+    canonTower.style..backgroundImage = "url(" + images["CanonTower1"] + ")";
     canonTower.style..height = "32px";
     canonTower.style..width = "32px";
     canonTower.style..backgroundRepeat = "no-repeat";
-    fireTower.style..backgroundImage = "url(" + images["WeakKratzke"] + ")";
+    fireTower.style..backgroundImage = "url(" + images["FireTower1"] + ")";
     fireTower.style..height = "32px";
     fireTower.style..width = "32px";
     fireTower.style..backgroundRepeat = "no-repeat";
-    lightningTower.style..backgroundImage = "url(" + images["Docker"] + ")";
+    lightningTower.style
+      ..backgroundImage = "url(" + images["LightningTower1"] + ")";
     lightningTower.style..height = "32px";
     lightningTower.style..width = "32px";
     lightningTower.style..backgroundRepeat = "no-repeat";
-    arrowTower.style..backgroundImage = "url(" + images["Google"] + ")";
+    arrowTower.style..backgroundImage = "url(" + images["ArrowTower1"] + ")";
     arrowTower.style..height = "32px";
     arrowTower.style..width = "32px";
     arrowTower.style..backgroundRepeat = "no-repeat";
