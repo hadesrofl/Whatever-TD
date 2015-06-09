@@ -24,7 +24,10 @@ body{
    background-color: lightgreen;
    border-style: solid;
    margin: 45px 15px 15px 15px;
-   text-align: center;
+   width: 200px;
+}
+#navigation td{
+  background-color: lightgreen;
 }
 #highscore{
    float: right;
@@ -45,10 +48,9 @@ body{
 }
 #board{
   /*TODO: responsive*/
-   margin-left: 200px;
-   margin-right: 678px;
+   margin-left: 30%;
+   margin-right: 70%;
    border-style:none;
-   background-color: black;
    
 }
 td {

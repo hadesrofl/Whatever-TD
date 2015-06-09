@@ -34,21 +34,21 @@ class Controller {
       game.startGame();
       game.runGame();
     });
-    view.buy.onClick.listen((ev) {
-      view.buyMenu.hidden = false;
-      view.arrowTower.hidden = false;
-      view.canonTower.hidden = false;
-      view.lightningTower.hidden = false;
-      view.fireTower.hidden = false;
+    buyListener();
+    sellListener();
+    upgradeListener();
+  }
+  void upgradeListener() {
+    view.upgrade.onClick.listen((ev) {
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           view.board.children.elementAt(i).children.elementAt(j).onClick
-              .listen((ev) {
-            view.buyMenu.hidden = true;
-          });
+              .listen((ev) {});
         }
       }
     });
+  }
+  void sellListener() {
     view.sell.onClick.listen((ev) {
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
@@ -61,11 +61,23 @@ class Controller {
         }
       }
     });
-    view.upgrade.onClick.listen((ev) {
+  }
+  void buyListener() {
+    view.buy.onClick.listen((ev) {
+      view.buyMenu.hidden = false;
+      view.arrowTower.hidden = false;
+      view.canonTower.hidden = false;
+      view.lightningTower.hidden = false;
+      view.fireTower.hidden = false;
+      view.buy.onClick.listen((ev2) {
+        view.buyMenu.hidden = true;
+      });
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           view.board.children.elementAt(i).children.elementAt(j).onClick
-              .listen((ev) {});
+              .listen((ev) {
+            view.buyMenu.hidden = true;
+          });
         }
       }
     });
