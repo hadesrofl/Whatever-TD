@@ -69,14 +69,23 @@ class Controller {
       view.canonTower.hidden = false;
       view.lightningTower.hidden = false;
       view.fireTower.hidden = false;
-      view.buy.onClick.listen((ev2) {
+      view.sell.hidden = true;
+      view.upgrade.hidden = true;
+      view.cancel.hidden = false;
+
+      view.cancel.onClick.listen((ev) {
         view.buyMenu.hidden = true;
+        view.cancel.hidden = true;
+        view.sell.hidden = false;
+        view.upgrade.hidden = false;
       });
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           view.board.children.elementAt(i).children.elementAt(j).onClick
               .listen((ev) {
             view.buyMenu.hidden = true;
+            view.sell.hidden = false;
+            view.upgrade.hidden = false;
           });
         }
       }

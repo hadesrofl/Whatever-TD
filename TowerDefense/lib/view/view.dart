@@ -8,6 +8,7 @@ import "dart:html";
    */
 class View {
   ButtonElement buy;
+  ButtonElement cancel;
   ButtonElement sell;
   ButtonElement upgrade;
   ButtonElement canonTower;
@@ -141,6 +142,7 @@ class View {
   }
   void createMenu(Map<String, String> images) {
     buy = new ButtonElement();
+    cancel = new ButtonElement();
     sell = new ButtonElement();
     upgrade = new ButtonElement();
     canonTower = new ButtonElement();
@@ -155,11 +157,15 @@ class View {
     this.menuContainer.append(menu);
 
     LIElement Buy = new LIElement();
+    LIElement Cancel = new LIElement();
     LIElement Sell = new LIElement();
     LIElement Upgrade = new LIElement();
 
     Buy.append(buy);
     buy.text = "Buy";
+    Cancel.append(cancel);
+    cancel.text = "Cancel";
+    cancel.hidden = true;
     Sell.append(sell);
     sell.text = "Sell";
     Upgrade.append(upgrade);
@@ -168,6 +174,7 @@ class View {
     this.menu.append(Buy);
     this.menu.append(Sell);
     this.menu.append(Upgrade);
+    this.menu.append(Cancel);
 
     buyMenu = new TableElement();
     TableRowElement firstRow = new TableRowElement();
