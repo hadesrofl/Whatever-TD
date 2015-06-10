@@ -179,11 +179,21 @@ class View {
     buyMenu = new TableElement();
     TableRowElement firstRow = new TableRowElement();
     TableRowElement secondRow = new TableRowElement();
-
+    TableRowElement thirdRow = new TableRowElement();
+    TableRowElement fourthRow = new TableRowElement();
+    TableCellElement h1 = new TableCellElement();
+    TableCellElement h2 = new TableCellElement();
+    TableCellElement h3 = new TableCellElement();
+    TableCellElement h4 = new TableCellElement();
     TableCellElement cTower = new TableCellElement();
     TableCellElement fTower = new TableCellElement();
     TableCellElement lTower = new TableCellElement();
     TableCellElement aTower = new TableCellElement();
+
+    h1.text = "CanonTower";
+    h2.text = "FireTower";
+    h3.text = "LightningTower";
+    h4.text = "ArrowTower";
 
     setStylesToNavigationMenu(images);
 
@@ -192,13 +202,19 @@ class View {
     lTower.append(lightningTower);
     aTower.append(arrowTower);
 
-    firstRow.append(cTower);
-    firstRow.append(fTower);
-    secondRow.append(lTower);
-    secondRow.append(aTower);
+    firstRow.append(h1);
+    firstRow.append(h2);
+    secondRow.append(cTower);
+    secondRow.append(fTower);
+    thirdRow.append(h3);
+    thirdRow.append(h4);
+    fourthRow.append(lTower);
+    fourthRow.append(aTower);
 
     buyMenu.append(firstRow);
     buyMenu.append(secondRow);
+    buyMenu.append(thirdRow);
+    buyMenu.append(fourthRow);
 
     Buy.append(buyMenu);
     buyMenu.hidden = true;

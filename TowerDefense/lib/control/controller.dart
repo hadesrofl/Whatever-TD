@@ -64,6 +64,7 @@ class Controller {
   }
   void buyListener() {
     view.buy.onClick.listen((ev) {
+      view.buy.hidden = true;
       view.buyMenu.hidden = false;
       view.arrowTower.hidden = false;
       view.canonTower.hidden = false;
@@ -78,6 +79,7 @@ class Controller {
         view.cancel.hidden = true;
         view.sell.hidden = false;
         view.upgrade.hidden = false;
+        view.buy.hidden = false;
       });
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
@@ -86,6 +88,8 @@ class Controller {
             view.buyMenu.hidden = true;
             view.sell.hidden = false;
             view.upgrade.hidden = false;
+            view.buy.hidden = false;
+            view.cancel.hidden = true;
           });
         }
       }
