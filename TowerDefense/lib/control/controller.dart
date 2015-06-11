@@ -10,6 +10,10 @@ import "dart:html";
 class Controller {
   View view;
   Game game;
+  bool boolean = false;
+  int towerDescription;
+  Field towerField;
+  String field;
   Controller(String levels) {
     //Initializing the Game
     game = new Game(levels);
@@ -40,23 +44,35 @@ class Controller {
   }
   void upgradeListener() {
     view.upgrade.onClick.listen((ev) {
+      boolean = true;
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           view.board.children.elementAt(i).children.elementAt(j).onClick
-              .listen((ev) {});
+              .listen((ev) {
+            if (boolean) {
+              print("Feld " +
+                  view.board.children.elementAt(i).children.elementAt(j).text +
+                  " wurde angeklickt");
+              boolean = false;
+            }
+          });
         }
       }
     });
   }
   void sellListener() {
     view.sell.onClick.listen((ev) {
+      boolean = true;
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           view.board.children.elementAt(i).children.elementAt(j).onClick
               .listen((ev) {
-            print("Feld " +
-                view.board.children.elementAt(i).children.elementAt(j).text +
-                " wurde angeklickt");
+            if (boolean) {
+              print("Feld " +
+                  view.board.children.elementAt(i).children.elementAt(j).text +
+                  " wurde angeklickt");
+              boolean = false;
+            }
           });
         }
       }
@@ -81,18 +97,76 @@ class Controller {
         view.upgrade.hidden = false;
         view.buy.hidden = false;
       });
-      for (int i = 0; i < game.getCol(); i++) {
-        for (int j = 0; j < game.getRow(); j++) {
-          view.board.children.elementAt(i).children.elementAt(j).onClick
-              .listen((ev) {
-            view.buyMenu.hidden = true;
-            view.sell.hidden = false;
-            view.upgrade.hidden = false;
-            view.buy.hidden = false;
-            view.cancel.hidden = true;
-          });
+      //.first.childNodes
+      //List tElem;
+      // view.buyMenu.childNodes.forEach((children) =>
+      //     children.childNodes.forEach((c) => tElem.addAll(c.childNodes)));
+      //  print(tElem);
+
+      view.canonTower.onClick.listen((ev) {
+        //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower
+        game.tAdmin.buyTower(1, game.player);
+        boolean = true;
+        if (boolean) {
+          for (int i = 0; i < game.getCol(); i++) {
+            for (int j = 0; j < game.getRow(); j++) {
+              view.board.children.elementAt(i).children.elementAt(j).onClick
+                  .listen((ev) {
+                field =
+                    view.board.children.elementAt(i).children.elementAt(j).text;
+                print(field);
+                view.buyMenu.hidden = true;
+                view.sell.hidden = false;
+                view.upgrade.hidden = false;
+                view.buy.hidden = false;
+                view.cancel.hidden = true;
+                boolean = false;
+                towerField = lookUpField(field);
+                print(towerField);
+                game.tAdmin.setTowerChoords(game.tAdmin.allTower.last,
+                    towerField, game.board, game.getRow(), game.getCol());
+                view.setCTowerImageToTowerField(field, game.images);
+                //Aufruf an View, welches nun den richtigen Tower an die richtige Stelle
+                // setzen muss
+              });
+            }
+          }
         }
+        //towerField = lookUpField(field);
+        // game.tAdmin.setTowerChoords(game.tAdmin.allTower.last, towerField,
+        //     game.board, game.getRow(), game.getCol());
+        // TODO: setImageToField();
+        //view.setCTowerImageToTowerField(field, game.images);
+      });
+      /** view.arrowTower.onClick.listen((ev) {
+        //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower
+        game.tAdmin.buyTower();
+        selectFieldForTower();
+        // TODO: setImageToField();
+
+      });
+      view.fireTower.onClick.listen((ev) {
+        //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower
+        game.tAdmin.buyTower();
+        selectFieldForTower();
+        // TODO: setImageToField();
+      });
+      view.lightningTower.onClick.listen((ev) {
+        //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower
+        game.tAdmin.buyTower();
+        selectFieldForTower();
+        // TODO: setImageToField();
+      });*/
+    });
+  }
+  String selectFieldForTower() {}
+  Field lookUpField(String field) {
+    game.board.keys.forEach((f) {
+      if (f.getX().toString() == field[0] && f.getY().toString() == field[1]) {
+        towerField = f;
+        return towerField;
       }
     });
+    return towerField;
   }
 }

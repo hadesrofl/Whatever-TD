@@ -238,4 +238,12 @@ class View {
     arrowTower.style..width = "32px";
     arrowTower.style..backgroundRepeat = "no-repeat";
   }
+  void setCTowerImageToTowerField(String id, Map<String, String> images) {
+    this.board.children.forEach((c) {
+      c.children.forEach((children) {
+        if (children.id == id) children.style
+          ..backgroundImage = "url(" + images["CanonTower"] + ")";
+      });
+    });
+  }
 }
