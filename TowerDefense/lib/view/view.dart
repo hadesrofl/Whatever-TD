@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 library view;
 
 import "dart:html";
@@ -250,7 +249,7 @@ class View {
     });
   }
 }
-=======
+/**
 library view;
 
 import "dart:html";
@@ -499,5 +498,4 @@ class View {
       });
     });
   }
-}
->>>>>>> 9d7569a19ddd37043e6e2be7670e91ded58b2980
+}*/
