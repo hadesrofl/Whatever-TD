@@ -105,7 +105,10 @@ class Controller {
 
       view.canonTower.onClick.listen((ev) {
         //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower
-        game.tAdmin.buyTower(1, game.player);
+        bool b = game.tAdmin.buyTower(1, game.player);
+        // hier muss abgefangen werden, wenn der Spieler zu wenig Geld
+        // für einen TowerBuy hat
+
         boolean = true;
         if (boolean) {
           for (int i = 0; i < game.getCol(); i++) {
@@ -113,8 +116,8 @@ class Controller {
               view.board.children.elementAt(i).children.elementAt(j).onClick
                   .listen((ev) {
                 field =
-                    view.board.children.elementAt(i).children.elementAt(j).text;
-                print(field);
+                    view.board.children.elementAt(i).children.elementAt(j).id;
+                //print(field);
                 view.buyMenu.hidden = true;
                 view.sell.hidden = false;
                 view.upgrade.hidden = false;
@@ -122,7 +125,7 @@ class Controller {
                 view.cancel.hidden = true;
                 boolean = false;
                 towerField = lookUpField(field);
-                print(towerField);
+                // print(towerField);
                 game.tAdmin.setTowerChoords(game.tAdmin.allTower.last,
                     towerField, game.board, game.getRow(), game.getCol());
                 view.setCTowerImageToTowerField(field, game.images);
@@ -132,11 +135,7 @@ class Controller {
             }
           }
         }
-        //towerField = lookUpField(field);
-        // game.tAdmin.setTowerChoords(game.tAdmin.allTower.last, towerField,
-        //     game.board, game.getRow(), game.getCol());
-        // TODO: setImageToField();
-        //view.setCTowerImageToTowerField(field, game.images);
+        //TODO: Message, dass der Spieler nicht genügend Geld hat
       });
       /** view.arrowTower.onClick.listen((ev) {
         //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower

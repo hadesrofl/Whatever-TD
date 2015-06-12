@@ -100,6 +100,7 @@ class View {
         final cellElement = new TableCellElement();
         cellElement.id = j.toString() + i.toString();
         cellElement.innerHtml = j.toString() + i.toString();
+        // cellElement.innerHtml = "";
         table.children.elementAt(i).append(cellElement);
       }
     }
@@ -239,10 +240,11 @@ class View {
     arrowTower.style..backgroundRepeat = "no-repeat";
   }
   void setCTowerImageToTowerField(String id, Map<String, String> images) {
+    print(id);
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) children.style
-          ..backgroundImage = "url(" + images["CanonTower"] + ")";
+          ..backgroundImage = "url(" + images["CanonTower1"] + ")";
       });
     });
   }

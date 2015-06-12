@@ -34,7 +34,8 @@ class TowerAdmin {
   /**
    * updates money of the player and adds the new Tower to the AllTower-List
    */
-  void buyTower(int towerDescription, Player player) {
+  bool buyTower(int towerDescription, Player player) {
+    bool ausgabe;
     Tower newTower;
     switch (towerDescription) {
       // case 1 = CanonTower
@@ -44,9 +45,11 @@ class TowerAdmin {
           //TODO: print befehl ausgabe im HTML Dokument evtl returnType bool
           print("Not enough money to buy the Tower");
           newTower = null;
+          ausgabe = false;
         } else {
           player.setGold(player.getGold() - newTower.getPrice());
           allTower.add(newTower);
+          ausgabe = true;
         }
         break;
       // case 2 = ArrowTower
@@ -56,9 +59,11 @@ class TowerAdmin {
           //TODO: print befehl ausgabe im HTML Dokument evtl returnType bool
           print("Not enough money to buy the Tower");
           newTower = null;
+          ausgabe = false;
         } else {
           player.setGold(player.getGold() - newTower.getPrice());
           allTower.add(newTower);
+          ausgabe = true;
         }
         break;
       // case 3 = FireTower
@@ -68,9 +73,11 @@ class TowerAdmin {
           //TODO: print befehl ausgabe im HTML Dokument evtl returnType bool
           print("Not enough money to buy the Tower");
           newTower = null;
+          ausgabe = false;
         } else {
           player.setGold(player.getGold() - newTower.getPrice());
           allTower.add(newTower);
+          ausgabe = true;
         }
         break;
       // case 4 = LighteningTower
@@ -80,15 +87,18 @@ class TowerAdmin {
           //TODO: print befehl ausgabe im HTML Dokument evtl returnType bool
           print("Not enough money to buy the Tower");
           newTower = null;
+          ausgabe = false;
         } else {
           player.setGold(player.getGold() - newTower.getPrice());
           allTower.add(newTower);
+          ausgabe = true;
         }
         break;
 
       default:
         break;
     }
+    return ausgabe;
   }
 
   /**

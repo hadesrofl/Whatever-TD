@@ -48,7 +48,7 @@ class Tower {
   /**
    * 
    */
-  List<Field> attackFields;
+  List<Field> attackFields = new List<Field>();
   /**
    * 
    */
@@ -76,9 +76,8 @@ class Tower {
     int startY = this.getPosition().getY() - this.getRange();
     int endX = this.getPosition().getX() + this.getRange();
     int endY = this.getPosition().getY() + this.getRange();
-
-    if (startX < 0) startX = 1;
-    if (startY < 0) startY = 1;
+    if (startX < 0) startX = 0;
+    if (startY < 0) startY = 0;
     if (endX > row) endX = row;
     if (endY > col) endY = col;
     // runtime O(n^3) because we are working on objects, so we cannot instantiate
@@ -86,8 +85,9 @@ class Tower {
     for (int x = startX; x <= endX; x++) {
       for (int y = startY; y <= endY; y++) {
         board.forEach((field, str) {
-          if (field.getX() == x && field.getY() == y) this.attackFields
-              .add(field);
+          if (field.getX() == x && field.getY() == y) {
+            this.attackFields.add(field);
+          }
         });
       }
     }
@@ -172,7 +172,7 @@ class Tower {
   void setAbilityFactor(int abF) {
     this.abilityFactor = abF;
   }
-  void setName(String name){
+  void setName(String name) {
     this.name = name;
   }
 

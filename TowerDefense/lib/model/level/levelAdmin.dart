@@ -118,8 +118,8 @@ class LevelAdmin {
    */
   Map<Field, String> createBoard(final row, final col) {
     Map<Field, String> board = new Map<Field, String>();
-    for (int i = 0; i <= row; i++) {
-      for (int j = 0; j <= col; j++) {
+    for (int i = 0; i < row; i++) {
+      for (int j = 0; j < col; j++) {
         board.putIfAbsent(new Field(i, j, false), () => "");
       }
     }
