@@ -248,4 +248,8 @@ class View {
       });
     });
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> b58fdfceab9bb28e53ae0412ebcb5cb20f621b92

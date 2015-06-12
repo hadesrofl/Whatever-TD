@@ -3,6 +3,10 @@ body{
 }
 #top{
   text-align: center;
+  color: white;
+}
+#player{
+  color: white;
 }
 
 #navigation > ul{   
