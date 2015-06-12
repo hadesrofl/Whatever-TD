@@ -1,6 +1,6 @@
 <allLevels>
 	<levels>
-		<level no="1" finalLevel="false">
+		<level no="1" finalLevel="false" difficulty="easy">
 			<wave no="1" numberOfMinions="10" finalWave="false">
 				<minion ref="weakKratzke"></minion>
 			</wave>
@@ -16,7 +16,7 @@
 				<minion ref="CookieMonster"></minion>
 			</wave>
 		</level>
-		<level no="2" finalLevel="false">
+		<level no="2" finalLevel="false" difficulty="easy">
 			<wave no="1" numberOfMinions="20" finalWave="false">
 				<minion ref="Docker"></minion>
 			</wave>
@@ -33,7 +33,7 @@
 				<minion ref="amazon"></minion>
 			</wave>
 		</level>
-		<level no="3" finalLevel="true">
+		<level no="3" finalLevel="true" difficulty="easy">
 			<wave no="1" numberOfMinions="10" finalWave="false">
 				<minion ref="CookieMonster"></minion>
 			</wave>
