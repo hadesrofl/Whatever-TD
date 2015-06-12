@@ -24,6 +24,7 @@ class LevelAdmin {
   /**
    * The number of the current wave
    */
+  /* TODO: current Wave as Wave Object */
   int currentWave;
   /**
    * List of Minions active on the board
