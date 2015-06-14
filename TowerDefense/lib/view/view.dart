@@ -81,10 +81,21 @@ class View {
     nameLabel = querySelector("#player");
     menuContainer = querySelector("#navigation");
     highScoreContainer = querySelector("#highscore");
+    buyMenu = querySelector("#buyMenu");
+    buy = querySelector("#buy");
+    cancel = querySelector("#cancel");
+    sell = querySelector("#sell");
+    upgrade = querySelector("#upgrade");
+    canonTower = querySelector("#CanonTower");
+    arrowTower = querySelector("#ArrowTower");
+    lightningTower = querySelector("#LightningTower");
+    fireTower = querySelector("#FireTower");
 
     stop.hidden = true;
     menuContainer.hidden = true;
     highScoreContainer.hidden = true;
+    buyMenu.hidden = true;
+    cancel.hidden = true;
   }
 /**
    * Method to create a board 
@@ -99,8 +110,6 @@ class View {
         // col.toString() + row.toString()
         final cellElement = new TableCellElement();
         cellElement.id = j.toString() + i.toString();
-        cellElement.innerHtml = j.toString() + i.toString();
-        // cellElement.innerHtml = "";
         table.children.elementAt(i).append(cellElement);
       }
     }
@@ -140,104 +149,6 @@ class View {
       le.text = "Player $i";
       this.highScoreTable.append(le);
     }
-  }
-  void createMenu(Map<String, String> images) {
-    buy = new ButtonElement();
-    cancel = new ButtonElement();
-    sell = new ButtonElement();
-    upgrade = new ButtonElement();
-    canonTower = new ButtonElement();
-    arrowTower = new ButtonElement();
-    lightningTower = new ButtonElement();
-    fireTower = new ButtonElement();
-
-    this.menuContainer.hidden = true;
-    this.menuContainer.innerHtml = "<strong>Menu</strong>";
-    this.menu = new UListElement();
-    this.menu.id = "menu";
-    this.menuContainer.append(menu);
-
-    LIElement Buy = new LIElement();
-    LIElement Cancel = new LIElement();
-    LIElement Sell = new LIElement();
-    LIElement Upgrade = new LIElement();
-
-    Buy.append(buy);
-    buy.text = "Buy";
-    Cancel.append(cancel);
-    cancel.text = "Cancel";
-    cancel.hidden = true;
-    Sell.append(sell);
-    sell.text = "Sell";
-    Upgrade.append(upgrade);
-    upgrade.text = "Upgrade";
-
-    this.menu.append(Buy);
-    this.menu.append(Sell);
-    this.menu.append(Upgrade);
-    this.menu.append(Cancel);
-
-    buyMenu = new TableElement();
-    TableRowElement firstRow = new TableRowElement();
-    TableRowElement secondRow = new TableRowElement();
-    TableRowElement thirdRow = new TableRowElement();
-    TableRowElement fourthRow = new TableRowElement();
-    TableCellElement h1 = new TableCellElement();
-    TableCellElement h2 = new TableCellElement();
-    TableCellElement h3 = new TableCellElement();
-    TableCellElement h4 = new TableCellElement();
-    TableCellElement cTower = new TableCellElement();
-    TableCellElement fTower = new TableCellElement();
-    TableCellElement lTower = new TableCellElement();
-    TableCellElement aTower = new TableCellElement();
-
-    h1.text = "CanonTower";
-    h2.text = "FireTower";
-    h3.text = "LightningTower";
-    h4.text = "ArrowTower";
-
-    setStylesToNavigationMenu(images);
-
-    cTower.append(canonTower);
-    fTower.append(fireTower);
-    lTower.append(lightningTower);
-    aTower.append(arrowTower);
-
-    firstRow.append(h1);
-    firstRow.append(h2);
-    secondRow.append(cTower);
-    secondRow.append(fTower);
-    thirdRow.append(h3);
-    thirdRow.append(h4);
-    fourthRow.append(lTower);
-    fourthRow.append(aTower);
-
-    buyMenu.append(firstRow);
-    buyMenu.append(secondRow);
-    buyMenu.append(thirdRow);
-    buyMenu.append(fourthRow);
-
-    Buy.append(buyMenu);
-    buyMenu.hidden = true;
-  }
-  void setStylesToNavigationMenu(Map<String, String> images) {
-    canonTower.style..backgroundImage = "url(" + images["CanonTower1"] + ")";
-    canonTower.style..height = "32px";
-    canonTower.style..width = "32px";
-    canonTower.style..backgroundRepeat = "no-repeat";
-    fireTower.style..backgroundImage = "url(" + images["FireTower1"] + ")";
-    fireTower.style..height = "32px";
-    fireTower.style..width = "32px";
-    fireTower.style..backgroundRepeat = "no-repeat";
-    lightningTower.style
-      ..backgroundImage = "url(" + images["LightningTower1"] + ")";
-    lightningTower.style..height = "32px";
-    lightningTower.style..width = "32px";
-    lightningTower.style..backgroundRepeat = "no-repeat";
-    arrowTower.style..backgroundImage = "url(" + images["ArrowTower1"] + ")";
-    arrowTower.style..height = "32px";
-    arrowTower.style..width = "32px";
-    arrowTower.style..backgroundRepeat = "no-repeat";
   }
   void setCTowerImageToTowerField(String id, Map<String, String> images) {
     print(id);

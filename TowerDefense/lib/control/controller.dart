@@ -10,7 +10,7 @@ import "dart:html";
 class Controller {
   View view;
   Game game;
-  bool boolean = false;
+  bool boolean;
   int towerDescription;
   Field towerField;
   String field;
@@ -19,7 +19,6 @@ class Controller {
     game = new Game(levels);
     view = new View(game.getRow(), game.getCol());
     game.setView(view);
-    view.createMenu(game.images);
     view.start.onClick.listen((ev) {
       /* TODO: Check for following characters only? a-zA-Z0-9 */
       game.setPlayer(view.nameInput.value);
@@ -89,6 +88,7 @@ class Controller {
       view.sell.hidden = true;
       view.upgrade.hidden = true;
       view.cancel.hidden = false;
+      boolean = true;
 
       view.cancel.onClick.listen((ev) {
         view.buyMenu.hidden = true;
@@ -97,19 +97,12 @@ class Controller {
         view.upgrade.hidden = false;
         view.buy.hidden = false;
       });
-      //.first.childNodes
-      //List tElem;
-      // view.buyMenu.childNodes.forEach((children) =>
-      //     children.childNodes.forEach((c) => tElem.addAll(c.childNodes)));
-      //  print(tElem);
-
       view.canonTower.onClick.listen((ev) {
         //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower
         bool b = game.tAdmin.buyTower(1, game.player);
         // hier muss abgefangen werden, wenn der Spieler zu wenig Geld
         // für einen TowerBuy hat
 
-        boolean = true;
         if (boolean) {
           for (int i = 0; i < game.getCol(); i++) {
             for (int j = 0; j < game.getRow(); j++) {
@@ -129,8 +122,6 @@ class Controller {
                 game.tAdmin.setTowerChoords(game.tAdmin.allTower.last,
                     towerField, game.board, game.getRow(), game.getCol());
                 view.setCTowerImageToTowerField(field, game.images);
-                //Aufruf an View, welches nun den richtigen Tower an die richtige Stelle
-                // setzen muss
               });
             }
           }

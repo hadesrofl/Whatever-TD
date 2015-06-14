@@ -52,19 +52,36 @@ body{
 }
 #board{
   /*TODO: responsive*/
-   margin-left: 30%;
-   margin-right: 70%;
    border-style:none;
    
+   
 }
-td {
-  padding: 8px;
+#board td {
   text-align: right;
-  background-color: lightgrey;
+  height: 32px;
+  width: 32px;
+  background-image: url("../img/background/grass.jpg");
 }
 #player{
   margin-left: 200px;
 
 }
 #gameHeader{
+}
+.TowerButton{
+  height: 32px;
+  width: 32px;
+  background-repeat: no-repeat;
+}
+#CanonTower{
+  background-image: url("../img/towers/canontower.jpg");
+}
+#ArrowTower{
+  background-image: url("../img/towers/arrowtower.jpg");
+}
+#LightningTower{
+  background-image: url("../img/towers/lightningtower.jpg");
+}
+#FireTower{
+  background-image: url("../img/towers/firetower.jpg");
 }

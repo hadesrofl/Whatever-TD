@@ -13,14 +13,45 @@
     <p id="gameDescription">Hier steht dann eine kurze Anleitung</p>
     <input type="text" id="playerName"/>
     <button id="start">Start</button></div>
-
-
-    <div id="navigation"></div>
-      <h3 id="player"></h3>
-      <div id="highscore">
+    <div id="navigation">
+      <strong>Menu</strong>
+      <ul id="menu">
+        <li><button type="button" id="buy">Buy</button>
+          <table id="buyMenu">
+            <tr>
+              <td>CanonTower</td>
+              <td>FireTower</td>
+            </tr>
+             <tr>
+              <td>
+                <button type="button" id="CanonTower" class="TowerButton"></button>
+              </td>
+              <td>
+                <button type="button" id="FireTower" class="TowerButton"></button>
+              </td>
+            </tr>
+             <tr>
+              <td>LightningTower</td>
+              <td>ArrowTower</td>
+            </tr>
+             <tr>
+              <td>
+                <button type="button" id="LightningTower" class="TowerButton"></button>
+              </td>
+              <td>
+                <button type="button" id="ArrowTower" class="TowerButton"></button>
+              </td>
+            </tr>
+          </table>
+        </li>
+        <li><button type="button" id="cancel">Cancel</button></li>
+        <li><button type="button" id="sell">Sell</button></li>
+        <li><button type="button" id="upgrade">Upgrade</button></li>
+      </ul>
     </div>
-    <div id="board"> 
-    </div>
+    <h3 id="player"></h3>
+    <div id="highscore"></div>
+    <div id="board"></div>
   
     <button id="stop">Stop</button>
     <script type="application/dart" src="td_client.dart"></script>

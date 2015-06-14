@@ -130,9 +130,6 @@ class TowerAdmin {
    */
   void upgradeTower(Tower tower, Player player, Map<Field, String> board,
       final row, final col) {
-    // Problem: "if" checks only if the player can pay the old price of the tower
-    // but we have to check if the player can pay the NEW price
-    // => fixed, method saves the upcoming price and compares
     if (tower.newPriceAfterUpgrade() <= player.getGold()) {
       tower.upgrade();
       tower.findFieldsToAttack(board, row, col);
