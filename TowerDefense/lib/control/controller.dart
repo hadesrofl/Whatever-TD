@@ -4,6 +4,7 @@ import '../model/game/game.dart';
 import "../view/view.dart";
 
 import "dart:html";
+import "dart:async";
 
 // TODO: Problem, ob Eingaben während der Wellen vom Nutzer aus möglich sind
 // oder nicht
@@ -14,6 +15,7 @@ class Controller {
   int towerDescription;
   Field towerField;
   String field;
+  var setTower;
   Controller(String levels) {
     //Initializing the Game
     game = new Game(levels);
@@ -88,7 +90,7 @@ class Controller {
       view.sell.hidden = true;
       view.upgrade.hidden = true;
       view.cancel.hidden = false;
-      boolean = true;
+      boolean = false;
 
       view.cancel.onClick.listen((ev) {
         view.buyMenu.hidden = true;
@@ -98,16 +100,19 @@ class Controller {
         view.buy.hidden = false;
       });
       view.canonTower.onClick.listen((ev) {
-        //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower
-        bool b = game.tAdmin.buyTower(1, game.player);
+        //boolean = true;
+
         // hier muss abgefangen werden, wenn der Spieler zu wenig Geld
         // für einen TowerBuy hat
 
-        if (boolean) {
-          for (int i = 0; i < game.getCol(); i++) {
-            for (int j = 0; j < game.getRow(); j++) {
-              view.board.children.elementAt(i).children.elementAt(j).onClick
-                  .listen((ev) {
+        for (int i = 0; i < game.getCol(); i++) {
+          for (int j = 0; j < game.getRow(); j++) {
+            setTower = view.board.children.elementAt(i).children
+                .elementAt(j).onClick.listen((ev) {
+              bool b = game.tAdmin.buyTower(1, game.player);
+              boolean = true;
+              if (boolean) {
+                //bool b = game.tAdmin.buyTower(1, game.player);
                 field =
                     view.board.children.elementAt(i).children.elementAt(j).id;
                 //print(field);
@@ -116,40 +121,120 @@ class Controller {
                 view.upgrade.hidden = false;
                 view.buy.hidden = false;
                 view.cancel.hidden = true;
-                boolean = false;
+
                 towerField = lookUpField(field);
-                // print(towerField);
+                print("x");
+                print(game.tAdmin.allTower.last);
                 game.tAdmin.setTowerChoords(game.tAdmin.allTower.last,
                     towerField, game.board, game.getRow(), game.getCol());
-                view.setCTowerImageToTowerField(field, game.images);
-              });
-            }
+                view.setTowerImageToTowerField(field, game.images, 1);
+                print(game.tAdmin.allTower.length);
+                boolean = false;
+              }
+            });
           }
         }
         //TODO: Message, dass der Spieler nicht genügend Geld hat
       });
-      /** view.arrowTower.onClick.listen((ev) {
-        //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower
-        game.tAdmin.buyTower();
-        selectFieldForTower();
-        // TODO: setImageToField();
 
+      view.arrowTower.onClick.listen((ev) {
+        //boolean = true;
+
+        for (int i = 0; i < game.getCol(); i++) {
+          for (int j = 0; j < game.getRow(); j++) {
+            setTower = view.board.children.elementAt(i).children
+                .elementAt(j).onClick.listen((ev) {
+              bool b = game.tAdmin.buyTower(2, game.player);
+              boolean = true;
+              if (boolean) {
+                //bool b = game.tAdmin.buyTower(2, game.player);
+                field =
+                    view.board.children.elementAt(i).children.elementAt(j).id;
+                //print(field);
+                view.buyMenu.hidden = true;
+                view.sell.hidden = false;
+                view.upgrade.hidden = false;
+                view.buy.hidden = false;
+                view.cancel.hidden = true;
+                towerField = lookUpField(field);
+                print("y");
+                print(game.tAdmin.allTower.last);
+                game.tAdmin.setTowerChoords(game.tAdmin.allTower.last,
+                    towerField, game.board, game.getRow(), game.getCol());
+                view.setTowerImageToTowerField(field, game.images, 2);
+                print(game.tAdmin.allTower.length);
+                boolean = false;
+              }
+            });
+          }
+        }
       });
+
       view.fireTower.onClick.listen((ev) {
-        //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower
-        game.tAdmin.buyTower();
-        selectFieldForTower();
-        // TODO: setImageToField();
+        //boolean = true;
+
+        for (int i = 0; i < game.getCol(); i++) {
+          for (int j = 0; j < game.getRow(); j++) {
+            setTower = view.board.children.elementAt(i).children
+                .elementAt(j).onClick.listen((ev) {
+              bool b = game.tAdmin.buyTower(3, game.player);
+              boolean = true;
+              if (boolean) {
+                //bool b = game.tAdmin.buyTower(3, game.player);
+                field =
+                    view.board.children.elementAt(i).children.elementAt(j).id;
+                //print(field);
+                view.buyMenu.hidden = true;
+                view.sell.hidden = false;
+                view.upgrade.hidden = false;
+                view.buy.hidden = false;
+                view.cancel.hidden = true;
+                towerField = lookUpField(field);
+                print("z");
+                print(game.tAdmin.allTower.last);
+                game.tAdmin.setTowerChoords(game.tAdmin.allTower.last,
+                    towerField, game.board, game.getRow(), game.getCol());
+                view.setTowerImageToTowerField(field, game.images, 3);
+                print(game.tAdmin.allTower.length);
+                boolean = false;
+              }
+            });
+          }
+        }
       });
+
       view.lightningTower.onClick.listen((ev) {
-        //print(view.buyMenu.children.elementAt(2).children.elementAt(1).text); => ArrowTower
-        game.tAdmin.buyTower();
-        selectFieldForTower();
-        // TODO: setImageToField();
-      });*/
+        for (int i = 0; i < game.getCol(); i++) {
+          for (int j = 0; j < game.getRow(); j++) {
+            setTower = view.board.children.elementAt(i).children
+                .elementAt(j).onClick.listen((ev) {
+              bool b = game.tAdmin.buyTower(4, game.player);
+              boolean = true;
+              if (boolean) {
+                // bool b = game.tAdmin.buyTower(4, game.player);
+                field =
+                    view.board.children.elementAt(i).children.elementAt(j).id;
+                //print(field);
+                view.buyMenu.hidden = true;
+                view.sell.hidden = false;
+                view.upgrade.hidden = false;
+                view.buy.hidden = false;
+                view.cancel.hidden = true;
+                towerField = lookUpField(field);
+                print("a");
+                print(game.tAdmin.allTower.last);
+                game.tAdmin.setTowerChoords(game.tAdmin.allTower.last,
+                    towerField, game.board, game.getRow(), game.getCol());
+                view.setTowerImageToTowerField(field, game.images, 4);
+                print(game.tAdmin.allTower.length);
+                boolean = false;
+              }
+            });
+          }
+        }
+      });
     });
   }
-  String selectFieldForTower() {}
   Field lookUpField(String field) {
     game.board.keys.forEach((f) {
       if (f.getX().toString() == field[0] && f.getY().toString() == field[1]) {

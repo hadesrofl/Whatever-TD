@@ -150,12 +150,32 @@ class View {
       this.highScoreTable.append(le);
     }
   }
-  void setCTowerImageToTowerField(String id, Map<String, String> images) {
-    print(id);
+  void setTowerImageToTowerField(
+      String id, Map<String, String> images, int key) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
-        if (children.id == id) children.style
-          ..backgroundImage = "url(" + images["CanonTower1"] + ")";
+        if (children.id == id) {
+          switch (key) {
+            case 1:
+              children.style
+                ..backgroundImage = "url(" + images["CanonTower1"] + ")";
+              break;
+            case 2:
+              children.style
+                ..backgroundImage = "url(" + images["ArrowTower1"] + ")";
+              break;
+            case 3:
+              children.style
+                ..backgroundImage = "url(" + images["FireTower1"] + ")";
+              break;
+            case 4:
+              children.style
+                ..backgroundImage = "url(" + images["LightningTower1"] + ")";
+              break;
+            default:
+              break;
+          }
+        }
       });
     });
   }
