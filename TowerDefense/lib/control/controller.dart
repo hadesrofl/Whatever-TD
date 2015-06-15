@@ -90,7 +90,6 @@ class Controller {
       view.sell.hidden = true;
       view.upgrade.hidden = true;
       view.cancel.hidden = false;
-      boolean = false;
 
       view.cancel.onClick.listen((ev) {
         view.buyMenu.hidden = true;
@@ -100,8 +99,7 @@ class Controller {
         view.buy.hidden = false;
       });
       view.canonTower.onClick.listen((ev) {
-        //boolean = true;
-
+        boolean = true;
         // hier muss abgefangen werden, wenn der Spieler zu wenig Geld
         // für einen TowerBuy hat
 
@@ -109,10 +107,10 @@ class Controller {
           for (int j = 0; j < game.getRow(); j++) {
             setTower = view.board.children.elementAt(i).children
                 .elementAt(j).onClick.listen((ev) {
-              bool b = game.tAdmin.buyTower(1, game.player);
-              boolean = true;
+
+              //bool b = game.tAdmin.buyTower(1, game.player);
               if (boolean) {
-                //bool b = game.tAdmin.buyTower(1, game.player);
+                bool b = game.tAdmin.buyTower(1, game.player);
                 field =
                     view.board.children.elementAt(i).children.elementAt(j).id;
                 //print(field);
@@ -138,16 +136,15 @@ class Controller {
       });
 
       view.arrowTower.onClick.listen((ev) {
-        //boolean = true;
-
+        boolean = true;
         for (int i = 0; i < game.getCol(); i++) {
           for (int j = 0; j < game.getRow(); j++) {
             setTower = view.board.children.elementAt(i).children
                 .elementAt(j).onClick.listen((ev) {
-              bool b = game.tAdmin.buyTower(2, game.player);
-              boolean = true;
+
+              //bool b = game.tAdmin.buyTower(2, game.player);
               if (boolean) {
-                //bool b = game.tAdmin.buyTower(2, game.player);
+                bool b = game.tAdmin.buyTower(2, game.player);
                 field =
                     view.board.children.elementAt(i).children.elementAt(j).id;
                 //print(field);
@@ -171,16 +168,15 @@ class Controller {
       });
 
       view.fireTower.onClick.listen((ev) {
-        //boolean = true;
-
+        boolean = true;
         for (int i = 0; i < game.getCol(); i++) {
           for (int j = 0; j < game.getRow(); j++) {
             setTower = view.board.children.elementAt(i).children
                 .elementAt(j).onClick.listen((ev) {
-              bool b = game.tAdmin.buyTower(3, game.player);
-              boolean = true;
+
+              //bool b = game.tAdmin.buyTower(3, game.player);
               if (boolean) {
-                //bool b = game.tAdmin.buyTower(3, game.player);
+                bool b = game.tAdmin.buyTower(3, game.player);
                 field =
                     view.board.children.elementAt(i).children.elementAt(j).id;
                 //print(field);
@@ -204,14 +200,15 @@ class Controller {
       });
 
       view.lightningTower.onClick.listen((ev) {
+        boolean = true;
         for (int i = 0; i < game.getCol(); i++) {
           for (int j = 0; j < game.getRow(); j++) {
             setTower = view.board.children.elementAt(i).children
                 .elementAt(j).onClick.listen((ev) {
-              bool b = game.tAdmin.buyTower(4, game.player);
-              boolean = true;
+
+              //bool b = game.tAdmin.buyTower(4, game.player);
               if (boolean) {
-                // bool b = game.tAdmin.buyTower(4, game.player);
+                bool b = game.tAdmin.buyTower(4, game.player);
                 field =
                     view.board.children.elementAt(i).children.elementAt(j).id;
                 //print(field);
