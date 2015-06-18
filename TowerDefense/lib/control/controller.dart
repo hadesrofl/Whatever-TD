@@ -43,7 +43,9 @@ class Controller {
     upgradeListener();
   }
   void upgradeListener() {
+    view.errorDiv.hidden = true;
     view.upgrade.onClick.listen((ev) {
+      bool enoughMoney;
       bool b = true;
       var tmp;
       for (int i = 0; i < game.getCol(); i++) {
@@ -51,38 +53,37 @@ class Controller {
           view.board.children.elementAt(i).children.elementAt(j).onClick
               .listen((ev) {
             if (b) {
-              print("Feld " +
-                  view.board.children.elementAt(i).children.elementAt(j).text +
-                  " wurde angeklickt");
               game.tAdmin.allTower.forEach((tower) {
                 if (tower.getPosition().getX() == j &&
                     tower.getPosition().getY() == i) {
                   String id = tower.getPosition().getX().toString() +
                       tower.getPosition().getY().toString();
                   tmp = tower;
-                  print(tmp.name);
-                  switch (tmp.name) {
-                    case "Canon Tower":
-                      view.upgradeImage(
-                          id, game.images, 1, tmp.getUpgradeLevel());
-                      break;
-                    case "Arrow Tower":
-                      view.upgradeImage(
-                          id, game.images, 2, tower.getUpgradeLevel());
-                      break;
-                    case "Fire Tower":
-                      view.upgradeImage(
-                          id, game.images, 3, tower.getUpgradeLevel());
-                      break;
-                    case "Lightning Tower":
-                      view.upgradeImage(
-                          id, game.images, 4, tower.getUpgradeLevel());
-                      break;
-                    default:
-                      break;
-                  }
-                  game.tAdmin.upgradeTower(
+                  enoughMoney = game.tAdmin.upgradeTower(
                       tmp, game.player, game.board, game.row, game.col);
+                  if (enoughMoney) {
+                    switch (tmp.name) {
+                      case "Canon Tower":
+                        view.upgradeImage(
+                            id, game.images, 1, tmp.getUpgradeLevel());
+                        break;
+                      case "Arrow Tower":
+                        view.upgradeImage(
+                            id, game.images, 2, tower.getUpgradeLevel());
+                        break;
+                      case "Fire Tower":
+                        view.upgradeImage(
+                            id, game.images, 3, tower.getUpgradeLevel());
+                        break;
+                      case "Lightning Tower":
+                        view.upgradeImage(
+                            id, game.images, 4, tower.getUpgradeLevel());
+                        break;
+                      default:
+                        break;
+                    }
+                  }
+                  view.errorDiv.hidden = false;
                 }
               });
               b = false;
@@ -92,7 +93,10 @@ class Controller {
       }
     });
   }
+  //TODO: Wenn Sell Gedrückt wurde und danach Upgrade dann sellt er trozdem den Tower!!!
+  // das muss unbedingt gefixed werden
   void sellListener() {
+    view.errorDiv.hidden = true;
     view.sell.onClick.listen((ev) {
       bool check = true;
       for (int i = 0; i < game.getCol(); i++) {
@@ -111,6 +115,7 @@ class Controller {
                 }
               });
               if (tmp != null) game.tAdmin.sellTower(tmp, game.player);
+              print(game.tAdmin.allTower.length);
               check = false;
             }
           });
@@ -120,6 +125,7 @@ class Controller {
   }
   void buyListener() {
     view.buy.onClick.listen((ev) {
+      view.errorDiv.hidden = true;
       view.buy.hidden = true;
       view.buyMenu.hidden = false;
       view.arrowTower.hidden = false;
@@ -155,7 +161,6 @@ class Controller {
     return towerField;
   }
   void setTowerImg(int towerDescription) {
-    view.errorDiv.hidden = true;
     if (boolean) {
       boolean = false;
       bool b;
@@ -197,8 +202,9 @@ class Controller {
               print(game.tAdmin.allTower.length);
               b = false;
               towerDescription = 0; // DONE: hier lokale Variable auf 0 setzen
+            } else {
+              view.errorDiv.hidden = false;
             }
-            view.errorDiv.hidden = false;
           });
         }
       }

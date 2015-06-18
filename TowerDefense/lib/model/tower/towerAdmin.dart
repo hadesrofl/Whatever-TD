@@ -128,14 +128,16 @@ class TowerAdmin {
   /**
    * 
    */
-  void upgradeTower(Tower tower, Player player, Map<Field, String> board,
+  bool upgradeTower(Tower tower, Player player, Map<Field, String> board,
       final row, final col) {
     if (tower.newPriceAfterUpgrade() <= player.getGold()) {
       tower.upgrade();
       tower.findFieldsToAttack(board, row, col);
       player.setGold(player.getGold() - tower.getPrice());
+      return true;
     } else {
       print("Not enough Money to upgrade the Tower");
+      return false;
     }
   }
 }
