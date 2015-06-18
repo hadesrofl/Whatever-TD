@@ -16,7 +16,7 @@ class LevelAdmin {
   /**
    * The File containing all informations for the levels of this game
    */
-  var levelFile;
+  XmlDocument levelFile;
   /**
    * The number of the current level
    */
@@ -24,10 +24,13 @@ class LevelAdmin {
   /**
    * The number of the current wave
    */
-  /* TODO: current Wave as Wave Object */
-  int currentWave;
+  Wave currentWave;
   /**
-   * List of Minions active on the board
+   * List of Levels
+   */
+  List<XmlElement> levels;
+  /**
+   * List of Minions of this wave
    */
   List<Minion> minions = new List<Minion>();
   /**
@@ -49,7 +52,10 @@ class LevelAdmin {
   LevelAdmin(String levelFile) {
     this.levelFile = parse(levelFile);
     this.currentLevel = 1;
-    this.currentWave = 1;
+    this.currentWave = null;
+    this.levels = null;
+    this.evaluateFile();
+    this.loadNextLevel();
   }
   /**
    * Method to calculate the hitpoints of every single Minion
@@ -107,12 +113,92 @@ class LevelAdmin {
    * Method to get all necessary informations of the XML File
    */
   /** TODO: Implement */
-  void evaluateFile() {}
+  void evaluateFile() {
+    if(levels == null){
+      levels = levelFile.findElements("allLevels").first.findElements("levels").first.findElements("level").toList();
+    }
+  }
   /**
   * Method to load the next level
   */
   /** TODO: Implement */
-  void loadNextLevel() {}
+  void loadNextLevel() {
+    bool finalWave;
+    int currentWaveNumber;
+    if(currentWave != null){
+      currentWaveNumber = currentWave.getWaveNumber();
+    }else{
+      currentWaveNumber = 1;
+    }
+    XmlElement level = levels.firstWhere((x) => (x.attributes[0].value.compareTo(currentLevel.toString()) == 0));
+    List<XmlNode> wavesRaw = level.children;
+    
+    /* Extract Waves of XML */
+    List<XmlNode> wavesFromXml = extractWavesFromXml(level);
+    wavesFromXml.forEach((x) {
+          int waveNumber = int.parse(x.attributes[0].value);
+          int numberOfMinions = int.parse(x.attributes[1].value);
+          if(x.attributes[2].value.compareTo("true") == 0){
+            finalWave = true;
+          }else{
+            finalWave = false;
+          }
+          waves[waveNumber] = new Wave(waveNumber, numberOfMinions, finalWave);
+        
+    });
+       
+    
+ 
+    
+    
+    waves.forEach((k,v) => print("Wave: " + v.getWaveNumber().toString() + "\nNumber of Minions:  " + v.getNumberOfMinions().toString()));    
+    /* TODO: Change Static Value */
+    currentWave = waves[1];
+    loadNextWave();
+  }
+  
+  /**
+   * Loads the next Wave of the current Level from XML
+   */
+  void loadNextWave(){
+    int foundYa = -1;
+    if(currentWave.isFinalWave()){
+      loadNextLevel();
+    }else{
+      
+      /* Get Minion Data */
+      List<XmlElement> levelMinionsRaw = levelFile.findElements("allLevels").first.findElements("minions").first.findElements("minion").toList();
+      List<XmlElement> levelMinions = new List<XmlElement>();
+      levelMinionsRaw.forEach((x) {
+        if(x.firstChild != null){
+          levelMinions.add(x);
+        }
+      });
+      
+      XmlElement level = levels.firstWhere((x) => (x.attributes[0].value.compareTo(currentLevel.toString()) == 0));
+      List<XmlNode> wavesFromXml = extractWavesFromXml(level);
+      /* TODO: Search Wave Number and then search children for refered Minion */ 
+      if(foundYa != -1){
+        String tmp = wave.children[0].attributes[0].value;
+        print(tmp);
+      }
+
+    }
+  }
+  /**
+   * Extracts the Wave Data from XML and removes prettyFormatNodes
+   */
+  List<XmlNode> extractWavesFromXml(XmlElement level){
+    List<XmlNode> wavesRaw = level.children;
+    List<XmlNode> wavesRet = new List<XmlNode>();
+    wavesRaw.forEach((x) {
+          //int t = x;
+          if (x.firstChild != null){
+              wavesRet.add(x);
+          }
+        });
+    return wavesRet;
+  }
   /**
    * Creates the board of this level
    * @return a map of this level
