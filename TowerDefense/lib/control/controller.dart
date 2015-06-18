@@ -12,7 +12,6 @@ class Controller {
   View view;
   Game game;
   bool boolean;
-  int towerDescription;
   Field towerField;
   String field;
   var setTower;
@@ -102,10 +101,6 @@ class Controller {
       });
     });
     ct = view.canonTower.onClick.listen((ev) => setTowerImg(1));
-    // hier muss abgefangen werden, wenn der Spieler zu wenig Geld
-    // für einen TowerBuy hat
-
-    //TODO: Message, dass der Spieler nicht genügend Geld hat
 
     at = view.arrowTower.onClick.listen((ev) => setTowerImg(2));
 
@@ -132,20 +127,20 @@ class Controller {
               .listen((ev) {
             switch (towerDescription) {
               case 1:
-                b = game.tAdmin.buyTower(1, game.player);
-                ct.cancel();
+                b = game.tAdmin.buyTower(towerDescription, game.player);
+
                 break;
               case 2:
-                b = game.tAdmin.buyTower(2, game.player);
-                at.cancel();
+                b = game.tAdmin.buyTower(towerDescription, game.player);
+
                 break;
               case 3:
-                b = game.tAdmin.buyTower(3, game.player);
-                ft.cancel();
+                b = game.tAdmin.buyTower(towerDescription, game.player);
+
                 break;
               case 4:
-                b = game.tAdmin.buyTower(4, game.player);
-                lt.cancel();
+                b = game.tAdmin.buyTower(towerDescription, game.player);
+
                 break;
               default:
                 break;
@@ -168,6 +163,7 @@ class Controller {
                   field, game.images, towerDescription);
               print(game.tAdmin.allTower.length);
               b = false;
+              towerDescription = 0; // DONE: hier lokale Variable auf 0 setzen
             }
           });
         }
