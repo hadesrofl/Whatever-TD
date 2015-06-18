@@ -15,7 +15,6 @@ class Controller {
   Field towerField;
   String field;
   var setTower;
-  var ct, at, lt, ft;
   Controller(String levels) {
     //Initializing the Game
     game = new Game(levels);
@@ -138,15 +137,13 @@ class Controller {
         view.sell.hidden = false;
         view.upgrade.hidden = false;
         view.buy.hidden = false;
+        view.errorDiv.hidden = true;
       });
     });
-    ct = view.canonTower.onClick.listen((ev) => setTowerImg(1));
-
-    at = view.arrowTower.onClick.listen((ev) => setTowerImg(2));
-
-    ft = view.fireTower.onClick.listen((ev) => setTowerImg(3));
-
-    lt = view.lightningTower.onClick.listen((ev) => setTowerImg(4));
+    view.canonTower.onClick.listen((ev) => setTowerImg(1));
+    view.arrowTower.onClick.listen((ev) => setTowerImg(2));
+    view.fireTower.onClick.listen((ev) => setTowerImg(3));
+    view.lightningTower.onClick.listen((ev) => setTowerImg(4));
   }
   Field lookUpField(String field) {
     game.board.keys.forEach((f) {
@@ -158,6 +155,7 @@ class Controller {
     return towerField;
   }
   void setTowerImg(int towerDescription) {
+    view.errorDiv.hidden = true;
     if (boolean) {
       boolean = false;
       bool b;
@@ -183,7 +181,6 @@ class Controller {
             }
             if (b) {
               field = view.board.children.elementAt(i).children.elementAt(j).id;
-              //print(field);
               view.buyMenu.hidden = true;
               view.sell.hidden = false;
               view.upgrade.hidden = false;
@@ -201,6 +198,7 @@ class Controller {
               b = false;
               towerDescription = 0; // DONE: hier lokale Variable auf 0 setzen
             }
+            view.errorDiv.hidden = false;
           });
         }
       }

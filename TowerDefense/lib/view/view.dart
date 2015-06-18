@@ -64,6 +64,7 @@ class View {
    * Columns for the Board
    */
   int col;
+  Element errorDiv;
 
 /**
    * Constructor of the view
@@ -90,12 +91,14 @@ class View {
     arrowTower = querySelector("#ArrowTower");
     lightningTower = querySelector("#LightningTower");
     fireTower = querySelector("#FireTower");
+    errorDiv = querySelector("#errorDiv");
 
     stop.hidden = true;
     menuContainer.hidden = true;
     highScoreContainer.hidden = true;
     buyMenu.hidden = true;
     cancel.hidden = true;
+    errorDiv.hidden = true;
   }
 /**
    * Method to create a board 
