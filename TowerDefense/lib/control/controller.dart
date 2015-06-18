@@ -45,13 +45,13 @@ class Controller {
   }
   void upgradeListener() {
     view.upgrade.onClick.listen((ev) {
-      boolean = true;
+      bool b = true;
       var tmp;
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           view.board.children.elementAt(i).children.elementAt(j).onClick
               .listen((ev) {
-            if (boolean) {
+            if (b) {
               print("Feld " +
                   view.board.children.elementAt(i).children.elementAt(j).text +
                   " wurde angeklickt");
@@ -86,7 +86,7 @@ class Controller {
                       tmp, game.player, game.board, game.row, game.col);
                 }
               });
-              boolean = false;
+              b = false;
             }
           });
         }
@@ -95,12 +95,12 @@ class Controller {
   }
   void sellListener() {
     view.sell.onClick.listen((ev) {
-      boolean = true;
+      bool check = true;
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           view.board.children.elementAt(i).children.elementAt(j).onClick
               .listen((ev) {
-            if (boolean) {
+            if (check) {
               var tmp;
               game.tAdmin.allTower.forEach((tower) {
                 if (tower.getPosition().getX() == j &&
@@ -112,7 +112,7 @@ class Controller {
                 }
               });
               if (tmp != null) game.tAdmin.sellTower(tmp, game.player);
-              boolean = false;
+              check = false;
             }
           });
         }

@@ -183,7 +183,7 @@ class View {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
-          children.style..backgroundImage = "";
+          children.style..backgroundImage = "url(" + images["Grass"] + ")";
         }
       });
     });
