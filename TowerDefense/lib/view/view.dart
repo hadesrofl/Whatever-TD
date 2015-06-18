@@ -179,4 +179,78 @@ class View {
       });
     });
   }
+  void deleteImage(String id, Map<String, String> images) {
+    this.board.children.forEach((c) {
+      c.children.forEach((children) {
+        if (children.id == id) {
+          children.style..backgroundImage = "";
+        }
+      });
+    });
+  }
+  void upgradeImage(
+      String id, Map<String, String> images, int towerDescription, int level) {
+    print(towerDescription);
+    print(level);
+    this.board.children.forEach((c) {
+      c.children.forEach((children) {
+        if (children.id == id) {
+          switch (towerDescription) {
+            case 1:
+              switch (level) {
+                case 1:
+                  children.style
+                    ..backgroundImage = "url(" + images["CanonTower2"] + ")";
+                  break;
+                case 2:
+                  children.style
+                    ..backgroundImage = "url(" + images["CanonTower3"] + ")";
+                  break;
+              }
+              break;
+            case 2:
+              switch (level) {
+                case 1:
+                  children.style
+                    ..backgroundImage = "url(" + images["ArrowTower2"] + ")";
+                  break;
+                case 2:
+                  children.style
+                    ..backgroundImage = "url(" + images["ArrowTower3"] + ")";
+                  break;
+              }
+              break;
+            case 3:
+              switch (level) {
+                case 1:
+                  children.style
+                    ..backgroundImage = "url(" + images["FireTower2"] + ")";
+                  break;
+                case 2:
+                  children.style
+                    ..backgroundImage = "url(" + images["FireTower3"] + ")";
+                  break;
+              }
+              break;
+            case 4:
+              switch (level) {
+                case 1:
+                  children.style
+                    ..backgroundImage =
+                    "url(" + images["LightningTower2"] + ")";
+                  break;
+                case 2:
+                  children.style
+                    ..backgroundImage =
+                    "url(" + images["LightningTower3"] + ")";
+                  break;
+              }
+              break;
+            default:
+              break;
+          }
+        }
+      });
+    });
+  }
 }

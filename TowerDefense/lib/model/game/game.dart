@@ -132,5 +132,7 @@ class Game {
     this.images.putIfAbsent("FireTower1", () => "img/towers/firetower.jpg");
     this.images.putIfAbsent("FireTower2", () => "img/towers/firetower2.jpg");
     this.images.putIfAbsent("FireTower3", () => "img/towers/firetower3.png");
+    this.images.putIfAbsent("Dirt", () => "img/background/dirt.jpg");
+    this.images.putIfAbsent("Grass", () => "img/background/grass.jpg");
   }
 }

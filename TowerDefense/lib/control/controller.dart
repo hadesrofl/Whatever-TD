@@ -46,6 +46,7 @@ class Controller {
   void upgradeListener() {
     view.upgrade.onClick.listen((ev) {
       boolean = true;
+      var tmp;
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           view.board.children.elementAt(i).children.elementAt(j).onClick
@@ -54,6 +55,37 @@ class Controller {
               print("Feld " +
                   view.board.children.elementAt(i).children.elementAt(j).text +
                   " wurde angeklickt");
+              game.tAdmin.allTower.forEach((tower) {
+                if (tower.getPosition().getX() == j &&
+                    tower.getPosition().getY() == i) {
+                  String id = tower.getPosition().getX().toString() +
+                      tower.getPosition().getY().toString();
+                  tmp = tower;
+                  print(tmp.name);
+                  switch (tmp.name) {
+                    case "Canon Tower":
+                      view.upgradeImage(
+                          id, game.images, 1, tmp.getUpgradeLevel());
+                      break;
+                    case "Arrow Tower":
+                      view.upgradeImage(
+                          id, game.images, 2, tower.getUpgradeLevel());
+                      break;
+                    case "Fire Tower":
+                      view.upgradeImage(
+                          id, game.images, 3, tower.getUpgradeLevel());
+                      break;
+                    case "Lightning Tower":
+                      view.upgradeImage(
+                          id, game.images, 4, tower.getUpgradeLevel());
+                      break;
+                    default:
+                      break;
+                  }
+                  game.tAdmin.upgradeTower(
+                      tmp, game.player, game.board, game.row, game.col);
+                }
+              });
               boolean = false;
             }
           });
@@ -69,9 +101,17 @@ class Controller {
           view.board.children.elementAt(i).children.elementAt(j).onClick
               .listen((ev) {
             if (boolean) {
-              print("Feld " +
-                  view.board.children.elementAt(i).children.elementAt(j).text +
-                  " wurde angeklickt");
+              var tmp;
+              game.tAdmin.allTower.forEach((tower) {
+                if (tower.getPosition().getX() == j &&
+                    tower.getPosition().getY() == i) {
+                  String id = tower.getPosition().getX().toString() +
+                      tower.getPosition().getY().toString();
+                  view.deleteImage(id, game.images);
+                  tmp = tower;
+                }
+              });
+              if (tmp != null) game.tAdmin.sellTower(tmp, game.player);
               boolean = false;
             }
           });
@@ -128,19 +168,15 @@ class Controller {
             switch (towerDescription) {
               case 1:
                 b = game.tAdmin.buyTower(towerDescription, game.player);
-
                 break;
               case 2:
                 b = game.tAdmin.buyTower(towerDescription, game.player);
-
                 break;
               case 3:
                 b = game.tAdmin.buyTower(towerDescription, game.player);
-
                 break;
               case 4:
                 b = game.tAdmin.buyTower(towerDescription, game.player);
-
                 break;
               default:
                 break;
