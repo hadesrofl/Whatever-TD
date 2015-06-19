@@ -20,12 +20,14 @@ class Game {
   View view;
   Player player;
   int life;
+  /* TODO: Get Difficulty from User Input (button or something else) */
+  String difficulty = "easy";
 
   Game(String levels) {
     this.levels = levels;
     this.tAdmin = new TowerAdmin();
-    this.lAdmin = new LevelAdmin(levels);
-    this.board = new Map<Field, String>();
+    this.lAdmin = new LevelAdmin(levels, difficulty);
+    this.board = createBoard(this.row, this.col);
     this.images = new Map<String, String>();
     this.setImagesToMap();
   }
@@ -33,7 +35,7 @@ class Game {
    * 
    */
   void startGame() {
-    this.board = lAdmin.createBoard(this.row, this.col);
+
   }
   /**
    * 
@@ -67,6 +69,20 @@ class Game {
           key.getX().toString() + key.getY().toString(), () => value);
     });
     return htmlBoard;
+  }
+  
+  /**
+   * Creates the board of this level
+   * @return a map of this level
+   */
+  Map<Field, String> createBoard(final row, final col) {
+    Map<Field, String> board = new Map<Field, String>();
+    for (int i = 0; i < row; i++) {
+      for (int j = 0; j < col; j++) {
+        board.putIfAbsent(new Field(i, j, false), () => "");
+      }
+    }
+    return board;
   }
   /**
    * ---------------Getter and Setter Methods---------------------

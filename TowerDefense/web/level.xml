@@ -1,144 +1,235 @@
 <allLevels>
-	<levels>
+	<easyLevels>
 		<level no="1" finalLevel="false">
 			<wave no="1" numberOfMinions="10" finalWave="false">
-				<minion ref="WeakKratzke"></minion>
+				<minion ref="weakKratzke"></minion>
 			</wave>
 			<wave no="2" numberOfMinions="20" finalWave="false">
-				<minion ref="InternetExplorer"></minion>
+				<minion ref="internetExplorer"></minion>
 			</wave>
 			<wave no="3" numberOfMinions="5" finalWave="false">
-				<minion ref="Docker"></minion>
+				<minion ref="docker"></minion>
 			</wave>
 			<wave no="4" numberOfMinions="15" finalWave="false">
-				<minion ref="Dart"></minion>
+				<minion ref="dart"></minion>
 			</wave>
 			<wave no="5" numberOfMinions="1" finalWave="true">
-				<minion ref="CookieMonster"></minion>
+				<minion ref="cookieMonster"></minion>
 			</wave>
 		</level>
 		<level no="2" finalLevel="false">
 			<wave no="1" numberOfMinions="20" finalWave="false">
-				<minion ref="Docker"></minion>
+				<minion ref="docker"></minion>
 			</wave>
 			<wave no="2" numberOfMinions="25" finalWave="false">
-				<minion ref="Dart"></minion>
+				<minion ref="dart"></minion>
 			</wave>
 			<wave no="3" numberOfMinions="15" finalWave="false">
-				<minion ref="Twitter"></minion>
+				<minion ref="twitter"></minion>
 			</wave>
 			<wave no="4" numberOfMinions="10" finalWave="false">
-				<minion ref="Whatsapp"></minion>
+				<minion ref="whatsapp"></minion>
 			</wave>
 			<wave no="5" numberOfMinions="1" finalWave="true">
-				<minion ref="Amazon"></minion>
+				<minion ref="amazon"></minion>
 			</wave>
 		</level>
 		<level no="3" finalLevel="true">
 			<wave no="1" numberOfMinions="10" finalWave="false">
-				<minion ref="CookieMonster"></minion>
+				<minion ref="cookieMonster"></minion>
 			</wave>
 			<wave no="2" numberOfMinions="20" finalWave="false">
-				<minion ref="Facebook"></minion>
+				<minion ref="facebook"></minion>
 			</wave>
 			<wave no="3" numberOfMinions="15" finalWave="false">
-				<minion ref="Apple"></minion>
+				<minion ref="apple"></minion>
 			</wave>
 			<wave no="4" numberOfMinions="10" finalWave="false">
-				<minion ref="Google"></minion>
+				<minion ref="google"></minion>
 			</wave>
 			<wave no="5" numberOfMinions="1" finalWave="true">
-				<minion ref="StrongKratzke"></minion>
+				<minion ref="strongKratzke"></minion>
 			</wave>
 		</level>
-	</levels>	
+	</easyLevels>
+	<mediumLevels>
+		<level no="1" finalLevel="false">
+			<wave no="1" numberOfMinions="10" finalWave="false">
+				<minion ref="internetExplorer"></minion>
+			</wave>
+			<wave no="2" numberOfMinions="20" finalWave="false">
+				<minion ref="docker"></minion>
+			</wave>
+			<wave no="3" numberOfMinions="5" finalWave="false">
+				<minion ref="twitter"></minion>
+			</wave>
+			<wave no="4" numberOfMinions="15" finalWave="false">
+				<minion ref="dart"></minion>
+			</wave>
+			<wave no="5" numberOfMinions="1" finalWave="true">
+				<minion ref="cookieMonster"></minion>
+			</wave>
+		</level>
+				<level no="2" finalLevel="false">
+			<wave no="1" numberOfMinions="20" finalWave="false">
+				<minion ref="dart"></minion>
+			</wave>
+			<wave no="2" numberOfMinions="25" finalWave="false">
+				<minion ref="docker"></minion>
+			</wave>
+			<wave no="3" numberOfMinions="15" finalWave="false">
+				<minion ref="twitter"></minion>
+			</wave>
+			<wave no="4" numberOfMinions="20" finalWave="false">
+				<minion ref="whatsapp"></minion>
+			</wave>
+			<wave no="5" numberOfMinions="1" finalWave="true">
+				<minion ref="amazon"></minion>
+			</wave>
+		</level>
+		<level no="3" finalLevel="true">
+			<wave no="1" numberOfMinions="10" finalWave="false">
+				<minion ref="apple"></minion>
+			</wave>
+			<wave no="2" numberOfMinions="20" finalWave="false">
+				<minion ref="facebook"></minion>
+			</wave>
+			<wave no="3" numberOfMinions="5" finalWave="false">
+				<minion ref="amazon"></minion>
+			</wave>
+			<wave no="4" numberOfMinions="15" finalWave="false">
+				<minion ref="google"></minion>
+			</wave>
+			<wave no="5" numberOfMinions="1" finalWave="true">
+				<minion ref="strongKratzke"></minion>
+			</wave>
+		</level>
+	</mediumLevels>
+	<hardLevels>
+		<level no="1" finalLevel="false">
+			<wave no="1" numberOfMinions="10" finalWave="false">
+				<minion ref="docker"></minion>
+			</wave>
+			<wave no="2" numberOfMinions="20" finalWave="false">
+				<minion ref="twitter"></minion>
+			</wave>
+			<wave no="3" numberOfMinions="5" finalWave="false">
+				<minion ref="dart"></minion>
+			</wave>
+			<wave no="4" numberOfMinions="5" finalWave="false">
+				<minion ref="whatsapp"></minion>
+			</wave>
+			<wave no="5" numberOfMinions="2" finalWave="true">
+				<minion ref="cookieMonster"></minion>
+			</wave>
+		</level>
+		<level no="2" finalLevel="false">
+			<wave no="1" numberOfMinions="20" finalWave="false">
+				<minion ref="whatsapp"></minion>
+			</wave>
+			<wave no="2" numberOfMinions="25" finalWave="false">
+				<minion ref="facebook"></minion>
+			</wave>
+			<wave no="3" numberOfMinions="5" finalWave="false">
+				<minion ref="cookieMonster"></minion>
+			</wave>
+			<wave no="4" numberOfMinions="20" finalWave="false">
+				<minion ref="google"></minion>
+			</wave>
+			<wave no="5" numberOfMinions="2" finalWave="true">
+				<minion ref="amazon"></minion>
+			</wave>
+		</level>
+		<level no="3" finalLevel="true">
+			<wave no="1" numberOfMinions="20" finalWave="false">
+				<minion ref="apple"></minion>
+			</wave>
+			<wave no="2" numberOfMinions="30" finalWave="false">
+				<minion ref="facebook"></minion>
+			</wave>
+			<wave no="3" numberOfMinions="5" finalWave="false">
+				<minion ref="amazon"></minion>
+			</wave>
+			<wave no="4" numberOfMinions="100" finalWave="false">
+				<minion ref="weakKratzke"></minion>
+			</wave>
+			<wave no="5" numberOfMinions="2" finalWave="true">
+				<minion ref="strongKratzke"></minion>
+			</wave>
+		</level>
+	</hardLevels>	
 <minions>
-	<minion name="WeakKratzke">
+	<minion name="weakKratzke">
 		<hitpoints>25</hitpoints>
 		<armor>light</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>25</droppedGold>
 	</minion>
-	<minion name="InternetExplorer">
+	<minion name="internetExplorer">
 		<hitpoints>20</hitpoints>
 		<armor>light</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>20</droppedGold>
 	</minion>
-	<minion name="Docker">
+	<minion name="docker">
 		<hitpoints>50</hitpoints>
 		<armor>medium</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>50</droppedGold>
 	</minion>
-	<minion name="Dart">
+	<minion name="dart">
 		<hitpoints>50</hitpoints>
 		<armor>light</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>30</droppedGold>
 	</minion>
-	<minion name="CookieMonster">
+	<minion name="cookieMonster">
 		<hitpoints>1000</hitpoints>
 		<armor>heavy</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>500</droppedGold>
 	</minion>
-	<minion> name="Twitter">
+	<minion> name="twitter">
 		<hitpoints>40</hitpoints>
 		<armor>medium</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>30</droppedGold>
 	</minion>
-	<minion name="Whatsapp">
+	<minion name="whatsapp">
 		<hitpoints>60</hitpoints>
 		<armor>medium</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>40</droppedGold>
 	</minion>
-	<minion name="Facebook">
+	<minion name="facebook">
 		<hitpoints>100</hitpoints>
 		<armor>heavy</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>60</droppedGold>
 	</minion>
-	<minion name="Amazon">
+	<minion name="amazon">
 		<hitpoints>2500</hitpoints>
 		<armor>heavy</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>1000</droppedGold>
 	</minion>
-	<minion name="Apple">
+	<minion name="apple">
 		<hitpoints>150</hitpoints>
 		<armor>heavy</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>200</droppedGold>
 	</minion>
-	<minion name="Google">
+	<minion name="google">
 		<hitpoints>200</hitpoints>
 		<armor>heavy</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>300</droppedGold>
 	</minion>
-	<minion name="StrongKratzke">
+	<minion name="strongKratzke">
 		<hitpoints>5000</hitpoints>
 		<armor>light</armor>
 		<movementSpeed>1.0</movementSpeed>
 		<droppedGold>10000</droppedGold>
 	</minion>
 </minions>
-<highscores>
-	<level no="1">
-			<player name="Peter">
-				<points>500</points>
-			</player>
-			<player name="Robin">
-				<points>1000</points>
-			</player>
-	</level>
-	<level no="2">
-		<player name="Peter">
-			<points>1200</points>
-		</player>
-	</level>
-</highscores>
 </allLevels>

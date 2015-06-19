@@ -5,6 +5,7 @@ import "../game/game.dart";
 import 'dart:math';
 
 part 'target.dart';
+part 'condition.dart';
 part 'damage.dart';
 part 'tower.dart';
 part 'canonTower.dart';

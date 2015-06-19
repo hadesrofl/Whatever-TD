@@ -21,6 +21,10 @@ class Wave {
    * the number of slain minions of this wave
    */
   int deadMinions;
+  /**
+   * List of Minions of this wave
+   */
+  List<Minion> minions = new List<Minion>();
 
   /**
    * Constructor of a wave object
@@ -89,5 +93,15 @@ class Wave {
    */
   int getDeadMinions() {
     return this.deadMinions;
+  }
+  /**
+   * Gets the minions of this wave
+   * @return a list of all minions of this wave
+   */
+  List<Minion> getMinions(){
+    return this.minions;
+  }
+  void addMinion(Minion m){
+    this.minions.add(m);
   }
 }

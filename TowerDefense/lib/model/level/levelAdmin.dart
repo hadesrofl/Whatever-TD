@@ -4,7 +4,6 @@ import "package:xml/xml.dart";
 import "../tower/towerAdmin.dart";
 import "../game/game.dart";
 
-part "condition.dart";
 part "minion.dart";
 part "wave.dart";
 part "armor.dart";
@@ -30,10 +29,6 @@ class LevelAdmin {
    */
   List<XmlElement> levels;
   /**
-   * List of Minions of this wave
-   */
-  List<Minion> minions = new List<Minion>();
-  /**
    * Map of all Waves of this current Level
    * Key - integer of the wave number
    * Value - the wave
@@ -43,15 +38,18 @@ class LevelAdmin {
  * Path the minions have to follow
  */
   List<Field> path = new List<Field>();
-  Map<Field, String> board;
+  /**
+   * All Minions of the current wave
+   */
+  List<Minion> minions;
 
   /**
    * Constructor for the Level Administration object
    * @param levelFile - XML Document containing the information about the levels of this game
    */
-  LevelAdmin(String levelFile) {
+  LevelAdmin(String levelFile, String difficulty) {
     this.levelFile = parse(levelFile);
-    this.evaluateFile();
+    this.evaluateFile(difficulty);
     this.currentLevel = 0;
     this.currentWave = null;
   }
@@ -66,7 +64,7 @@ class LevelAdmin {
         /* Didn't found the minion yet */
         if (foundMinion == false) {
           /* found minion */
-          if (minions[i].equals(target.getTarget()) == true) {
+          if (minions[i].equals(target.getMinion()) == true) {
             /* minion has 0 or lower hp => dead */
             if (minions[i].calculateHitPoints(target.getDamage()) <= 0) {
               minions.removeAt(i);
@@ -110,17 +108,27 @@ class LevelAdmin {
   /**
    * Method to get all necessary informations of the XML File
    */
-  void evaluateFile() {
+  void evaluateFile(String difficulty) {
+    String chosenDifficulty = "";
+    if (difficulty.compareTo("easy") == 0) {
+      chosenDifficulty = "easyLevels";
+    } else if (difficulty.compareTo("medium") == 0) {
+      chosenDifficulty = "mediumLevels";
+    } else if (difficulty.compareTo("hard") == 0) {
+      chosenDifficulty = "hardLevels";
+      /* Default */
+    } else {
+      chosenDifficulty = "easyLevels";
+    }
     levels = levelFile.findElements("allLevels").first
-        .findElements("levels").first.findElements("level").toList();
+        .findElements(chosenDifficulty).first.findElements("level").toList();
   }
   /**
   * Method to load the next level
   */
-  /* TODO: Level Difficulties needs to be checked */
   void loadNextLevel() {
-    bool finalWave = isFinalLevel();
-    if (!finalWave) {
+    bool finalWave;
+    if (!isFinalLevel()) {
       currentLevel++;
       XmlElement level = levels.firstWhere((x) =>
           (x.attributes[0].value.compareTo(currentLevel.toString()) == 0));
@@ -144,7 +152,6 @@ class LevelAdmin {
   /**
    * Loads the next Wave of the current Level from XML
    */
-  /* TODO: Level Difficulties needs to be checked */
   void loadNextWave() {
     int waveIndex = 0;
     if (currentWave != null) {
@@ -158,7 +165,7 @@ class LevelAdmin {
         /* Get Wave index in XML */
         for (int i = 0; i < wavesFromXml.length; i++) {
           if (wavesFromXml[i].attributes[0].value
-                  .compareTo((currentWave.getWaveNumber() + 1).toString()) ==
+                  .compareTo((currentWave.getWaveNumber()).toString()) ==
               0) {
             waveIndex = i;
           }
@@ -169,12 +176,9 @@ class LevelAdmin {
           bool found = false;
           for (int i = 0; i < wavesFromXml[waveIndex].children.length; i++) {
             if (!found) {
-              /* pretty format text in XML */
-              //if (!wavesFromXml[waveIndex].children[i].text.startsWith("\n")) {
+              /* remove pretty format text in XML */
               minionIndex = skipFormatTags(wavesFromXml[waveIndex].children, 0);
-              // minionIndex = i;
               found = true;
-              // }
             }
           }
 
@@ -206,7 +210,7 @@ class LevelAdmin {
                 print(droppedGold.toString());
                 /* create minion objects and save them in the minions list */
                 for (int j = 0; j < currentWave.getNumberOfMinions(); j++) {
-                  minions.add(new Minion(minionName, hitpoints, armor,
+                  currentWave.addMinion(new Minion(minionName, hitpoints, armor,
                       movementSpeed, droppedGold));
                 }
               }
@@ -215,6 +219,7 @@ class LevelAdmin {
         }
       }
     }
+    minions = waves[currentWave.getWaveNumber()].getMinions();
   }
   /**
    * Extracts the Wave Data from XML and removes prettyFormatNodes
@@ -234,7 +239,6 @@ class LevelAdmin {
    * Gets the Minions from XML
    * @return a list of xml elements containing all minions
    */
-/* TODO: Level Difficulties needs to be checked */
   List<XmlElement> getMinionsFromXml() {
     /* Get Minion Data */
     List<XmlElement> levelMinionsRaw = levelFile.findElements("allLevels").first
@@ -261,26 +265,13 @@ class LevelAdmin {
     bool found = false;
     for (int i = oldIndex; i < nodes.length; i++) {
       if (!found) {
-        if (!nodes[i].text.startsWith("\n")) {
+        if (!nodes[i].text.startsWith(new RegExp(r"\s"))) {
           found = true;
           value = i;
         }
       }
     }
     return value;
-  }
-  /**
-   * Creates the board of this level
-   * @return a map of this level
-   */
-  Map<Field, String> createBoard(final row, final col) {
-    Map<Field, String> board = new Map<Field, String>();
-    for (int i = 0; i < row; i++) {
-      for (int j = 0; j < col; j++) {
-        board.putIfAbsent(new Field(i, j, false), () => "");
-      }
-    }
-    return board;
   }
   /**
    * ---------------Getter and Setter Methods---------------------
