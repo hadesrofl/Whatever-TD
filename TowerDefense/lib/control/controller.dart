@@ -15,6 +15,7 @@ class Controller {
   Field towerField;
   String field;
   var setTower;
+  var x;
   Controller(String levels) {
     //Initializing the Game
     game = new Game(levels);
@@ -41,10 +42,20 @@ class Controller {
     buyListener();
     sellListener();
     upgradeListener();
+
+    view.cancel.onClick.listen((ev) {
+      view.buyMenu.hidden = true;
+      view.cancel.hidden = true;
+      view.sell.hidden = false;
+      view.upgrade.hidden = false;
+      view.buy.hidden = false;
+      view.errorDiv.hidden = true;
+      onDOne: () => x.pause();
+    });
   }
   void upgradeListener() {
-    view.errorDiv.hidden = true;
     view.upgrade.onClick.listen((ev) {
+      view.errorDiv.hidden = true;
       bool enoughMoney;
       bool b = true;
       var tmp;
@@ -84,6 +95,7 @@ class Controller {
                     }
                   }
                   view.errorDiv.hidden = false;
+                  print("Error upgrade");
                 }
               });
               b = false;
@@ -96,8 +108,12 @@ class Controller {
   //TODO: Wenn Sell Gedrückt wurde und danach Upgrade dann sellt er trozdem den Tower!!!
   // das muss unbedingt gefixed werden
   void sellListener() {
-    view.errorDiv.hidden = true;
-    view.sell.onClick.listen((ev) {
+    x = view.sell.onClick.listen((ev) {
+      view.errorDiv.hidden = true;
+      view.buy.hidden = true;
+      view.upgrade.hidden = true;
+      view.cancel.hidden = false;
+      view.sell.hidden = true;
       bool check = true;
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
@@ -136,20 +152,11 @@ class Controller {
       view.upgrade.hidden = true;
       view.cancel.hidden = false;
       boolean = true;
-
-      view.cancel.onClick.listen((ev) {
-        view.buyMenu.hidden = true;
-        view.cancel.hidden = true;
-        view.sell.hidden = false;
-        view.upgrade.hidden = false;
-        view.buy.hidden = false;
-        view.errorDiv.hidden = true;
-      });
     });
-    view.canonTower.onClick.listen((ev) => setTowerImg(1));
-    view.arrowTower.onClick.listen((ev) => setTowerImg(2));
-    view.fireTower.onClick.listen((ev) => setTowerImg(3));
-    view.lightningTower.onClick.listen((ev) => setTowerImg(4));
+    var x = view.canonTower.onClick.listen((ev) => setTowerImg(1));
+    var y = view.arrowTower.onClick.listen((ev) => setTowerImg(2));
+    var z = view.fireTower.onClick.listen((ev) => setTowerImg(3));
+    var a = view.lightningTower.onClick.listen((ev) => setTowerImg(4));
   }
   Field lookUpField(String field) {
     game.board.keys.forEach((f) {
@@ -163,47 +170,45 @@ class Controller {
   void setTowerImg(int towerDescription) {
     if (boolean) {
       boolean = false;
-      bool b;
+      bool enough;
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           view.board.children.elementAt(i).children.elementAt(j).onClick
               .listen((ev) {
             switch (towerDescription) {
               case 1:
-                b = game.tAdmin.buyTower(towerDescription, game.player);
+                enough = game.tAdmin.buyTower(towerDescription, game.player);
                 break;
               case 2:
-                b = game.tAdmin.buyTower(towerDescription, game.player);
+                enough = game.tAdmin.buyTower(towerDescription, game.player);
                 break;
               case 3:
-                b = game.tAdmin.buyTower(towerDescription, game.player);
+                enough = game.tAdmin.buyTower(towerDescription, game.player);
                 break;
               case 4:
-                b = game.tAdmin.buyTower(towerDescription, game.player);
+                enough = game.tAdmin.buyTower(towerDescription, game.player);
                 break;
               default:
                 break;
             }
-            if (b) {
+            if (enough) {
+              print(enough);
               field = view.board.children.elementAt(i).children.elementAt(j).id;
               view.buyMenu.hidden = true;
               view.sell.hidden = false;
               view.upgrade.hidden = false;
               view.buy.hidden = false;
               view.cancel.hidden = true;
-
               towerField = lookUpField(field);
-              print("x");
-              print(game.tAdmin.allTower.last);
               game.tAdmin.setTowerChoords(game.tAdmin.allTower.last, towerField,
                   game.board, game.getRow(), game.getCol());
               view.setTowerImageToTowerField(
                   field, game.images, towerDescription);
               print(game.tAdmin.allTower.length);
-              b = false;
               towerDescription = 0; // DONE: hier lokale Variable auf 0 setzen
             } else {
               view.errorDiv.hidden = false;
+              print("Error buy");
             }
           });
         }

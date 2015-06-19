@@ -7,7 +7,7 @@ class Player {
 
   Player(String name) {
     this.setName(name);
-    this.setGold(150);
+    this.setGold(151);
     this.setHighscore(0);
   }
   String getName() {
