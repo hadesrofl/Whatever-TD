@@ -19,6 +19,7 @@ class Game {
   final col = 11;
   View view;
   Player player;
+  int life;
 
   Game(String levels) {
     this.levels = levels;
