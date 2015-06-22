@@ -65,6 +65,11 @@ class View {
    */
   int col;
   Element errorDiv;
+  Element errorDiv2;
+  ButtonElement easy;
+  ButtonElement medium;
+  ButtonElement hard;
+  Element p;
 
 /**
    * Constructor of the view
@@ -92,6 +97,11 @@ class View {
     lightningTower = querySelector("#LightningTower");
     fireTower = querySelector("#FireTower");
     errorDiv = querySelector("#errorDiv");
+    errorDiv2 = querySelector("#errorDiv2");
+    easy = querySelector("#easyGame");
+    medium = querySelector("#mediumGame");
+    hard = querySelector("#hardGame");
+    p = querySelector("#difficulty");
 
     stop.hidden = true;
     menuContainer.hidden = true;
@@ -99,6 +109,10 @@ class View {
     buyMenu.hidden = true;
     cancel.hidden = true;
     errorDiv.hidden = true;
+    errorDiv2.hidden = true;
+    buy.hidden = true;
+    upgrade.hidden = true;
+    sell.hidden = true;
   }
 /**
    * Method to create a board 
@@ -255,5 +269,14 @@ class View {
         }
       });
     });
+  }
+  void hideDifficultyMenu() {
+    hard.hidden = true;
+    medium.hidden = true;
+    easy.hidden = true;
+    buy.hidden = false;
+    sell.hidden = false;
+    upgrade.hidden = false;
+    p.hidden = true;
   }
 }

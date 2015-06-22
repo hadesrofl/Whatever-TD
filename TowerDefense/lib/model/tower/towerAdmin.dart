@@ -35,7 +35,8 @@ class TowerAdmin {
   /**
    * updates money of the player and adds the new Tower to the AllTower-List
    */
-  bool buyTower(int towerDescription, Player player) {
+  bool buyTower(int towerDescription, Player player, Field field,
+      Map<Field, String> board, final row, final col) {
     bool ausgabe;
     Tower newTower;
     switch (towerDescription) {
@@ -99,6 +100,10 @@ class TowerAdmin {
       default:
         break;
     }
+    if (ausgabe == true) {
+      ausgabe = setTowerChoords(newTower, field, board, row,
+          col); // TODO: abfragen, wenn feld shcon belegt ist
+    }
     return ausgabe;
   }
 
@@ -116,7 +121,7 @@ class TowerAdmin {
    */
   bool setTowerChoords(
       Tower tower, Field f, Map<Field, String> board, final row, final col) {
-    if (!f.isPathField() || !f.isCovered()) {
+    if (!f.isPathField() && !f.isCovered()) {
       tower.setCoordinates(f);
       tower.findFieldsToAttack(board, row, col);
       f.setCovered(true);

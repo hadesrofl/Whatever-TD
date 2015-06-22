@@ -34,9 +34,7 @@ class Game {
   /**
    * 
    */
-  void startGame() {
-
-  }
+  void startGame() {}
   /**
    * 
    */
@@ -70,7 +68,7 @@ class Game {
     });
     return htmlBoard;
   }
-  
+
   /**
    * Creates the board of this level
    * @return a map of this level
