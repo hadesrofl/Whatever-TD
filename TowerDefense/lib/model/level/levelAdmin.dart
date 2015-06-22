@@ -47,14 +47,11 @@ class LevelAdmin {
    * Constructor for the Level Administration object
    * @param levelFile - XML Document containing the information about the levels of this game
    */
-  LevelAdmin(String levelFile, String difficulty, Map<Field, String> board) {
+  LevelAdmin(String levelFile, String difficulty) {
     this.levelFile = parse(levelFile);
     this.evaluateFile(difficulty);
     this.currentLevel = 0;
     this.currentWave = null;
-    loadNextLevel();
-    loadNextWave();
-    loadPath(board, difficulty);
   }
   /**
    * Method to calculate the hitpoints of every single Minion
@@ -69,7 +66,7 @@ class LevelAdmin {
           /* found minion */
           if (minions[i].equals(target.getMinion()) == true) {
             /* minion has 0 or lower hp => dead */
-            if (minions[i].calculateHitPoints(target.getDamage()) <= 0) {
+            if (minions[i].calculateHitPoints(target) <= 0) {
               minions.removeAt(i);
             }
             /* mark minion as found */
@@ -82,16 +79,19 @@ class LevelAdmin {
   /**
    * Method to spawn a new minion
    */
-  void minionSpawn() {
+  Minion minionSpawn() {
     bool foundMinion = false;
+    Minion m = null;
     for (int i = 0; i < minions.length; i++) {
       if (foundMinion == false) {
         if (minions[i].isSpawned() == false) {
           minions[i].spawn();
+          m = minions[i];
           foundMinion = true;
         }
       }
     }
+    return m;
   }
   /**
    * Method to move minions
@@ -122,18 +122,18 @@ class LevelAdmin {
    * @param difficulty is the given string of the difficulty
    * @return the name in the xml file for this difficulty
    */
-  String translateDifficulty(String difficulty){
+  String translateDifficulty(String difficulty) {
     String chosenDifficulty;
     if (difficulty.compareTo("easy") == 0) {
-          chosenDifficulty = "easyLevels";
-        } else if (difficulty.compareTo("medium") == 0) {
-          chosenDifficulty = "mediumLevels";
-        } else if (difficulty.compareTo("hard") == 0) {
-          chosenDifficulty = "hardLevels";
-          /* Default */
-        } else {
-          chosenDifficulty = "easyLevels";
-        }
+      chosenDifficulty = "easyLevels";
+    } else if (difficulty.compareTo("medium") == 0) {
+      chosenDifficulty = "mediumLevels";
+    } else if (difficulty.compareTo("hard") == 0) {
+      chosenDifficulty = "hardLevels";
+      /* Default */
+    } else {
+      chosenDifficulty = "easyLevels";
+    }
     return chosenDifficulty;
   }
   /**
@@ -255,33 +255,33 @@ class LevelAdmin {
       }
     });
     /* Skip Format Tags */
-    for(int index = 1; index < waves.children.length;index = index + 2){
+    for (int index = 1; index < waves.children.length; index = index + 2) {
       wavesRet.add(waves.children[index]);
     }
 
     return wavesRet;
   }
-  
-  void loadPath(Map<Field,String> board, String difficulty){
+/**
+ * Loads the path from the xml and updates the fields inside the board
+ * @param board is the board of the game
+ * @param difficulty is the difficulty of the game needed to evalute the xml file
+ */
+  void loadPath(Map<Field, String> board, String difficulty) {
     difficulty = translateDifficulty(difficulty);
 
     List<int> pathCoords = loadPathFromXML(this.levels.firstWhere((x) =>
-          (x.attributes[0].value.compareTo(currentLevel.toString()) == 0)), difficulty);
-  for(int i = 0; i <pathCoords.length;i = i + 2){
-  board.forEach((f,v){
-   if(f.getX() == pathCoords[i] && f.getY() == pathCoords[i+1]){
-    f.setPathField(true);
-  }
-  });
-  board.forEach((f,v) {
-    if(f.isPathField()){
-      print(f.toString());
+            (x.attributes[0].value.compareTo(currentLevel.toString()) == 0)),
+        difficulty);
+    for (int i = 0; i < pathCoords.length; i = i + 2) {
+      board.forEach((f, v) {
+        if (f.getX() == pathCoords[i] && f.getY() == pathCoords[i + 1]) {
+          f.setPathField(true);
+          this.path.add(f);
+        }
+      });
     }
-  });
-  print("Done");
-}
   }
-  
+
   /**
    * Extracts the Wave Data from XML and removes prettyFormatNodes
    */
@@ -295,11 +295,18 @@ class LevelAdmin {
       }
     });
     pathRaw = getPathFromXml();
-    pathRaw.forEach((x){
-      if(x.attributes[0].value.compareTo(path.attributes[0].value.toString()) == 0){
-        for(int startIndex = 1; startIndex < x.children.length; startIndex = startIndex + 2){
-          for(int i = 1; i < x.children[startIndex].children.length;i = i + 2){
-            coords.add(int.parse(x.children[startIndex].children[i].children[0].text));
+    pathRaw.forEach((x) {
+      if (x.attributes[0].value
+              .compareTo(path.attributes[0].value.toString()) ==
+          0) {
+        for (int startIndex = 1;
+            startIndex < x.children.length;
+            startIndex = startIndex + 2) {
+          for (int i = 1;
+              i < x.children[startIndex].children.length;
+              i = i + 2) {
+            coords.add(
+                int.parse(x.children[startIndex].children[i].children[0].text));
           }
         }
       }
@@ -340,7 +347,7 @@ class LevelAdmin {
     });
     return path;
   }
-  
+
   /**
    * Skips Tags with Pretty Format Text and returns the necessary index
    * @param nodes is the List of nodes contaning pretty format tags

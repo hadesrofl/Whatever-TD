@@ -35,7 +35,6 @@ class Controller {
       view.errorDiv.hidden = true;
 
       //Start the Game
-      game.startGame();
       game.runGame();
     });
     buyListener();
@@ -56,13 +55,23 @@ class Controller {
   void difficultyListener() {
     view.easy.onClick.listen((ev) {
       view.hideDifficultyMenu();
+      game.setDifficulty("easy");
+      game.setLevelAdmin();
+      game.startGame();
     });
     view.medium.onClick.listen((ev) {
       view.hideDifficultyMenu();
+      game.setDifficulty("medium");
+      game.setLevelAdmin();
+      game.startGame();
     });
     view.hard.onClick.listen((ev) {
       view.hideDifficultyMenu();
+      game.setDifficulty("hard");
+      game.setLevelAdmin();
+      game.startGame();
     });
+
   }
   void upgradeListener() {
     view.upgrade.onClick.listen((ev) {

@@ -1,9 +1,9 @@
 <allLevels>
 	<easyLevels>
 		<level no="1" finalLevel="false">
-			<waves name="bla">
+			<waves>
 				<wave no="1" numberOfMinions="10" finalWave="false">
-					<minion ref="weakKratzke"></minion>
+					<minion ref="internetExplorer"></minion>
 				</wave>
 				<wave no="2" numberOfMinions="20" finalWave="false">
 					<minion ref="internetExplorer"></minion>

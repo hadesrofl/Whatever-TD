@@ -21,20 +21,24 @@ class Game {
   Player player;
   int life;
   /* TODO: Get Difficulty from User Input (button or something else) */
-  String difficulty = "easy";
+  String difficulty;
 
   Game(String levels) {
     this.levels = levels;
     this.tAdmin = new TowerAdmin();
     this.board = createBoard(this.row, this.col);
-    this.lAdmin = new LevelAdmin(levels, difficulty, board);
+   // this.lAdmin = new LevelAdmin(levels);
     this.images = new Map<String, String>();
     this.setImagesToMap();
   }
   /**
    * 
    */
-  void startGame() {}
+  void startGame() {
+    this.lAdmin.loadNextLevel();
+    this.lAdmin.loadPath(board, difficulty);
+    this.lAdmin.loadNextWave();
+  }
   /**
    * 
    */
@@ -149,5 +153,11 @@ class Game {
     this.images.putIfAbsent("FireTower3", () => "img/towers/firetower3.png");
     this.images.putIfAbsent("Dirt", () => "img/background/dirt.jpg");
     this.images.putIfAbsent("Grass", () => "img/background/grass.jpg");
+  }
+  void setDifficulty(String dif){
+    this.difficulty = dif;
+  }
+  void setLevelAdmin(){
+    this.lAdmin = new LevelAdmin(levels, difficulty);
   }
 }
