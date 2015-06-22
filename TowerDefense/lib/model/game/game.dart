@@ -26,8 +26,8 @@ class Game {
   Game(String levels) {
     this.levels = levels;
     this.tAdmin = new TowerAdmin();
-    this.lAdmin = new LevelAdmin(levels, difficulty);
     this.board = createBoard(this.row, this.col);
+    this.lAdmin = new LevelAdmin(levels, difficulty, board);
     this.images = new Map<String, String>();
     this.setImagesToMap();
   }

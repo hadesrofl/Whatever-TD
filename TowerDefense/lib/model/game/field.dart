@@ -96,4 +96,7 @@ class Field {
   String toString() {
     return this.getX().toString() + this.getY().toString();
   }
+  void setPathField(bool b){
+    this.pathField = b;
+  }
 }

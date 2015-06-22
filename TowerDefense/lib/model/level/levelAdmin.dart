@@ -47,11 +47,14 @@ class LevelAdmin {
    * Constructor for the Level Administration object
    * @param levelFile - XML Document containing the information about the levels of this game
    */
-  LevelAdmin(String levelFile, String difficulty) {
+  LevelAdmin(String levelFile, String difficulty, Map<Field, String> board) {
     this.levelFile = parse(levelFile);
     this.evaluateFile(difficulty);
     this.currentLevel = 0;
     this.currentWave = null;
+    loadNextLevel();
+    loadNextWave();
+    loadPath(board, difficulty);
   }
   /**
    * Method to calculate the hitpoints of every single Minion
@@ -110,24 +113,36 @@ class LevelAdmin {
    */
   void evaluateFile(String difficulty) {
     String chosenDifficulty = "";
-    if (difficulty.compareTo("easy") == 0) {
-      chosenDifficulty = "easyLevels";
-    } else if (difficulty.compareTo("medium") == 0) {
-      chosenDifficulty = "mediumLevels";
-    } else if (difficulty.compareTo("hard") == 0) {
-      chosenDifficulty = "hardLevels";
-      /* Default */
-    } else {
-      chosenDifficulty = "easyLevels";
-    }
+    chosenDifficulty = translateDifficulty(difficulty);
     levels = levelFile.findElements("allLevels").first
         .findElements(chosenDifficulty).first.findElements("level").toList();
   }
   /**
+   * Translates the given difficulty for the xml document.
+   * @param difficulty is the given string of the difficulty
+   * @return the name in the xml file for this difficulty
+   */
+  String translateDifficulty(String difficulty){
+    String chosenDifficulty;
+    if (difficulty.compareTo("easy") == 0) {
+          chosenDifficulty = "easyLevels";
+        } else if (difficulty.compareTo("medium") == 0) {
+          chosenDifficulty = "mediumLevels";
+        } else if (difficulty.compareTo("hard") == 0) {
+          chosenDifficulty = "hardLevels";
+          /* Default */
+        } else {
+          chosenDifficulty = "easyLevels";
+        }
+    return chosenDifficulty;
+  }
+  /**
   * Method to load the next level
+  * @return false, if it is the last level and no new could be loaded, true if a new level is loaded
   */
-  void loadNextLevel() {
+  bool loadNextLevel() {
     bool finalWave;
+    bool nextLevelLoaded = false;
     if (!isFinalLevel()) {
       currentLevel++;
       XmlElement level = levels.firstWhere((x) =>
@@ -146,18 +161,23 @@ class LevelAdmin {
       });
       /* Save first Wave as current Wave */
       currentWave = waves[1];
+      nextLevelLoaded = true;
     }
+    return nextLevelLoaded;
   }
 
   /**
    * Loads the next Wave of the current Level from XML
+   * @return false if it is the last wave of the level, true if new wave is loaded
    */
-  void loadNextWave() {
+  bool loadNextWave() {
     int waveIndex = 0;
+    bool nextWaveLoaded;
     if (currentWave != null) {
       if (isLevelEnd()) {
-        loadNextLevel();
+        nextWaveLoaded = false;
       } else {
+        nextWaveLoaded = true;
         List<XmlElement> levelMinions = getMinionsFromXml();
         XmlElement level = levels.firstWhere((x) =>
             (x.attributes[0].value.compareTo(currentLevel.toString()) == 0));
@@ -220,20 +240,71 @@ class LevelAdmin {
       }
     }
     minions = waves[currentWave.getWaveNumber()].getMinions();
+    return nextWaveLoaded;
   }
   /**
    * Extracts the Wave Data from XML and removes prettyFormatNodes
    */
   List<XmlNode> extractWavesFromXml(XmlElement level) {
     List<XmlNode> wavesRaw = level.children;
+    XmlNode waves = null;
     List<XmlNode> wavesRet = new List<XmlNode>();
     wavesRaw.forEach((x) {
-      //int t = x;
       if (x.firstChild != null) {
-        wavesRet.add(x);
+        waves = x;
       }
     });
+    /* Skip Format Tags */
+    for(int index = 1; index < waves.children.length;index = index + 2){
+      wavesRet.add(waves.children[index]);
+    }
+
     return wavesRet;
+  }
+  
+  void loadPath(Map<Field,String> board, String difficulty){
+    difficulty = translateDifficulty(difficulty);
+
+    List<int> pathCoords = loadPathFromXML(this.levels.firstWhere((x) =>
+          (x.attributes[0].value.compareTo(currentLevel.toString()) == 0)), difficulty);
+  for(int i = 0; i <pathCoords.length;i = i + 2){
+  board.forEach((f,v){
+   if(f.getX() == pathCoords[i] && f.getY() == pathCoords[i+1]){
+    f.setPathField(true);
+  }
+  });
+  board.forEach((f,v) {
+    if(f.isPathField()){
+      print(f.toString());
+    }
+  });
+  print("Done");
+}
+  }
+  
+  /**
+   * Extracts the Wave Data from XML and removes prettyFormatNodes
+   */
+  List<int> loadPathFromXML(XmlElement level, String difficulty) {
+    List<XmlNode> pathRaw = level.children;
+    List<int> coords = new List<int>();
+    XmlNode path = null;
+    pathRaw.forEach((x) {
+      if (x.text.startsWith(new RegExp(r"\s")) == false) {
+        path = x;
+      }
+    });
+    pathRaw = getPathFromXml();
+    pathRaw.forEach((x){
+      if(x.attributes[0].value.compareTo(path.attributes[0].value.toString()) == 0){
+        for(int startIndex = 1; startIndex < x.children.length; startIndex = startIndex + 2){
+          for(int i = 1; i < x.children[startIndex].children.length;i = i + 2){
+            coords.add(int.parse(x.children[startIndex].children[i].children[0].text));
+          }
+        }
+      }
+    });
+    return coords;
   }
   /**
    * Gets the Minions from XML
@@ -252,6 +323,24 @@ class LevelAdmin {
     });
     return levelMinions;
   }
+  /**
+   * Gets the Path from XML
+   * @return a list of xml elements containing all path coords
+   */
+  List<XmlElement> getPathFromXml() {
+    /* Get Minion Data */
+    List<XmlElement> pathRaw = levelFile.findElements("allLevels").first
+        .findElements("paths").first.findElements("path").toList();
+    List<XmlElement> path = new List<XmlElement>();
+    /* Extract Minion Data from XML, remove pretty Format XML */
+    pathRaw.forEach((x) {
+      if (x.firstChild != null) {
+        path.add(x);
+      }
+    });
+    return path;
+  }
+  
   /**
    * Skips Tags with Pretty Format Text and returns the necessary index
    * @param nodes is the List of nodes contaning pretty format tags

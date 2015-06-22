@@ -1,21 +1,24 @@
 <allLevels>
 	<easyLevels>
 		<level no="1" finalLevel="false">
-			<wave no="1" numberOfMinions="10" finalWave="false">
-				<minion ref="weakKratzke"></minion>
-			</wave>
-			<wave no="2" numberOfMinions="20" finalWave="false">
-				<minion ref="internetExplorer"></minion>
-			</wave>
-			<wave no="3" numberOfMinions="5" finalWave="false">
-				<minion ref="docker"></minion>
-			</wave>
-			<wave no="4" numberOfMinions="15" finalWave="false">
-				<minion ref="dart"></minion>
-			</wave>
-			<wave no="5" numberOfMinions="1" finalWave="true">
-				<minion ref="cookieMonster"></minion>
-			</wave>
+			<waves name="bla">
+				<wave no="1" numberOfMinions="10" finalWave="false">
+					<minion ref="weakKratzke"></minion>
+				</wave>
+				<wave no="2" numberOfMinions="20" finalWave="false">
+					<minion ref="internetExplorer"></minion>
+				</wave>
+				<wave no="3" numberOfMinions="5" finalWave="false">
+					<minion ref="docker"></minion>
+				</wave>
+				<wave no="4" numberOfMinions="15" finalWave="false">
+					<minion ref="dart"></minion>
+				</wave>
+				<wave no="5" numberOfMinions="1" finalWave="true">
+					<minion ref="cookieMonster"></minion>
+				</wave>
+			</waves>
+			<path ref="easyLevels"></path>
 		</level>
 		<level no="2" finalLevel="false">
 			<wave no="1" numberOfMinions="20" finalWave="false">
@@ -232,4 +235,78 @@
 		<droppedGold>10000</droppedGold>
 	</minion>
 </minions>
+<paths>
+		<path name="easyLevels">
+			<pathfield>
+				<y-coord>5</y-coord>
+				<x-coord>0</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>5</y-coord>
+				<x-coord>1</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>5</y-coord>
+				<x-coord>2</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>5</y-coord>
+				<x-coord>3</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>4</y-coord>
+				<x-coord>3</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>3</y-coord>
+				<x-coord>3</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>2</y-coord>
+				<x-coord>3</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>2</y-coord>
+				<x-coord>4</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>2</y-coord>
+				<x-coord>5</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>2</y-coord>
+				<x-coord>6</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>3</y-coord>
+				<x-coord>6</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>4</y-coord>
+				<x-coord>6</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>5</y-coord>
+				<x-coord>6</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>6</y-coord>
+				<x-coord>6</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>6</y-coord>
+				<x-coord>7</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>6</y-coord>
+				<x-coord>8</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>6</y-coord>
+				<x-coord>9</x-coord>
+			</pathfield>
+		</path>
+		<path name="mediumLevels">
+		</path>
+</paths>
 </allLevels>
