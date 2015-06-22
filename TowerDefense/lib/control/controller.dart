@@ -71,7 +71,6 @@ class Controller {
       game.setLevelAdmin();
       game.startGame();
     });
-
   }
   void upgradeListener() {
     view.upgrade.onClick.listen((ev) {
@@ -115,8 +114,7 @@ class Controller {
                         break;
                     }
                   } else {
-                    view.errorDiv2.hidden = false;
-                    print("Error upgrade");
+                    view.errorDiv.hidden = false;
                   }
                 }
               });
