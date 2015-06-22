@@ -274,7 +274,7 @@ class LevelAdmin {
         difficulty);
     for (int i = 0; i < pathCoords.length; i = i + 2) {
       board.forEach((f, v) {
-        if (f.getX() == pathCoords[i] && f.getY() == pathCoords[i + 1]) {
+        if (f.getX() == pathCoords[i+1] && f.getY() == pathCoords[i]) {
           f.setPathField(true);
           this.path.add(f);
         }
