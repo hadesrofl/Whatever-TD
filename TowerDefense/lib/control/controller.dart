@@ -73,7 +73,6 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
       game.startGame();
       setPath();
     });
-
   }
   void upgradeListener() {
     view.upgrade.onClick.listen((ev) {
@@ -99,8 +98,7 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
                   if (enoughMoney) {
                    view.upgradeImage(id, tmp.name, tmp.getUpgradeLevel());
                   } else {
-                    view.errorDiv2.hidden = false;
-                    print("Error upgrade");
+                    view.errorDiv.hidden = false;
                   }
                 }
               });
