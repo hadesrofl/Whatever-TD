@@ -2,7 +2,7 @@ part of tower;
 
 class FireTower extends Tower {
   FireTower() {
-    this.setName("Fire Tower");
+    this.setName("FireTower");
     this.setRange(4);
     this.setPrice(1000);
     this.setSellingPrice(500);
