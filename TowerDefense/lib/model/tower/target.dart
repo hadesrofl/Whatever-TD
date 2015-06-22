@@ -3,10 +3,12 @@ part of tower;
 class Target {
   Damage damage;
   Minion target;
+  Condition condition;
 
-  Target(Damage damage, Minion target) {
+  Target(Damage damage, Minion target, Condition condition) {
     this.damage = damage;
     this.target = target;
+    this.condition = condition;
   }
 
   Damage getDamage() {
@@ -20,5 +22,11 @@ class Target {
   }
   void setMinion(Minion tgt) {
     this.target = tgt;
+  }
+  Condition getCondition(){
+   return this.condition;
+  }
+  void setCondition(Condition con){
+    this.condition = con;
   }
 }

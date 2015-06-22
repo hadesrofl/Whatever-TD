@@ -64,7 +64,21 @@ class Tower {
         if (minion.getPosition().equals(fields)) {
           this.damage = new Damage(this.getBasicDamage(), this.damageType,
               this.abilityCalculation());
-          this.target = new Target(this.damage, minion);
+          Condition con = null;
+          if(this.damage.applyCondition == true){
+            switch(this.name){
+              case "Fire Tower":
+                con = new Condition("Fire");
+                break;
+              case "Lightning Tower":
+                con = new Condition("Lightning");
+                break;
+              default:
+                con = null;
+                break;
+            }
+          }
+          this.target = new Target(this.damage, minion, con);
         }
       });
     });

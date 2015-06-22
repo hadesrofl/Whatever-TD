@@ -79,71 +79,70 @@ class Minion {
    * Method to calculate hitpoints after getting hit by a tower
    * @param damage - damage object the tower is hitting him with
    */
-  double calculateHitPoints(Damage damage) {
+  double calculateHitPoints(Target target) {
     double dmgToMinion = 0.0;
+    if (target != null) {
     switch (this.armor.value) {
       //Light Armor
       case 1:
         //TODO: getter einbauen
         //DamageType = Siege
-        if (damage.damageType == 1) {
-          dmgToMinion = damage.getDamage() * 0.75;
+        if (target.getDamage().getDamageType() == 1) {
+          dmgToMinion = target.getDamage().getDamageValue() * 0.75;
           //DamageType = Piercing
-        } else if (damage.damageType == 2) {
-          dmgToMinion = damage.getDamage() * 1.25;
+        } else if (target.getDamage().getDamageType() == 2) {
+          dmgToMinion = target.getDamage().getDamageValue() * 1.25;
           //DamageType = Fire
-        } else if (damage.damageType == 3) {
-          dmgToMinion = damage.getDamage() * 1.25;
+        } else if (target.getDamage().getDamageType() == 3) {
+          dmgToMinion = target.getDamage().getDamageValue() * 1.25;
           //DamageType = Lightning
-        } else if (damage.damageType == 4) {
-          dmgToMinion = damage.getDamage() * 0.75;
+        } else if (target.getDamage().getDamageType() == 4) {
+          dmgToMinion = target.getDamage().getDamageValue() * 0.75;
         }
         break;
       //Medium Armor
       case 2:
         //DamageType = Siege
-        if (damage.damageType == 1) {
-          dmgToMinion = damage.getDamage() * 1.0;
+        if (target.getDamage().getDamageType() == 1) {
+          dmgToMinion = target.getDamage().getDamageValue() * 1.0;
           //DamageType = Piercing
-        } else if (damage.damageType == 2) {
-          dmgToMinion = damage.getDamage() * 1.0;
+        } else if (target.getDamage().getDamageType() == 2) {
+          dmgToMinion = target.getDamage().getDamageValue()* 1.0;
           //DamageType = Fire
-        } else if (damage.damageType == 3) {
-          dmgToMinion = damage.getDamage() * 0.75;
+        } else if (target.getDamage().getDamageType() == 3) {
+          dmgToMinion = target.getDamage().getDamageValue() * 0.75;
           //DamageType = Lightning
-        } else if (damage.damageType == 4) {
-          dmgToMinion = damage.getDamage() * 0.75;
+        } else if (target.getDamage().getDamageType() == 4) {
+          dmgToMinion = target.getDamage().getDamageValue() * 0.75;
         }
         break;
       //Heavy Armor
       case 3:
         //DamageType = Siege
-        if (damage.damageType == 1) {
-          dmgToMinion = damage.getDamage() * 1.25;
+        if (target.getDamage().getDamageType() == 1) {
+          dmgToMinion = target.getDamage().getDamageValue() * 1.25;
           //DamageType = Piercing
-        } else if (damage.damageType == 2) {
-          dmgToMinion = damage.getDamage() * 0.75;
+        } else if (target.getDamage().getDamageType() == 2) {
+          dmgToMinion = target.getDamage().getDamageValue() * 0.75;
           //DamageType = Fire
-        } else if (damage.damageType == 3) {
-          dmgToMinion = damage.getDamage() * 1.0;
+        } else if (target.getDamage().getDamageType() == 3) {
+          dmgToMinion = target.getDamage() .getDamageValue()* 1.0;
           //DamageType = Lightning
-        } else if (damage.damageType == 4) {
-          dmgToMinion = damage.getDamage() * 1.25;
+        } else if (target.getDamage().getDamageType() == 4) {
+          dmgToMinion = target.getDamage().getDamageValue() * 1.25;
         }
         break;
       default:
-        dmgToMinion = damage.getDamage() * 1.0;
+        dmgToMinion = target.getDamage().getDamageValue() * 1.0;
         break;
     }
     /* There are conditions to apply */
-    if (damage.applyCondition == true) {
+    if(target.getCondition() != null){
       bool foundCondition = false;
-      /* Case: Fire */
-      if (damage.damageType == 3) {
-        /* Minion has condition already? => reset Duration */
+      /* Minion has condition already? => reset Duration */
         conditions.forEach((c) {
           if (foundCondition == false) {
-            if (c.getIdentifier().compareTo("Fire") == 0) {
+            if (c.getIdentifier().compareTo(target.getCondition().identifier) == 0) {
               foundCondition = true;
               c.resetDuration();
             }
@@ -151,22 +150,7 @@ class Minion {
         });
         /* Condition is new */
         if (foundCondition == false) {
-          conditions.add(new Condition("Fire"));
-        }
-        /* Case: Lightning */
-      } else if (damage.damageType == 4) {
-        /* Minion has condition already? => reset Duration */
-        conditions.forEach((c) {
-          if (foundCondition == false) {
-            if (c.getIdentifier().compareTo("Lightning") == 0) {
-              foundCondition = true;
-              c.resetDuration();
-            }
-          }
-        });
-        /* Condition is new */
-        if (foundCondition == false) {
-          conditions.add(new Condition("Lightning"));
+          conditions.add(target.getCondition());
         }
       }
       for (int i = 0; i < conditions.length; i++) {

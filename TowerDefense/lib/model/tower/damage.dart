@@ -10,7 +10,7 @@ class Damage {
     this.setDamage(damage);
     this.setDamageType(damageType);
   }
-  double getDamage() {
+  double getDamageValue() {
     return this.dmg;
   }
   void setDamage(double dmg) {
