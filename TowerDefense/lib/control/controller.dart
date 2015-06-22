@@ -57,18 +57,21 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
       game.setDifficulty("easy");
       game.setLevelAdmin();
       game.startGame();
+      setPath();
     });
     view.medium.onClick.listen((ev) {
       view.hideDifficultyMenu();
       game.setDifficulty("medium");
       game.setLevelAdmin();
       game.startGame();
+      setPath();
     });
     view.hard.onClick.listen((ev) {
       view.hideDifficultyMenu();
       game.setDifficulty("hard");
       game.setLevelAdmin();
       game.startGame();
+      setPath();
     });
 
   }
@@ -230,5 +233,13 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
         streams[i].cancel();
       }
     }
+  }
+  void setPath(){
+    game.board.forEach((f,v){
+      if(f.isPathField()){
+        String id = f.getX().toString() + f.getY().toString();
+        view.setPath(id);
+      }
+    });
   }
 }

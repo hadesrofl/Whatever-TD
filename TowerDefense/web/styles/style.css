@@ -65,6 +65,9 @@ body{
 }
 #gameHeader{
 }
+#board td.Path{
+    background-image: url("../img/background/dirt.jpg");
+}
 .TowerButton{
   height: 32px;
   width: 32px;

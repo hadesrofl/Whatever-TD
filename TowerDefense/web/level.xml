@@ -305,6 +305,10 @@
 				<y-coord>6</y-coord>
 				<x-coord>9</x-coord>
 			</pathfield>
+			<pathfield>
+				<y-coord>6</y-coord>
+				<x-coord>10</x-coord>
+			</pathfield>
 		</path>
 		<path name="mediumLevels">
 		</path>

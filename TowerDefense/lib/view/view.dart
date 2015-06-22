@@ -171,7 +171,7 @@ class View {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
-          children..classes.add(towerName);
+          children.classes.add(towerName);
         }
       });
     });
@@ -212,6 +212,15 @@ class View {
         });
       });
 }
+  void setPath(String id){
+    this.board.children.forEach((c) {
+      c.children.forEach((children) {
+        if (children.id == id) {
+          children.classes.add("Path");
+        }
+      });
+    });
+  }
   void hideDifficultyMenu() {
     hard.hidden = true;
     medium.hidden = true;
