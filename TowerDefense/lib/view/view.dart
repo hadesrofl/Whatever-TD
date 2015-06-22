@@ -65,6 +65,7 @@ class View {
    */
   int col;
   Element errorDiv;
+  Element errorDiv2;
 
 /**
    * Constructor of the view
@@ -92,6 +93,7 @@ class View {
     lightningTower = querySelector("#LightningTower");
     fireTower = querySelector("#FireTower");
     errorDiv = querySelector("#errorDiv");
+    errorDiv2 = querySelector("#errorDiv2");
 
     stop.hidden = true;
     menuContainer.hidden = true;
@@ -99,6 +101,7 @@ class View {
     buyMenu.hidden = true;
     cancel.hidden = true;
     errorDiv.hidden = true;
+    errorDiv2.hidden = true;
   }
 /**
    * Method to create a board 
