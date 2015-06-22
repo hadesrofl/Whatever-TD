@@ -1,6 +1,7 @@
 library game;
 
 import '../tower/towerAdmin.dart';
+import 'dart:async';
 import '../level/levelAdmin.dart';
 import '../../view/view.dart';
 part "field.dart";
@@ -14,7 +15,6 @@ class Game {
   /**
    * Map with Images - The Key is the Name of a Tower or Minion, the value is the path to that image
    */
-  Map<String, String> images;
   final row = 11;
   final col = 11;
   View view;
@@ -22,14 +22,14 @@ class Game {
   int life;
   /* TODO: Get Difficulty from User Input (button or something else) */
   String difficulty;
+  Timer startWave;
+  bool runningGame = false;
+  Duration buildingPhase = const Duration(seconds: 15);
 
   Game(String levels) {
     this.levels = levels;
     this.tAdmin = new TowerAdmin();
     this.board = createBoard(this.row, this.col);
-   // this.lAdmin = new LevelAdmin(levels);
-    this.images = new Map<String, String>();
-    this.setImagesToMap();
   }
   /**
    * 
@@ -38,11 +38,21 @@ class Game {
     this.lAdmin.loadNextLevel();
     this.lAdmin.loadPath(board, difficulty);
     this.lAdmin.loadNextWave();
+    if(!runningGame){
+      startWave = new Timer(buildingPhase, () => runGame());
+    }
   }
   /**
    * 
    */
-  void runGame() {}
+  void runGame() {
+    runningGame = true;
+    if(startWave != null) {
+      startWave.cancel();
+    }
+    print("War....war never changes....");
+    
+  }
   /**
    * 
    */
@@ -50,9 +60,7 @@ class Game {
   /**
    * 
    */
-  void updateView() {
-    view.updateBoard(convertBoard());
-  }
+
   /**
    * s
    */
@@ -61,18 +69,6 @@ class Game {
    * 
    */
   void calculateHighScore() {}
-  /**
-   * converts the Map from <String, Field> to <String, String> to create a HTML-Table
-   */
-  Map<String, String> convertBoard() {
-    Map<String, String> htmlBoard = new Map<String, String>();
-    this.board.forEach((key, value) {
-      htmlBoard.putIfAbsent(
-          key.getX().toString() + key.getY().toString(), () => value);
-    });
-    return htmlBoard;
-  }
-
   /**
    * Creates the board of this level
    * @return a map of this level
@@ -116,43 +112,6 @@ class Game {
    */
   void setPlayer(String name) {
     this.player = new Player(name);
-  }
-  /**
-   * Sets the Path of the images to the keys of the objects
-   */
-
-  void setImagesToMap() {
-    this.images.putIfAbsent("Amazon", () => "img/minions/amazon.png");
-    this.images.putIfAbsent("Apple", () => "img/minions/apple.png");
-    this.images.putIfAbsent(
-        "CookieMonster", () => "img/minions/cookiemonster.jpg");
-    this.images.putIfAbsent("Dart", () => "img/minions/dart.jpg");
-    this.images.putIfAbsent("Docker", () => "img/minions/docker.png");
-    this.images.putIfAbsent("Facebook", () => "img/minions/facebook.png");
-    this.images.putIfAbsent("Google", () => "img/minions/google.png");
-    this.images.putIfAbsent(
-        "WeakKratzke", () => "img/minions/weakkratzke.jpeg");
-    this.images.putIfAbsent("Twitter", () => "img/minions/twitter.png");
-    this.images.putIfAbsent("Whatsapp", () => "img/minions/whatsapp.png");
-    this.images.putIfAbsent(
-        "StrongKratzke", () => "img/minions/strongkratzke.jpg");
-    this.images.putIfAbsent("ArrowTower1", () => "img/towers/arrowtower.jpg");
-    this.images.putIfAbsent("ArrowTower2", () => "img/towers/arrowtower2.jpg");
-    this.images.putIfAbsent("ArrowTower3", () => "img/towers/arrowtower3.jpg");
-    this.images.putIfAbsent("CanonTower1", () => "img/towers/canontower.jpg");
-    this.images.putIfAbsent("CanonTower2", () => "img/towers/canontower2.jpg");
-    this.images.putIfAbsent("CanonTower3", () => "img/towers/canontower3.jpg");
-    this.images.putIfAbsent(
-        "LightningTower1", () => "img/towers/lightningtower.jpg");
-    this.images.putIfAbsent(
-        "LightningTower2", () => "img/towers/lightningtower2.png");
-    this.images.putIfAbsent(
-        "LightningTower3", () => "img/towers/lightningtower3.jpg");
-    this.images.putIfAbsent("FireTower1", () => "img/towers/firetower.jpg");
-    this.images.putIfAbsent("FireTower2", () => "img/towers/firetower2.jpg");
-    this.images.putIfAbsent("FireTower3", () => "img/towers/firetower3.png");
-    this.images.putIfAbsent("Dirt", () => "img/background/dirt.jpg");
-    this.images.putIfAbsent("Grass", () => "img/background/grass.jpg");
   }
   void setDifficulty(String dif){
     this.difficulty = dif;

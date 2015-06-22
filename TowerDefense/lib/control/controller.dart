@@ -2,6 +2,7 @@ library control;
 
 import '../model/game/game.dart';
 import "../view/view.dart";
+import 'dart:async';
 
 // TODO: Problem, ob Eingaben während der Wellen vom Nutzer aus möglich sind
 // oder nicht
@@ -13,6 +14,7 @@ class Controller {
   String field;
   var setTower;
   var x;
+List<StreamSubscription> streams = new List<StreamSubscription>();
   Controller(String levels) {
     //Initializing the Game
     game = new Game(levels);
@@ -33,9 +35,6 @@ class Controller {
       view.menuContainer.hidden = false;
       view.errorDiv2.hidden = true;
       view.errorDiv.hidden = true;
-
-      //Start the Game
-      game.runGame();
     });
     buyListener();
     sellListener();
@@ -79,9 +78,10 @@ class Controller {
       bool enoughMoney;
       bool b = true;
       var tmp;
+      endStreamSubscription();
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
-          view.board.children.elementAt(i).children.elementAt(j).onClick
+          streams.add(view.board.children.elementAt(i).children.elementAt(j).onClick
               .listen((ev) {
             if (b) {
               game.tAdmin.allTower.forEach((tower) {
@@ -93,26 +93,7 @@ class Controller {
                   enoughMoney = game.tAdmin.upgradeTower(
                       tmp, game.player, game.board, game.row, game.col);
                   if (enoughMoney) {
-                    switch (tmp.name) {
-                      case "Canon Tower":
-                        view.upgradeImage(
-                            id, game.images, 1, tmp.getUpgradeLevel());
-                        break;
-                      case "Arrow Tower":
-                        view.upgradeImage(
-                            id, game.images, 2, tower.getUpgradeLevel());
-                        break;
-                      case "Fire Tower":
-                        view.upgradeImage(
-                            id, game.images, 3, tower.getUpgradeLevel());
-                        break;
-                      case "Lightning Tower":
-                        view.upgradeImage(
-                            id, game.images, 4, tower.getUpgradeLevel());
-                        break;
-                      default:
-                        break;
-                    }
+                   view.upgradeImage(id, tmp.name, tmp.getUpgradeLevel());
                   } else {
                     view.errorDiv.hidden = false;
                   }
@@ -120,7 +101,7 @@ class Controller {
               });
               b = false;
             }
-          });
+          }));
         }
       }
     });
@@ -133,9 +114,10 @@ class Controller {
       view.upgrade.hidden = true;
       view.sell.hidden = true;
       bool check = true;
+      endStreamSubscription();
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
-          view.board.children.elementAt(i).children.elementAt(j).onClick
+          streams.add(view.board.children.elementAt(i).children.elementAt(j).onClick
               .listen((ev) {
             if (check) {
               var tmp = null;
@@ -144,14 +126,17 @@ class Controller {
                     tower.getPosition().getY() == i) {
                   String id = tower.getPosition().getX().toString() +
                       tower.getPosition().getY().toString();
-                  view.deleteImage(id, game.images);
+                  view.deleteImage(id, tower.name);
                   tmp = tower;
                 }
               });
               if (tmp != null) game.tAdmin.sellTower(tmp, game.player);
               check = false;
+              view.buy.hidden = false;
+              view.upgrade.hidden = false;
+              view.sell.hidden = false;
             }
-          });
+          }));
         }
       }
     });
@@ -178,14 +163,16 @@ class Controller {
   }
 
   void setTowerImg(int towerDescription) {
+    endStreamSubscription();
     if (boolean) {
       view.buyMenu.hidden = true;
       boolean = false;
       Field field;
       bool enough;
+      String towerName = "";
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
-          view.board.children.elementAt(i).children.elementAt(j).onClick
+          streams.add(view.board.children.elementAt(i).children.elementAt(j).onClick
               .listen((ev) {
             String f = j.toString() + i.toString();
             field = lookUpField(f);
@@ -214,14 +201,14 @@ class Controller {
               view.upgrade.hidden = false;
               view.buy.hidden = false;
               view.cancel.hidden = true;
-              view.setTowerImageToTowerField(f, game.images, towerDescription);
+              view.setTowerImageToTowerField(f, game.tAdmin.allTower.last.name);
             } else {
               if (towerDescription != 0) {
                 view.errorDiv.hidden = false;
               }
             }
             towerDescription = 0;
-          });
+          }));
         }
       }
     }
@@ -234,5 +221,12 @@ class Controller {
       }
     });
     return towerField;
+  }
+  void endStreamSubscription(){
+    if(!streams.isEmpty){
+      for(int i = 0; i < streams.length;i++){
+        streams[i].cancel();
+      }
+    }
   }
 }

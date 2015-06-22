@@ -52,9 +52,7 @@ body{
 }
 #board{
   /*TODO: responsive*/
-   border-style:none;
-   
-   
+   border-style:none;  
 }
 #board td {
   text-align: right;
@@ -64,7 +62,6 @@ body{
 }
 #player{
   margin-left: 200px;
-
 }
 #gameHeader{
 }
@@ -73,17 +70,41 @@ body{
   width: 32px;
   background-repeat: no-repeat;
 }
-#CanonTower{
+#board td.CanonTower, .TowerButton.CanonTower{
   background-image: url("../img/towers/canontower.jpg");
 }
-#ArrowTower{
+#board td.CanonTower2{
+    background-image: url("../img/towers/canontower2.jpg");
+}
+#board td.CanonTower3{
+    background-image: url("../img/towers/canontower3.jpg");
+}
+#board td.ArrowTower, .TowerButton.ArrowTower{
   background-image: url("../img/towers/arrowtower.jpg");
 }
-#LightningTower{
+#board td.ArrowTower2 {
+    background-image: url("../img/towers/arrowtower2.jpg");
+}
+#board td.ArrowTower3{
+    background-image: url("../img/towers/arrowtower3.jpg");
+}
+#board td.LightningTower, .TowerButton.LightningTower{
   background-image: url("../img/towers/lightningtower.jpg");
 }
-#FireTower{
+#board td.LightningTower2{
+    background-image: url("../img/towers/lightningtower2.png");
+}
+#board td.LightningTower3{
+    background-image: url("../img/towers/lightningtower3.jpg");
+}
+#board td.FireTower, .TowerButton.FireTower{
   background-image: url("../img/towers/firetower.jpg");
+}
+#board td.FireTower2{
+    background-image: url("../img/towers/firetower2.jpg");
+}
+#board td.FireTower3{
+    background-image: url("../img/towers/firetower3.png");
 }
 .alert-box span {
     font-weight:bold;

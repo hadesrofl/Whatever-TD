@@ -167,109 +167,51 @@ class View {
       this.highScoreTable.append(le);
     }
   }
-  void setTowerImageToTowerField(
-      String id, Map<String, String> images, int key) {
+  void setTowerImageToTowerField(String id, String towerName) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
-          switch (key) {
-            case 1:
-              children.style
-                ..backgroundImage = "url(" + images["CanonTower1"] + ")";
-              break;
-            case 2:
-              children.style
-                ..backgroundImage = "url(" + images["ArrowTower1"] + ")";
-              break;
-            case 3:
-              children.style
-                ..backgroundImage = "url(" + images["FireTower1"] + ")";
-              break;
-            case 4:
-              children.style
-                ..backgroundImage = "url(" + images["LightningTower1"] + ")";
-              break;
-            default:
-              break;
+          children..classes.add(towerName);
+        }
+      });
+    });
+  }
+  void deleteImage(String id, String towerName) {
+    this.board.children.forEach((c) {
+      c.children.forEach((children) {
+        if (children.id == id) {
+          if(children.classes.contains(towerName)){
+            children.classes.remove(towerName);
+          }
+          if(children.classes.contains(towerName + "2")){
+            children.classes.remove(towerName + "2");
+          }
+          if(children.classes.contains(towerName + "3")){
+            children.classes.remove(towerName + "3");
           }
         }
       });
     });
   }
-  void deleteImage(String id, Map<String, String> images) {
+  void upgradeImage(String id, String towerName, int level) {
+   // print(towerDescription);
+    //print(level);
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
-          children.style..backgroundImage = "url(" + images["Grass"] + ")";
-        }
-      });
-    });
-  }
-  void upgradeImage(
-      String id, Map<String, String> images, int towerDescription, int level) {
-    print(towerDescription);
-    print(level);
-    this.board.children.forEach((c) {
-      c.children.forEach((children) {
-        if (children.id == id) {
-          switch (towerDescription) {
-            case 1:
+            children.classes.remove(towerName);
               switch (level) {
-                case 1:
-                  children.style
-                    ..backgroundImage = "url(" + images["CanonTower2"] + ")";
-                  break;
                 case 2:
-                  children.style
-                    ..backgroundImage = "url(" + images["CanonTower3"] + ")";
+                  children.classes.add(towerName + "2");
                   break;
-              }
-              break;
-            case 2:
-              switch (level) {
-                case 1:
-                  children.style
-                    ..backgroundImage = "url(" + images["ArrowTower2"] + ")";
+                case 3:
+                  children.classes.add(towerName + "3");
                   break;
-                case 2:
-                  children.style
-                    ..backgroundImage = "url(" + images["ArrowTower3"] + ")";
-                  break;
-              }
-              break;
-            case 3:
-              switch (level) {
-                case 1:
-                  children.style
-                    ..backgroundImage = "url(" + images["FireTower2"] + ")";
-                  break;
-                case 2:
-                  children.style
-                    ..backgroundImage = "url(" + images["FireTower3"] + ")";
-                  break;
-              }
-              break;
-            case 4:
-              switch (level) {
-                case 1:
-                  children.style
-                    ..backgroundImage =
-                    "url(" + images["LightningTower2"] + ")";
-                  break;
-                case 2:
-                  children.style
-                    ..backgroundImage =
-                    "url(" + images["LightningTower3"] + ")";
-                  break;
-              }
-              break;
-            default:
-              break;
+              }        
           }
-        }
+        });
       });
-    });
-  }
+}
   void hideDifficultyMenu() {
     hard.hidden = true;
     medium.hidden = true;

@@ -112,6 +112,7 @@ class TowerAdmin {
    */
   void sellTower(Tower tower, Player player) {
     player.setGold(player.getGold() + tower.getSellingPrice());
+    tower.getPosition().setCovered(false);
     this.allTower.remove(tower);
     tower = null;
   }

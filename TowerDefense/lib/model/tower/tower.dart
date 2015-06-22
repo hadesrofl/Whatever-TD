@@ -121,7 +121,7 @@ class Tower {
     this.setRange(this.getRange() + (this.getUpgradeLevel()));
     this.setSellingPrice(this.getSellingPrice() * (this.getUpgradeLevel()));
     this.setBasicDamage(this.getBasicDamage() * (this.getUpgradeLevel()));
-    if (this.name != "Arrow Tower") this
+    if (this.name != "ArrowTower") this
         .setAbilityFactor(this.getAbilityFactor() + 5);
   }
 
