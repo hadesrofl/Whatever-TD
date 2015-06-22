@@ -41,6 +41,7 @@ class Controller {
     buyListener();
     sellListener();
     upgradeListener();
+    difficultyListener();
 
     view.cancel.onClick.listen((ev) {
       view.buyMenu.hidden = true;
@@ -50,6 +51,17 @@ class Controller {
       view.buy.hidden = false;
       view.errorDiv.hidden = true;
       view.errorDiv2.hidden = true;
+    });
+  }
+  void difficultyListener() {
+    view.easy.onClick.listen((ev) {
+      view.hideDifficultyMenu();
+    });
+    view.medium.onClick.listen((ev) {
+      view.hideDifficultyMenu();
+    });
+    view.hard.onClick.listen((ev) {
+      view.hideDifficultyMenu();
     });
   }
   void upgradeListener() {
