@@ -294,6 +294,7 @@ class Controller {
         }
         if(tmp.isNotEmpty){
           tmp.forEach((m){
+            game.lAdmin.getCurrentWave().incDeadMinions();
             game.lAdmin.getMinions().remove(m);
           });
         }

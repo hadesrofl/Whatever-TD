@@ -192,7 +192,7 @@
 		<movementSpeed>1000</movementSpeed>
 		<droppedGold>500</droppedGold>
 	</minion>
-	<minion> name="twitter">
+	<minion name="twitter">
 		<hitpoints>40</hitpoints>
 		<armor>medium</armor>
 		<movementSpeed>1000</movementSpeed>

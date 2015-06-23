@@ -153,8 +153,6 @@ class LevelAdmin {
         }
         waves[waveNumber] = new Wave(waveNumber, numberOfMinions, finalWave);
       });
-      /* Save first Wave as current Wave */
-      currentWave = waves[1];
       nextLevelLoaded = true;
     }
     return nextLevelLoaded;
@@ -164,13 +162,21 @@ class LevelAdmin {
    * Loads the next Wave of the current Level from XML
    * @return false if it is the last wave of the level, true if new wave is loaded
    */
+  /* TODO: 2. Level einlesen */
   bool loadNextWave() {
     int waveIndex = 0;
     bool nextWaveLoaded;
-    if (currentWave != null) {
+    if (currentWave == null) {
+      currentWave = waves[1];
+    }else{
       if (isLevelEnd()) {
         nextWaveLoaded = false;
       } else {
+        if(currentWave.getWaveNumber() == 1){
+          waveIndex = currentWave.getWaveNumber();
+        }else{
+          waveIndex = currentWave.getWaveNumber() + 1;
+        }
         nextWaveLoaded = true;
         List<XmlElement> levelMinions = getMinionsFromXml();
         XmlElement level = levels.firstWhere((x) =>
@@ -179,9 +185,8 @@ class LevelAdmin {
         /* Get Wave index in XML */
         for (int i = 0; i < wavesFromXml.length; i++) {
           if (wavesFromXml[i].attributes[0].value
-                  .compareTo((currentWave.getWaveNumber()).toString()) ==
+                  .compareTo((waveIndex).toString()) ==
               0) {
-            waveIndex = i;
           }
         }
         /* Get Minion from Wave */
@@ -384,7 +389,7 @@ class LevelAdmin {
    */
   bool isLevelEnd() {
     bool levelEnd;
-    if (isWaveClear() == true && waves[currentWave].isFinalWave()) {
+    if (isWaveClear() == true && waves[currentWave.getWaveNumber()].isFinalWave()) {
       levelEnd = true;
     } else {
       levelEnd = false;

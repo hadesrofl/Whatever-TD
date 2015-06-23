@@ -83,9 +83,13 @@ class Game {
           }
         });
         tmp.forEach((m) {
+          this.lAdmin.getCurrentWave().incDeadMinions();
           this.lAdmin.minions.remove(m);
         });
         tmp = null;
+        if(this.lAdmin.getCurrentWave().isWaveClear()){
+          this.lAdmin.loadNextWave();
+        }
       });
     }
   }
@@ -96,9 +100,9 @@ class Game {
   /**
    * 
    */
-
+  
   /**
-   * s
+   * 
    */
   void endOfLevel() {}
   /**
