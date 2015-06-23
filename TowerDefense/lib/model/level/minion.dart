@@ -29,18 +29,6 @@ class Minion {
    */
   List<Condition> conditions = new List<Condition>();
   /**
-   * X-Coordinate for this minion on our board
-   */
-  /*
-   int x;
-    */
-  /**
-   * Y-Coordinate for this mininon on our board
-   */
-  /*
-   int y;
-   */
-  /**
    * Position where the minion is
    */
   Field position;
@@ -56,7 +44,13 @@ bool destroyedALife;
    * Steps the minion took on the path (index for the path)
    */
   int stepsOnPath;
-  Timer minionTimer;
+  /**
+   * Timer for the movement of one minion
+   */
+  Timer moveTimer;
+  /**
+   * Path the minion has to walk on
+   */
   List<Field> path;
 
   /**
@@ -161,7 +155,7 @@ bool destroyedALife;
       }
       this.hitpoints -= dmgToMinion;
       if(this.hitpoints <= 0){
-        this.minionTimer.cancel();
+        this.moveTimer.cancel();
       }
     }
     return this.hitpoints;
@@ -171,8 +165,8 @@ bool destroyedALife;
    */
   void spawn() {
     this.spawned = true;
-    if(minionTimer == null){
-      minionTimer = new Timer.periodic(movementSpeed, (_) {
+    if(moveTimer == null){
+      moveTimer = new Timer.periodic(movementSpeed, (_) {
         this.move();
       });
     }
@@ -183,7 +177,7 @@ bool destroyedALife;
   void move() {
       incStepsOnPath();
       if(this.stepsOnPath >= this.path.length){
-        this.minionTimer == null;
+        this.moveTimer == null;
       }else{
         this.position = this.path[this.stepsOnPath];
       }

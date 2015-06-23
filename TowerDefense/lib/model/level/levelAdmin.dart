@@ -421,4 +421,11 @@ class LevelAdmin {
   List<Field> getPath(){
     return this.path;
   }
+  /**
+   * Returns the current wave object
+   * @return the current wave
+   */
+  Wave getCurrentWave(){
+    return this.currentWave;
+  }
 }

@@ -65,19 +65,69 @@ body{
 }
 #gameHeader{
 }
+.alert-box span {
+    font-weight:bold;
+    text-transform:uppercase
+}
+.alert-box {
+    color:#555;
+    border-radius:10px;
+    font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+    padding:10px 10px 10px 36px;
+    margin:10px;
+}
+.error {
+    background:#ffecec url('../img/background/error.png') no-repeat 10px 50%;
+    border:1px solid #f5aca6;
+}
 #board td.Path{
     background-image: url("../img/background/dirt.jpg");
 }
-
+/* Minion Images */
+#board td.amazon{
+      background-image: url("../img/minions/amazon.png");
+}
+#board td.apple{
+      background-image: url("../img/minions/apple.png");
+}
+#board td.cookieMonster{
+      background-image: url("../img/minions/cookiemonster.jpg");
+}
+#board td.dart{
+      background-image: url("../img/minions/dart.jpg");
+}
+#board td.docker{
+      background-image: url("../img/minions/docker.png");
+}
+#board td.facebook{
+      background-image: url("../img/minions/facebook.png");
+}
+#board td.google{
+      background-image: url("../img/minions/google.png");
+}
 #board td.internetExplorer{
       background-image: url("../img/minions/internetexplorer.jpg");
 }
+#board td.strongKratzke{
+      background-image: url("../img/minions/strongkratzke.jpg");
+}
+#board td.twitter{
+      background-image: url("../img/minions/twitter.jpg");
+}
+#board td.weakKratzke{
+      background-image: url("../img/minions/weakkratzke.jpeg");
+}
+#board td.whatsapp{
+      background-image: url("../img/minions/whatsapp.png");
+}
 
+/* Tower Images */
 .TowerButton{
   height: 32px;
   width: 32px;
   background-repeat: no-repeat;
 }
+
 #board td.CanonTower, .TowerButton.CanonTower{
   background-image: url("../img/towers/canontower.jpg");
 }
@@ -113,19 +163,4 @@ body{
 }
 #board td.FireTower3{
     background-image: url("../img/towers/firetower3.png");
-}
-.alert-box span {
-    font-weight:bold;
-    text-transform:uppercase
-}
-.alert-box {
-    color:#555;
-    border-radius:10px;
-    font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
-    padding:10px 10px 10px 36px;
-    margin:10px;
-}
-.error {
-    background:#ffecec url('../img/background/error.png') no-repeat 10px 50%;
-    border:1px solid #f5aca6;
 }
