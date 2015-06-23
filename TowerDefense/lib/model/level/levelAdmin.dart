@@ -39,7 +39,7 @@ class LevelAdmin {
  */
   List<Field> path = new List<Field>();
   /**
-   * All Minions of the current wave
+   * All Minions currently active on the board
    */
   List<Minion> minions;
 
@@ -82,11 +82,12 @@ class LevelAdmin {
   Minion minionSpawn() {
     bool foundMinion = false;
     Minion m = null;
-    for (int i = 0; i < minions.length; i++) {
+    for (int i = 0; i < currentWave.getMinions().length; i++) {
       if (foundMinion == false) {
-        if (minions[i].isSpawned() == false) {
-          minions[i].spawn();
+        if (currentWave.getMinions()[i].isSpawned() == false) {
+          currentWave.getMinions()[i].spawn();
           m = minions[i];
+          minions.add(m);
           foundMinion = true;
         }
       }
@@ -239,7 +240,6 @@ class LevelAdmin {
         }
       }
     }
-    minions = waves[currentWave.getWaveNumber()].getMinions();
     return nextWaveLoaded;
   }
   /**

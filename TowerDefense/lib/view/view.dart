@@ -155,23 +155,11 @@ class View {
   void updatePage() {
 //TODO: Do fancy updating stuff _ rev 2
   }
-  void createHighScoreTable() {
-    this.highScoreContainer.hidden = false;
-    this.highScoreContainer.innerHtml = "<strong>Highscore</strong>";
-    this.highScoreTable = new OListElement();
-    this.highScoreTable.id = "highscoreTable";
-    this.highScoreContainer.append(this.highScoreTable);
-    for (int i = 0; i < 5; i++) {
-      LIElement le = new LIElement();
-      le.text = "Player $i";
-      this.highScoreTable.append(le);
-    }
-  }
-  void setTowerImageToTowerField(String id, String towerName) {
+  void setImageToView(String id, String objectName) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
-          children.classes.add(towerName);
+          children.classes.add(objectName);
         }
       });
     });
@@ -212,15 +200,6 @@ class View {
         });
       });
 }
-  void setPath(String id){
-    this.board.children.forEach((c) {
-      c.children.forEach((children) {
-        if (children.id == id) {
-          children.classes.add("Path");
-        }
-      });
-    });
-  }
   void hideDifficultyMenu() {
     hard.hidden = true;
     medium.hidden = true;

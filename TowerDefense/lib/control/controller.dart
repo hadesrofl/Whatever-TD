@@ -31,7 +31,6 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
           game.player.getHighscore().toString() +
           " Points";
       view.nameInput.hidden = true;
-      view.createHighScoreTable();
       view.menuContainer.hidden = false;
       view.errorDiv2.hidden = true;
       view.errorDiv.hidden = true;
@@ -159,10 +158,10 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
       view.cancel.hidden = false;
       boolean = true;
     });
-    var x = view.canonTower.onClick.listen((ev) => setTowerImg(1));
-    var y = view.arrowTower.onClick.listen((ev) => setTowerImg(2));
-    var z = view.fireTower.onClick.listen((ev) => setTowerImg(3));
-    var a = view.lightningTower.onClick.listen((ev) => setTowerImg(4));
+    view.canonTower.onClick.listen((ev) => setTowerImg(1));
+    view.arrowTower.onClick.listen((ev) => setTowerImg(2));
+    view.fireTower.onClick.listen((ev) => setTowerImg(3));
+    view.lightningTower.onClick.listen((ev) => setTowerImg(4));
   }
 
   void setTowerImg(int towerDescription) {
@@ -172,7 +171,6 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
       boolean = false;
       Field field;
       bool enough;
-      String towerName = "";
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           streams.add(view.board.children.elementAt(i).children.elementAt(j).onClick
@@ -204,7 +202,7 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
               view.upgrade.hidden = false;
               view.buy.hidden = false;
               view.cancel.hidden = true;
-              view.setTowerImageToTowerField(f, game.tAdmin.allTower.last.name);
+              view.setImageToView(f, game.tAdmin.allTower.last.name);
             } else {
               if (towerDescription != 0) {
                 view.errorDiv.hidden = false;
@@ -236,7 +234,7 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
     game.board.forEach((f,v){
       if(f.isPathField()){
         String id = f.getX().toString() + f.getY().toString();
-        view.setPath(id);
+        view.setImageToView(id, "Path");
       }
     });
   }
