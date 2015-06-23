@@ -55,11 +55,11 @@ class TowerAdmin {
    * 
    * @param minions list of all minions
    */
-  Map<Tower, Target> attack(List<Minion> minions) {
-    Map<Tower, Target> targets = new Map<Tower, Target>();
+  List<Target> attack(List<Minion> minions) {
+    List<Target> targets = new List<Target>();
     allTower.forEach((tower) {
       Target newTarget = tower.shoot(minions);
-      targets.putIfAbsent(tower, () => newTarget);
+      targets.add(newTarget);
     });
     return targets;
   }
