@@ -185,8 +185,6 @@ class View {
     });
   }
   void upgradeImage(String id, String towerName, int level) {
-    // print(towerDescription);
-    //print(level);
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
@@ -201,7 +199,7 @@ class View {
           }
         }
       });
-});
+    });
   }
   void hideDifficultyMenu() {
     hard.hidden = true;

@@ -16,6 +16,10 @@ part 'arrowTower.dart';
 class TowerAdmin {
   List<Tower> allTower;
   final int MAX_UPGRADE = 3;
+  static const CANONTOWER = 1;
+  static const ARROWTOWER = 2;
+  static const FIRETOWER = 3;
+  static const LIGHTNINGTOWER = 4;
 
   TowerAdmin() {
     allTower = new List<Tower>();
@@ -41,11 +45,9 @@ class TowerAdmin {
     bool ausgabe;
     Tower newTower;
     switch (towerDescription) {
-      // case 1 = CanonTower
-      case 1:
+      case CANONTOWER:
         newTower = new CanonTower();
         if (!enoughMoney(newTower, player)) {
-          //TODO: print befehl ausgabe im HTML Dokument evtl returnType bool
           print("Not enough money to buy the Tower");
           newTower = null;
           ausgabe = false;
@@ -55,11 +57,9 @@ class TowerAdmin {
           ausgabe = true;
         }
         break;
-      // case 2 = ArrowTower
-      case 2:
+      case ARROWTOWER:
         newTower = new ArrowTower();
         if (!enoughMoney(newTower, player)) {
-          //TODO: print befehl ausgabe im HTML Dokument evtl returnType bool
           print("Not enough money to buy the Tower");
           newTower = null;
           ausgabe = false;
@@ -69,11 +69,9 @@ class TowerAdmin {
           ausgabe = true;
         }
         break;
-      // case 3 = FireTower
-      case 3:
+      case FIRETOWER:
         newTower = new FireTower();
         if (!enoughMoney(newTower, player)) {
-          //TODO: print befehl ausgabe im HTML Dokument evtl returnType bool
           print("Not enough money to buy the Tower");
           newTower = null;
           ausgabe = false;
@@ -83,11 +81,9 @@ class TowerAdmin {
           ausgabe = true;
         }
         break;
-      // case 4 = LighteningTower
-      case 4:
+      case LIGHTNINGTOWER:
         newTower = new LightningTower();
         if (!enoughMoney(newTower, player)) {
-          //TODO: print befehl ausgabe im HTML Dokument evtl returnType bool
           print("Not enough money to buy the Tower");
           newTower = null;
           ausgabe = false;
@@ -102,8 +98,7 @@ class TowerAdmin {
         break;
     }
     if (ausgabe == true) {
-      ausgabe = setTowerChoords(newTower, field, board, row,
-          col); // TODO: abfragen, wenn feld shcon belegt ist
+      ausgabe = setTowerChoords(newTower, field, board, row, col);
     }
     return ausgabe;
   }

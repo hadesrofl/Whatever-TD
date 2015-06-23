@@ -7,6 +7,10 @@ import 'dart:async';
 // TODO: Problem, ob Eingaben während der Wellen vom Nutzer aus möglich sind
 // oder nicht
 class Controller {
+  static const int CANONTOWER = 1;
+  static const int ARROWTOWER = 2;
+  static const int FIRETOWER = 3;
+  static const int LIGHTNINGTOWER = 4;
   View view;
   Game game;
   bool boolean;
@@ -163,10 +167,10 @@ class Controller {
       view.cancel.hidden = false;
       boolean = true;
     });
-    view.canonTower.onClick.listen((ev) => setTowerImg(1));
-    view.arrowTower.onClick.listen((ev) => setTowerImg(2));
-    view.fireTower.onClick.listen((ev) => setTowerImg(3));
-    view.lightningTower.onClick.listen((ev) => setTowerImg(4));
+    view.canonTower.onClick.listen((ev) => setTowerImg(CANONTOWER));
+    view.arrowTower.onClick.listen((ev) => setTowerImg(ARROWTOWER));
+    view.fireTower.onClick.listen((ev) => setTowerImg(FIRETOWER));
+    view.lightningTower.onClick.listen((ev) => setTowerImg(LIGHTNINGTOWER));
   }
 
   void setTowerImg(int towerDescription) {
@@ -184,19 +188,19 @@ class Controller {
             String f = j.toString() + i.toString();
             field = lookUpField(f);
             switch (towerDescription) {
-              case 1:
+              case CANONTOWER:
                 enough = game.tAdmin.buyTower(towerDescription, game.player,
                     field, game.board, game.getRow(), game.getCol());
                 break;
-              case 2:
+              case ARROWTOWER:
                 enough = game.tAdmin.buyTower(towerDescription, game.player,
                     field, game.board, game.getRow(), game.getCol());
                 break;
-              case 3:
+              case FIRETOWER:
                 enough = game.tAdmin.buyTower(towerDescription, game.player,
                     field, game.board, game.getRow(), game.getCol());
                 break;
-              case 4:
+              case LIGHTNINGTOWER:
                 enough = game.tAdmin.buyTower(towerDescription, game.player,
                     field, game.board, game.getRow(), game.getCol());
                 break;
