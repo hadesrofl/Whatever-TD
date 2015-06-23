@@ -257,47 +257,57 @@ class Controller {
   void updateGold() {
     view.px.innerHtml = game.player.getGold().toString();
   }
-  void gameTriggers(){
-
-    if(updateMinionTimer == null){
-      updateMinionTimer = new Timer.periodic(game.lAdmin.getCurrentWave().getMinions()[0].getMovementSpeed(),(_) {
+  void gameTriggers() {
+    if (updateMinionTimer == null) {
+      updateMinionTimer = new Timer.periodic(
+          game.lAdmin.getCurrentWave().getMinions()[0].getMovementSpeed(), (_) {
         String id;
         List<Minion> tmp = new List<Minion>();
-        if(game.lAdmin.getMinions().length == 0){
-          Field lastField = game.lAdmin.getPath()[game.lAdmin.getPath().length-1];
-                  id =  lastField.getX().toString() + lastField.getY().toString();
-                view.deleteImage(id, game.lAdmin.getCurrentWave().getMinions()[0].getName());
-        }else{
-          game.lAdmin.getMinions().forEach((m){
-                    String oldId;
-                    if(m.getHitpoints() <= 0){
-                      id = m.getPosition().getX().toString() + m.getPosition().getY().toString();
-                      view.deleteImage(id, m.getName());
-                      id= (m.getPosition().getX()-1).toString() + (m.getPosition().getY()-1).toString();
-                      view.deleteImage(id, m.getName());
-                      tmp.add(m);
-                    }else{
-                    if(m.getStepsOnPath() < game.lAdmin.getPath().length){
-                    if(m.getStepsOnPath() != 0){
-                     oldId = game.lAdmin.getPath()[m.getStepsOnPath()-1].getX().toString() + m.path[m.getStepsOnPath()-1].getY().toString();
-                               view.deleteImage(oldId, m.getName());
-                    }
-                    id =  m.getPosition().getX().toString() + m.getPosition().getY().toString();
-                    view.setImageToView(id, m.getName());
-                    }else if(m.getStepsOnPath() >= game.lAdmin.getPath().length){
-                      Field lastField = game.lAdmin.getPath()[game.lAdmin.getPath().length-1];
-                      id =  lastField.getX().toString() + lastField.getY().toString();
-                    view.deleteImage(id, m.getName());
-                    }
-                    }});
-          
+        if (game.lAdmin.getMinions().length == 0) {
+          Field lastField =
+              game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
+          id = lastField.getX().toString() + lastField.getY().toString();
+          view.deleteImage(
+              id, game.lAdmin.getCurrentWave().getMinions()[0].getName());
+        } else {
+          game.lAdmin.getMinions().forEach((m) {
+            String oldId;
+            if (m.getHitpoints() <= 0) {
+              id = m.getPosition().getX().toString() +
+                  m.getPosition().getY().toString();
+              view.deleteImage(id, m.getName());
+              id = (m.getPosition().getX() - 1).toString() +
+                  (m.getPosition().getY() - 1).toString();
+              view.deleteImage(id, m.getName());
+              tmp.add(m);
+            } else {
+              if (m.getStepsOnPath() < game.lAdmin.getPath().length) {
+                if (m.getStepsOnPath() != 0) {
+                  oldId = game.lAdmin.getPath()[m.getStepsOnPath() - 1]
+                          .getX()
+                          .toString() +
+                      m.path[m.getStepsOnPath() - 1].getY().toString();
+                  view.deleteImage(oldId, m.getName());
+                }
+                id = m.getPosition().getX().toString() +
+                    m.getPosition().getY().toString();
+                view.setImageToView(id, m.getName());
+              } else if (m.getStepsOnPath() >= game.lAdmin.getPath().length) {
+                Field lastField =
+                    game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
+                id = lastField.getX().toString() + lastField.getY().toString();
+                view.deleteImage(id, m.getName());
+              }
+            }
+          });
         }
-        if(tmp.isNotEmpty){
-          tmp.forEach((m){
+        if (tmp.isNotEmpty) {
+          tmp.forEach((m) {
             game.lAdmin.getMinions().remove(m);
           });
         }
         print("List of Minions " + game.lAdmin.getMinions().length.toString());
-      }); 
+      });
+    }
   }
-}}
+}

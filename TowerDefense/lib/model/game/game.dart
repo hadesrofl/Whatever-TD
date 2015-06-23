@@ -26,11 +26,11 @@ class Game {
   Timer spawnTimer;
   Timer updateMinionTimer;
   Timer checkLifeTimer;
-  Timer towerShootTimer;
   bool runningGame = false;
-  Duration buildingPhase = const Duration(milliseconds: 1000);
-  Duration spawn = const Duration(milliseconds: 2500);
-  Duration checkLife = const Duration(milliseconds: 1000);
+  Duration buildingPhase = const Duration(seconds: 1);
+  Duration spawn = const Duration(seconds: 2);
+  Duration checkLife = const Duration(seconds: 1);
+  Timer towerShootTimer;
   Duration shoot = const Duration(milliseconds: 500);
 
   Game(String levels) {
@@ -80,6 +80,7 @@ class Game {
             this.life--;
             m.setDestroyedALife(true);
             tmp.add(m);
+            print("Life remaining: $life");
           }
         });
         tmp.forEach((m) {
