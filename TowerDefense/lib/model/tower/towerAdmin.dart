@@ -15,6 +15,7 @@ part 'arrowTower.dart';
 
 class TowerAdmin {
   List<Tower> allTower;
+  final int MAX_UPGRADE = 3;
 
   TowerAdmin() {
     allTower = new List<Tower>();
@@ -137,7 +138,8 @@ class TowerAdmin {
    */
   bool upgradeTower(Tower tower, Player player, Map<Field, String> board,
       final row, final col) {
-    if (tower.newPriceAfterUpgrade() <= player.getGold()) {
+    if (tower.newPriceAfterUpgrade() <= player.getGold() &&
+        tower.upgradeLevel < this.MAX_UPGRADE) {
       tower.upgrade();
       tower.findFieldsToAttack(board, row, col);
       player.setGold(player.getGold() - tower.getPrice());
