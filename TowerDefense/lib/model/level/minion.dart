@@ -156,56 +156,42 @@ class Minion {
         if (conditions.elementAt(i).getDuration() == 0) conditions.remove(i);
       }
       this.hitpoints -= dmgToMinion;
-<<<<<<< HEAD
-      if(this.hitpoints <= 0){
-        this.moveTimer.cancel();
-=======
       if (this.hitpoints <= 0) {
-        this.minionTimer.cancel();
->>>>>>> 5cf96d0f5e9137c278d69615c07c5f1e83a61ca1
+        this.moveTimer.cancel();
+        if (this.hitpoints <= 0) {
+          this.moveTimer.cancel();
+        }
       }
+      return this.hitpoints;
     }
-    return this.hitpoints;
   }
   /**
-   * Marks the minion as spawned
-   */
+   * Spawns a minion and sets a moveTimer
+  */
   void spawn() {
     this.spawned = true;
-<<<<<<< HEAD
-    if(moveTimer == null){
-      moveTimer = new Timer.periodic(movementSpeed, (_) {
-=======
-    if (minionTimer == null) {
-      minionTimer = new Timer.periodic(movementSpeed, (_) {
->>>>>>> 5cf96d0f5e9137c278d69615c07c5f1e83a61ca1
+    if (moveTimer == null) {
+      moveTimer = new Timer.periodic(movementSpeed, (_) { 
         this.move();
-      });
+          });
+      
+        }
     }
-  }
+
 /**
    * Method to move a minion on the board
    */
   void move() {
-<<<<<<< HEAD
-      incStepsOnPath();
-      if(this.stepsOnPath >= this.path.length){
-        this.moveTimer == null;
-      }else{
-        this.position = this.path[this.stepsOnPath];
-      }
-=======
     incStepsOnPath();
     if (this.stepsOnPath >= this.path.length) {
-      this.minionTimer == null;
+      this.moveTimer == null;
     } else {
       this.position = this.path[this.stepsOnPath];
     }
->>>>>>> 5cf96d0f5e9137c278d69615c07c5f1e83a61ca1
   }
-/**
- * Increases the counter of steps he took on the path
- */
+  /**
+   * Increases the counter of steps he took on the path
+   */
   void incStepsOnPath() {
     this.stepsOnPath++;
   }

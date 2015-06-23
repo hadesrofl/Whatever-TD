@@ -62,6 +62,7 @@ class LevelAdmin {
     targets.forEach((target) {
       if (target != null) {
         bool foundMinion = false;
+        List<Minion> tmp = new List<Minion>();
         for (int i = 0; i < minions.length; i++) {
           /* Didn't found the minion yet */
           if (foundMinion == false) {
@@ -70,7 +71,7 @@ class LevelAdmin {
               /* minion has 0 or lower hp => dead */
               /* TODO: remove with tmp list */
               if (minions[i].calculateHitPoints(target) <= 0) {
-                minions.removeAt(i);
+                tmp.add(minions[i]);
               }
               print(minions[i].getHitpoints().toString());
               /* mark minion as found */
@@ -78,6 +79,9 @@ class LevelAdmin {
             }
           }
         }
+        tmp.forEach((m){
+          minions.remove(m);
+        });
       }
     });
   }
