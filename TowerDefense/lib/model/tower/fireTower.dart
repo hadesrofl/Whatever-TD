@@ -16,9 +16,9 @@ class FireTower extends Tower {
     this.setSellingPrice(500);
     this.setUpgradeLevel(1);
     this.setAttackSpeed(1.1);
-    this.setBasicDamage(21.0);
+    this.setBasicDamage(5.0);
     this.setDmgType(3);
     this.setAbility(false);
-    this.setAbilityFactor(25);
+    this.setAbilityFactor(90);
   }
 }

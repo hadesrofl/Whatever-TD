@@ -8,7 +8,7 @@ class ArrowTower extends Tower {
     this.setSellingPrice(110);
     this.setUpgradeLevel(1);
     this.setAttackSpeed(1.2);
-    this.setBasicDamage(22.0);
+    this.setBasicDamage(5.0);
     this.setDmgType(2);
   }
 }

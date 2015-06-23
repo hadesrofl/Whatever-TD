@@ -80,26 +80,26 @@ class Tower {
           if (!check) {
             if (minion.getPosition().equals(fields)) {
               Condition con = null;
-            if(this.getAbility() != null || this.getAbility() != false){
-              this.damage = new Damage(this.getBasicDamage(), this.damageType,
-                  this.abilityCalculation());
-              if (this.damage.applyCondition == true) {
-                switch (this.name) {
-                  case "Fire Tower":
-                    con = new Condition("Fire");
-                    break;
-                  case "Lightning Tower":
-                    con = new Condition("Lightning");
-                    break;
-                  default:
-                    con = null;
-                    break;
+              if (this.getAbility() != null || this.getAbility() != false) {
+                this.damage = new Damage(this.getBasicDamage(), this.damageType,
+                    this.abilityCalculation());
+                if (this.damage.applyCondition == true) {
+                  switch (this.name) {
+                    case "FireTower":
+                      con = new Condition("Fire");
+                      break;
+                    case "LightningTower":
+                      con = new Condition("Lightning");
+                      break;
+                    default:
+                      con = null;
+                      break;
+                  }
                 }
+              } else {
+                this.damage =
+                    new Damage(this.getBasicDamage(), this.damageType, false);
               }
-            }else{
-              this.damage = new Damage(this.getBasicDamage(), this.damageType,
-                               false);
-            }
               this.target = new Target(this.damage, minion, con);
               check = true;
             } else {
@@ -157,12 +157,15 @@ class Tower {
  * Checks if the tower can do ability Damage
  */
   bool abilityCalculation() {
-    if(this.getAbilityFactor() == null){
+    if (this.getAbilityFactor() == null) {
       return false;
-    }else{
+    } else {
       Random r = new Random();
-      if (r.nextInt(100) < this.getAbilityFactor()) return true;
-      return false;
+      if (r.nextInt(100) < this.getAbilityFactor()) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 
