@@ -30,6 +30,8 @@ class Game {
   Duration buildingPhase = const Duration(seconds: 1);
   Duration spawn = const Duration(seconds: 2);
   Duration checkLife = const Duration(seconds: 1);
+  Timer towerShootTimer;
+  Duration shoot = const Duration(milliseconds: 500);
 
   Game(String levels) {
     this.levels = levels;
@@ -53,30 +55,38 @@ class Game {
    */
   void runGame() {
     Minion m;
-    if(spawnTimer == null){
-      spawnTimer = new Timer.periodic(spawn, (_){
-       m = this.lAdmin.minionSpawn();
+    if (spawnTimer == null) {
+      spawnTimer = new Timer.periodic(spawn, (_) {
+        m = this.lAdmin.minionSpawn();
       });
     }
     runningGame = true;
     if (startWave != null) {
       startWave.cancel();
     }
-    if(checkLifeTimer == null){
-      checkLifeTimer = new Timer.periodic(checkLife, (_){
+    if (towerShootTimer == null) {
+      towerShootTimer = new Timer.periodic(shoot, (_) {
+        List<Target> targets = tAdmin.attack(lAdmin.getMinions());
+        lAdmin.calculateHPOfMinions(targets);
+      });
+    }
+    if (checkLifeTimer == null) {
+      checkLifeTimer = new Timer.periodic(checkLife, (_) {
         List<Minion> tmp = new List<Minion>();
-        this.lAdmin.minions.forEach((m){
-          if(m.getStepsOnPath() >= this.lAdmin.path.length && m.getHitpoints() > 0 && m.getDestroyedALife() == false){
+        this.lAdmin.minions.forEach((m) {
+          if (m.getStepsOnPath() >= this.lAdmin.path.length &&
+              m.getHitpoints() > 0 &&
+              m.getDestroyedALife() == false) {
             this.life--;
             m.setDestroyedALife(true);
             tmp.add(m);
             print("Life remaining: $life");
           }
         });
-      tmp.forEach((m){
-        this.lAdmin.minions.remove(m);
-      });
-      tmp = null;
+        tmp.forEach((m) {
+          this.lAdmin.minions.remove(m);
+        });
+        tmp = null;
       });
     }
   }
