@@ -14,7 +14,7 @@ class Controller {
   String field;
   var setTower;
   var x;
-List<StreamSubscription> streams = new List<StreamSubscription>();
+  List<StreamSubscription> streams = new List<StreamSubscription>();
   Controller(String levels) {
     //Initializing the Game
     game = new Game(levels);
@@ -34,6 +34,7 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
       view.menuContainer.hidden = false;
       view.errorDiv2.hidden = true;
       view.errorDiv.hidden = true;
+      updateGold();
     });
     buyListener();
     sellListener();
@@ -83,8 +84,9 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
       endStreamSubscription();
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
-          streams.add(view.board.children.elementAt(i).children.elementAt(j).onClick
-              .listen((ev) {
+          streams.add(
+              view.board.children.elementAt(i).children.elementAt(j).onClick
+                  .listen((ev) {
             if (b) {
               game.tAdmin.allTower.forEach((tower) {
                 if (tower.getPosition().getX() == j &&
@@ -95,7 +97,8 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
                   enoughMoney = game.tAdmin.upgradeTower(
                       tmp, game.player, game.board, game.row, game.col);
                   if (enoughMoney) {
-                   view.upgradeImage(id, tmp.name, tmp.getUpgradeLevel());
+                    view.upgradeImage(id, tmp.name, tmp.getUpgradeLevel());
+                    updateGold();
                   } else {
                     view.errorDiv.hidden = false;
                   }
@@ -119,8 +122,9 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
       endStreamSubscription();
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
-          streams.add(view.board.children.elementAt(i).children.elementAt(j).onClick
-              .listen((ev) {
+          streams.add(
+              view.board.children.elementAt(i).children.elementAt(j).onClick
+                  .listen((ev) {
             if (check) {
               var tmp = null;
               game.tAdmin.allTower.forEach((tower) {
@@ -133,6 +137,7 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
                 }
               });
               if (tmp != null) game.tAdmin.sellTower(tmp, game.player);
+              updateGold();
               check = false;
               view.buy.hidden = false;
               view.upgrade.hidden = false;
@@ -173,8 +178,9 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
       bool enough;
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
-          streams.add(view.board.children.elementAt(i).children.elementAt(j).onClick
-              .listen((ev) {
+          streams.add(
+              view.board.children.elementAt(i).children.elementAt(j).onClick
+                  .listen((ev) {
             String f = j.toString() + i.toString();
             field = lookUpField(f);
             switch (towerDescription) {
@@ -198,6 +204,7 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
                 break;
             }
             if (enough) {
+              updateGold();
               view.sell.hidden = false;
               view.upgrade.hidden = false;
               view.buy.hidden = false;
@@ -223,19 +230,22 @@ List<StreamSubscription> streams = new List<StreamSubscription>();
     });
     return towerField;
   }
-  void endStreamSubscription(){
-    if(!streams.isEmpty){
-      for(int i = 0; i < streams.length;i++){
+  void endStreamSubscription() {
+    if (!streams.isEmpty) {
+      for (int i = 0; i < streams.length; i++) {
         streams[i].cancel();
       }
     }
   }
-  void setPath(){
-    game.board.forEach((f,v){
-      if(f.isPathField()){
+  void setPath() {
+    game.board.forEach((f, v) {
+      if (f.isPathField()) {
         String id = f.getX().toString() + f.getY().toString();
         view.setImageToView(id, "Path");
       }
     });
+  }
+  void updateGold() {
+    view.px.innerHtml = game.player.getGold().toString();
   }
 }

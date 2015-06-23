@@ -70,6 +70,8 @@ class View {
   ButtonElement medium;
   ButtonElement hard;
   Element p;
+  Element gold;
+  Element px;
 
 /**
    * Constructor of the view
@@ -102,6 +104,7 @@ class View {
     medium = querySelector("#mediumGame");
     hard = querySelector("#hardGame");
     p = querySelector("#difficulty");
+    px = querySelector("#gold");
 
     stop.hidden = true;
     menuContainer.hidden = true;
@@ -168,13 +171,13 @@ class View {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
-          if(children.classes.contains(towerName)){
+          if (children.classes.contains(towerName)) {
             children.classes.remove(towerName);
           }
-          if(children.classes.contains(towerName + "2")){
+          if (children.classes.contains(towerName + "2")) {
             children.classes.remove(towerName + "2");
           }
-          if(children.classes.contains(towerName + "3")){
+          if (children.classes.contains(towerName + "3")) {
             children.classes.remove(towerName + "3");
           }
         }
@@ -182,24 +185,37 @@ class View {
     });
   }
   void upgradeImage(String id, String towerName, int level) {
-   // print(towerDescription);
+    // print(towerDescription);
     //print(level);
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
-            children.classes.remove(towerName);
-              switch (level) {
-                case 2:
-                  children.classes.add(towerName + "2");
-                  break;
-                case 3:
-                  children.classes.add(towerName + "3");
-                  break;
-              }        
+          children.classes.remove(towerName);
+          switch (level) {
+            case 2:
+              children.classes.add(towerName + "2");
+              break;
+            case 3:
+              children.classes.add(towerName + "3");
+              break;
           }
-        });
+        }
       });
+<<<<<<< HEAD
 }
+=======
+    });
+  }
+  void setPath(String id) {
+    this.board.children.forEach((c) {
+      c.children.forEach((children) {
+        if (children.id == id) {
+          children.classes.add("Path");
+        }
+      });
+    });
+  }
+>>>>>>> 6e14f7ca900a84f5723ac93ffea1deaa0756df68
   void hideDifficultyMenu() {
     hard.hidden = true;
     medium.hidden = true;
