@@ -260,18 +260,19 @@ class Controller {
     if(updateMinionTimer == null){
       updateMinionTimer = new Timer.periodic(game.lAdmin.currentWave.getMinions()[0].getMovementSpeed(),(_) {
         game.lAdmin.getMinions().forEach((f){
+          String oldId;
+          String id;
           if(f.getStepsOnPath() < game.lAdmin.getPath().length){
           if(f.getStepsOnPath() != 0){
-            String oldId = game.lAdmin.getPath()[f.getStepsOnPath()-1].getX().toString() + f.path[f.getStepsOnPath()-1].getY().toString();
+           oldId = game.lAdmin.getPath()[f.getStepsOnPath()-1].getX().toString() + f.path[f.getStepsOnPath()-1].getY().toString();
                      view.deleteImage(oldId, f.getName());
           }
-          String id =  f.getPosition().getX().toString() + f.getPosition().getY().toString();
-          view.setImageToView(id, f.getName());   
-             }else{
-               String id = game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getX().toString() + game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getY().toString();
-                view.deleteImage(id,f.getName());
-             }
-          
+          id =  f.getPosition().getX().toString() + f.getPosition().getY().toString();
+          view.setImageToView(id, f.getName());
+          }else if(f.getStepsOnPath() >= game.lAdmin.getPath().length){
+            id =  game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getX().toString() + game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getY().toString();
+          view.deleteImage(id, f.getName());
+          }
         });
       }); 
   }
