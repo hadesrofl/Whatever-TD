@@ -275,12 +275,14 @@ class Controller {
           }
         });
         game.lAdmin.currentWave.getMinions().forEach((m){
-          String x = game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getX().toString();
-          String y = game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getY().toString();
-          if(m.getPosition().getX().toString().compareTo(x) == 0 && m.getPosition().getY().toString().compareTo(y) == 0){    
-          view.setImageToView(x + y, m.getName());
-          }else{
-            view.deleteImage(x + y, m.getName());
+          if(m != null && m.getPosition() != null && m.getPosition().getX() != null && m.getPosition().getY() != null){
+            String x = game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getX().toString();
+            String y = game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getY().toString();
+            if(m.getPosition().getX().toString().compareTo(x) == 0 && m.getPosition().getY().toString().compareTo(y) == 0){    
+            view.setImageToView(x + y, m.getName());
+            }else{
+              view.deleteImage(x + y, m.getName());
+            }
           }
         });
       }); 

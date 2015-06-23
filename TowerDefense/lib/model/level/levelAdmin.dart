@@ -59,8 +59,8 @@ class LevelAdmin {
    * @param targets - a list of targets from the tower administation
    */
   void calculateHPOfMinions(List<Target> targets) {
-    /* TODO: Null Objects */
-    targets.forEach((target) {
+     targets.forEach((target) {
+       if(target != null){
       bool foundMinion = false;
       for (int i = 0; i < minions.length; i++) {
         /* Didn't found the minion yet */
@@ -77,7 +77,7 @@ class LevelAdmin {
           }
         }
       }
-    });
+    }});
   }
   /**
    * Method to spawn a new minion
