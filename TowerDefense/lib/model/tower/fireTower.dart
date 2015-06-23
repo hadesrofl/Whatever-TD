@@ -1,6 +1,14 @@
 part of tower;
 
+/**
+ * Instance of a FireTower
+ * 
+ * @author Florian Winzek
+ */
 class FireTower extends Tower {
+  /**
+   * Constructor
+   */
   FireTower() {
     this.setName("FireTower");
     this.setRange(4);

@@ -38,7 +38,7 @@ class Game {
     this.lAdmin.loadNextLevel();
     this.lAdmin.loadPath(board, difficulty);
     this.lAdmin.loadNextWave();
-    if(!runningGame){
+    if (!runningGame) {
       startWave = new Timer(buildingPhase, () => runGame());
     }
   }
@@ -47,11 +47,10 @@ class Game {
    */
   void runGame() {
     runningGame = true;
-    if(startWave != null) {
+    if (startWave != null) {
       startWave.cancel();
     }
     print("War....war never changes....");
-    
   }
   /**
    * 
@@ -113,10 +112,10 @@ class Game {
   void setPlayer(String name) {
     this.player = new Player(name);
   }
-  void setDifficulty(String dif){
+  void setDifficulty(String dif) {
     this.difficulty = dif;
   }
-  void setLevelAdmin(){
+  void setLevelAdmin() {
     this.lAdmin = new LevelAdmin(levels, difficulty);
   }
 }

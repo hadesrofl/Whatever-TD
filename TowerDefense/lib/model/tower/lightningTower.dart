@@ -1,6 +1,15 @@
 part of tower;
 
+/**
+ * Instance of a LigthningTower
+ * 
+ * @author Florian Winzek
+ */
 class LightningTower extends Tower {
+  /**
+   * Constructor
+   * 
+   */
   LightningTower() {
     this.setName("LightningTower");
     this.setRange(4);

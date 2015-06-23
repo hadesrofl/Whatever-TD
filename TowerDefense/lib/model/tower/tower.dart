@@ -1,63 +1,77 @@
 part of tower;
 
+/**
+ * Instance of a Tower
+ * 
+ * @author Florian Winzek
+ * 
+ */
 class Tower {
   /**
    * Name of the Tower
    */
   String name;
   /**
-   * 
+   * Range of the Tower
    */
   int range;
   /**
-   * 
+   * Buying price
    */
   int price;
   /**
-   * 
+   * Selling Price
    */
   int sellingPrice;
   /**
-   * 
+   * Level of the Tower
    */
   int upgradeLevel;
   /**
-   * 
+   * Attack Speed
    */
   double attackSpeed;
   /**
-   * 
+   * The Target which the Tower is shooting at
    */
   Target target;
   /**
-   * 
+   * Object of a Damage Class of the Tower
    */
   Damage damage;
   /**
-   * 
+   * Position on the board
    */
   Field position;
   /**
-   * 
+   * basic Damage
    */
   double basicDamage;
   /**
-   * 
+   * given Type of Damage
    */
   int damageType;
   /**
-   * 
+   * all the Fields on the Board, which the Tower can shoot
    */
   List<Field> attackFields = new List<Field>();
   /**
-   * 
+   * a special ability 
    */
   bool ability;
   /**
-   * 
+   * amount of ability power
    */
   int abilityFactor;
 
+  /**
+  * Selects a Minion to shoot at
+  * 
+  * @param minions list of minions which the tower can shoot
+  * 
+  * @return a Target object with a chosen minion 
+  * and damage/condition from the tower
+  */
   Target shoot(List<Minion> minions) {
     minions.forEach((minion) {
       attackFields.forEach((fields) {
@@ -65,8 +79,8 @@ class Tower {
           this.damage = new Damage(this.getBasicDamage(), this.damageType,
               this.abilityCalculation());
           Condition con = null;
-          if(this.damage.applyCondition == true){
-            switch(this.name){
+          if (this.damage.applyCondition == true) {
+            switch (this.name) {
               case "Fire Tower":
                 con = new Condition("Fire");
                 break;
@@ -84,7 +98,13 @@ class Tower {
     });
     return this.target;
   }
-
+/**
+ * Calculates all the fields on the board which the tower can aim at
+ * 
+ * @param board the playground
+ * @param row number of rows of the board
+ * @param col number of colums of the board
+ */
   void findFieldsToAttack(Map<Field, String> board, final row, final col) {
     int startX = this.getPosition().getX() - this.getRange();
     int startY = this.getPosition().getY() - this.getRange();
@@ -107,10 +127,6 @@ class Tower {
     }
   }
 
-  void setCoordinates(Field f) {
-    position = f;
-  }
-
   /**
    * Upgrades the tower with the upcoming level factor
    */
@@ -124,7 +140,9 @@ class Tower {
     if (this.name != "ArrowTower") this
         .setAbilityFactor(this.getAbilityFactor() + 5);
   }
-
+/**
+ * Checks if the tower can do ability Damage
+ */
   bool abilityCalculation() {
     Random r = new Random();
     if (r.nextInt(100) < this.getAbilityFactor()) return true;
@@ -133,6 +151,9 @@ class Tower {
 
   // --------------getter-/setter methods-----------------//
 
+  void setCoordinates(Field f) {
+    position = f;
+  }
   int getRange() {
     return this.range;
   }

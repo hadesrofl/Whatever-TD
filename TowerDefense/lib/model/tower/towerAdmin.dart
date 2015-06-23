@@ -13,20 +13,47 @@ part 'lightningTower.dart';
 part 'fireTower.dart';
 part 'arrowTower.dart';
 
+/**
+ * Administration class for all the tower
+ * 
+ * @author Florian Winzek
+ */
 class TowerAdmin {
+  /**
+   * List with all tower
+   */
   List<Tower> allTower;
+  /**
+   * max level number
+   */
   final int MAX_UPGRADE = 3;
+  /**
+   * Identifier for a CanonTower
+   */
   static const CANONTOWER = 1;
+  /**
+   * Identifier for an ArrowTower
+   */
   static const ARROWTOWER = 2;
+  /**
+   * Identifier for a FireTower
+   */
   static const FIRETOWER = 3;
+  /**
+   * Identifier for a LigthningTower
+   */
   static const LIGHTNINGTOWER = 4;
-
+  /**
+   * Constructor 
+   */
   TowerAdmin() {
     allTower = new List<Tower>();
   }
 
   /**
-   * calculates all the targets which the tower can reach
+   * Calculates all the targets which the tower can reach
+   * 
+   * @param minions list of all minions
    */
   Map<Tower, Target> attack(List<Minion> minions) {
     Map<Tower, Target> targets = new Map<Tower, Target>();
@@ -39,6 +66,13 @@ class TowerAdmin {
 
   /**
    * updates money of the player and adds the new Tower to the AllTower-List
+   * 
+   * @param towerDescription Identifier to build a new Tower
+   * @param player player of the game
+   * @param field the position on the board where the tower should be placed
+   * @param board the playground
+   * @param row number of rows of the board
+   * @param col number of colums of the board
    */
   bool buyTower(int towerDescription, Player player, Field field,
       Map<Field, String> board, final row, final col) {
@@ -105,6 +139,9 @@ class TowerAdmin {
 
   /**
    * deletes the Tower and upgrades the players amount of gold
+   * 
+   * @param tower the tower which should be deleted
+   * @player player current player of the game
    */
   void sellTower(Tower tower, Player player) {
     player.setGold(player.getGold() + tower.getSellingPrice());
@@ -115,6 +152,12 @@ class TowerAdmin {
 
   /**
    * selects the tower by the given field
+   * 
+   * @param tower the tower which should be placed
+   * @param f the field on which the tower should be placed
+   * @param board the playground
+   * @param row number of rows of the board
+   * @param col number of colums of the board
    */
   bool setTowerChoords(
       Tower tower, Field f, Map<Field, String> board, final row, final col) {
@@ -129,7 +172,13 @@ class TowerAdmin {
     }
   }
   /**
+   * upgrades a special tower
    * 
+   * @param tower tower which should be upgraded
+   * @param player current player of the game
+   * @param board the playground
+   * @param row number of rows of the board
+   * @param col number of colums of the board
    */
   bool upgradeTower(Tower tower, Player player, Map<Field, String> board,
       final row, final col) {
@@ -147,6 +196,9 @@ class TowerAdmin {
 }
 /**
  * checks if the Player has enough money to buy the tower
+ * 
+ * @param tower current tower to buy
+ * @param player current player of the game
  */
 bool enoughMoney(Tower tower, Player player) {
   if (player.getGold() < tower.getPrice()) return false;
