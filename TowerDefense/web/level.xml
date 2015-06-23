@@ -2,7 +2,7 @@
 	<easyLevels>
 		<level no="1" finalLevel="false">
 			<waves>
-				<wave no="1" numberOfMinions="10" finalWave="false">
+				<wave no="1" numberOfMinions="5" finalWave="false">
 					<minion ref="internetExplorer"></minion>
 				</wave>
 				<wave no="2" numberOfMinions="20" finalWave="false">
@@ -165,73 +165,73 @@
 	<minion name="weakKratzke">
 		<hitpoints>25</hitpoints>
 		<armor>light</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>25</droppedGold>
 	</minion>
 	<minion name="internetExplorer">
 		<hitpoints>20</hitpoints>
 		<armor>light</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>20</droppedGold>
 	</minion>
 	<minion name="docker">
 		<hitpoints>50</hitpoints>
 		<armor>medium</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>50</droppedGold>
 	</minion>
 	<minion name="dart">
 		<hitpoints>50</hitpoints>
 		<armor>light</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>30</droppedGold>
 	</minion>
 	<minion name="cookieMonster">
 		<hitpoints>1000</hitpoints>
 		<armor>heavy</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>500</droppedGold>
 	</minion>
 	<minion> name="twitter">
 		<hitpoints>40</hitpoints>
 		<armor>medium</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>30</droppedGold>
 	</minion>
 	<minion name="whatsapp">
 		<hitpoints>60</hitpoints>
 		<armor>medium</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>40</droppedGold>
 	</minion>
 	<minion name="facebook">
 		<hitpoints>100</hitpoints>
 		<armor>heavy</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>60</droppedGold>
 	</minion>
 	<minion name="amazon">
 		<hitpoints>2500</hitpoints>
 		<armor>heavy</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>1000</droppedGold>
 	</minion>
 	<minion name="apple">
 		<hitpoints>150</hitpoints>
 		<armor>heavy</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>200</droppedGold>
 	</minion>
 	<minion name="google">
 		<hitpoints>200</hitpoints>
 		<armor>heavy</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>300</droppedGold>
 	</minion>
 	<minion name="strongKratzke">
 		<hitpoints>5000</hitpoints>
 		<armor>light</armor>
-		<movementSpeed>1.0</movementSpeed>
+		<movementSpeed>1000</movementSpeed>
 		<droppedGold>10000</droppedGold>
 	</minion>
 </minions>

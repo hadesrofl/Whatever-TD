@@ -68,6 +68,11 @@ body{
 #board td.Path{
     background-image: url("../img/background/dirt.jpg");
 }
+
+#board td.internetExplorer{
+      background-image: url("../img/minions/internetexplorer.jpg");
+}
+
 .TowerButton{
   height: 32px;
   width: 32px;

@@ -167,18 +167,18 @@ class View {
       });
     });
   }
-  void deleteImage(String id, String towerName) {
+  void deleteImage(String id, String objectName) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
-          if (children.classes.contains(towerName)) {
-            children.classes.remove(towerName);
+          if (children.classes.contains(objectName)) {
+            children.classes.remove(objectName);
           }
-          if (children.classes.contains(towerName + "2")) {
-            children.classes.remove(towerName + "2");
+          if (children.classes.contains(objectName + "2")) {
+            children.classes.remove(objectName + "2");
           }
-          if (children.classes.contains(towerName + "3")) {
-            children.classes.remove(towerName + "3");
+          if (children.classes.contains(objectName + "3")) {
+            children.classes.remove(objectName + "3");
           }
         }
       });

@@ -19,6 +19,7 @@ class Controller {
   var setTower;
   var x;
   List<StreamSubscription> streams = new List<StreamSubscription>();
+  Timer updateMinionTimer;
   Controller(String levels) {
     //Initializing the Game
     game = new Game(levels);
@@ -61,6 +62,7 @@ class Controller {
       game.setDifficulty("easy");
       game.setLevelAdmin();
       game.startGame();
+      gameTriggers();
       setPath();
     });
     view.medium.onClick.listen((ev) {
@@ -68,6 +70,7 @@ class Controller {
       game.setDifficulty("medium");
       game.setLevelAdmin();
       game.startGame();
+      gameTriggers();
       setPath();
     });
     view.hard.onClick.listen((ev) {
@@ -75,6 +78,7 @@ class Controller {
       game.setDifficulty("hard");
       game.setLevelAdmin();
       game.startGame();
+      gameTriggers();
       setPath();
     });
   }
@@ -252,4 +256,23 @@ class Controller {
   void updateGold() {
     view.px.innerHtml = game.player.getGold().toString();
   }
-}
+  void gameTriggers(){
+    if(updateMinionTimer == null){
+      updateMinionTimer = new Timer.periodic(game.lAdmin.currentWave.getMinions()[0].getMovementSpeed(),(_) {
+        game.lAdmin.getMinions().forEach((f){
+          if(f.getStepsOnPath() < game.lAdmin.getPath().length){
+          if(f.getStepsOnPath() != 0){
+            String oldId = game.lAdmin.getPath()[f.getStepsOnPath()-1].getX().toString() + f.path[f.getStepsOnPath()-1].getY().toString();
+                     view.deleteImage(oldId, f.getName());
+          }
+          String id =  f.getPosition().getX().toString() + f.getPosition().getY().toString();
+          view.setImageToView(id, f.getName());   
+             }else{
+               String id = game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getX().toString() + game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getY().toString();
+                view.deleteImage(id,f.getName());
+             }
+          
+        });
+      }); 
+  }
+}}

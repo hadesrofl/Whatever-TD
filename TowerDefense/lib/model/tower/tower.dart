@@ -93,6 +93,8 @@ class Tower {
             }
           }
           this.target = new Target(this.damage, minion, con);
+        }else{
+          this.target = null;
         }
       });
     });

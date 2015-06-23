@@ -19,7 +19,7 @@ class Minion {
   /**
    * Speed of minion
    */
-  double movementSpeed;
+  Duration movementSpeed;
   /**
    * Amount of gold dropped on death
    */
@@ -45,9 +45,9 @@ class Minion {
    */
   Field position;
   /**
-   * Counter of rounds this minion is alive
+   * Bool if the minion has reached the end of the path
    */
-  int roundCounter;
+bool destroyedALife;
   /**
    * Bool if minion is spawned right now or not
    */
@@ -56,6 +56,8 @@ class Minion {
    * Steps the minion took on the path (index for the path)
    */
   int stepsOnPath;
+  Timer minionTimer;
+  List<Field> path;
 
   /**
    * Constructor for a minion object
@@ -65,15 +67,15 @@ class Minion {
    * @param x - x-coordinate a minion is starting at
    * @param y - y-coordinate a minion is starting at
    */
-  Minion(String name, double hitpoints, Armor armor, double movementSpeed, int droppedGold) {
+  Minion(String name, double hitpoints, Armor armor, Duration movementSpeed, int droppedGold) {
     this.name = name;
     this.hitpoints = hitpoints;
     this.armor = armor;
     this.movementSpeed = movementSpeed;
     this.droppedGold = droppedGold;
-    this.roundCounter = 0;
     this.stepsOnPath = 0;
     this.spawned = false;
+    this.destroyedALife = false;
   }
 /**
    * Method to calculate hitpoints after getting hit by a tower
@@ -158,6 +160,9 @@ class Minion {
         if (conditions.elementAt(i).getDuration() == 0) conditions.remove(i);
       }
       this.hitpoints -= dmgToMinion;
+      if(this.hitpoints <= 0){
+        this.minionTimer.cancel();
+      }
     }
     return this.hitpoints;
   }
@@ -166,21 +171,22 @@ class Minion {
    */
   void spawn() {
     this.spawned = true;
+    if(minionTimer == null){
+      minionTimer = new Timer.periodic(movementSpeed, (_) {
+        this.move();
+      });
+    }
   }
 /**
    * Method to move a minion on the board
    */
-  void move(Field position) {
-    /** TODO: Check if this is all */
-    this.position = position;
-    incStepsOnPath();
-    incRounds();
-  }
-/**
-   * Method to increment round counter
-   */
-  void incRounds() {
-    this.roundCounter++;
+  void move() {
+      incStepsOnPath();
+      if(this.stepsOnPath >= this.path.length){
+        this.minionTimer == null;
+      }else{
+        this.position = this.path[this.stepsOnPath];
+      }
   }
 /**
  * Increases the counter of steps he took on the path
@@ -207,7 +213,6 @@ class Minion {
             this.armor.toString().compareTo(m.getArmor().toString()) == 0) &&
         this.movementSpeed == m.getMovementSpeed() &&
         this.position.equals(m.getPosition()) &&
-        this.roundCounter == m.getRoundCounter() &&
         this.spawned == m.isSpawned() &&
         this.stepsOnPath == m.getStepsOnPath() &&
         sameConditionCounter == conditions.length) {
@@ -228,21 +233,6 @@ class Minion {
   double getHitpoints() {
     return this.hitpoints;
   }
-/*
-int getX(){
-	return this.x;
-}
-void setX(int x){
-	this.x = x;
-}
-
-int getY(){
-	return this.y;
-}
-void setY(int y){
-	this.y = y;
-}
- */
 /**
  * Gets the current position of this minion on the board
  * @return a field object where the minion is
@@ -275,15 +265,8 @@ void setY(int y){
    * Returns the movement speed of this minion
    * @return the movement speed
    */
-  double getMovementSpeed() {
+  Duration getMovementSpeed() {
     return this.movementSpeed;
-  }
-  /**
-   * Returns the round counter of this minion
-   * @return the round counter
-   */
-  int getRoundCounter() {
-    return this.roundCounter;
   }
   /**
    * Returns a list of all conditions this minion has
@@ -305,5 +288,32 @@ void setY(int y){
    */
   String getName(){
     return this.name;
+  }
+  /**
+   * Sets the startPosition of this minion
+   */
+  void setStartPosition(){
+    this.position = this.path[0];
+  }
+  /**
+   * Sets the list of fields for the path the minion has to walk
+   * @param path is the list of fields
+   */
+  void setPath(List<Field> path){
+    this.path = path;
+  }
+  /**
+   * Returns the status if the minion has reached the end of the path and therefore destroyed a life
+   * @return true if the minion destroyed a life, false if not
+   */
+  bool getDestroyedALife(){
+    return this.destroyedALife;
+  }
+  /**
+   * Sets the bool for destroying a life 
+   * @param b is the bool to be set
+   */
+  void setDestroyedALife(bool b){
+    this.destroyedALife = b;
   }
 }

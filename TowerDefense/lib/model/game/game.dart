@@ -23,13 +23,19 @@ class Game {
   /* TODO: Get Difficulty from User Input (button or something else) */
   String difficulty;
   Timer startWave;
+  Timer spawnTimer;
+  Timer updateMinionTimer;
+  Timer checkLifeTimer;
   bool runningGame = false;
-  Duration buildingPhase = const Duration(seconds: 15);
+  Duration buildingPhase = const Duration(seconds: 1);
+  Duration spawn = const Duration(seconds: 2);
+  Duration checkLife = const Duration(seconds: 1);
 
   Game(String levels) {
     this.levels = levels;
     this.tAdmin = new TowerAdmin();
     this.board = createBoard(this.row, this.col);
+    this.life = 20;
   }
   /**
    * 
@@ -46,11 +52,33 @@ class Game {
    * 
    */
   void runGame() {
+    Minion m;
+    if(spawnTimer == null){
+      spawnTimer = new Timer.periodic(spawn, (_){
+       m = this.lAdmin.minionSpawn();
+      });
+    }
     runningGame = true;
     if (startWave != null) {
       startWave.cancel();
     }
-    print("War....war never changes....");
+    if(checkLifeTimer == null){
+      checkLifeTimer = new Timer.periodic(checkLife, (_){
+        List<Minion> tmp = new List<Minion>();
+        this.lAdmin.minions.forEach((m){
+          if(m.getStepsOnPath() >= this.lAdmin.path.length && m.getHitpoints() > 0 && m.getDestroyedALife() == false){
+            this.life--;
+            m.setDestroyedALife(true);
+            tmp.add(m);
+            print("Life remaining: $life");
+          }
+        });
+      tmp.forEach((m){
+        this.lAdmin.minions.remove(m);
+      });
+      tmp = null;
+      });
+    }
   }
   /**
    * 

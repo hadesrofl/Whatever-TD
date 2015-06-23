@@ -3,6 +3,7 @@ library level;
 import "package:xml/xml.dart";
 import "../tower/towerAdmin.dart";
 import "../game/game.dart";
+import "dart:async";
 
 part "minion.dart";
 part "wave.dart";
@@ -41,7 +42,7 @@ class LevelAdmin {
   /**
    * All Minions currently active on the board
    */
-  List<Minion> minions;
+  List<Minion> minions = new List<Minion>();
 
   /**
    * Constructor for the Level Administration object
@@ -58,6 +59,7 @@ class LevelAdmin {
    * @param targets - a list of targets from the tower administation
    */
   void calculateHPOfMinions(List<Target> targets) {
+    /* TODO: Null Objects */
     targets.forEach((target) {
       bool foundMinion = false;
       for (int i = 0; i < minions.length; i++) {
@@ -66,6 +68,7 @@ class LevelAdmin {
           /* found minion */
           if (minions[i].equals(target.getMinion()) == true) {
             /* minion has 0 or lower hp => dead */
+            /* TODO: remove with tmp list */
             if (minions[i].calculateHitPoints(target) <= 0) {
               minions.removeAt(i);
             }
@@ -86,23 +89,15 @@ class LevelAdmin {
       if (foundMinion == false) {
         if (currentWave.getMinions()[i].isSpawned() == false) {
           currentWave.getMinions()[i].spawn();
-          m = minions[i];
+          m = currentWave.getMinions()[i];
           minions.add(m);
           foundMinion = true;
+          m.setPath(path);
+          m.setStartPosition();
         }
       }
     }
     return m;
-  }
-  /**
-   * Method to move minions
-   */
-  void moveMinions() {
-    minions.forEach((m) {
-      if (m.isSpawned()) {
-        m.move(path[m.getStepsOnPath()]);
-      }
-    });
   }
   /**
    * Method to....well...dunno
@@ -219,16 +214,14 @@ class LevelAdmin {
                     skipFormatTags(levelMinions[i].children, childIndex);
                 Armor armor =
                     new Armor(levelMinions[i].children[childIndex].text);
-                print(armor.value);
                 childIndex =
                     skipFormatTags(levelMinions[i].children, childIndex);
-                double movementSpeed =
-                    double.parse(levelMinions[i].children[childIndex].text);
+                Duration movementSpeed =
+                    new Duration(milliseconds: int.parse(levelMinions[i].children[childIndex].text));
                 childIndex =
                     skipFormatTags(levelMinions[i].children, childIndex);
                 int droppedGold =
                     int.parse(levelMinions[i].children[childIndex].text);
-                print(droppedGold.toString());
                 /* create minion objects and save them in the minions list */
                 for (int j = 0; j < currentWave.getNumberOfMinions(); j++) {
                   currentWave.addMinion(new Minion(minionName, hitpoints, armor,
@@ -424,5 +417,8 @@ class LevelAdmin {
    */
   List<Minion> getMinions() {
     return this.minions;
+  }
+  List<Field> getPath(){
+    return this.path;
   }
 }
