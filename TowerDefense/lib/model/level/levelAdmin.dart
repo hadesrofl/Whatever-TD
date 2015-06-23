@@ -153,6 +153,7 @@ class LevelAdmin {
         }
         waves[waveNumber] = new Wave(waveNumber, numberOfMinions, finalWave);
       });
+      currentWave = waves[1];
       nextLevelLoaded = true;
     }
     return nextLevelLoaded;
@@ -166,9 +167,7 @@ class LevelAdmin {
   bool loadNextWave() {
     int waveIndex = 0;
     bool nextWaveLoaded;
-    if (currentWave == null) {
-      currentWave = waves[1];
-    }else{
+    if (currentWave != null) {
       if (isLevelEnd()) {
         nextWaveLoaded = false;
       } else {
