@@ -47,7 +47,7 @@ class Minion {
   /**
    * Bool if the minion has reached the end of the path
    */
-bool destroyedALife;
+  bool destroyedALife;
   /**
    * Bool if minion is spawned right now or not
    */
@@ -67,7 +67,8 @@ bool destroyedALife;
    * @param x - x-coordinate a minion is starting at
    * @param y - y-coordinate a minion is starting at
    */
-  Minion(String name, double hitpoints, Armor armor, Duration movementSpeed, int droppedGold) {
+  Minion(String name, double hitpoints, Armor armor, Duration movementSpeed,
+      int droppedGold) {
     this.name = name;
     this.hitpoints = hitpoints;
     this.armor = armor;
@@ -84,67 +85,68 @@ bool destroyedALife;
   double calculateHitPoints(Target target) {
     double dmgToMinion = 0.0;
     if (target != null) {
-    switch (this.armor.value) {
-      //Light Armor
-      case 1:
-        //TODO: getter einbauen
-        //DamageType = Siege
-        if (target.getDamage().getDamageType() == 1) {
-          dmgToMinion = target.getDamage().getDamageValue() * 0.75;
-          //DamageType = Piercing
-        } else if (target.getDamage().getDamageType() == 2) {
-          dmgToMinion = target.getDamage().getDamageValue() * 1.25;
-          //DamageType = Fire
-        } else if (target.getDamage().getDamageType() == 3) {
-          dmgToMinion = target.getDamage().getDamageValue() * 1.25;
-          //DamageType = Lightning
-        } else if (target.getDamage().getDamageType() == 4) {
-          dmgToMinion = target.getDamage().getDamageValue() * 0.75;
-        }
-        break;
-      //Medium Armor
-      case 2:
-        //DamageType = Siege
-        if (target.getDamage().getDamageType() == 1) {
+      switch (this.armor.value) {
+        //Light Armor
+        case "light":
+          //TODO: getter einbauen
+          //DamageType = Siege
+          if (target.getDamage().getDamageType() == 1) {
+            dmgToMinion = target.getDamage().getDamageValue() * 0.75;
+            //DamageType = Piercing
+          } else if (target.getDamage().getDamageType() == 2) {
+            dmgToMinion = target.getDamage().getDamageValue() * 1.25;
+            //DamageType = Fire
+          } else if (target.getDamage().getDamageType() == 3) {
+            dmgToMinion = target.getDamage().getDamageValue() * 1.25;
+            //DamageType = Lightning
+          } else if (target.getDamage().getDamageType() == 4) {
+            dmgToMinion = target.getDamage().getDamageValue() * 0.75;
+          }
+          break;
+        //Medium Armor
+        case "medium":
+          //DamageType = Siege
+          if (target.getDamage().getDamageType() == 1) {
+            dmgToMinion = target.getDamage().getDamageValue() * 1.0;
+            //DamageType = Piercing
+          } else if (target.getDamage().getDamageType() == 2) {
+            dmgToMinion = target.getDamage().getDamageValue() * 1.0;
+            //DamageType = Fire
+          } else if (target.getDamage().getDamageType() == 3) {
+            dmgToMinion = target.getDamage().getDamageValue() * 0.75;
+            //DamageType = Lightning
+          } else if (target.getDamage().getDamageType() == 4) {
+            dmgToMinion = target.getDamage().getDamageValue() * 0.75;
+          }
+          break;
+        //Heavy Armor
+        case "heavy":
+          //DamageType = Siege
+          if (target.getDamage().getDamageType() == 1) {
+            dmgToMinion = target.getDamage().getDamageValue() * 1.25;
+            //DamageType = Piercing
+          } else if (target.getDamage().getDamageType() == 2) {
+            dmgToMinion = target.getDamage().getDamageValue() * 0.75;
+            //DamageType = Fire
+          } else if (target.getDamage().getDamageType() == 3) {
+            dmgToMinion = target.getDamage().getDamageValue() * 1.0;
+            //DamageType = Lightning
+          } else if (target.getDamage().getDamageType() == 4) {
+            dmgToMinion = target.getDamage().getDamageValue() * 1.25;
+          }
+          break;
+        default:
           dmgToMinion = target.getDamage().getDamageValue() * 1.0;
-          //DamageType = Piercing
-        } else if (target.getDamage().getDamageType() == 2) {
-          dmgToMinion = target.getDamage().getDamageValue()* 1.0;
-          //DamageType = Fire
-        } else if (target.getDamage().getDamageType() == 3) {
-          dmgToMinion = target.getDamage().getDamageValue() * 0.75;
-          //DamageType = Lightning
-        } else if (target.getDamage().getDamageType() == 4) {
-          dmgToMinion = target.getDamage().getDamageValue() * 0.75;
-        }
-        break;
-      //Heavy Armor
-      case 3:
-        //DamageType = Siege
-        if (target.getDamage().getDamageType() == 1) {
-          dmgToMinion = target.getDamage().getDamageValue() * 1.25;
-          //DamageType = Piercing
-        } else if (target.getDamage().getDamageType() == 2) {
-          dmgToMinion = target.getDamage().getDamageValue() * 0.75;
-          //DamageType = Fire
-        } else if (target.getDamage().getDamageType() == 3) {
-          dmgToMinion = target.getDamage() .getDamageValue()* 1.0;
-          //DamageType = Lightning
-        } else if (target.getDamage().getDamageType() == 4) {
-          dmgToMinion = target.getDamage().getDamageValue() * 1.25;
-        }
-        break;
-      default:
-        dmgToMinion = target.getDamage().getDamageValue() * 1.0;
-        break;
-    }
-    /* There are conditions to apply */
-    if(target.getCondition() != null){
-      bool foundCondition = false;
-      /* Minion has condition already? => reset Duration */
+          break;
+      }
+      /* There are conditions to apply */
+      if (target.getCondition() != null) {
+        bool foundCondition = false;
+        /* Minion has condition already? => reset Duration */
         conditions.forEach((c) {
           if (foundCondition == false) {
-            if (c.getIdentifier().compareTo(target.getCondition().identifier) == 0) {
+            if (c.getIdentifier().compareTo(target.getCondition().identifier) ==
+                0) {
               foundCondition = true;
               c.resetDuration();
             }
@@ -160,7 +162,7 @@ bool destroyedALife;
         if (conditions.elementAt(i).getDuration() == 0) conditions.remove(i);
       }
       this.hitpoints -= dmgToMinion;
-      if(this.hitpoints <= 0){
+      if (this.hitpoints <= 0) {
         this.minionTimer.cancel();
       }
     }
@@ -171,7 +173,7 @@ bool destroyedALife;
    */
   void spawn() {
     this.spawned = true;
-    if(minionTimer == null){
+    if (minionTimer == null) {
       minionTimer = new Timer.periodic(movementSpeed, (_) {
         this.move();
       });
@@ -181,12 +183,12 @@ bool destroyedALife;
    * Method to move a minion on the board
    */
   void move() {
-      incStepsOnPath();
-      if(this.stepsOnPath >= this.path.length){
-        this.minionTimer == null;
-      }else{
-        this.position = this.path[this.stepsOnPath];
-      }
+    incStepsOnPath();
+    if (this.stepsOnPath >= this.path.length) {
+      this.minionTimer == null;
+    } else {
+      this.position = this.path[this.stepsOnPath];
+    }
   }
 /**
  * Increases the counter of steps he took on the path
@@ -279,41 +281,41 @@ bool destroyedALife;
    * Returns the amount of gold dropped on death
    * @return the amount of gold
    */
-  int getDroppedGold(){
+  int getDroppedGold() {
     return this.droppedGold;
   }
   /**
    * Returns the name of the minion
    * @return the name
    */
-  String getName(){
+  String getName() {
     return this.name;
   }
   /**
    * Sets the startPosition of this minion
    */
-  void setStartPosition(){
+  void setStartPosition() {
     this.position = this.path[0];
   }
   /**
    * Sets the list of fields for the path the minion has to walk
    * @param path is the list of fields
    */
-  void setPath(List<Field> path){
+  void setPath(List<Field> path) {
     this.path = path;
   }
   /**
    * Returns the status if the minion has reached the end of the path and therefore destroyed a life
    * @return true if the minion destroyed a life, false if not
    */
-  bool getDestroyedALife(){
+  bool getDestroyedALife() {
     return this.destroyedALife;
   }
   /**
    * Sets the bool for destroying a life 
    * @param b is the bool to be set
    */
-  void setDestroyedALife(bool b){
+  void setDestroyedALife(bool b) {
     this.destroyedALife = b;
   }
 }

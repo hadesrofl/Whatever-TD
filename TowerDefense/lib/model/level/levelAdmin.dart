@@ -59,25 +59,27 @@ class LevelAdmin {
    * @param targets - a list of targets from the tower administation
    */
   void calculateHPOfMinions(List<Target> targets) {
-     targets.forEach((target) {
-       if(target != null){
-      bool foundMinion = false;
-      for (int i = 0; i < minions.length; i++) {
-        /* Didn't found the minion yet */
-        if (foundMinion == false) {
-          /* found minion */
-          if (minions[i].equals(target.getMinion()) == true) {
-            /* minion has 0 or lower hp => dead */
-            /* TODO: remove with tmp list */
-            if (minions[i].calculateHitPoints(target) <= 0) {
-              minions.removeAt(i);
+    targets.forEach((target) {
+      if (target != null) {
+        bool foundMinion = false;
+        for (int i = 0; i < minions.length; i++) {
+          /* Didn't found the minion yet */
+          if (foundMinion == false) {
+            /* found minion */
+            if (minions[i].equals(target.getMinion()) == true) {
+              /* minion has 0 or lower hp => dead */
+              /* TODO: remove with tmp list */
+              if (minions[i].calculateHitPoints(target) <= 0) {
+                minions.removeAt(i);
+              }
+              print(minions[i].getHitpoints().toString());
+              /* mark minion as found */
+              foundMinion = true;
             }
-            /* mark minion as found */
-            foundMinion = true;
           }
         }
       }
-    }});
+    });
   }
   /**
    * Method to spawn a new minion
@@ -216,8 +218,9 @@ class LevelAdmin {
                     new Armor(levelMinions[i].children[childIndex].text);
                 childIndex =
                     skipFormatTags(levelMinions[i].children, childIndex);
-                Duration movementSpeed =
-                    new Duration(milliseconds: int.parse(levelMinions[i].children[childIndex].text));
+                Duration movementSpeed = new Duration(
+                    milliseconds: int
+                        .parse(levelMinions[i].children[childIndex].text));
                 childIndex =
                     skipFormatTags(levelMinions[i].children, childIndex);
                 int droppedGold =
@@ -267,7 +270,7 @@ class LevelAdmin {
         difficulty);
     for (int i = 0; i < pathCoords.length; i = i + 2) {
       board.forEach((f, v) {
-        if (f.getX() == pathCoords[i+1] && f.getY() == pathCoords[i]) {
+        if (f.getX() == pathCoords[i + 1] && f.getY() == pathCoords[i]) {
           f.setPathField(true);
           this.path.add(f);
         }
@@ -418,7 +421,7 @@ class LevelAdmin {
   List<Minion> getMinions() {
     return this.minions;
   }
-  List<Field> getPath(){
+  List<Field> getPath() {
     return this.path;
   }
 }

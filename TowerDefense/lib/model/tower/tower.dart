@@ -73,30 +73,36 @@ class Tower {
   * and damage/condition from the tower
   */
   Target shoot(List<Minion> minions) {
+    bool check = false;
     minions.forEach((minion) {
-      attackFields.forEach((fields) {
-        if (minion.getPosition().equals(fields)) {
-          this.damage = new Damage(this.getBasicDamage(), this.damageType,
-              this.abilityCalculation());
-          Condition con = null;
-          if (this.damage.applyCondition == true) {
-            switch (this.name) {
-              case "Fire Tower":
-                con = new Condition("Fire");
-                break;
-              case "Lightning Tower":
-                con = new Condition("Lightning");
-                break;
-              default:
-                con = null;
-                break;
+      if (!check) {
+        attackFields.forEach((fields) {
+          if (!check) {
+            if (minion.getPosition().equals(fields)) {
+              this.damage = new Damage(this.getBasicDamage(), this.damageType,
+                  this.abilityCalculation());
+              Condition con = null;
+              if (this.damage.applyCondition == true) {
+                switch (this.name) {
+                  case "Fire Tower":
+                    con = new Condition("Fire");
+                    break;
+                  case "Lightning Tower":
+                    con = new Condition("Lightning");
+                    break;
+                  default:
+                    con = null;
+                    break;
+                }
+              }
+              this.target = new Target(this.damage, minion, con);
+              check = true;
+            } else {
+              this.target = null;
             }
           }
-          this.target = new Target(this.damage, minion, con);
-        }else{
-          this.target = null;
-        }
-      });
+        });
+      }
     });
     return this.target;
   }
