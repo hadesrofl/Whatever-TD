@@ -21,6 +21,7 @@
 			<path ref="easyLevels"></path>
 		</level>
 		<level no="2" finalLevel="false">
+			<waves>
 			<wave no="1" numberOfMinions="20" finalWave="false">
 				<minion ref="docker"></minion>
 			</wave>
@@ -36,8 +37,11 @@
 			<wave no="5" numberOfMinions="1" finalWave="true">
 				<minion ref="amazon"></minion>
 			</wave>
+			</waves>
+			<path ref="easyLevels"></path>
 		</level>
 		<level no="3" finalLevel="true">
+		<waves>
 			<wave no="1" numberOfMinions="10" finalWave="false">
 				<minion ref="cookieMonster"></minion>
 			</wave>
@@ -53,6 +57,8 @@
 			<wave no="5" numberOfMinions="1" finalWave="true">
 				<minion ref="strongKratzke"></minion>
 			</wave>
+			</waves>
+			<path ref="easyLevels"></path>
 		</level>
 	</easyLevels>
 	<mediumLevels>

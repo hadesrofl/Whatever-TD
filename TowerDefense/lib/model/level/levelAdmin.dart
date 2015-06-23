@@ -139,6 +139,8 @@ class LevelAdmin {
     bool nextLevelLoaded = false;
     if (!isFinalLevel()) {
       currentLevel++;
+      //currentLevel++;
+      //currentLevel++;
       XmlElement level = levels.firstWhere((x) =>
           (x.attributes[0].value.compareTo(currentLevel.toString()) == 0));
       /* Extract Waves of XML */
@@ -153,7 +155,8 @@ class LevelAdmin {
         }
         waves[waveNumber] = new Wave(waveNumber, numberOfMinions, finalWave);
       });
-      currentWave = waves[1];
+      currentWave = null;
+       loadNextWave();
       nextLevelLoaded = true;
     }
     return nextLevelLoaded;
@@ -167,76 +170,90 @@ class LevelAdmin {
   bool loadNextWave() {
     int waveIndex = 0;
     bool nextWaveLoaded;
-    if (currentWave != null) {
-      if (isLevelEnd()) {
+    /* there is no current wave, load first one */
+    if (currentWave == null) {
+      currentWave = waves[1];
+      nextWaveLoaded = getMinionsForWave(0);
+      /* Wave is clear, load next one */
+    }else if(currentWave.isWaveClear()){
+      waveIndex = currentWave.getWaveNumber();
+    }
+    if (isLevelEnd()) {
         nextWaveLoaded = false;
-      } else {
-        if(currentWave.getWaveNumber() == 1){
-          waveIndex = currentWave.getWaveNumber();
-        }else{
-          waveIndex = currentWave.getWaveNumber() + 1;
-        }
-        nextWaveLoaded = true;
-        List<XmlElement> levelMinions = getMinionsFromXml();
-        XmlElement level = levels.firstWhere((x) =>
-            (x.attributes[0].value.compareTo(currentLevel.toString()) == 0));
-        List<XmlNode> wavesFromXml = extractWavesFromXml(level);
+      } else if(currentWave.isWaveClear()){
+        currentWave = waves[currentWave.getWaveNumber() + 1];
+        nextWaveLoaded = getMinionsForWave(waveIndex);
+
         /* Get Wave index in XML */
-        for (int i = 0; i < wavesFromXml.length; i++) {
+       /* for (int i = 0; i < wavesFromXml.length; i++) {
           if (wavesFromXml[i].attributes[0].value
                   .compareTo((waveIndex).toString()) ==
               0) {
           }
-        }
-        /* Get Minion from Wave */
-        if (waveIndex != -1) {
-          int minionIndex = 0;
-          bool found = false;
-          for (int i = 0; i < wavesFromXml[waveIndex].children.length; i++) {
-            if (!found) {
-              /* remove pretty format text in XML */
-              minionIndex = skipFormatTags(wavesFromXml[waveIndex].children, 0);
-              found = true;
-            }
-          }
-
-          found = false;
-          String minionName =
-              wavesFromXml[waveIndex].children[minionIndex].attributes[0].value;
-          /* compare referring minion in wave to minions in xml and get the attributes */
-          for (int i = 0; i < levelMinions.length; i++) {
-            if (!found) {
-              if (minionName.compareTo(levelMinions[i].attributes[0].value) ==
-                  0) {
-                found = true;
-                int childIndex = skipFormatTags(levelMinions[i].children, 0);
-                double hitpoints =
-                    double.parse(levelMinions[i].children[childIndex].text);
-                childIndex =
-                    skipFormatTags(levelMinions[i].children, childIndex);
-                Armor armor =
-                    new Armor(levelMinions[i].children[childIndex].text);
-                childIndex =
-                    skipFormatTags(levelMinions[i].children, childIndex);
-                Duration movementSpeed = new Duration(
-                    milliseconds: int
-                        .parse(levelMinions[i].children[childIndex].text));
-                childIndex =
-                    skipFormatTags(levelMinions[i].children, childIndex);
-                int droppedGold =
-                    int.parse(levelMinions[i].children[childIndex].text);
-                /* create minion objects and save them in the minions list */
-                for (int j = 0; j < currentWave.getNumberOfMinions(); j++) {
-                  currentWave.addMinion(new Minion(minionName, hitpoints, armor,
-                      movementSpeed, droppedGold));
-                }
-              }
-            }
-          }
-        }
+        }*/
+      }else{
+        /* The Wave is still running */
+        nextWaveLoaded = false;
       }
-    }
     return nextWaveLoaded;
+  }
+  
+  bool getMinionsForWave(int waveIndex){
+    bool minionsLoaded;
+    List<XmlElement> levelMinions = getMinionsFromXml();
+    XmlElement level = levels.firstWhere((x) =>
+        (x.attributes[0].value.compareTo(currentLevel.toString()) == 0));
+    List<XmlNode> wavesFromXml = extractWavesFromXml(level);
+    /* Get Minion from Wave */
+           if (waveIndex != -1) {
+             int minionIndex = 0;
+             bool found = false;
+             for (int i = 0; i < wavesFromXml[waveIndex].children.length; i++) {
+               if (!found) {
+                 /* remove pretty format text in XML */
+                 minionIndex = skipFormatTags(wavesFromXml[waveIndex].children, 0);
+                 found = true;
+               }
+             }
+
+             found = false;
+             String minionName =
+                 wavesFromXml[waveIndex].children[minionIndex].attributes[0].value;
+             /* compare referring minion in wave to minions in xml and get the attributes */
+             for (int i = 0; i < levelMinions.length; i++) {
+               if (!found) {
+                 if (minionName.compareTo(levelMinions[i].attributes[0].value) ==
+                     0) {
+                   found = true;
+                   int childIndex = skipFormatTags(levelMinions[i].children, 0);
+                   double hitpoints =
+                       double.parse(levelMinions[i].children[childIndex].text);
+                   childIndex =
+                       skipFormatTags(levelMinions[i].children, childIndex);
+                   Armor armor =
+                       new Armor(levelMinions[i].children[childIndex].text);
+                   childIndex =
+                       skipFormatTags(levelMinions[i].children, childIndex);
+                   Duration movementSpeed = new Duration(
+                       milliseconds: int
+                           .parse(levelMinions[i].children[childIndex].text));
+                   childIndex =
+                       skipFormatTags(levelMinions[i].children, childIndex);
+                   int droppedGold =
+                       int.parse(levelMinions[i].children[childIndex].text);
+                   /* create minion objects and save them in the minions list */
+                   for (int j = 0; j < currentWave.getNumberOfMinions(); j++) {
+                     currentWave.addMinion(new Minion(minionName, hitpoints, armor,
+                         movementSpeed, droppedGold));
+                   }
+                   minionsLoaded = true;
+                 }
+               }
+             }
+           }else{
+             minionsLoaded = false;
+           }
+           return minionsLoaded;
   }
   /**
    * Extracts the Wave Data from XML and removes prettyFormatNodes

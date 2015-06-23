@@ -21,6 +21,10 @@ class Controller {
   var x;
   List<StreamSubscription> streams = new List<StreamSubscription>();
   Timer updateMinionTimer;
+  Timer updatePlayerDataTimer;
+  Timer waveEndTimer;
+  Duration waveEndCheck = const Duration(milliseconds: 1000);
+  Duration playerData = const Duration(milliseconds: 1500);
   Controller(String levels) {
     //Initializing the Game
     game = new Game(levels);
@@ -258,7 +262,6 @@ class Controller {
     view.px.innerHtml = game.player.getGold().toString();
   }
   void gameTriggers(){
-
     if(updateMinionTimer == null){
       updateMinionTimer = new Timer.periodic(game.lAdmin.getCurrentWave().getMinions()[0].getMovementSpeed(),(_) {
         String id;
@@ -292,6 +295,7 @@ class Controller {
                     }});
           
         }
+        /* Delete Dead Minions from active minion list of the map */
         if(tmp.isNotEmpty){
           tmp.forEach((m){
             game.lAdmin.getCurrentWave().incDeadMinions();
@@ -301,4 +305,36 @@ class Controller {
         print("List of Minions " + game.lAdmin.getMinions().length.toString());
       }); 
   }
-}}
+    if(updatePlayerDataTimer == null){
+      updatePlayerDataTimer = new Timer.periodic(playerData, (_) {
+        this.game.evaluateKilledMinions();
+        view.nameLabel.innerHtml = "Hello " +
+            view.nameInput.value +
+            ", you've got " +
+            game.player.getHighscore().toString() +
+            " Points and " + game.player.getGold().toString() + " Gold";
+      });
+    }
+    if(waveEndTimer == null){
+      waveEndTimer = new Timer.periodic(waveEndCheck, (_) {
+        if(game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel()){
+          clearPath();
+          game.lAdmin.loadNextLevel();
+        }
+        else if(game.lAdmin.getCurrentWave().isWaveClear()){
+          clearPath();
+          game.lAdmin.loadNextWave();
+        }else if(game.lAdmin.isLevelEnd() && game.lAdmin.isFinalLevel()){
+          clearPath();
+          game.endOfGame();
+        }
+      });
+    }
+}
+  void clearPath(){
+    game.lAdmin.getPath().forEach((f){
+      String id = f.getX().toString() + f.getY().toString();
+      view.deleteImage(id, game.lAdmin.getCurrentWave().getMinions()[0].getName());
+    });
+  }
+  }

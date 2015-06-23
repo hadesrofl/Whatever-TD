@@ -13,8 +13,8 @@ class LightningTower extends Tower {
   LightningTower() {
     this.setName("LightningTower");
     this.setRange(4);
-    this.setPrice(100);
-    this.setSellingPrice(70);
+    this.setPrice(1000);
+    this.setSellingPrice(500);
     this.setUpgradeLevel(1);
     this.setAttackSpeed(1.1);
     this.setBasicDamage(5.0);

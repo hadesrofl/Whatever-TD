@@ -31,7 +31,7 @@ class Game {
   Duration buildingPhase = const Duration(milliseconds: 1000);
   Duration spawn = const Duration(milliseconds: 2500);
   Duration checkLife = const Duration(milliseconds: 1000);
-  Duration shoot = const Duration(milliseconds: 500);
+  Duration shoot = const Duration(milliseconds: 2000);
 
   Game(String levels) {
     this.levels = levels;
@@ -82,21 +82,32 @@ class Game {
             tmp.add(m);
           }
         });
+        /* remove leaked minions from list of active minions */
         tmp.forEach((m) {
-          this.lAdmin.getCurrentWave().incDeadMinions();
+          this.lAdmin.getCurrentWave().incLeakedMinions();
           this.lAdmin.minions.remove(m);
         });
         tmp = null;
-        if(this.lAdmin.getCurrentWave().isWaveClear()){
-          this.lAdmin.loadNextWave();
-        }
       });
     }
   }
+  void evaluateKilledMinions(){
+    int income = this.lAdmin.getCurrentWave().deadMinions * this.lAdmin.getCurrentWave().getMinions()[0].getDroppedGold();
+    this.player.setGold(this.player.getGold() + income);
+    this.player.setHighscore(this.player.getHighscore() + income * 2);
+  }
   /**
-   * 
+   * TODO: End Game Somehow
    */
-  void endOfGame() {}
+  void endOfGame() {
+    startWave = null;
+    spawnTimer = null;
+    updateMinionTimer = null;
+    checkLifeTimer = null;
+    towerShootTimer = null;
+    this.lAdmin = null;
+    this.tAdmin = null;
+  }
   /**
    * 
    */
@@ -104,7 +115,9 @@ class Game {
   /**
    * 
    */
-  void endOfLevel() {}
+  void endOfLevel() {
+    
+  }
   /**
    * 
    */
