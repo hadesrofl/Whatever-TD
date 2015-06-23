@@ -259,19 +259,28 @@ class Controller {
   void gameTriggers(){
     if(updateMinionTimer == null){
       updateMinionTimer = new Timer.periodic(game.lAdmin.currentWave.getMinions()[0].getMovementSpeed(),(_) {
-        game.lAdmin.getMinions().forEach((f){
+        game.lAdmin.getMinions().forEach((m){
           String oldId;
           String id;
-          if(f.getStepsOnPath() < game.lAdmin.getPath().length){
-          if(f.getStepsOnPath() != 0){
-           oldId = game.lAdmin.getPath()[f.getStepsOnPath()-1].getX().toString() + f.path[f.getStepsOnPath()-1].getY().toString();
-                     view.deleteImage(oldId, f.getName());
+          if(m.getStepsOnPath() < game.lAdmin.getPath().length){
+          if(m.getStepsOnPath() != 0){
+           oldId = game.lAdmin.getPath()[m.getStepsOnPath()-1].getX().toString() + m.path[m.getStepsOnPath()-1].getY().toString();
+                     view.deleteImage(oldId, m.getName());
           }
-          id =  f.getPosition().getX().toString() + f.getPosition().getY().toString();
-          view.setImageToView(id, f.getName());
-          }else if(f.getStepsOnPath() >= game.lAdmin.getPath().length){
+          id =  m.getPosition().getX().toString() + m.getPosition().getY().toString();
+          view.setImageToView(id, m.getName());
+          }else if(m.getStepsOnPath() >= game.lAdmin.getPath().length){
             id =  game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getX().toString() + game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getY().toString();
-          view.deleteImage(id, f.getName());
+          view.deleteImage(id, m.getName());
+          }
+        });
+        game.lAdmin.currentWave.getMinions().forEach((m){
+          String x = game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getX().toString();
+          String y = game.lAdmin.getPath()[game.lAdmin.getPath().length-1].getY().toString();
+          if(m.getPosition().getX().toString().compareTo(x) == 0 && m.getPosition().getY().toString().compareTo(y) == 0){    
+          view.setImageToView(x + y, m.getName());
+          }else{
+            view.deleteImage(x + y, m.getName());
           }
         });
       }); 
