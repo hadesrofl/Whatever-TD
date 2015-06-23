@@ -79,9 +79,10 @@ class Tower {
         attackFields.forEach((fields) {
           if (!check) {
             if (minion.getPosition().equals(fields)) {
+              Condition con = null;
+            if(this.getAbility() != null || this.getAbility() != false){
               this.damage = new Damage(this.getBasicDamage(), this.damageType,
                   this.abilityCalculation());
-              Condition con = null;
               if (this.damage.applyCondition == true) {
                 switch (this.name) {
                   case "Fire Tower":
@@ -95,6 +96,10 @@ class Tower {
                     break;
                 }
               }
+            }else{
+              this.damage = new Damage(this.getBasicDamage(), this.damageType,
+                               false);
+            }
               this.target = new Target(this.damage, minion, con);
               check = true;
             } else {
@@ -152,9 +157,13 @@ class Tower {
  * Checks if the tower can do ability Damage
  */
   bool abilityCalculation() {
-    Random r = new Random();
-    if (r.nextInt(100) < this.getAbilityFactor()) return true;
-    return false;
+    if(this.getAbilityFactor() == null){
+      return false;
+    }else{
+      Random r = new Random();
+      if (r.nextInt(100) < this.getAbilityFactor()) return true;
+      return false;
+    }
   }
 
   // --------------getter-/setter methods-----------------//
