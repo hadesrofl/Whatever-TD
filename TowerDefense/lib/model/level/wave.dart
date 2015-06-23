@@ -22,6 +22,10 @@ class Wave {
    */
   int deadMinions;
   /**
+   * Minions leaked to the end of the map
+   */
+  int leakedMinions;
+  /**
    * List of Minions of this wave
    */
   List<Minion> minions = new List<Minion>();
@@ -37,6 +41,7 @@ class Wave {
     this.numberOfMinions = numberOfMinions;
     this.finalWave = finalWave;
     this.deadMinions = 0;
+    this.leakedMinions = 0;
   }
   /**
    * Method to decrease the number of Minions
@@ -56,7 +61,7 @@ class Wave {
    */
   bool isWaveClear() {
     bool waveClear;
-    if (numberOfMinions == deadMinions) {
+    if (numberOfMinions == deadMinions + leakedMinions) {
       waveClear = true;
     } else {
       waveClear = false;
@@ -103,5 +108,8 @@ class Wave {
   }
   void addMinion(Minion m){
     this.minions.add(m);
+  }
+  void incLeakedMinions(){
+    this.leakedMinions++;
   }
 }

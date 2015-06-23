@@ -204,11 +204,12 @@ class Minion {
     bool same;
     int sameConditionCounter = 0;
     /* Check all conditions */
+    if(conditions.length != 0 && m.conditions.length != 0){
     for (int i = 0; i < conditions.length; i++) {
       if (conditions[i].equals(m.getConditions()[i])) {
         sameConditionCounter++;
       }
-    }
+    }}
     /* Check the rest of the attributes */
     if ((this.hitpoints == m.getHitpoints() &&
             this.armor.toString().compareTo(m.getArmor().toString()) == 0) &&

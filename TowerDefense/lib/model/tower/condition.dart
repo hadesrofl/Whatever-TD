@@ -63,11 +63,15 @@ class Condition {
    */
   bool equals(Condition c) {
     bool same;
+    if(c != null){
     if (this.identifier.compareTo(c.getIdentifier()) == 0 &&
         this.duration == c.getDuration() &&
         this.maxDuration == c.getMaxDuration() &&
         this.damagePerTurn == c.getDamagePerTurn()) {
       same = true;
+    }else{
+     same = false; 
+    }
     } else {
       same = false;
     }
