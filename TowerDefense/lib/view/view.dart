@@ -201,21 +201,8 @@ class View {
           }
         }
       });
-<<<<<<< HEAD
-}
-=======
-    });
+});
   }
-  void setPath(String id) {
-    this.board.children.forEach((c) {
-      c.children.forEach((children) {
-        if (children.id == id) {
-          children.classes.add("Path");
-        }
-      });
-    });
-  }
->>>>>>> 6e14f7ca900a84f5723ac93ffea1deaa0756df68
   void hideDifficultyMenu() {
     hard.hidden = true;
     medium.hidden = true;
