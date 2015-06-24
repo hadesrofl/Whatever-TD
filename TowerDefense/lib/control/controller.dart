@@ -337,15 +337,17 @@ class Controller {
 
       if (waveEndTimer == null) {
         waveEndTimer = new Timer.periodic(waveEndCheck, (_) {
-          if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel()) {
-            clearPath();
-            game.lAdmin.loadNextLevel();
-          } else if (game.lAdmin.getCurrentWave().isWaveClear()) {
+          if (game.lAdmin.isLevelEnd() && game.lAdmin.isFinalLevel()) {
+                     clearPath();
+                     game.endOfGame();
+                     endTrigger();
+                   }
+        else if (game.lAdmin.getCurrentWave().isWaveClear()) {
             clearPath();
             game.lAdmin.loadNextWave();
-          } else if (game.lAdmin.isLevelEnd() && game.lAdmin.isFinalLevel()) {
+          }   else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel()) {
             clearPath();
-            game.endOfGame();
+            game.lAdmin.loadNextLevel();
           }
         });
       }
@@ -357,5 +359,10 @@ class Controller {
       view.deleteImage(
           id, game.lAdmin.getCurrentWave().getMinions()[0].getName());
     });
+  }
+  void endTrigger(){
+    updateMinionTimer.cancel();
+    updatePlayerDataTimer.cancel();
+    waveEndTimer.cancel();
   }
 }

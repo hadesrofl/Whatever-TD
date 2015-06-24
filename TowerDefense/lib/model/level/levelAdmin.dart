@@ -252,14 +252,14 @@ class LevelAdmin {
     List<XmlNode> wavesRaw = level.children;
     XmlNode waves = null;
     List<XmlNode> wavesRet = new List<XmlNode>();
-    wavesRaw.forEach((x) {
+   /* wavesRaw.forEach((x) {
       if (x.firstChild != null) {
         waves = x;
       }
-    });
+    });*/
     /* Skip Format Tags */
-    for (int index = 1; index < waves.children.length; index = index + 2) {
-      wavesRet.add(waves.children[index]);
+    for (int index = 1; index < wavesRaw.length; index = index + 2) {
+      wavesRet.add(wavesRaw[index]);
     }
 
     return wavesRet;

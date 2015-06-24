@@ -24,7 +24,6 @@ class Game {
   String difficulty;
   Timer startWave;
   Timer spawnTimer;
-  Timer updateMinionTimer;
   Timer checkLifeTimer;
   bool runningGame = false;
   Timer towerShootTimer;
@@ -103,11 +102,10 @@ class Game {
    * TODO: End Game Somehow
    */
   void endOfGame() {
-    startWave = null;
-    spawnTimer = null;
-    updateMinionTimer = null;
-    checkLifeTimer = null;
-    towerShootTimer = null;
+    startWave.cancel();
+    spawnTimer.cancel();
+    checkLifeTimer.cancel();
+    towerShootTimer.cancel();
     this.lAdmin = null;
     this.tAdmin = null;
   }
