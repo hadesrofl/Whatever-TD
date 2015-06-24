@@ -4,6 +4,7 @@ import "package:xml/xml.dart";
 import "../tower/towerAdmin.dart";
 import "../game/game.dart";
 import "dart:async";
+import 'dart:math';
 
 part "minion.dart";
 part "wave.dart";
@@ -139,8 +140,6 @@ class LevelAdmin {
     bool nextLevelLoaded = false;
     if (!isFinalLevel()) {
       currentLevel++;
-      //currentLevel++;
-      //currentLevel++;
       XmlElement level = levels.firstWhere((x) =>
           (x.attributes[0].value.compareTo(currentLevel.toString()) == 0));
       /* Extract Waves of XML */
@@ -166,7 +165,6 @@ class LevelAdmin {
    * Loads the next Wave of the current Level from XML
    * @return false if it is the last wave of the level, true if new wave is loaded
    */
-  /* TODO: 2. Level einlesen */
   bool loadNextWave() {
     int waveIndex = 0;
     bool nextWaveLoaded;
@@ -183,14 +181,6 @@ class LevelAdmin {
       } else if(currentWave.isWaveClear()){
         currentWave = waves[currentWave.getWaveNumber() + 1];
         nextWaveLoaded = getMinionsForWave(waveIndex);
-
-        /* Get Wave index in XML */
-       /* for (int i = 0; i < wavesFromXml.length; i++) {
-          if (wavesFromXml[i].attributes[0].value
-                  .compareTo((waveIndex).toString()) ==
-              0) {
-          }
-        }*/
       }else{
         /* The Wave is still running */
         nextWaveLoaded = false;
@@ -299,18 +289,13 @@ class LevelAdmin {
    * Extracts the Wave Data from XML and removes prettyFormatNodes
    */
   List<int> loadPathFromXML(XmlElement level, String difficulty) {
-    List<XmlNode> pathRaw = level.children;
+    List<XmlNode> pathRaw = getPathFromXml();
     List<int> coords = new List<int>();
-    XmlNode path = null;
-    pathRaw.forEach((x) {
-      if (x.text.startsWith(new RegExp(r"\s")) == false) {
-        path = x;
-      }
-    });
-    pathRaw = getPathFromXml();
+    Random rand = new Random(new DateTime.now().millisecondsSinceEpoch);
+    int randomNumber = (rand.nextInt(pathRaw.length)) + 1; 
     pathRaw.forEach((x) {
       if (x.attributes[0].value
-              .compareTo(path.attributes[0].value.toString()) ==
+              .compareTo(randomNumber.toString()) ==
           0) {
         for (int startIndex = 1;
             startIndex < x.children.length;

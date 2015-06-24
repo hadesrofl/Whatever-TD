@@ -322,12 +322,16 @@ class Controller {
     if (updatePlayerDataTimer == null) {
       updatePlayerDataTimer = new Timer.periodic(playerData, (_) {
         this.game.evaluateKilledMinions();
+        int gold = game.player.getGold();
+        if(gold < 0){
+          gold = 0;
+        }
         view.nameLabel.innerHtml = "Hello " +
             view.nameInput.value +
             ", you've got " +
             game.player.getHighscore().toString() +
             " Points and " +
-            game.player.getGold().toString() +
+            gold.toString() +
             " Gold";
       });
 

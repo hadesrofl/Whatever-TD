@@ -18,7 +18,6 @@
 					<minion ref="cookieMonster"></minion>
 				</wave>
 			</waves>
-			<path ref="easyLevels"></path>
 		</level>
 		<level no="2" finalLevel="false">
 			<waves>
@@ -38,7 +37,6 @@
 				<minion ref="amazon"></minion>
 			</wave>
 			</waves>
-			<path ref="easyLevels"></path>
 		</level>
 		<level no="3" finalLevel="true">
 		<waves>
@@ -58,7 +56,6 @@
 				<minion ref="strongKratzke"></minion>
 			</wave>
 			</waves>
-			<path ref="easyLevels"></path>
 		</level>
 	</easyLevels>
 	<mediumLevels>
@@ -242,8 +239,82 @@
 	</minion>
 </minions>
 <paths>
-		<path name="easyLevels">
+		<path no="1">
 			<pathfield>
+				<y-coord>0</y-coord>
+				<x-coord>5</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>1</y-coord>
+				<x-coord>5</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>2</y-coord>
+				<x-coord>5</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>3</y-coord>
+				<x-coord>5</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>3</y-coord>
+				<x-coord>4</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>3</y-coord>
+				<x-coord>3</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>3</y-coord>
+				<x-coord>2</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>4</y-coord>
+				<x-coord>2</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>5</y-coord>
+				<x-coord>2</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>6</y-coord>
+				<x-coord>2</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>6</y-coord>
+				<x-coord>3</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>6</y-coord>
+				<x-coord>4</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>6</y-coord>
+				<x-coord>5</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>6</y-coord>
+				<x-coord>6</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>7</y-coord>
+				<x-coord>6</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>8</y-coord>
+				<x-coord>6</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>9</y-coord>
+				<x-coord>6</x-coord>
+			</pathfield>
+			<pathfield>
+				<y-coord>10</y-coord>
+				<x-coord>6</x-coord>
+			</pathfield>
+		</path>
+		<path no="2">
+		<pathfield>
 				<y-coord>5</y-coord>
 				<x-coord>0</x-coord>
 			</pathfield>
@@ -315,8 +386,6 @@
 				<y-coord>6</y-coord>
 				<x-coord>10</x-coord>
 			</pathfield>
-		</path>
-		<path name="mediumLevels">
 		</path>
 </paths>
 </allLevels>
