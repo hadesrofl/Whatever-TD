@@ -18,6 +18,8 @@ class View {
   ButtonElement lightningTower;
   ButtonElement fireTower;
   TableElement buyMenu;
+  Element helpBox;
+
 /**
    * An inputElement so that the user can type in his name
    */
@@ -30,18 +32,6 @@ class View {
    * Container of the menu
    */
   Element menuContainer;
-  /**
-   * Unordered List Element for the menu
-   */
-  UListElement menu;
-  /**
-   * Container of the highscore Table
-   */
-  Element highScoreContainer;
-  /**
-   * Ordered List Element for showing some points of other players
-   */
-  OListElement highScoreTable;
 /**
    * A start button to start or continue the game
    */
@@ -72,10 +62,8 @@ class View {
   ButtonElement medium;
   ButtonElement hard;
   Element p;
-  Element gold;
   Element px;
   ButtonElement help;
-  Element highscore;
   ButtonElement restart;
 
 /**
@@ -110,7 +98,7 @@ class View {
     p = querySelector("#difficulty");
     px = querySelector("#gold");
     help = querySelector("#help");
-    highscore = querySelector("#highscore");
+    helpBox = querySelector("#helpBox");
     restart = querySelector("#restart");
 
     menuContainer.hidden = true;
@@ -122,9 +110,10 @@ class View {
     upgrade.hidden = true;
     sell.hidden = true;
     help.hidden = true;
-    highscore.hidden = true;
     stop.hidden = true;
     restart.hidden = true;
+    helpBox.hidden = true;
+
   }
 /**
    * Method to create a board 

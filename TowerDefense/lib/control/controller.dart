@@ -44,8 +44,8 @@ class Controller {
       view.menuContainer.hidden = false;
       view.errorDiv2.hidden = true;
       view.errorDiv.hidden = true;
+      view.helpBox.hidden = false;
       view.help.hidden = false;
-      view.highscore.hidden = false;
       view.stop.hidden = false;
     });
     buyListener();
@@ -281,14 +281,14 @@ class Controller {
           game.lAdmin.getCurrentWave().getMinions()[0].getMovementSpeed(), (_) {
         String id;
         List<Minion> tmp = new List<Minion>();
-        if (game.lAdmin.getMinions().length == 0) {
+        if (game.lAdmin.getActiveMinions().length == 0) {
           Field lastField =
               game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
           id = lastField.getX().toString() + lastField.getY().toString();
           view.deleteImage(
               id, game.lAdmin.getCurrentWave().getMinions()[0].getName());
         } else {
-          game.lAdmin.getMinions().forEach((m) {
+          game.lAdmin.getActiveMinions().forEach((m) {
             String oldId;
             if (m.getHitpoints() <= 0) {
               id = m.getPosition().getX().toString() +
@@ -325,10 +325,10 @@ class Controller {
           tmp.forEach((m) {
             game.lAdmin.getCurrentWave().incDeadMinions();
 
-            game.lAdmin.getMinions().remove(m);
+            game.lAdmin.getActiveMinions().remove(m);
           });
         }
-        print("List of Minions " + game.lAdmin.getMinions().length.toString());
+        print("List of Minions " + game.lAdmin.getActiveMinions().length.toString());
       });
     }
 

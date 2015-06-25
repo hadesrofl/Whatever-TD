@@ -12,12 +12,10 @@ class Game {
   LevelAdmin lAdmin;
   String levels;
   Map<Field, String> board;
-  /**
-   * Map with Images - The Key is the Name of a Tower or Minion, the value is the path to that image
-   */
   final row = 11;
   final col = 11;
   final highScoreModifier = 0.2;
+  final maxLife = 20;
   View view;
   Player player;
   int life;
@@ -38,14 +36,23 @@ class Game {
     this.levels = levels;
     this.tAdmin = new TowerAdmin();
     this.board = createBoard(this.row, this.col);
-    this.life = 20;
+    this.life = maxLife;
   }
   /**
    * 
    */
   void startGame() {
+    if(this.tAdmin == null){
+      this.tAdmin = new TowerAdmin();
+    }
+    if(this.life != maxLife){
+      this.life = maxLife;
+    }
+    if(this.lAdmin == null){
+      setLevelAdmin();
+    }
     this.lAdmin.loadNextLevel();
-    this.lAdmin.loadPath(board, difficulty);
+    this.lAdmin.loadPath(board);
     this.lAdmin.loadNextWave();
     if (!runningGame) {
       startWave = new Timer(buildingPhase, () => runGame());
@@ -67,14 +74,14 @@ class Game {
     }
     if (towerShootTimer == null) {
       towerShootTimer = new Timer.periodic(shoot, (_) {
-        List<Target> targets = tAdmin.attack(lAdmin.getMinions());
+        List<Target> targets = tAdmin.attack(lAdmin.getActiveMinions());
         lAdmin.calculateHPOfMinions(targets);
       });
     }
     if (checkLifeTimer == null) {
       checkLifeTimer = new Timer.periodic(checkLife, (_) {
         List<Minion> tmp = new List<Minion>();
-        this.lAdmin.minions.forEach((m) {
+        this.lAdmin.activeMinions.forEach((m) {
           if (m.getStepsOnPath() >= this.lAdmin.path.length &&
               m.getHitpoints() > 0 &&
               m.getDestroyedALife() == false) {
@@ -87,7 +94,7 @@ class Game {
         /* remove leaked minions from list of active minions */
         tmp.forEach((m) {
           this.lAdmin.getCurrentWave().incLeakedMinions();
-          this.lAdmin.minions.remove(m);
+          this.lAdmin.activeMinions.remove(m);
         });
         tmp = null;
       });
@@ -117,14 +124,6 @@ class Game {
     this.lAdmin = null;
     this.tAdmin = null;
   }
-  /**
-   * 
-   */
-
-  /**
-   * 
-   */
-  void endOfLevel() {}
   /**
    * 
    */

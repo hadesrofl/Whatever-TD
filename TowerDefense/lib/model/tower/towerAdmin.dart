@@ -193,7 +193,6 @@ class TowerAdmin {
       return false;
     }
   }
-}
 /**
  * checks if the Player has enough money to buy the tower
  * 
@@ -204,4 +203,5 @@ bool enoughMoney(Tower tower, Player player) {
   if (player.getGold() < tower.getPrice()) return false;
 
   return true;
+}
 }

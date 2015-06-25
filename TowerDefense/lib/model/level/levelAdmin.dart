@@ -43,7 +43,7 @@ class LevelAdmin {
   /**
    * All Minions currently active on the board
    */
-  List<Minion> minions = new List<Minion>();
+  List<Minion> activeMinions = new List<Minion>();
 
   /**
    * Constructor for the Level Administration object
@@ -63,13 +63,13 @@ class LevelAdmin {
     targets.forEach((target) {
       if (target != null) {
         bool foundMinion = false;
-        for (int i = 0; i < minions.length; i++) {
+        for (int i = 0; i < activeMinions.length; i++) {
           /* Didn't found the minion yet */
           if (foundMinion == false) {
             /* found minion */
-            if (minions[i].equals(target.getMinion()) == true) {
-              minions[i].calculateHitPoints(target);
-              print(minions[i].getHitpoints().toString());
+            if (activeMinions[i].equals(target.getMinion()) == true) {
+              activeMinions[i].calculateHitPoints(target);
+              print(activeMinions[i].getHitpoints().toString());
               /* mark minion as found */
               foundMinion = true;
             }
@@ -89,7 +89,7 @@ class LevelAdmin {
         if (currentWave.getMinions()[i].isSpawned() == false) {
           currentWave.getMinions()[i].spawn();
           m = currentWave.getMinions()[i];
-          minions.add(m);
+          activeMinions.add(m);
           foundMinion = true;
           m.setPath(path);
           m.setStartPosition();
@@ -98,11 +98,6 @@ class LevelAdmin {
     }
     return m;
   }
-  /**
-   * Method to....well...dunno
-   * TODO: what the fuck does this method ö.ö
-   */
-  void updateMinions() {}
   /**
    * Method to get all necessary informations of the XML File
    */
@@ -268,12 +263,9 @@ class LevelAdmin {
  * @param board is the board of the game
  * @param difficulty is the difficulty of the game needed to evalute the xml file
  */
-  void loadPath(Map<Field, String> board, String difficulty) {
-    difficulty = translateDifficulty(difficulty);
-
-    List<int> pathCoords = loadPathFromXML(this.levels.firstWhere((x) =>
-            (x.attributes[0].value.compareTo(currentLevel.toString()) == 0)),
-        difficulty);
+  void loadPath(Map<Field, String> board) {
+    List<int> pathCoords = transformPathFromXml(this.levels.firstWhere((x) =>
+            (x.attributes[0].value.compareTo(currentLevel.toString()) == 0)));
     for (int i = 0; i < pathCoords.length; i = i + 2) {
       board.forEach((f, v) {
         if (f.getX() == pathCoords[i + 1] && f.getY() == pathCoords[i]) {
@@ -287,7 +279,7 @@ class LevelAdmin {
   /**
    * Extracts the Wave Data from XML and removes prettyFormatNodes
    */
-  List<int> loadPathFromXML(XmlElement level, String difficulty) {
+  List<int> transformPathFromXml(XmlElement level) {
     List<XmlNode> pathRaw = getPathFromXml();
     List<int> coords = new List<int>();
     Random rand = new Random(new DateTime.now().millisecondsSinceEpoch);
@@ -419,8 +411,8 @@ class LevelAdmin {
    * Returns the List of Minions of this wave and Level
    * @return list of all minions
    */
-  List<Minion> getMinions() {
-    return this.minions;
+  List<Minion> getActiveMinions() {
+    return this.activeMinions;
   }
   List<Field> getPath() {
     return this.path;

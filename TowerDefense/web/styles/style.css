@@ -9,11 +9,11 @@ body{
   color: white;
 }
 
-#navigation > ul, #highscore > ul{   
+#navigation > ul, #helpBox > ul{   
   padding: 4px;
   
 }
-#navigation ul, #highscore ul{
+#navigation ul, #helpBox ul{
   list-style-type: none;
 }
 
@@ -32,7 +32,7 @@ body{
 #navigation td{
   background-color: lightgreen;
 }
-#highscore{
+#helpBox{
    float: right;
    text-align: center;
    text-style: bold;
