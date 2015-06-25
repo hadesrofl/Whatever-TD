@@ -261,7 +261,6 @@ class LevelAdmin {
     for (int index = 1; index < wavesRaw.length; index = index + 2) {
       wavesRet.add(wavesRaw[index]);
     }
-
     return wavesRet;
   }
 /**

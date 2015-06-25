@@ -17,6 +17,7 @@ class Game {
    */
   final row = 11;
   final col = 11;
+  final highScoreModifier = 0.2;
   View view;
   Player player;
   int life;
@@ -25,8 +26,8 @@ class Game {
   Timer startWave;
   Timer spawnTimer;
   Timer checkLifeTimer;
-  bool runningGame = false;
   Timer towerShootTimer;
+  bool runningGame = false;
 
   Duration buildingPhase = const Duration(milliseconds: 1000);
   Duration spawn = const Duration(milliseconds: 2500);
@@ -92,11 +93,18 @@ class Game {
       });
     }
   }
-  void evaluateKilledMinions() {
+  void evaluateKilledMinions(bool endOfGame) {
     int income = this.lAdmin.getCurrentWave().deadMinions *
         this.lAdmin.getCurrentWave().getMinions()[0].getDroppedGold();
     this.player.setGold(this.player.getGold() + income);
-    this.player.setHighscore(this.player.getHighscore() + income * 2);
+    if(endOfGame){
+      this.player.setHighscore(this.player.getHighscore() + (this.player.getGold() * highScoreModifier).toInt());
+      this.player.setGold(0);
+    }else{
+      this.player.setHighscore(this.player.getHighscore() + (income * highScoreModifier).toInt()); 
+    }
+
+
   }
   /**
    * TODO: End Game Somehow

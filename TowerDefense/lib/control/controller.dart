@@ -47,7 +47,6 @@ class Controller {
       view.help.hidden = false;
       view.highscore.hidden = false;
       view.stop.hidden = false;
-      updateGold();
     });
     buyListener();
     sellListener();
@@ -128,7 +127,6 @@ class Controller {
                       tmp, game.player, game.board, game.row, game.col);
                   if (enoughMoney) {
                     view.upgradeImage(id, tmp.name, tmp.getUpgradeLevel());
-                    updateGold();
                   } else {
                     view.errorDiv.hidden = false;
                   }
@@ -168,7 +166,6 @@ class Controller {
               });
               if (tmp != null) game.tAdmin.sellTower(tmp, game.player);
               print(game.tAdmin.allTower.length);
-              updateGold();
               check = false;
               view.buy.hidden = false;
               view.upgrade.hidden = false;
@@ -235,7 +232,6 @@ class Controller {
                 break;
             }
             if (enough) {
-              updateGold();
               view.sell.hidden = false;
               view.upgrade.hidden = false;
               view.buy.hidden = false;
@@ -277,9 +273,6 @@ class Controller {
         view.setImageToView(id, "Path");
       }
     });
-  }
-  void updateGold() {
-    view.px.innerHtml = game.player.getGold().toString();
   }
 
   void gameTriggers() {
@@ -341,7 +334,7 @@ class Controller {
 
     if (updatePlayerDataTimer == null) {
       updatePlayerDataTimer = new Timer.periodic(playerData, (_) {
-        this.game.evaluateKilledMinions();
+        this.game.evaluateKilledMinions(false);
         int gold = game.player.getGold();
         if (gold < 0) {
           gold = 0;
@@ -357,9 +350,17 @@ class Controller {
 
       if (waveEndTimer == null) {
         waveEndTimer = new Timer.periodic(waveEndCheck, (_) {
-          if (game.lAdmin.isLevelEnd() && game.lAdmin.isFinalLevel()) {
+          if (game.lAdmin.isLevelEnd() && game.lAdmin.isFinalLevel() || game.life <= 0) {
             clearPath();
-            game.endOfGame();
+            game.evaluateKilledMinions(true);
+            /* Player wins */
+            if(game.life <= 0){
+            this.view.nameLabel.innerHtml = "Game over! You have " + game.player.getHighscore().toString() + " Points!";
+              /* Player loses */
+            }else{
+           this.view.nameLabel.innerHtml = "Congratz," + game.player.getName() + ", you win with " + game.player.getHighscore().toString() + " Points!";
+            }
+            game.endOfGame();  
             endTrigger();
           } else if (game.lAdmin.getCurrentWave().isWaveClear()) {
             clearPath();
