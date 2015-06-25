@@ -44,6 +44,9 @@ class Controller {
       view.menuContainer.hidden = false;
       view.errorDiv2.hidden = true;
       view.errorDiv.hidden = true;
+      view.help.hidden = false;
+      view.highscore.hidden = false;
+      view.stop.hidden = false;
       updateGold();
     });
     buyListener();
@@ -60,6 +63,20 @@ class Controller {
       view.errorDiv.hidden = true;
       view.errorDiv2.hidden = true;
     });
+  }
+  void stopListener() {
+    streams.add(view.stop.onClick.listen((ev) {
+      updateMinionTimer.cancel();
+      updatePlayerDataTimer.cancel();
+      waveEndTimer.cancel();
+      game.checkLifeTimer.cancel();
+      game.towerShootTimer.cancel();
+      view.restart.hidden = false;
+      endStreamSubscription();
+    }));
+  }
+  void restartListener() {
+    streams.add(view.restart.onClick.listen((ev) {}));
   }
   void difficultyListener() {
     view.easy.onClick.listen((ev) {
@@ -94,7 +111,7 @@ class Controller {
       bool enoughMoney;
       bool b = true;
       var tmp;
-      endStreamSubscription();
+
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           streams.add(
@@ -119,6 +136,7 @@ class Controller {
               });
               b = false;
             }
+            endStreamSubscription();
           }));
         }
       }
@@ -132,7 +150,6 @@ class Controller {
       view.upgrade.hidden = true;
       view.sell.hidden = true;
       bool check = true;
-      endStreamSubscription();
       for (int i = 0; i < game.getCol(); i++) {
         for (int j = 0; j < game.getRow(); j++) {
           streams.add(
@@ -150,12 +167,14 @@ class Controller {
                 }
               });
               if (tmp != null) game.tAdmin.sellTower(tmp, game.player);
+              print(game.tAdmin.allTower.length);
               updateGold();
               check = false;
               view.buy.hidden = false;
               view.upgrade.hidden = false;
               view.sell.hidden = false;
             }
+            endStreamSubscription();
           }));
         }
       }
@@ -183,7 +202,6 @@ class Controller {
   }
 
   void setTowerImg(int towerDescription) {
-    endStreamSubscription();
     if (boolean) {
       view.buyMenu.hidden = true;
       boolean = false;
@@ -222,13 +240,15 @@ class Controller {
               view.upgrade.hidden = false;
               view.buy.hidden = false;
               view.cancel.hidden = true;
-              view.setImageToView(f, game.tAdmin.allTower.last.name);
+              view.setImageTower(
+                  f, game.tAdmin.allTower.last.name, game.tAdmin.allTower.last);
             } else {
               if (towerDescription != 0) {
                 view.errorDiv.hidden = false;
               }
             }
             towerDescription = 0;
+            endStreamSubscription();
           }));
         }
       }
@@ -296,7 +316,7 @@ class Controller {
                 }
                 id = m.getPosition().getX().toString() +
                     m.getPosition().getY().toString();
-                view.setImageToView(id, m.getName());
+                view.setImageMinion(id, m.getName(), m);
               } else if (m.getStepsOnPath() >= game.lAdmin.getPath().length) {
                 Field lastField =
                     game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
@@ -323,7 +343,7 @@ class Controller {
       updatePlayerDataTimer = new Timer.periodic(playerData, (_) {
         this.game.evaluateKilledMinions();
         int gold = game.player.getGold();
-        if(gold < 0){
+        if (gold < 0) {
           gold = 0;
         }
         view.nameLabel.innerHtml = "Hello " +
@@ -338,14 +358,13 @@ class Controller {
       if (waveEndTimer == null) {
         waveEndTimer = new Timer.periodic(waveEndCheck, (_) {
           if (game.lAdmin.isLevelEnd() && game.lAdmin.isFinalLevel()) {
-                     clearPath();
-                     game.endOfGame();
-                     endTrigger();
-                   }
-        else if (game.lAdmin.getCurrentWave().isWaveClear()) {
+            clearPath();
+            game.endOfGame();
+            endTrigger();
+          } else if (game.lAdmin.getCurrentWave().isWaveClear()) {
             clearPath();
             game.lAdmin.loadNextWave();
-          }   else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel()) {
+          } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel()) {
             clearPath();
             game.lAdmin.loadNextLevel();
           }
@@ -360,7 +379,7 @@ class Controller {
           id, game.lAdmin.getCurrentWave().getMinions()[0].getName());
     });
   }
-  void endTrigger(){
+  void endTrigger() {
     updateMinionTimer.cancel();
     updatePlayerDataTimer.cancel();
     waveEndTimer.cancel();

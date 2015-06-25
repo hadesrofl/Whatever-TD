@@ -1,6 +1,8 @@
 library view;
 
 import "dart:html";
+import 'package:TowerDefense/model/level/levelAdmin.dart';
+import 'package:TowerDefense/model/tower/towerAdmin.dart';
 /* TODO: DeathCounter for Minions */
 
 /**
@@ -72,6 +74,9 @@ class View {
   Element p;
   Element gold;
   Element px;
+  ButtonElement help;
+  Element highscore;
+  ButtonElement restart;
 
 /**
    * Constructor of the view
@@ -88,7 +93,6 @@ class View {
     boardElement = querySelector("#board");
     nameLabel = querySelector("#player");
     menuContainer = querySelector("#navigation");
-    highScoreContainer = querySelector("#highscore");
     buyMenu = querySelector("#buyMenu");
     buy = querySelector("#buy");
     cancel = querySelector("#cancel");
@@ -105,10 +109,11 @@ class View {
     hard = querySelector("#hardGame");
     p = querySelector("#difficulty");
     px = querySelector("#gold");
+    help = querySelector("#help");
+    highscore = querySelector("#highscore");
+    restart = querySelector("#restart");
 
-    stop.hidden = true;
     menuContainer.hidden = true;
-    highScoreContainer.hidden = true;
     buyMenu.hidden = true;
     cancel.hidden = true;
     errorDiv.hidden = true;
@@ -116,6 +121,10 @@ class View {
     buy.hidden = true;
     upgrade.hidden = true;
     sell.hidden = true;
+    help.hidden = true;
+    highscore.hidden = true;
+    stop.hidden = true;
+    restart.hidden = true;
   }
 /**
    * Method to create a board 
@@ -158,19 +167,32 @@ class View {
   void updatePage() {
 //TODO: Do fancy updating stuff _ rev 2
   }
-  void setImageToView(String id, String objectName) {
+  void setImageTower(String id, String objectName, Tower t) {
+    Element children = setImageToView(id, objectName);
+    setToolTipTower(children, t);
+  }
+  void setImageMinion(String id, String objectName, Minion m) {
+    Element children = setImageToView(id, objectName);
+    setToolTipMinion(children, m);
+  }
+  Element setImageToView(String id, String objectName) {
+    Element e;
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
           children.classes.add(objectName);
+          e = children;
         }
       });
     });
+    return e;
   }
   void deleteImage(String id, String objectName) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
+          children.attributes.remove("data-toggle");
+          children.attributes.remove("title");
           if (children.classes.contains(objectName)) {
             children.classes.remove(objectName);
           }
@@ -209,5 +231,16 @@ class View {
     sell.hidden = false;
     upgrade.hidden = false;
     p.hidden = true;
+  }
+  void setToolTipTower(Element child, Tower t) {
+    child.setAttribute("data-toggle", "tooltip");
+    child.setAttribute("title", "Basic Damage: " + t.basicDamage.toString());
+  }
+  void setToolTipMinion(Element child, Minion m) {
+    child.setAttribute("data-toggle", "tooltip");
+    child.setAttribute("title", "ArmorClass: " +
+        m.armor.value +
+        "HitPoints: " +
+        m.hitpoints.toString());
   }
 }

@@ -18,10 +18,10 @@
       <strong>Menu</strong>
       <ul id="menu">
         <p id="difficulty">Which difficulty you want to play with?</p>
-        <button type="button" id="easyGame">Easy</button>
-        <button type="button" id="mediumGame">Medium</button>
-        <button type="button" id="hardGame">Hard</button>
-        <li><button type="button" id="buy">Buy</button>
+        <button type="button" class="LevelButton" id="easyGame">Easy</button>
+        <button type="button" class="LevelButton" id="mediumGame">Medium</button>
+        <button type="button" class="LevelButton" id="hardGame">Hard</button>
+        <li><button type="button" class="MenuButton" id="buy">Buy</button>
           <table id="buyMenu">
             <tr>
               <td>CanonTower</td>
@@ -49,18 +49,24 @@
             </tr>
           </table>
         </li>
-        <li><button type="button" id="cancel">Cancel</button></li>
-        <li><button type="button" id="sell">Sell</button></li>
-        <li><button type="button" id="upgrade">Upgrade</button></li>
+        <li><button type="button" class="MenuButton" id="cancel">Cancel</button></li>
+        <li><button type="button" class="MenuButton" id="sell">Sell</button></li>
+        <li><button type="button" class="MenuButton" id="upgrade">Upgrade</button></li>
       </ul>
     </div>
     <div id="errorDiv" class="alert-box error"><span>error: </span> Not enough money to buy/upgrade the Tower!</div>
     <div id="errorDiv2" class="alert-box error"><span>error: </span> Tower cannot be placed here!</div>
     <h3 id="player"></h3>
-    <div id="highscore"></div>
+    <div id="highscore">
+      <ul>
+        <li><button type="button" class="MenuButton" id="restart">Start</button></li>
+        <li><button type="button" class="MenuButton" id="stop">Stop</button></li>
+        <li><button type="button" class="MenuButton" id="help">Help</button></li>
+      </ul>
+    </div>
     <div id="board"></div>
   
-    <button id="stop">Stop</button>
+    
     <script type="application/dart" src="td_client.dart"></script>
     <!-- for this next line to work, your pubspec.yaml file must have a dependency on 'browser' -->
    <!--  <script src="packages/browser/dart.js"></script> -->
