@@ -159,7 +159,7 @@ body{
     background-image: url("../img/towers/firetower3.png");
 }
 .MenuButton, .LevelButton{
-  text-shadow: 1px 1px 3px #666666;
+  text-shadow: 1px 1px 3px white;
   border: solid black 3px;
   border-radius: 20px;
   font-weight: bold;
