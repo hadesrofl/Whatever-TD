@@ -161,12 +161,6 @@ class View {
       }
     }
   }
-/**
-   * Method to update the page
-   */
-  void updatePage() {
-//TODO: Do fancy updating stuff _ rev 2
-  }
   void setImageTower(String id, String objectName, Tower t) {
     Element children = setImageToView(id, objectName);
     setToolTipTower(children, t);
