@@ -26,7 +26,7 @@ body{
    text-align: center;
    text-style: bold;
    background-color: lightgreen;
-   margin: 45px 15px 15px 15px;
+   margin: 45px 200px 15px 15px;
    width: 250px;
 }
 #navigation td{
@@ -37,7 +37,8 @@ body{
    text-align: center;
    text-style: bold;
    background-color: lightgreen;
-   margin-right: 400px;
+   margin-left: 10px;
+   margin-right: 75px;
    width: 100px;
 }
 #stop{
@@ -46,18 +47,19 @@ body{
 }
 #board{
   /*TODO: responsive*/
-   border-style:none;  
+   border-style: none;
+}
+#board tr{
+  
 }
 #board td {
   text-align: right;
-  height: 32px;
-  width: 32px;
+  height: 38px;
+  width: 38px;
   background-image: url("../img/background/grass.jpg");
 }
 #player{
   margin-left: 200px;
-}
-#gameHeader{
 }
 .alert-box span {
     font-weight:bold;
