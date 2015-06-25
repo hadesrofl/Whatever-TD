@@ -80,6 +80,7 @@ class LevelAdmin {
   }
   /**
    * Method to spawn a new minion
+   * @return the spawned minion
    */
   Minion minionSpawn() {
     bool foundMinion = false;
@@ -100,6 +101,7 @@ class LevelAdmin {
   }
   /**
    * Method to get all necessary informations of the XML File
+   * @param difficulty is the difficulty chosen by the player
    */
   void evaluateFile(String difficulty) {
     String chosenDifficulty = "";
@@ -183,6 +185,10 @@ class LevelAdmin {
     return nextWaveLoaded;
   }
   
+  /**
+   * Reads the Minions for this level from the xml and gets the specific minion of the current wave
+   * @param waveIndex is the index of the current wave in the xml
+   */
   bool getMinionsForWave(int waveIndex){
     bool minionsLoaded;
     List<XmlElement> levelMinions = getMinionsFromXml();
@@ -242,16 +248,12 @@ class LevelAdmin {
   }
   /**
    * Extracts the Wave Data from XML and removes prettyFormatNodes
+   * @param level is the current level as xml element
+   * @return a list of the waves as xml nodes
    */
   List<XmlNode> extractWavesFromXml(XmlElement level) {
     List<XmlNode> wavesRaw = level.children;
-    XmlNode waves = null;
     List<XmlNode> wavesRet = new List<XmlNode>();
-   /* wavesRaw.forEach((x) {
-      if (x.firstChild != null) {
-        waves = x;
-      }
-    });*/
     /* Skip Format Tags */
     for (int index = 1; index < wavesRaw.length; index = index + 2) {
       wavesRet.add(wavesRaw[index]);
@@ -261,7 +263,6 @@ class LevelAdmin {
 /**
  * Loads the path from the xml and updates the fields inside the board
  * @param board is the board of the game
- * @param difficulty is the difficulty of the game needed to evalute the xml file
  */
   void loadPath(List<Field> board) {
     List<int> pathCoords = transformPathFromXml(this.levels.firstWhere((x) =>
@@ -277,7 +278,10 @@ class LevelAdmin {
   }
 
   /**
-   * Extracts the Wave Data from XML and removes prettyFormatNodes
+   * Extracts the Wave Data from XML, removes prettyFormatNodes and returns a list 
+   * with the ids of the fields that are path fields
+   * @param level is the current level
+   * @return a list of integer containing the field ids, which are path fields
    */
   List<int> transformPathFromXml(XmlElement level) {
     List<XmlNode> pathRaw = getPathFromXml();
@@ -414,6 +418,10 @@ class LevelAdmin {
   List<Minion> getActiveMinions() {
     return this.activeMinions;
   }
+  /**
+   * Gets the Path Fields
+   * @return a list of path fields
+   */
   List<Field> getPath() {
     return this.path;
   }
