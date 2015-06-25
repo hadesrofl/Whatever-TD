@@ -251,7 +251,7 @@ class Controller {
     }
   }
   Field lookUpField(String field) {
-    game.board.keys.forEach((f) {
+    game.board.forEach((f) {
       if (f.getX().toString() == field[0] && f.getY().toString() == field[1]) {
         towerField = f;
         return towerField;
@@ -267,7 +267,7 @@ class Controller {
     }
   }
   void setPath() {
-    game.board.forEach((f, v) {
+    game.board.forEach((f) {
       if (f.isPathField()) {
         String id = f.getX().toString() + f.getY().toString();
         view.setImageToView(id, "Path");

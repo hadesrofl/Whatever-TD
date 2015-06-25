@@ -263,11 +263,11 @@ class LevelAdmin {
  * @param board is the board of the game
  * @param difficulty is the difficulty of the game needed to evalute the xml file
  */
-  void loadPath(Map<Field, String> board) {
+  void loadPath(List<Field> board) {
     List<int> pathCoords = transformPathFromXml(this.levels.firstWhere((x) =>
             (x.attributes[0].value.compareTo(currentLevel.toString()) == 0)));
     for (int i = 0; i < pathCoords.length; i = i + 2) {
-      board.forEach((f, v) {
+      board.forEach((f) {
         if (f.getX() == pathCoords[i + 1] && f.getY() == pathCoords[i]) {
           f.setPathField(true);
           this.path.add(f);

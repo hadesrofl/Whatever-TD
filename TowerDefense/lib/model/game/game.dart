@@ -11,7 +11,7 @@ class Game {
   TowerAdmin tAdmin;
   LevelAdmin lAdmin;
   String levels;
-  Map<Field, String> board;
+  List<Field> board;
   final row = 11;
   final col = 11;
   final highScoreModifier = 0.2;
@@ -132,11 +132,11 @@ class Game {
    * Creates the board of this level
    * @return a map of this level
    */
-  Map<Field, String> createBoard(final row, final col) {
-    Map<Field, String> board = new Map<Field, String>();
+  List<Field> createBoard(final row, final col) {
+    List<Field> board = new List<Field>();
     for (int i = 0; i < row; i++) {
       for (int j = 0; j < col; j++) {
-        board.putIfAbsent(new Field(i, j, false), () => "");
+        board.add(new Field(i, j, false));
       }
     }
     return board;

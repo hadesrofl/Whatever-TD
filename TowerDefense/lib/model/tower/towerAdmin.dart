@@ -75,7 +75,7 @@ class TowerAdmin {
    * @param col number of colums of the board
    */
   bool buyTower(int towerDescription, Player player, Field field,
-      Map<Field, String> board, final row, final col) {
+      List<Field> board, final row, final col) {
     bool ausgabe;
     Tower newTower;
     switch (towerDescription) {
@@ -160,7 +160,7 @@ class TowerAdmin {
    * @param col number of colums of the board
    */
   bool setTowerChoords(
-      Tower tower, Field f, Map<Field, String> board, final row, final col) {
+      Tower tower, Field f, List<Field> board, final row, final col) {
     if (!f.isPathField() && !f.isCovered()) {
       tower.setCoordinates(f);
       tower.findFieldsToAttack(board, row, col);
@@ -180,7 +180,7 @@ class TowerAdmin {
    * @param row number of rows of the board
    * @param col number of colums of the board
    */
-  bool upgradeTower(Tower tower, Player player, Map<Field, String> board,
+  bool upgradeTower(Tower tower, Player player, List<Field> board,
       final row, final col) {
     if (tower.newPriceAfterUpgrade() <= player.getGold() &&
         tower.upgradeLevel < this.MAX_UPGRADE) {
