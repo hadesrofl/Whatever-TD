@@ -36,12 +36,12 @@ class Wave {
    * @param numberOfMinions - how many minions this wave has
    * @param finalWave - true if this is the final wave of the level, false if not
    */
-  Wave(int waveNumber, int numberOfMinions, bool finalWave) {
+  Wave(int waveNumber, bool finalWave) {
     this.waveNumber = waveNumber;
-    this.numberOfMinions = numberOfMinions;
     this.finalWave = finalWave;
     this.deadMinions = 0;
     this.leakedMinions = 0;
+    this.numberOfMinions = 0;
   }
   /**
    * Method to decrease the number of Minions
@@ -108,6 +108,7 @@ class Wave {
   }
   void addMinion(Minion m){
     this.minions.add(m);
+    this.numberOfMinions++;
   }
   void incLeakedMinions(){
     this.leakedMinions++;

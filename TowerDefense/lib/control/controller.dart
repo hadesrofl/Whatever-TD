@@ -362,12 +362,12 @@ class Controller {
             }
             game.endOfGame();  
             endTrigger();
-          } else if (game.lAdmin.getCurrentWave().isWaveClear()) {
-            clearPath();
-            game.lAdmin.loadNextWave();
           } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel()) {
             clearPath();
             game.lAdmin.loadNextLevel();
+          } else if (game.lAdmin.getCurrentWave().isWaveClear()) {
+            clearPath();
+            game.lAdmin.loadNextWave();
           }
         });
       }

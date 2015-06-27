@@ -1,5 +1,7 @@
 body{
   background-image: url(../img/background/background2.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 #top{
   text-align: center;
