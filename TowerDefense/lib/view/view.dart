@@ -240,7 +240,11 @@ class View {
         "Price: 1000\nBasicDamage: 10.0\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
   void setMinionToolTip(String name, String armor, String hitpoints,
+<<<<<<< HEAD
       String movementSpeed, String droppedGold) {  
+=======
+      String movementSpeed, String droppedGold) {
+>>>>>>> 6fb6ce0f8a5a8006c0ea04442da6a1d76e65cac3
     LIElement m = new LIElement();
     m.classes.add(name);
     m.setAttribute("data-toggle", "tooltip");
