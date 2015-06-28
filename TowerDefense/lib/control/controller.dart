@@ -75,11 +75,14 @@ class Controller {
       game.checkLifeTimer.cancel();
       game.towerShootTimer.cancel();
       view.restart.hidden = false;
-      endStreamSubscription();
+      view.stop.hidden = true;
     });
   }
   void restartListener() {
-    streams.add(view.restart.onClick.listen((ev) {}));
+    view.restart.onClick.listen((ev) {
+      view.restart.hidden = true;
+      view.stop.hidden = false;
+    });
   }
   void difficultyListener() {
     view.easy.onClick.listen((ev) {
@@ -295,10 +298,10 @@ class Controller {
           /* There are minions on the board */
         } else {
           game.lAdmin.getActiveMinions().forEach((m) {
-            if(m.getDestroyedALife()){
+            if (m.getDestroyedALife()) {
               leakedMinions.add(m);
               id = lastField.getX().toString() + lastField.getY().toString();
-                        view.deleteImageOnLastField(id);
+              view.deleteImageOnLastField(id);
             }
             String oldId;
             /* Minion is dead */
@@ -329,7 +332,6 @@ class Controller {
           });
         }
 
-
         /* Delete Dead Minions from active minion list of the map */
         if (deadMinions.isNotEmpty) {
           deadMinions.forEach((m) {
@@ -338,14 +340,13 @@ class Controller {
           });
         }
         /* remove leaked minions from list of active minions */
-        if(leakedMinions.isNotEmpty){
+        if (leakedMinions.isNotEmpty) {
           leakedMinions.forEach((m) {
             game.lAdmin.getCurrentWave().incLeakedMinions();
             game.lAdmin.activeMinions.remove(m);
           });
         }
       });
-
     }
 
     if (updatePlayerDataTimer == null) {
