@@ -20,7 +20,7 @@ class Controller {
   var setTower;
   var x;
   Timer startWave;
-  int startCounter = 15;
+ final startCounter = 15;
   List<StreamSubscription> streams = new List<StreamSubscription>();
   Timer updateMinionTimer;
   Timer updatePlayerDataTimer;
@@ -48,7 +48,6 @@ class Controller {
       view.menuContainer.hidden = false;
       view.helpBox.hidden = false;
       view.help.hidden = false;
-      view.time.hidden = false;
     });
     buyListener();
     sellListener();
@@ -97,6 +96,10 @@ class Controller {
       game.setDifficulty("easy");
       game.setTowerAdmin();
       game.setLevelAdmin();
+      if(game.player != null){
+        game.player = null;
+      }
+      game.setPlayer(view.nameInput.value);
       this.view.clearView();
       startWaveTimer();
     });
@@ -105,6 +108,10 @@ class Controller {
       game.setDifficulty("medium");
       game.setTowerAdmin();
       game.setLevelAdmin();
+      if(game.player != null){
+        game.player = null;
+      }
+      game.setPlayer(view.nameInput.value);
       this.view.clearView();
       startWaveTimer();
     });
@@ -113,6 +120,10 @@ class Controller {
       game.setDifficulty("hard");
       game.setTowerAdmin();
       game.setLevelAdmin();
+      if(game.player != null){
+        game.player = null;
+      }
+      game.setPlayer(view.nameInput.value);
       this.view.clearView();
       startWaveTimer();
     });
@@ -418,20 +429,23 @@ class Controller {
     });
   }
   void startWaveTimer() {
+    view.time.hidden = false;
+    int counter = this.startCounter;
     setPath();
     if (startWave == null) {
       startWave = new Timer.periodic((buildingPhase), (_) {
-        if (this.startCounter == 0) {
+        if (counter == 0) {
           game.startGame();
           startWave.cancel();
+          startWave = null;
           startControllerTimer();
           view.stop.hidden = false;
           view.time.hidden = true;
           stopListener();
         } else {
-          startCounter--;
+          counter--;
         }
-        view.time.innerHtml = "Next Wave starts in: " + startCounter.toString();
+        view.time.innerHtml = "Next Wave starts in: " + counter.toString();
       });
     }
   }

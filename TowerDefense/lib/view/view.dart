@@ -240,9 +240,16 @@ class View {
         "Price: 1000\nBasicDamage: 10.0\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
   void setMinionToolTip(String name, String armor, String hitpoints,
-      String movementSpeed, String droppedGold) {
-<<<<<<< HEAD
-    
+      String movementSpeed, String droppedGold) {  
+    minionBox.innerHtml = name +
+            ": Armor= " +
+            armor +
+            ", Hitpoints= " +
+            hitpoints +
+            ", MovementSpeed= " +
+            movementSpeed +
+            ", Dropped Gold= " +
+            droppedGold;
   }
   void clearView(){
     Element e;
@@ -251,16 +258,6 @@ class View {
           children.classes.clear();        
       });
     });
-=======
-    minionBox.innerHtml = name +
-        ": Armor= " +
-        armor +
-        ", Hitpoints= " +
-        hitpoints +
-        ", MovementSpeed= " +
-        movementSpeed +
-        ", Dropped Gold= " +
-        droppedGold;
->>>>>>> c2a71724d05245803613bc9dc4c04f3c667d840f
+    
   }
 }
