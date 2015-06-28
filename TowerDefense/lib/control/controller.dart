@@ -275,6 +275,9 @@ class Controller {
   void startControllerTimer() {
     if (updateMinionTimer == null) {
       updateMinionTimer = new Timer.periodic(updateMinion, (_) {
+        print("Distinct Minions: ");
+       this.game.lAdmin.getCurrentWave().getDistinctMinions().forEach((m) => print(m.getName()));
+       print("Distinct Minions End!");
         String id;
         Field lastField =
             game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];

@@ -100,6 +100,34 @@ class Wave {
     return this.deadMinions;
   }
   /**
+   * Gets a list of all minions but only once
+   * @return a list of distinct minions of this wave
+   */
+  List<Minion> getDistinctMinions(){
+    bool found;
+    List<Minion> distinct = new List<Minion>();
+    if(this.minions.length > 0){
+    this.minions.forEach((m){
+      found = false;
+      /* List is not empty */
+      if(distinct.length > 0){
+        /* Compare all minions to the already added distinct minions */
+        distinct.forEach((dm){
+         if(m.getName().compareTo(dm.getName()) == 0){
+           found = true;
+        }});
+      }else{
+        found = true;
+        distinct.add(m);
+      }
+      if(found != true){
+        distinct.add(m);
+      }
+    });
+    }
+    return distinct;
+  }
+  /**
    * Gets the minions of this wave
    * @return a list of all minions of this wave
    */
