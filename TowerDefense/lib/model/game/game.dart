@@ -45,9 +45,15 @@ class Game {
     if (this.lAdmin == null) {
       setLevelAdmin();
     }
-    this.lAdmin.loadNextLevel();
-    //this.lAdmin.loadPath(board);
-    this.lAdmin.loadNextWave();
+    if (this.lAdmin.currentLevel == 0 ) {
+      this.lAdmin.loadNextLevel();
+    }
+    if(this.lAdmin.currentLevel != 0 && this.lAdmin.getCurrentWave() != null){
+      if (this.lAdmin.isLevelEnd()) {
+        this.lAdmin.loadNextLevel();
+      }else {
+      this.lAdmin.loadNextWave();
+    }}
     runGame();
     /** if (!runningGame) {
       startWave = new Timer.periodic((buildingPhase), (_) {
@@ -176,7 +182,7 @@ class Game {
   void setLevelAdmin() {
     this.lAdmin = new LevelAdmin(levels, difficulty);
   }
-  void setTowerAdmin(){
+  void setTowerAdmin() {
     this.tAdmin = new TowerAdmin();
   }
 }

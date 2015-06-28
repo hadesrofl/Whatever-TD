@@ -100,7 +100,8 @@ class Controller {
         game.player = null;
       }
       game.setPlayer(view.nameInput.value);
-      this.view.clearView();
+      this.view.clearBoard();
+      setPath();
       startWaveTimer();
     });
     view.medium.onClick.listen((ev) {
@@ -112,7 +113,8 @@ class Controller {
         game.player = null;
       }
       game.setPlayer(view.nameInput.value);
-      this.view.clearView();
+      this.view.clearBoard();
+      setPath();
       startWaveTimer();
     });
     view.hard.onClick.listen((ev) {
@@ -124,7 +126,8 @@ class Controller {
         game.player = null;
       }
       game.setPlayer(view.nameInput.value);
-      this.view.clearView();
+      this.view.clearBoard();
+      setPath();
       startWaveTimer();
     });
   }
@@ -410,13 +413,10 @@ class Controller {
             game.endOfGame();
             stopControllerTimer();
             view.showDifficultyMenu();
-          } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel()) {
+          } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel() || game.lAdmin.getCurrentWave().isWaveClear()) {
             clearPath();
-            game.lAdmin.loadNextLevel();
-          } else if (game.lAdmin.getCurrentWave().isWaveClear()) {
-            clearPath();
-            game.lAdmin.loadNextWave();
-          }
+            this.startWaveTimer();
+          }        
         });
       }
     }
@@ -431,7 +431,6 @@ class Controller {
   void startWaveTimer() {
     view.time.hidden = false;
     int counter = this.startCounter;
-    setPath();
     if (startWave == null) {
       startWave = new Timer.periodic((buildingPhase), (_) {
         if (counter == 0) {
@@ -464,6 +463,7 @@ class Controller {
      String hitPoints = m.getHitpoints().toString();
      String movementSpeed = m.getMovementSpeed().inMilliseconds.toString();
      String droppedGold =  m.getDroppedGold().toString();
+     this.view.setMinionToolTip(name, armor, hitpoints, movementSpeed, droppedGold);
     });
   }
 }
