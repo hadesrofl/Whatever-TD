@@ -46,8 +46,6 @@ class Controller {
           " Points";
       view.nameInput.hidden = true;
       view.menuContainer.hidden = false;
-      view.errorDiv2.hidden = true;
-      view.errorDiv.hidden = true;
       view.helpBox.hidden = false;
       view.help.hidden = false;
       view.time.hidden = false;
@@ -64,8 +62,6 @@ class Controller {
       view.sell.hidden = false;
       view.upgrade.hidden = false;
       view.buy.hidden = false;
-      view.errorDiv.hidden = true;
-      view.errorDiv2.hidden = true;
     });
   }
   void stopListener() {
@@ -117,8 +113,6 @@ class Controller {
   }
   void upgradeListener() {
     view.upgrade.onClick.listen((ev) {
-      view.errorDiv.hidden = true;
-      view.errorDiv2.hidden = true;
       bool enoughMoney;
       bool b = true;
       var tmp;
@@ -137,11 +131,8 @@ class Controller {
                   tmp = tower;
                   enoughMoney = game.tAdmin.upgradeTower(
                       tmp, game.player, game.board, game.row, game.col);
-                  if (enoughMoney) {
-                    view.upgradeImage(id, tmp.name, tmp.getUpgradeLevel());
-                  } else {
-                    view.errorDiv.hidden = false;
-                  }
+                  if (enoughMoney) view.upgradeImage(
+                      id, tmp.name, tmp.getUpgradeLevel());
                 }
               });
               b = false;
@@ -154,8 +145,6 @@ class Controller {
   }
   void sellListener() {
     x = view.sell.onClick.listen((ev) {
-      view.errorDiv.hidden = true;
-      view.errorDiv2.hidden = true;
       view.buy.hidden = true;
       view.upgrade.hidden = true;
       view.sell.hidden = true;
@@ -191,8 +180,6 @@ class Controller {
   }
   void buyListener() {
     view.buy.onClick.listen((ev) {
-      view.errorDiv.hidden = true;
-      view.errorDiv2.hidden = true;
       view.buy.hidden = true;
       view.buyMenu.hidden = false;
       view.arrowTower.hidden = false;
@@ -250,9 +237,7 @@ class Controller {
               view.cancel.hidden = true;
               view.setImageToView(f, game.tAdmin.allTower.last.name);
             } else {
-              if (towerDescription != 0) {
-                view.errorDiv.hidden = false;
-              }
+              if (towerDescription != 0) {}
             }
             towerDescription = 0;
             endStreamSubscription();

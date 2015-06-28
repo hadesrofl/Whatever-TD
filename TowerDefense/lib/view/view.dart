@@ -1,9 +1,6 @@
 library view;
 
 import "dart:html";
-import 'package:TowerDefense/model/level/levelAdmin.dart';
-import 'package:TowerDefense/model/tower/towerAdmin.dart';
-/* TODO: DeathCounter for Minions */
 
 /**
    * This Class handles the appearance of our game and manipulates the DOM-Tree of HTML
@@ -56,8 +53,6 @@ class View {
    * Columns for the Board
    */
   int col;
-  Element errorDiv;
-  Element errorDiv2;
   ButtonElement easy;
   ButtonElement medium;
   ButtonElement hard;
@@ -92,8 +87,6 @@ class View {
     arrowTower = querySelector("#ArrowTower");
     lightningTower = querySelector("#LightningTower");
     fireTower = querySelector("#FireTower");
-    errorDiv = querySelector("#errorDiv");
-    errorDiv2 = querySelector("#errorDiv2");
     easy = querySelector("#easyGame");
     medium = querySelector("#mediumGame");
     hard = querySelector("#hardGame");
@@ -108,8 +101,6 @@ class View {
     menuContainer.hidden = true;
     buyMenu.hidden = true;
     cancel.hidden = true;
-    errorDiv.hidden = true;
-    errorDiv2.hidden = true;
     buy.hidden = true;
     upgrade.hidden = true;
     sell.hidden = true;
