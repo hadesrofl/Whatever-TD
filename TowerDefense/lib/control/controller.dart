@@ -69,11 +69,9 @@ class Controller {
   }
   void stopListener() {
     view.stop.onClick.listen((ev) {
-      updateMinionTimer.cancel();
-      updatePlayerDataTimer.cancel();
-      waveEndTimer.cancel();
-      game.checkLifeTimer.cancel();
-      game.towerShootTimer.cancel();
+      stopControllerTimer();
+      game.stopGameTimer();
+      game.lAdmin.stopActiveMinions();
       view.restart.hidden = false;
       view.stop.hidden = true;
       restartListener();
@@ -81,6 +79,9 @@ class Controller {
   }
   void restartListener() {
     view.restart.onClick.listen((ev) {
+      startControllerTimer();
+      game.startGameTimer();
+      game.lAdmin.restartActiveMinions();
       view.restart.hidden = true;
       view.stop.hidden = false;
     });
@@ -90,19 +91,19 @@ class Controller {
       view.hideDifficultyMenu();
       game.setDifficulty("easy");
       game.setLevelAdmin();
-      time();
+      startWaveTimer();
     });
     view.medium.onClick.listen((ev) {
       view.hideDifficultyMenu();
       game.setDifficulty("medium");
       game.setLevelAdmin();
-      time();
+      startWaveTimer();
     });
     view.hard.onClick.listen((ev) {
       view.hideDifficultyMenu();
       game.setDifficulty("hard");
       game.setLevelAdmin();
-      time();
+      startWaveTimer();
     });
   }
   void upgradeListener() {
@@ -278,7 +279,7 @@ class Controller {
     });
   }
 
-  void gameTriggers() {
+  void startControllerTimer() {
     if (updateMinionTimer == null) {
       updateMinionTimer = new Timer.periodic(updateMinion, (_) {
         String id;
@@ -410,14 +411,14 @@ class Controller {
     updatePlayerDataTimer.cancel();
     waveEndTimer.cancel();
   }
-  void time() {
+  void startWaveTimer() {
     setPath();
     if (startWave == null) {
       startWave = new Timer.periodic((buildingPhase), (_) {
         if (this.startCounter == 0) {
           game.startGame();
           startWave.cancel();
-          gameTriggers();
+          startControllerTimer();
           view.stop.hidden = false;
           view.time.hidden = true;
           stopListener();
@@ -427,5 +428,13 @@ class Controller {
         view.time.innerHtml = "Next Wave starts in: " + startCounter.toString();
       });
     }
+  }
+  void stopControllerTimer(){
+    updateMinionTimer.cancel();
+    updateMinionTimer = null;
+    updatePlayerDataTimer.cancel();
+    updatePlayerDataTimer = null;
+    waveEndTimer.cancel();
+    waveEndTimer = null;
   }
 }
