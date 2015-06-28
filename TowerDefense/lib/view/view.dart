@@ -218,6 +218,15 @@ class View {
     upgrade.hidden = false;
     p.hidden = true;
   }
+  void showDifficultyMenu(){
+    hard.hidden = false;
+    medium.hidden = false;
+    easy.hidden = false;
+    buy.hidden = true;
+    sell.hidden = true;
+    upgrade.hidden = true;
+    p.hidden = false;
+  }
   void setToolTip() {
     canonTower.setAttribute("title",
         "Price: 300\nBasicDamage: 7.0\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
@@ -229,5 +238,15 @@ class View {
         "Price: 1000\nBasicDamage: 10.0\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
   void setMinionToolTip(String name, String armor, String hitpoints,
-      String movementSpeed, String droppedGold) {}
+      String movementSpeed, String droppedGold) {
+    
+  }
+  void clearView(){
+    Element e;
+    this.board.children.forEach((c) {
+      c.children.forEach((children) {
+          children.classes.clear();        
+      });
+    });
+  }
 }

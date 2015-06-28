@@ -95,19 +95,25 @@ class Controller {
     view.easy.onClick.listen((ev) {
       view.hideDifficultyMenu();
       game.setDifficulty("easy");
+      game.setTowerAdmin();
       game.setLevelAdmin();
+      this.view.clearView();
       startWaveTimer();
     });
     view.medium.onClick.listen((ev) {
       view.hideDifficultyMenu();
       game.setDifficulty("medium");
+      game.setTowerAdmin();
       game.setLevelAdmin();
+      this.view.clearView();
       startWaveTimer();
     });
     view.hard.onClick.listen((ev) {
       view.hideDifficultyMenu();
       game.setDifficulty("hard");
+      game.setTowerAdmin();
       game.setLevelAdmin();
+      this.view.clearView();
       startWaveTimer();
     });
   }
@@ -124,7 +130,7 @@ class Controller {
                   .listen((ev) {
             if (b) {
               game.tAdmin.allTower.forEach((tower) {
-                if (tower.getPosition().getX() == j &&
+                if (tower.getPosition() != null && tower.getPosition().getX() == j &&
                     tower.getPosition().getY() == i) {
                   String id = tower.getPosition().getX().toString() +
                       tower.getPosition().getY().toString();
@@ -157,11 +163,15 @@ class Controller {
             if (check) {
               var tmp = null;
               game.tAdmin.allTower.forEach((tower) {
+                if(tower.getPosition() != null){
                 if (tower.getPosition().getX() == j &&
                     tower.getPosition().getY() == i) {
                   String id = tower.getPosition().getX().toString() +
                       tower.getPosition().getY().toString();
                   view.deleteImage(id, tower.name);
+                  tmp = tower;
+                }
+                }else{
                   tmp = tower;
                 }
               });
@@ -263,6 +273,10 @@ class Controller {
     }
   }
   void setPath() {
+    game.board.forEach((f){
+      f.pathField = false;
+      f.covered = false;
+    });
     game.lAdmin.loadPath(game.board);
     game.board.forEach((f) {
       if (f.isPathField()) {
@@ -383,7 +397,8 @@ class Controller {
                   " Points!";
             }
             game.endOfGame();
-            endTrigger();
+            stopControllerTimer();
+            view.showDifficultyMenu();
           } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel()) {
             clearPath();
             game.lAdmin.loadNextLevel();
@@ -401,11 +416,6 @@ class Controller {
       view.deleteImage(
           id, game.lAdmin.getCurrentWave().getMinions()[0].getName());
     });
-  }
-  void endTrigger() {
-    updateMinionTimer.cancel();
-    updatePlayerDataTimer.cancel();
-    waveEndTimer.cancel();
   }
   void startWaveTimer() {
     setPath();
@@ -432,5 +442,14 @@ class Controller {
     updatePlayerDataTimer = null;
     waveEndTimer.cancel();
     waveEndTimer = null;
+  }
+  void setMinionInfo(){
+    this.game.lAdmin.currentWave.getDistinctMinions().forEach((m){
+     String name = m.getName();
+     String armor = m.getArmor().toString();
+     String hitPoints = m.getHitpoints().toString();
+     String movementSpeed = m.getMovementSpeed().inMilliseconds.toString();
+     String droppedGold =  m.getDroppedGold().toString();
+    });
   }
 }
