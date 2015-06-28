@@ -158,9 +158,6 @@ class Minion {
       this.hitpoints -= dmgToMinion;
       if (this.hitpoints <= 0) {
         this.moveTimer.cancel();
-        if (this.hitpoints <= 0) {
-          this.moveTimer.cancel();
-        }
       }
       return this.hitpoints;
     }
@@ -171,10 +168,8 @@ class Minion {
   void spawn() {
     this.spawned = true;
     if (moveTimer == null) {
-      moveTimer = new Timer.periodic(movementSpeed, (_) { 
-        this.move();
-          });
-      
+      moveTimer = new Timer.periodic(movementSpeed, (_) =>  
+        this.move());
         }
     }
 
@@ -317,5 +312,19 @@ class Minion {
    */
   void setDestroyedALife(bool b) {
     this.destroyedALife = b;
+  }
+  /**
+   * Restarts the move timer
+   */
+  void restartMoveTimer(){
+    if(this.moveTimer == null){
+      this.moveTimer = new Timer.periodic(this.movementSpeed, (_) => move());
+    }
+  }
+  /**
+   * Stops the move timer
+   */
+  void stopMoveTimer(){
+    this.moveTimer.cancel();
   }
 }
