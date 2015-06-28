@@ -195,11 +195,12 @@ class View {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
-          children.attributes.remove("data-toggle");
-          children.attributes.remove("title");
-          print(children.classes.toString());
-          children.classes.clear();
-          children.classes.add("Path");
+          if (children.classes.length > 1) {
+            children.attributes.remove("data-toggle");
+            children.attributes.remove("title");
+            children.classes.clear();
+            children.classes.add("Path");
+          }
         }
       });
     });

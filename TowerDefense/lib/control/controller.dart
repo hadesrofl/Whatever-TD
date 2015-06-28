@@ -280,10 +280,12 @@ class Controller {
         String id;
         Field lastField =
             game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
-        List<Minion> tmp = new List<Minion>();
+        List<Minion> deadMinions = new List<Minion>();
+        List<Minion> leakedMinions = new List<Minion>();
         /* Delete image on last field of path if there are no active minions */
         if (game.lAdmin.getActiveMinions().length == 0) {
           id = lastField.getX().toString() + lastField.getY().toString();
+          view.deleteImageOnLastField(id);
           for (int i = 0;
               i < game.lAdmin.getCurrentWave().getMinions().length;
               i++) {
@@ -293,6 +295,11 @@ class Controller {
           /* There are minions on the board */
         } else {
           game.lAdmin.getActiveMinions().forEach((m) {
+            if(m.getDestroyedALife()){
+              leakedMinions.add(m);
+              id = lastField.getX().toString() + lastField.getY().toString();
+                        view.deleteImageOnLastField(id);
+            }
             String oldId;
             /* Minion is dead */
             if (m.getHitpoints() <= 0) {
@@ -302,7 +309,7 @@ class Controller {
               id = (m.getPosition().getX() - 1).toString() +
                   (m.getPosition().getY() - 1).toString();
               view.deleteImage(id, m.getName());
-              tmp.add(m);
+              deadMinions.add(m);
               /* Minion is not dead, move image alongside the minion */
             } else {
               if (m.getStepsOnPath() < game.lAdmin.getPath().length) {
@@ -317,25 +324,28 @@ class Controller {
                     m.getPosition().getY().toString();
                 view.setImageMinion(id, m.getName(), m);
                 /* Minion leaked, delete image on last field */
-              } else if (m.getStepsOnPath() >= game.lAdmin.getPath().length) {
-                id = lastField.getX().toString() + lastField.getY().toString();
-                view.deleteImageOnLastField(id);
               }
             }
           });
         }
 
-        /* Delete Dead Minions from active minion list of the map */
-        if (tmp.isNotEmpty) {
-          tmp.forEach((m) {
-            game.lAdmin.getCurrentWave().incDeadMinions();
 
+        /* Delete Dead Minions from active minion list of the map */
+        if (deadMinions.isNotEmpty) {
+          deadMinions.forEach((m) {
+            game.lAdmin.getCurrentWave().incDeadMinions();
             game.lAdmin.getActiveMinions().remove(m);
           });
         }
-        print("List of Minions " +
-            game.lAdmin.getActiveMinions().length.toString());
+        /* remove leaked minions from list of active minions */
+        if(leakedMinions.isNotEmpty){
+          leakedMinions.forEach((m) {
+            game.lAdmin.getCurrentWave().incLeakedMinions();
+            game.lAdmin.activeMinions.remove(m);
+          });
+        }
       });
+
     }
 
     if (updatePlayerDataTimer == null) {
