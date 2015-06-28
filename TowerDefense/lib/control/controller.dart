@@ -25,6 +25,7 @@ class Controller {
   Timer waveEndTimer;
   Duration waveEndCheck = const Duration(milliseconds: 1000);
   Duration playerData = const Duration(milliseconds: 1500);
+  Duration updateMinion = const Duration(milliseconds: 200);
   Controller(String levels) {
     //Initializing the Game
     game = new Game(levels);
@@ -278,18 +279,23 @@ class Controller {
   void gameTriggers() {
     if (updateMinionTimer == null) {
       updateMinionTimer = new Timer.periodic(
-          game.lAdmin.getCurrentWave().getMinions()[0].getMovementSpeed(), (_) {
+          updateMinion, (_) {
         String id;
+        Field lastField =
+            game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
         List<Minion> tmp = new List<Minion>();
+        /* Delete image on last field of path if there are no active minions */
         if (game.lAdmin.getActiveMinions().length == 0) {
-          Field lastField =
-              game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
           id = lastField.getX().toString() + lastField.getY().toString();
-          view.deleteImage(
-              id, game.lAdmin.getCurrentWave().getMinions()[0].getName());
+          for(int i = 0; i < game.lAdmin.getCurrentWave().getMinions().length;i++){
+            view.deleteImage(
+                id, game.lAdmin.getCurrentWave().getMinions()[i].getName());
+          }
+          /* There are minions on the board */
         } else {
           game.lAdmin.getActiveMinions().forEach((m) {
             String oldId;
+            /* Minion is dead */
             if (m.getHitpoints() <= 0) {
               id = m.getPosition().getX().toString() +
                   m.getPosition().getY().toString();
@@ -298,6 +304,7 @@ class Controller {
                   (m.getPosition().getY() - 1).toString();
               view.deleteImage(id, m.getName());
               tmp.add(m);
+              /* Minion is not dead, move image alongside the minion */
             } else {
               if (m.getStepsOnPath() < game.lAdmin.getPath().length) {
                 if (m.getStepsOnPath() != 0) {
@@ -310,14 +317,14 @@ class Controller {
                 id = m.getPosition().getX().toString() +
                     m.getPosition().getY().toString();
                 view.setImageMinion(id, m.getName(), m);
+                /* Minion leaked, delete image on last field */
               } else if (m.getStepsOnPath() >= game.lAdmin.getPath().length) {
-                Field lastField =
-                    game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
                 id = lastField.getX().toString() + lastField.getY().toString();
-                view.deleteImage(id, m.getName());
+                view.deleteImageOnLastField(id);
               }
             }
           });
+          
         }
 
         /* Delete Dead Minions from active minion list of the map */
