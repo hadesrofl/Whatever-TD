@@ -62,7 +62,7 @@ class View {
   ButtonElement restart;
   Element time;
   Element helpText;
-  Element minionBox;
+  UListElement mList;
 
 /**
    * Constructor of the view
@@ -98,7 +98,7 @@ class View {
     restart = querySelector("#restart");
     time = querySelector("#time");
     helpText = querySelector("#helpText");
-    minionBox = querySelector("#minioninfo");
+    mList = querySelector("#mList");
 
     menuContainer.hidden = true;
     buyMenu.hidden = true;
@@ -232,14 +232,18 @@ class View {
   }
   void setMinionToolTip(String name, String armor, String hitpoints,
       String movementSpeed, String droppedGold) {
-    minionBox.innerHtml = name +
-        ": Armor= " +
+    LIElement m = new LIElement();
+    m.classes.add(name);
+    m.setAttribute("data-toggle", "tooltip");
+    m.setAttribute("title", name +
+        "\n: Armor= " +
         armor +
-        ", Hitpoints= " +
+        "\n, Hitpoints= " +
         hitpoints +
-        ", MovementSpeed= " +
+        "\n, MovementSpeed= " +
         movementSpeed +
-        ", Dropped Gold= " +
-        droppedGold;
+        "\n, Dropped Gold= " +
+        droppedGold);
+    mList.append(m);
   }
 }
