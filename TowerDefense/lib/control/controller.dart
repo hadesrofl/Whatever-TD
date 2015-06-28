@@ -89,7 +89,7 @@ class Controller {
   }
   void helpListener() {
     view.help.onClick.listen((ev) {
-      view.helpText.appendText("Towerklassen: ");
+      view.helpText.innerHtml = "Towerklassen: ";
       view.helpText.hidden = false;
     });
   }
@@ -436,7 +436,7 @@ class Controller {
       });
     }
   }
-  void stopControllerTimer(){
+  void stopControllerTimer() {
     updateMinionTimer.cancel();
     updateMinionTimer = null;
     updatePlayerDataTimer.cancel();
