@@ -115,10 +115,7 @@ class View {
     stop.hidden = true;
     restart.hidden = true;
     helpBox.hidden = true;
-<<<<<<< HEAD
-=======
     time.hidden = true;
->>>>>>> f952c0b247b407722edafadd5aec6de807abd4e3
   }
 /**
    * Method to create a board 

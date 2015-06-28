@@ -285,16 +285,13 @@ class Controller {
         /* Delete image on last field of path if there are no active minions */
         if (game.lAdmin.getActiveMinions().length == 0) {
           id = lastField.getX().toString() + lastField.getY().toString();
-<<<<<<< HEAD
           view.deleteImageOnLastField(id);
-=======
           for (int i = 0;
               i < game.lAdmin.getCurrentWave().getMinions().length;
               i++) {
             view.deleteImage(
                 id, game.lAdmin.getCurrentWave().getMinions()[i].getName());
           }
->>>>>>> f952c0b247b407722edafadd5aec6de807abd4e3
           /* There are minions on the board */
         } else {
           game.lAdmin.getActiveMinions().forEach((m) {
@@ -340,16 +337,13 @@ class Controller {
             game.lAdmin.getActiveMinions().remove(m);
           });
         }
-<<<<<<< HEAD
         /* remove leaked minions from list of active minions */
-            leakedMinions.forEach((m) {
-              game.lAdmin.getCurrentWave().incLeakedMinions();
-              game.lAdmin.activeMinions.remove(m);
-            });
-=======
-        print("List of Minions " +
-            game.lAdmin.getActiveMinions().length.toString());
->>>>>>> f952c0b247b407722edafadd5aec6de807abd4e3
+        if(leakedMinions.isNotEmpty){
+          leakedMinions.forEach((m) {
+            game.lAdmin.getCurrentWave().incLeakedMinions();
+            game.lAdmin.activeMinions.remove(m);
+          });
+        }
       });
 
     }
