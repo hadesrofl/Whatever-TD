@@ -282,6 +282,9 @@ class Controller {
   void startControllerTimer() {
     if (updateMinionTimer == null) {
       updateMinionTimer = new Timer.periodic(updateMinion, (_) {
+        print("Distinct Minions: ");
+       this.game.lAdmin.getCurrentWave().getDistinctMinions().forEach((m) => print(m.getName()));
+       print("Distinct Minions End!");
         String id;
         Field lastField =
             game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
@@ -328,7 +331,6 @@ class Controller {
                 id = m.getPosition().getX().toString() +
                     m.getPosition().getY().toString();
                 view.setImageMinion(id, m.getName(), m);
-                /* Minion leaked, delete image on last field */
               }
             }
           });
