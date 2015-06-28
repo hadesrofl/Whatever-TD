@@ -66,6 +66,7 @@ class View {
   ButtonElement help;
   ButtonElement restart;
   Element time;
+  Element helpText;
 
 /**
    * Constructor of the view
@@ -102,6 +103,7 @@ class View {
     helpBox = querySelector("#helpBox");
     restart = querySelector("#restart");
     time = querySelector("#time");
+    helpText = querySelector("#helpText");
 
     menuContainer.hidden = true;
     buyMenu.hidden = true;
@@ -116,6 +118,7 @@ class View {
     restart.hidden = true;
     helpBox.hidden = true;
     time.hidden = true;
+    helpText.hidden = true;
   }
 /**
    * Method to create a board 

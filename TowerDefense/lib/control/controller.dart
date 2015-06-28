@@ -56,6 +56,7 @@ class Controller {
     sellListener();
     upgradeListener();
     difficultyListener();
+    helpListener();
 
     view.cancel.onClick.listen((ev) {
       view.buyMenu.hidden = true;
@@ -83,6 +84,12 @@ class Controller {
     view.restart.onClick.listen((ev) {
       view.restart.hidden = true;
       view.stop.hidden = false;
+    });
+  }
+  void helpListener() {
+    view.help.onClick.listen((ev) {
+      view.helpText.appendText("Towerklassen: ");
+      view.helpText.hidden = false;
     });
   }
   void difficultyListener() {
