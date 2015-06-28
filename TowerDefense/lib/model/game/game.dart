@@ -22,12 +22,10 @@ class Game {
   int startCounter = 15;
   /* TODO: Get Difficulty from User Input (button or something else) */
   String difficulty;
-  Timer startWave;
   Timer spawnTimer;
   Timer checkLifeTimer;
   Timer towerShootTimer;
   bool runningGame = false;
-  Duration buildingPhase = const Duration(milliseconds: 1000);
   Duration spawn = const Duration(milliseconds: 2500);
   Duration checkLife = const Duration(milliseconds: 1000);
   Duration shoot = const Duration(milliseconds: 2000);
@@ -69,9 +67,6 @@ class Game {
    */
   void runGame() {
     runningGame = true;
-    if (startWave != null) {
-      startWave.cancel();
-    }
     startGameTimer();
   }
   void evaluateKilledMinions(bool endOfGame) {
@@ -91,7 +86,6 @@ class Game {
    * TODO: End Game Somehow
    */
   void endOfGame() {
-    startWave.cancel();
     spawnTimer.cancel();
     checkLifeTimer.cancel();
     towerShootTimer.cancel();
@@ -115,36 +109,35 @@ class Game {
     }
     return board;
   }
-  void startGameTimer(){
+  void startGameTimer() {
     if (spawnTimer == null) {
-          spawnTimer = new Timer.periodic(spawn, (_) {
-            this.lAdmin.minionSpawn();
-          });
-        }
+      spawnTimer = new Timer.periodic(spawn, (_) {
+        this.lAdmin.minionSpawn();
+      });
+    }
 
-
-        if (towerShootTimer == null) {
-          towerShootTimer = new Timer.periodic(shoot, (_) {
-            List<Target> targets = tAdmin.attack(lAdmin.getActiveMinions());
-            lAdmin.calculateHPOfMinions(targets);
-          });
-        }
-        if (checkLifeTimer == null) {
-          checkLifeTimer = new Timer.periodic(checkLife, (_) {
-            List<Minion> tmp = new List<Minion>();
-            this.lAdmin.activeMinions.forEach((m) {
-              if (m.getStepsOnPath() >= this.lAdmin.path.length &&
-                  m.getHitpoints() > 0 &&
-                  m.getDestroyedALife() == false) {
-                this.life--;
-                m.setDestroyedALife(true);
-                print("Life remaining: $life");
-              }
-            });
-          });
-        }
+    if (towerShootTimer == null) {
+      towerShootTimer = new Timer.periodic(shoot, (_) {
+        List<Target> targets = tAdmin.attack(lAdmin.getActiveMinions());
+        lAdmin.calculateHPOfMinions(targets);
+      });
+    }
+    if (checkLifeTimer == null) {
+      checkLifeTimer = new Timer.periodic(checkLife, (_) {
+        List<Minion> tmp = new List<Minion>();
+        this.lAdmin.activeMinions.forEach((m) {
+          if (m.getStepsOnPath() >= this.lAdmin.path.length &&
+              m.getHitpoints() > 0 &&
+              m.getDestroyedALife() == false) {
+            this.life--;
+            m.setDestroyedALife(true);
+            print("Life remaining: $life");
+          }
+        });
+      });
+    }
   }
-  void stopGameTimer(){
+  void stopGameTimer() {
     this.spawnTimer.cancel();
     this.spawnTimer = null;
     this.checkLifeTimer.cancel();

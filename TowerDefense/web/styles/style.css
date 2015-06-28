@@ -175,3 +175,9 @@ body{
 #stop:hover{
   color:red;
 }
+#minioninfo{
+  float: bottom;
+  width: 250px;
+  background-color: lightgreen;
+  margin-top: 15px;
+}
