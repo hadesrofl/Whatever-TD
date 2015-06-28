@@ -52,7 +52,7 @@ class Game {
       setLevelAdmin();
     }
     this.lAdmin.loadNextLevel();
-    this.lAdmin.loadPath(board);
+    //this.lAdmin.loadPath(board);
     this.lAdmin.loadNextWave();
     runGame();
     /** if (!runningGame) {

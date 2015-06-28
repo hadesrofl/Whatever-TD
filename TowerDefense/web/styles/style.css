@@ -132,6 +132,12 @@ body{
   height: 38px;
   width: 38px;
   background-repeat: no-repeat;
+  border: solid black 2px;
+  border-radius: 1px;
+  text-shadow: 1px 1px 3px white;
+}
+.TowerButton:hover{
+  border: solid red 2px;
 }
 
 #board td.CanonTower, .TowerButton.CanonTower{
