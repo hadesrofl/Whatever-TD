@@ -228,4 +228,6 @@ class View {
     lightningTower.setAttribute("title",
         "Price: 1000\nBasicDamage: 10.0\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
+  void setMinionToolTip(String name, String armor, String hitpoints,
+      String movementSpeed, String droppedGold) {}
 }
