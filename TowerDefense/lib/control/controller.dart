@@ -338,12 +338,8 @@ class Controller {
                 }
                 id = m.getPosition().getX().toString() +
                     m.getPosition().getY().toString();
-<<<<<<< HEAD
-                view.setImageMinion(id, m.getName(), m);
-=======
                 view.setImageToView(id, m.getName());
                 /* Minion leaked, delete image on last field */
->>>>>>> dd0a1be02617f1d79a74a886fbe7fc11a7da0113
               }
             }
           });
