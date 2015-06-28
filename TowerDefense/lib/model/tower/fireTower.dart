@@ -11,12 +11,12 @@ class FireTower extends Tower {
    */
   FireTower() {
     this.setName("FireTower");
-    this.setRange(4);
+    this.setRange(2);
     this.setPrice(1000);
     this.setSellingPrice(500);
     this.setUpgradeLevel(1);
     this.setAttackSpeed(1.1);
-    this.setBasicDamage(5.0);
+    this.setBasicDamage(10.0);
     this.setDmgType(3);
     this.setAbility(false);
     this.setAbilityFactor(90);

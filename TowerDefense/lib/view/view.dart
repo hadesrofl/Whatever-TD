@@ -119,6 +119,7 @@ class View {
     helpBox.hidden = true;
     time.hidden = true;
     helpText.hidden = true;
+    setToolTip();
   }
 /**
    * Method to create a board 
@@ -154,14 +155,6 @@ class View {
         cell.setInnerHtml(board[cell.id]);
       }
     }
-  }
-  void setImageTower(String id, String objectName, Tower t) {
-    Element children = setImageToView(id, objectName);
-    setToolTipTower(children, t);
-  }
-  void setImageMinion(String id, String objectName, Minion m) {
-    Element children = setImageToView(id, objectName);
-    setToolTipMinion(children, m);
   }
   Element setImageToView(String id, String objectName) {
     Element e;
@@ -234,15 +227,14 @@ class View {
     upgrade.hidden = false;
     p.hidden = true;
   }
-  void setToolTipTower(Element child, Tower t) {
-    child.setAttribute("data-toggle", "tooltip");
-    child.setAttribute("title", "Basic Damage: " + t.basicDamage.toString());
-  }
-  void setToolTipMinion(Element child, Minion m) {
-    child.setAttribute("data-toggle", "tooltip");
-    child.setAttribute("title", "ArmorClass: " +
-        m.armor.value +
-        "HitPoints: " +
-        m.hitpoints.toString());
+  void setToolTip() {
+    canonTower.setAttribute("title",
+        "Price: 300\nBasicDamage: 7.0\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+    arrowTower.setAttribute("title",
+        "Price: 150\nBasicDamage: 5.0\nDamageType: Piercing\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+    fireTower.setAttribute("title",
+        "Price: 1000\nBasicDamage: 10.0\nDamageType: Fire\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+    lightningTower.setAttribute("title",
+        "Price: 1000\nBasicDamage: 10.0\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
 }

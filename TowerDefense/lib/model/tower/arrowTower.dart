@@ -3,7 +3,7 @@ part of tower;
 class ArrowTower extends Tower {
   ArrowTower() {
     this.setName("ArrowTower");
-    this.setRange(5);
+    this.setRange(3);
     this.setPrice(150);
     this.setSellingPrice(110);
     this.setUpgradeLevel(1);
