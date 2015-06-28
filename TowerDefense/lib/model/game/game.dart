@@ -68,36 +68,11 @@ class Game {
    * 
    */
   void runGame() {
-    Minion m;
-    if (spawnTimer == null) {
-      spawnTimer = new Timer.periodic(spawn, (_) {
-        m = this.lAdmin.minionSpawn();
-      });
-    }
     runningGame = true;
     if (startWave != null) {
       startWave.cancel();
     }
-    if (towerShootTimer == null) {
-      towerShootTimer = new Timer.periodic(shoot, (_) {
-        List<Target> targets = tAdmin.attack(lAdmin.getActiveMinions());
-        lAdmin.calculateHPOfMinions(targets);
-      });
-    }
-    if (checkLifeTimer == null) {
-      checkLifeTimer = new Timer.periodic(checkLife, (_) {
-        List<Minion> tmp = new List<Minion>();
-        this.lAdmin.activeMinions.forEach((m) {
-          if (m.getStepsOnPath() >= this.lAdmin.path.length &&
-              m.getHitpoints() > 0 &&
-              m.getDestroyedALife() == false) {
-            this.life--;
-            m.setDestroyedALife(true);
-            print("Life remaining: $life");
-          }
-        });
-      });
-    }
+    startGameTimer();
   }
   void evaluateKilledMinions(bool endOfGame) {
     int income = this.lAdmin.getCurrentWave().deadMinions *
@@ -139,6 +114,43 @@ class Game {
       }
     }
     return board;
+  }
+  void startGameTimer(){
+    if (spawnTimer == null) {
+          spawnTimer = new Timer.periodic(spawn, (_) {
+            this.lAdmin.minionSpawn();
+          });
+        }
+
+
+        if (towerShootTimer == null) {
+          towerShootTimer = new Timer.periodic(shoot, (_) {
+            List<Target> targets = tAdmin.attack(lAdmin.getActiveMinions());
+            lAdmin.calculateHPOfMinions(targets);
+          });
+        }
+        if (checkLifeTimer == null) {
+          checkLifeTimer = new Timer.periodic(checkLife, (_) {
+            List<Minion> tmp = new List<Minion>();
+            this.lAdmin.activeMinions.forEach((m) {
+              if (m.getStepsOnPath() >= this.lAdmin.path.length &&
+                  m.getHitpoints() > 0 &&
+                  m.getDestroyedALife() == false) {
+                this.life--;
+                m.setDestroyedALife(true);
+                print("Life remaining: $life");
+              }
+            });
+          });
+        }
+  }
+  void stopGameTimer(){
+    this.spawnTimer.cancel();
+    this.spawnTimer = null;
+    this.checkLifeTimer.cancel();
+    this.checkLifeTimer = null;
+    this.towerShootTimer.cancel();
+    this.towerShootTimer = null;
   }
   /**
    * ---------------Getter and Setter Methods---------------------

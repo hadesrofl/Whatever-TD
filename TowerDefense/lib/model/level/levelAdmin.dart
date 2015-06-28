@@ -362,4 +362,20 @@ class LevelAdmin {
   Wave getCurrentWave() {
     return this.currentWave;
   }
+  /**
+   * Stops all active minions movement timer
+   */
+  void stopActiveMinions(){
+    this.activeMinions.forEach((m){
+      m.stopMoveTimer();
+    });
+  }
+  /**
+   * Restarts all active minions movement timer
+   */
+  void restartActiveMinions(){
+    this.activeMinions.forEach((m){
+      m.restartMoveTimer();
+    });
+  }
 }

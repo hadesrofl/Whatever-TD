@@ -179,7 +179,7 @@ class Minion {
   void move() {
     incStepsOnPath();
     if (this.stepsOnPath >= this.path.length) {
-      this.moveTimer == null;
+      this.moveTimer = null;
     } else {
       this.position = this.path[this.stepsOnPath];
     }
@@ -326,5 +326,6 @@ class Minion {
    */
   void stopMoveTimer(){
     this.moveTimer.cancel();
+    this.moveTimer = null;
   }
 }
