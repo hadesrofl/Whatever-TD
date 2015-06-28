@@ -23,12 +23,20 @@ body{
   margin-left: 50%;
   margin-right: 50%;
 }
+#counter{
+  float:right;
+  margin-bottom: 2px;
+  margin-right: 20px;
+  text-align: center;
+  background-color: lightgreen;
+  with: 250px;
+}
 #navigation{
    float: left;
    text-align: center;
    text-style: bold;
    background-color: lightgreen;
-   margin: 45px 200px 15px 15px;
+   margin: 100px 200px 15px 15px;
    width: 250px;
 }
 #navigation td{

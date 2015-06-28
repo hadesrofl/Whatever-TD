@@ -19,6 +19,7 @@ class Game {
   View view;
   Player player;
   int life;
+  int startCounter = 15;
   /* TODO: Get Difficulty from User Input (button or something else) */
   String difficulty;
   Timer startWave;
@@ -26,7 +27,6 @@ class Game {
   Timer checkLifeTimer;
   Timer towerShootTimer;
   bool runningGame = false;
-
   Duration buildingPhase = const Duration(milliseconds: 1000);
   Duration spawn = const Duration(milliseconds: 2500);
   Duration checkLife = const Duration(milliseconds: 1000);
@@ -42,21 +42,27 @@ class Game {
    * 
    */
   void startGame() {
-    if(this.tAdmin == null){
+    if (this.tAdmin == null) {
       this.tAdmin = new TowerAdmin();
     }
-    if(this.life != maxLife){
+    if (this.life != maxLife) {
       this.life = maxLife;
     }
-    if(this.lAdmin == null){
+    if (this.lAdmin == null) {
       setLevelAdmin();
     }
     this.lAdmin.loadNextLevel();
     this.lAdmin.loadPath(board);
     this.lAdmin.loadNextWave();
-    if (!runningGame) {
-      startWave = new Timer(buildingPhase, () => runGame());
-    }
+    runGame();
+    /** if (!runningGame) {
+      startWave = new Timer.periodic((buildingPhase), (_) {
+        if (this.startCounter == 0) runGame();
+        else {
+          startCounter--;
+        }
+      });
+    }*/
   }
   /**
    * 
@@ -104,14 +110,14 @@ class Game {
     int income = this.lAdmin.getCurrentWave().deadMinions *
         this.lAdmin.getCurrentWave().getMinions()[0].getDroppedGold();
     this.player.setGold(this.player.getGold() + income);
-    if(endOfGame){
-      this.player.setHighscore(this.player.getHighscore() + (this.player.getGold() * highScoreModifier).toInt());
+    if (endOfGame) {
+      this.player.setHighscore(this.player.getHighscore() +
+          (this.player.getGold() * highScoreModifier).toInt());
       this.player.setGold(0);
-    }else{
-      this.player.setHighscore(this.player.getHighscore() + (income * highScoreModifier).toInt()); 
+    } else {
+      this.player.setHighscore(
+          this.player.getHighscore() + (income * highScoreModifier).toInt());
     }
-
-
   }
   /**
    * TODO: End Game Somehow

@@ -65,6 +65,7 @@ class View {
   Element px;
   ButtonElement help;
   ButtonElement restart;
+  Element time;
 
 /**
    * Constructor of the view
@@ -100,6 +101,7 @@ class View {
     help = querySelector("#help");
     helpBox = querySelector("#helpBox");
     restart = querySelector("#restart");
+    time = querySelector("#time");
 
     menuContainer.hidden = true;
     buyMenu.hidden = true;
@@ -113,7 +115,7 @@ class View {
     stop.hidden = true;
     restart.hidden = true;
     helpBox.hidden = true;
-
+    time.hidden = true;
   }
 /**
    * Method to create a board 
@@ -189,7 +191,7 @@ class View {
       });
     });
   }
-  void deleteImageOnLastField(String id){
+  void deleteImageOnLastField(String id) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
@@ -199,8 +201,8 @@ class View {
           children.classes.clear();
           children.classes.add("Path");
         }
-        });
       });
+    });
   }
   void upgradeImage(String id, String towerName, int level) {
     this.board.children.forEach((c) {
