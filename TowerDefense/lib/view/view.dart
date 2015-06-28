@@ -255,6 +255,11 @@ class View {
         droppedGold);
     mList.append(m);
   }
+  void clearToolTip() {
+    mList.children.forEach((lielem) {
+      lielem.remove();
+    });
+  }
   void clearView() {
     Element e;
     this.board.children.forEach((c) {
