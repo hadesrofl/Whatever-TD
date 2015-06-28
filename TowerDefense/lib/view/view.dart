@@ -220,6 +220,15 @@ class View {
     upgrade.hidden = false;
     p.hidden = true;
   }
+  void showDifficultyMenu(){
+    hard.hidden = false;
+    medium.hidden = false;
+    easy.hidden = false;
+    buy.hidden = true;
+    sell.hidden = true;
+    upgrade.hidden = true;
+    p.hidden = false;
+  }
   void setToolTip() {
     canonTower.setAttribute("title",
         "Price: 300\nBasicDamage: 7.0\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
@@ -232,18 +241,40 @@ class View {
   }
   void setMinionToolTip(String name, String armor, String hitpoints,
       String movementSpeed, String droppedGold) {
+<<<<<<< HEAD
     LIElement m = new LIElement();
     m.classes.add(name);
     m.setAttribute("data-toggle", "tooltip");
     m.setAttribute("title", name +
         "\n: Armor= " +
+=======
+<<<<<<< HEAD
+    
+  }
+  void clearView(){
+    Element e;
+    this.board.children.forEach((c) {
+      c.children.forEach((children) {
+          children.classes.clear();        
+      });
+    });
+=======
+    minionBox.innerHtml = name +
+        ": Armor= " +
+>>>>>>> 75c54d2310e06310138d24cd01a6159c900550b5
         armor +
         "\n, Hitpoints= " +
         hitpoints +
         "\n, MovementSpeed= " +
         movementSpeed +
+<<<<<<< HEAD
         "\n, Dropped Gold= " +
         droppedGold);
     mList.append(m);
+=======
+        ", Dropped Gold= " +
+        droppedGold;
+>>>>>>> c2a71724d05245803613bc9dc4c04f3c667d840f
+>>>>>>> 75c54d2310e06310138d24cd01a6159c900550b5
   }
 }

@@ -15,7 +15,7 @@ class Game {
   final row = 11;
   final col = 11;
   final highScoreModifier = 0.2;
-  final maxLife = 20;
+  final maxLife = 2;
   View view;
   Player player;
   int life;
@@ -32,7 +32,6 @@ class Game {
 
   Game(String levels) {
     this.levels = levels;
-    this.tAdmin = new TowerAdmin();
     this.board = createBoard(this.row, this.col);
     this.life = maxLife;
   }
@@ -40,9 +39,6 @@ class Game {
    * 
    */
   void startGame() {
-    if (this.tAdmin == null) {
-      this.tAdmin = new TowerAdmin();
-    }
     if (this.life != maxLife) {
       this.life = maxLife;
     }
@@ -86,9 +82,7 @@ class Game {
    * TODO: End Game Somehow
    */
   void endOfGame() {
-    spawnTimer.cancel();
-    checkLifeTimer.cancel();
-    towerShootTimer.cancel();
+    stopGameTimer();
     this.lAdmin = null;
     this.tAdmin = null;
   }
@@ -181,5 +175,8 @@ class Game {
   }
   void setLevelAdmin() {
     this.lAdmin = new LevelAdmin(levels, difficulty);
+  }
+  void setTowerAdmin(){
+    this.tAdmin = new TowerAdmin();
   }
 }
