@@ -19,6 +19,8 @@ class Controller {
   String field;
   var setTower;
   var x;
+  Timer startWave;
+  int startCounter = 15;
   List<StreamSubscription> streams = new List<StreamSubscription>();
   Timer updateMinionTimer;
   Timer updatePlayerDataTimer;
@@ -26,6 +28,7 @@ class Controller {
   Duration waveEndCheck = const Duration(milliseconds: 1000);
   Duration playerData = const Duration(milliseconds: 1500);
   Duration updateMinion = const Duration(milliseconds: 200);
+  Duration buildingPhase = const Duration(milliseconds: 1000);
   Controller(String levels) {
     //Initializing the Game
     game = new Game(levels);
@@ -47,7 +50,7 @@ class Controller {
       view.errorDiv.hidden = true;
       view.helpBox.hidden = false;
       view.help.hidden = false;
-      view.stop.hidden = false;
+      view.time.hidden = false;
     });
     buyListener();
     sellListener();
@@ -65,7 +68,7 @@ class Controller {
     });
   }
   void stopListener() {
-    streams.add(view.stop.onClick.listen((ev) {
+    view.stop.onClick.listen((ev) {
       updateMinionTimer.cancel();
       updatePlayerDataTimer.cancel();
       waveEndTimer.cancel();
@@ -73,7 +76,7 @@ class Controller {
       game.towerShootTimer.cancel();
       view.restart.hidden = false;
       endStreamSubscription();
-    }));
+    });
   }
   void restartListener() {
     streams.add(view.restart.onClick.listen((ev) {}));
@@ -83,25 +86,19 @@ class Controller {
       view.hideDifficultyMenu();
       game.setDifficulty("easy");
       game.setLevelAdmin();
-      game.startGame();
-      gameTriggers();
-      setPath();
+      time();
     });
     view.medium.onClick.listen((ev) {
       view.hideDifficultyMenu();
       game.setDifficulty("medium");
       game.setLevelAdmin();
-      game.startGame();
-      gameTriggers();
-      setPath();
+      time();
     });
     view.hard.onClick.listen((ev) {
       view.hideDifficultyMenu();
       game.setDifficulty("hard");
       game.setLevelAdmin();
-      game.startGame();
-      gameTriggers();
-      setPath();
+      time();
     });
   }
   void upgradeListener() {
@@ -268,6 +265,7 @@ class Controller {
     }
   }
   void setPath() {
+    game.lAdmin.loadPath(game.board);
     game.board.forEach((f) {
       if (f.isPathField()) {
         String id = f.getX().toString() + f.getY().toString();
@@ -278,8 +276,7 @@ class Controller {
 
   void gameTriggers() {
     if (updateMinionTimer == null) {
-      updateMinionTimer = new Timer.periodic(
-          updateMinion, (_) {
+      updateMinionTimer = new Timer.periodic(updateMinion, (_) {
         String id;
         Field lastField =
             game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
@@ -288,7 +285,16 @@ class Controller {
         /* Delete image on last field of path if there are no active minions */
         if (game.lAdmin.getActiveMinions().length == 0) {
           id = lastField.getX().toString() + lastField.getY().toString();
+<<<<<<< HEAD
           view.deleteImageOnLastField(id);
+=======
+          for (int i = 0;
+              i < game.lAdmin.getCurrentWave().getMinions().length;
+              i++) {
+            view.deleteImage(
+                id, game.lAdmin.getCurrentWave().getMinions()[i].getName());
+          }
+>>>>>>> f952c0b247b407722edafadd5aec6de807abd4e3
           /* There are minions on the board */
         } else {
           game.lAdmin.getActiveMinions().forEach((m) {
@@ -334,11 +340,16 @@ class Controller {
             game.lAdmin.getActiveMinions().remove(m);
           });
         }
+<<<<<<< HEAD
         /* remove leaked minions from list of active minions */
             leakedMinions.forEach((m) {
               game.lAdmin.getCurrentWave().incLeakedMinions();
               game.lAdmin.activeMinions.remove(m);
             });
+=======
+        print("List of Minions " +
+            game.lAdmin.getActiveMinions().length.toString());
+>>>>>>> f952c0b247b407722edafadd5aec6de807abd4e3
       });
 
     }
@@ -361,17 +372,24 @@ class Controller {
 
       if (waveEndTimer == null) {
         waveEndTimer = new Timer.periodic(waveEndCheck, (_) {
-          if (game.lAdmin.isLevelEnd() && game.lAdmin.isFinalLevel() || game.life <= 0) {
+          if (game.lAdmin.isLevelEnd() && game.lAdmin.isFinalLevel() ||
+              game.life <= 0) {
             clearPath();
             game.evaluateKilledMinions(true);
             /* Player wins */
-            if(game.life <= 0){
-            this.view.nameLabel.innerHtml = "Game over! You have " + game.player.getHighscore().toString() + " Points!";
+            if (game.life <= 0) {
+              this.view.nameLabel.innerHtml = "Game over! You have " +
+                  game.player.getHighscore().toString() +
+                  " Points!";
               /* Player loses */
-            }else{
-           this.view.nameLabel.innerHtml = "Congratz," + game.player.getName() + ", you win with " + game.player.getHighscore().toString() + " Points!";
+            } else {
+              this.view.nameLabel.innerHtml = "Congratz," +
+                  game.player.getName() +
+                  ", you win with " +
+                  game.player.getHighscore().toString() +
+                  " Points!";
             }
-            game.endOfGame();  
+            game.endOfGame();
             endTrigger();
           } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel()) {
             clearPath();
@@ -395,5 +413,23 @@ class Controller {
     updateMinionTimer.cancel();
     updatePlayerDataTimer.cancel();
     waveEndTimer.cancel();
+  }
+  void time() {
+    setPath();
+    if (startWave == null) {
+      startWave = new Timer.periodic((buildingPhase), (_) {
+        if (this.startCounter == 0) {
+          game.startGame();
+          startWave.cancel();
+          gameTriggers();
+          view.stop.hidden = false;
+          view.time.hidden = true;
+          stopListener();
+        } else {
+          startCounter--;
+        }
+        view.time.innerHtml = "Next Wave starts in: " + startCounter.toString();
+      });
+    }
   }
 }
