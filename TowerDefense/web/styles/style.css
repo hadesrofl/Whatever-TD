@@ -13,7 +13,6 @@ body{
 
 #navigation > ul, #helpBox > ul{   
   padding: 4px;
-  
 }
 #navigation ul, #helpBox ul{
   list-style-type: none;
@@ -62,9 +61,6 @@ body{
    width: 500px;
    margin: auto;
 }
-#board tr{
-  
-}
 #board td {
   text-align: right;
   height: 38px;
@@ -78,7 +74,7 @@ body{
     background-image: url("../img/background/dirt.jpg");
 }
 /* Minion Images */
-#board td.amazon{
+#board td.amazon, li.amazon{
       background-image: url("../img/minions/amazon.png");
 }
 #board td.apple{
@@ -99,8 +95,10 @@ body{
 #board td.google{
       background-image: url("../img/minions/google.png");
 }
-#board td.internetExplorer{
+#board td.internetExplorer, #mList td.internetExplorer{
       background-image: url("../img/minions/internetexplorer.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
 }
 #board td.strongKratzke{
       background-image: url("../img/minions/strongkratzke.jpg");
@@ -120,6 +118,7 @@ body{
   height: 38px;
   width: 38px;
   background-repeat: no-repeat;
+  background-size: cover;
   border: solid black 2px;
   border-radius: 1px;
   text-shadow: 1px 1px 3px white;

@@ -62,7 +62,7 @@ class View {
   ButtonElement restart;
   Element time;
   Element helpText;
-  UListElement mList;
+  TableElement mList;
 
 /**
    * Constructor of the view
@@ -240,12 +240,12 @@ class View {
         "Price: 1000\nBasicDamage: 10.0\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
   void setMinionToolTip(String name, String armor, String hitpoints,
-<<<<<<< HEAD
       String movementSpeed, String droppedGold) {  
-=======
-      String movementSpeed, String droppedGold) {
->>>>>>> 6fb6ce0f8a5a8006c0ea04442da6a1d76e65cac3
-    LIElement m = new LIElement();
+    /** FIXME! */
+    TableRowElement tr = new TableRowElement();
+    TableCellElement m = new TableCellElement();
+    this.mList.append(tr);
+    tr.append(m);
     m.classes.add(name);
     m.setAttribute("data-toggle", "tooltip");
     m.setAttribute("title", name +
@@ -259,7 +259,7 @@ class View {
         droppedGold);
     mList.append(m);
   }
-  void clearToolTip() {
+  void clearMinionToolTip() {
     mList.children.forEach((lielem) {
       lielem.remove();
     });

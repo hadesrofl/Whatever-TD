@@ -413,6 +413,7 @@ class Controller {
             game.endOfGame();
             stopControllerTimer();
             view.showDifficultyMenu();
+            this.view.clearMinionToolTip();
           } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel() || game.lAdmin.getCurrentWave().isWaveClear()) {
             clearPath();
             this.startWaveTimer();
@@ -435,6 +436,7 @@ class Controller {
       startWave = new Timer.periodic((buildingPhase), (_) {
         if (counter == 0) {
           game.startGame();
+          this.setMinionInfo();
           startWave.cancel();
           startWave = null;
           startControllerTimer();
@@ -463,7 +465,7 @@ class Controller {
      String hitPoints = m.getHitpoints().toString();
      String movementSpeed = m.getMovementSpeed().inMilliseconds.toString();
      String droppedGold =  m.getDroppedGold().toString();
-     this.view.setMinionToolTip(name, armor, hitpoints, movementSpeed, droppedGold);
+     this.view.setMinionToolTip(name, armor, hitPoints, movementSpeed, droppedGold);
     });
   }
 }
