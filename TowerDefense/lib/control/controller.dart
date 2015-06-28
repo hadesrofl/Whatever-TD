@@ -76,6 +76,7 @@ class Controller {
       game.towerShootTimer.cancel();
       view.restart.hidden = false;
       view.stop.hidden = true;
+      restartListener();
     });
   }
   void restartListener() {
