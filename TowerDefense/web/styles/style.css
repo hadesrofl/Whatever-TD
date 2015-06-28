@@ -70,6 +70,7 @@ body{
 }
 #player{
   margin-left: 200px;
+}
 #board td.Path{
     background-image: url("../img/background/dirt.jpg");
 }
