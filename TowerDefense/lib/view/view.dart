@@ -191,7 +191,7 @@ class View {
       });
     });
   }
-  void deleteImageOnLastField(String id) {
+  void deleteImageOnLastPathField(String id) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {

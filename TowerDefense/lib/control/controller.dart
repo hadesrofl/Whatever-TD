@@ -288,7 +288,7 @@ class Controller {
         /* Delete image on last field of path if there are no active minions */
         if (game.lAdmin.getActiveMinions().length == 0) {
           id = lastField.getX().toString() + lastField.getY().toString();
-          view.deleteImageOnLastField(id);
+          view.deleteImageOnLastPathField(id);
           for (int i = 0;
               i < game.lAdmin.getCurrentWave().getMinions().length;
               i++) {
@@ -301,7 +301,7 @@ class Controller {
             if (m.getDestroyedALife()) {
               leakedMinions.add(m);
               id = lastField.getX().toString() + lastField.getY().toString();
-              view.deleteImageOnLastField(id);
+              view.deleteImageOnLastPathField(id);
             }
             String oldId;
             /* Minion is dead */
