@@ -58,6 +58,9 @@ body{
 #board{
   /*TODO: responsive*/
    border-style: none;
+   height: 700px;
+   width: 500px;
+   margin: auto;
 }
 #board tr{
   
