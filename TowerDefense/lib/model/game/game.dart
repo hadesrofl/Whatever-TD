@@ -87,16 +87,9 @@ class Game {
               m.getDestroyedALife() == false) {
             this.life--;
             m.setDestroyedALife(true);
-            tmp.add(m);
             print("Life remaining: $life");
           }
         });
-        /* remove leaked minions from list of active minions */
-        tmp.forEach((m) {
-          this.lAdmin.getCurrentWave().incLeakedMinions();
-          this.lAdmin.activeMinions.remove(m);
-        });
-        tmp = null;
       });
     }
   }

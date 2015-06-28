@@ -113,7 +113,6 @@ class View {
     stop.hidden = true;
     restart.hidden = true;
     helpBox.hidden = true;
-
   }
 /**
    * Method to create a board 
@@ -189,18 +188,19 @@ class View {
       });
     });
   }
-  void deleteImageOnLastField(String id){
+  void deleteImageOnLastField(String id) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
-          children.attributes.remove("data-toggle");
-          children.attributes.remove("title");
-          print(children.classes.toString());
-          children.classes.clear();
-          children.classes.add("Path");
+          if (children.classes.length > 1) {
+            children.attributes.remove("data-toggle");
+            children.attributes.remove("title");
+            children.classes.clear();
+            children.classes.add("Path");
+          }
         }
-        });
       });
+    });
   }
   void upgradeImage(String id, String towerName, int level) {
     this.board.children.forEach((c) {
