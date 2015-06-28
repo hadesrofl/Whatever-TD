@@ -62,6 +62,7 @@ class View {
   ButtonElement restart;
   Element time;
   Element helpText;
+  Element minionBox;
 
 /**
    * Constructor of the view
@@ -97,6 +98,7 @@ class View {
     restart = querySelector("#restart");
     time = querySelector("#time");
     helpText = querySelector("#helpText");
+    minionBox = querySelector("#minioninfo");
 
     menuContainer.hidden = true;
     buyMenu.hidden = true;
@@ -229,5 +231,15 @@ class View {
         "Price: 1000\nBasicDamage: 10.0\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
   void setMinionToolTip(String name, String armor, String hitpoints,
-      String movementSpeed, String droppedGold) {}
+      String movementSpeed, String droppedGold) {
+    minionBox.innerHtml = name +
+        ": Armor= " +
+        armor +
+        ", Hitpoints= " +
+        hitpoints +
+        ", MovementSpeed= " +
+        movementSpeed +
+        ", Dropped Gold= " +
+        droppedGold;
+  }
 }
