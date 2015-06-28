@@ -56,6 +56,7 @@ class Controller {
     sellListener();
     upgradeListener();
     difficultyListener();
+    helpListener();
 
     view.cancel.onClick.listen((ev) {
       view.buyMenu.hidden = true;
@@ -84,6 +85,14 @@ class Controller {
       game.lAdmin.restartActiveMinions();
       view.restart.hidden = true;
       view.stop.hidden = false;
+    });
+  }
+  void helpListener() {
+    view.help.onClick.listen((ev) {
+      view.helpText.innerHtml =
+          "Towerklassen: There are four kinds of Tower you can buy." +
+              "1: CanonTower() 2.ArrowTower() 3.FireTower() 4.LightningTower().";
+      view.helpText.hidden = false;
     });
   }
   void difficultyListener() {
@@ -239,8 +248,7 @@ class Controller {
               view.upgrade.hidden = false;
               view.buy.hidden = false;
               view.cancel.hidden = true;
-              view.setImageTower(
-                  f, game.tAdmin.allTower.last.name, game.tAdmin.allTower.last);
+              view.setImageToView(f, game.tAdmin.allTower.last.name);
             } else {
               if (towerDescription != 0) {
                 view.errorDiv.hidden = false;
@@ -330,7 +338,12 @@ class Controller {
                 }
                 id = m.getPosition().getX().toString() +
                     m.getPosition().getY().toString();
+<<<<<<< HEAD
                 view.setImageMinion(id, m.getName(), m);
+=======
+                view.setImageToView(id, m.getName());
+                /* Minion leaked, delete image on last field */
+>>>>>>> dd0a1be02617f1d79a74a886fbe7fc11a7da0113
               }
             }
           });
@@ -431,7 +444,7 @@ class Controller {
       });
     }
   }
-  void stopControllerTimer(){
+  void stopControllerTimer() {
     updateMinionTimer.cancel();
     updateMinionTimer = null;
     updatePlayerDataTimer.cancel();
