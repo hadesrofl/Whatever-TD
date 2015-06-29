@@ -63,6 +63,7 @@ class View {
   Element time;
   Element helpText;
   TableElement mList;
+  int mListRowCounter = 0;
 
 /**
    * Constructor of the view
@@ -240,13 +241,9 @@ class View {
         "Price: 1000\nBasicDamage: 10.0\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
   void setMinionToolTip(String name, String armor, String hitpoints,
-      String movementSpeed, String droppedGold) {  
+      String movementSpeed, String droppedGold) {
     /** FIXME! */
-    TableRowElement tr = new TableRowElement();
     TableCellElement m = new TableCellElement();
-    this.mList.append(tr);
-    tr.append(m);
-    m.classes.add(name);
     m.setAttribute("data-toggle", "tooltip");
     m.setAttribute("title", name +
         "\n: Armor= " +
@@ -257,12 +254,25 @@ class View {
         movementSpeed +
         "\n, Dropped Gold= " +
         droppedGold);
-    mList.append(m);
+    m.classes.add(name);
+    if (mList.children.length != 0) {
+      for (int i = 0; i < mList.children.length; i++) {
+        if (mList.children[i].children.length < 4) {
+          mList.children[i].append(m);
+        } else {
+          TableRowElement tr = new TableRowElement();
+          this.mList.append(tr);
+          tr.append(m);
+        }
+      }
+    } else {
+      TableRowElement tr = new TableRowElement();
+      this.mList.append(tr);
+      tr.append(m);
+    }
   }
   void clearMinionToolTip() {
-    mList.children.forEach((lielem) {
-      lielem.remove();
-    });
+    mList.children.clear();
   }
   void clearBoard() {
     Element e;

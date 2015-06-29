@@ -19,8 +19,9 @@ class Controller {
   String field;
   var setTower;
   var x;
+  bool endOfWave = false;
   Timer startWave;
- final startCounter = 15;
+  final startCounter = 15;
   List<StreamSubscription> streams = new List<StreamSubscription>();
   Timer updateMinionTimer;
   Timer updatePlayerDataTimer;
@@ -96,7 +97,7 @@ class Controller {
       game.setDifficulty("easy");
       game.setTowerAdmin();
       game.setLevelAdmin();
-      if(game.player != null){
+      if (game.player != null) {
         game.player = null;
       }
       game.setPlayer(view.nameInput.value);
@@ -109,7 +110,7 @@ class Controller {
       game.setDifficulty("medium");
       game.setTowerAdmin();
       game.setLevelAdmin();
-      if(game.player != null){
+      if (game.player != null) {
         game.player = null;
       }
       game.setPlayer(view.nameInput.value);
@@ -122,7 +123,7 @@ class Controller {
       game.setDifficulty("hard");
       game.setTowerAdmin();
       game.setLevelAdmin();
-      if(game.player != null){
+      if (game.player != null) {
         game.player = null;
       }
       game.setPlayer(view.nameInput.value);
@@ -144,7 +145,8 @@ class Controller {
                   .listen((ev) {
             if (b) {
               game.tAdmin.allTower.forEach((tower) {
-                if (tower.getPosition() != null && tower.getPosition().getX() == j &&
+                if (tower.getPosition() != null &&
+                    tower.getPosition().getX() == j &&
                     tower.getPosition().getY() == i) {
                   String id = tower.getPosition().getX().toString() +
                       tower.getPosition().getY().toString();
@@ -177,15 +179,15 @@ class Controller {
             if (check) {
               var tmp = null;
               game.tAdmin.allTower.forEach((tower) {
-                if(tower.getPosition() != null){
-                if (tower.getPosition().getX() == j &&
-                    tower.getPosition().getY() == i) {
-                  String id = tower.getPosition().getX().toString() +
-                      tower.getPosition().getY().toString();
-                  view.deleteImage(id, tower.name);
-                  tmp = tower;
-                }
-                }else{
+                if (tower.getPosition() != null) {
+                  if (tower.getPosition().getX() == j &&
+                      tower.getPosition().getY() == i) {
+                    String id = tower.getPosition().getX().toString() +
+                        tower.getPosition().getY().toString();
+                    view.deleteImage(id, tower.name);
+                    tmp = tower;
+                  }
+                } else {
                   tmp = tower;
                 }
               });
@@ -287,7 +289,7 @@ class Controller {
     }
   }
   void setPath() {
-    game.board.forEach((f){
+    game.board.forEach((f) {
       f.pathField = false;
       f.covered = false;
     });
@@ -304,8 +306,11 @@ class Controller {
     if (updateMinionTimer == null) {
       updateMinionTimer = new Timer.periodic(updateMinion, (_) {
         print("Distinct Minions: ");
-       this.game.lAdmin.getCurrentWave().getDistinctMinions().forEach((m) => print(m.getName()));
-       print("Distinct Minions End!");
+        this.game.lAdmin
+            .getCurrentWave()
+            .getDistinctMinions()
+            .forEach((m) => print(m.getName()));
+        print("Distinct Minions End!");
         String id;
         Field lastField =
             game.lAdmin.getPath()[game.lAdmin.getPath().length - 1];
@@ -377,7 +382,9 @@ class Controller {
 
     if (updatePlayerDataTimer == null) {
       updatePlayerDataTimer = new Timer.periodic(playerData, (_) {
-        this.game.evaluateKilledMinions(false);
+        if (!endOfWave) {
+          this.game.evaluateKilledMinions(false);
+        }
         int gold = game.player.getGold();
         if (gold < 0) {
           gold = 0;
@@ -410,14 +417,18 @@ class Controller {
                   game.player.getHighscore().toString() +
                   " Points!";
             }
+            endOfWave = true;
             game.endOfGame();
             stopControllerTimer();
             view.showDifficultyMenu();
             this.view.clearMinionToolTip();
-          } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel() || game.lAdmin.getCurrentWave().isWaveClear()) {
+          } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel() ||
+              game.lAdmin.getCurrentWave().isWaveClear()) {
+            endOfWave = true;
             clearPath();
             this.startWaveTimer();
-          }        
+            this.view.clearMinionToolTip();
+          }
         });
       }
     }
@@ -443,6 +454,7 @@ class Controller {
           view.stop.hidden = false;
           view.time.hidden = true;
           stopListener();
+          endOfWave = false;
         } else {
           counter--;
         }
@@ -458,14 +470,15 @@ class Controller {
     waveEndTimer.cancel();
     waveEndTimer = null;
   }
-  void setMinionInfo(){
-    this.game.lAdmin.currentWave.getDistinctMinions().forEach((m){
-     String name = m.getName();
-     String armor = m.getArmor().toString();
-     String hitPoints = m.getHitpoints().toString();
-     String movementSpeed = m.getMovementSpeed().inMilliseconds.toString();
-     String droppedGold =  m.getDroppedGold().toString();
-     this.view.setMinionToolTip(name, armor, hitPoints, movementSpeed, droppedGold);
+  void setMinionInfo() {
+    this.game.lAdmin.currentWave.getDistinctMinions().forEach((m) {
+      String name = m.getName();
+      String armor = m.getArmor().toString();
+      String hitPoints = m.getHitpoints().toString();
+      String movementSpeed = m.getMovementSpeed().inMilliseconds.toString();
+      String droppedGold = m.getDroppedGold().toString();
+      this.view.setMinionToolTip(
+          name, armor, hitPoints, movementSpeed, droppedGold);
     });
   }
 }
