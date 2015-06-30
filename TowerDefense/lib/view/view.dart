@@ -24,7 +24,7 @@ class View {
   /**
    * Label for the name and points of a player
    */
-  Element nameLabel;
+  Element playerLabel;
   /**
    * Container of the menu
    */
@@ -57,13 +57,16 @@ class View {
   ButtonElement medium;
   ButtonElement hard;
   Element p;
-  Element px;
   ButtonElement help;
   ButtonElement restart;
   Element time;
   Element helpText;
   TableElement mList;
   int mListRowCounter = 0;
+  Element points;
+  Element gold;
+  Element life;
+  Element timerhr;
 
 /**
    * Constructor of the view
@@ -78,7 +81,7 @@ class View {
     start = querySelector("#start");
     stop = querySelector("#stop");
     boardElement = querySelector("#board");
-    nameLabel = querySelector("#player");
+    playerLabel = querySelector("#playerLabel");
     menuContainer = querySelector("#navigation");
     buyMenu = querySelector("#buyMenu");
     buy = querySelector("#buy");
@@ -93,13 +96,16 @@ class View {
     medium = querySelector("#mediumGame");
     hard = querySelector("#hardGame");
     p = querySelector("#difficulty");
-    px = querySelector("#gold");
     help = querySelector("#help");
     helpBox = querySelector("#helpBox");
     restart = querySelector("#restart");
     time = querySelector("#time");
     helpText = querySelector("#helpText");
     mList = querySelector("#mList");
+    points = querySelector("#points");
+    gold = querySelector("#gold");
+    life = querySelector("#life");
+    timerhr = querySelector("#timerhr");
 
     menuContainer.hidden = true;
     buyMenu.hidden = true;
@@ -112,6 +118,7 @@ class View {
     restart.hidden = true;
     helpBox.hidden = true;
     time.hidden = true;
+    timerhr.hidden = true;
     helpText.hidden = true;
     setToolTip();
   }
@@ -232,13 +239,13 @@ class View {
   }
   void setToolTip() {
     canonTower.setAttribute("title",
-        "Price: 300\nBasicDamage: 7.0\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+        "Price: 300\nBasicDamage: 7.0\nRange: 2\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
     arrowTower.setAttribute("title",
-        "Price: 150\nBasicDamage: 5.0\nDamageType: Piercing\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+        "Price: 150\nBasicDamage: 5.0\nRange: 3\nDamageType: Piercing\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
     fireTower.setAttribute("title",
-        "Price: 1000\nBasicDamage: 10.0\nDamageType: Fire\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+        "Price: 1000\nBasicDamage: 10.0\nRange: 2\nDamageType: Fire\nSpecial Ability: does dmg/seconds\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
     lightningTower.setAttribute("title",
-        "Price: 1000\nBasicDamage: 10.0\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+        "Price: 1000\nBasicDamage: 10.0\nRange: 2\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
   void setMinionToolTip(String name, String armor, String hitpoints,
       String movementSpeed, String droppedGold) {
@@ -246,13 +253,13 @@ class View {
     TableCellElement m = new TableCellElement();
     m.setAttribute("data-toggle", "tooltip");
     m.setAttribute("title", name +
-        "\n: Armor= " +
+        "\n Armor= " +
         armor +
-        "\n, Hitpoints= " +
+        "\n Hitpoints= " +
         hitpoints +
-        "\n, MovementSpeed= " +
+        "\n MovementSpeed= " +
         movementSpeed +
-        "\n, Dropped Gold= " +
+        "\n Dropped Gold= " +
         droppedGold);
     m.classes.add(name);
     if (mList.children.length != 0) {

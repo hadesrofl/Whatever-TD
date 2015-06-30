@@ -40,15 +40,15 @@ class Controller {
       game.setPlayer(view.nameInput.value);
       view.createBoard(game.getRow(), game.getCol());
       view.start.hidden = true;
-      view.nameLabel.innerHtml = "Hello " +
-          view.nameInput.value +
-          ", you've got " +
-          game.player.getHighscore().toString() +
-          " Points";
       view.nameInput.hidden = true;
       view.menuContainer.hidden = false;
       view.helpBox.hidden = false;
       view.help.hidden = false;
+      view.playerLabel.innerHtml = "Name: " + game.player.getName();
+      view.points.innerHtml =
+          "Points: " + game.player.getHighscore().toString();
+      view.gold.innerHtml = "Gold: " + game.player.getGold().toString();
+      view.life.innerHtml = "Life: " + game.life.toString();
     });
     buyListener();
     sellListener();
@@ -389,13 +389,11 @@ class Controller {
         if (gold < 0) {
           gold = 0;
         }
-        view.nameLabel.innerHtml = "Hello " +
-            view.nameInput.value +
-            ", you've got " +
-            game.player.getHighscore().toString() +
-            " Points and " +
-            gold.toString() +
-            " Gold";
+        view.playerLabel.innerHtml = "Name: " + game.player.getName();
+        view.points.innerHtml =
+            "Points: " + game.player.getHighscore().toString();
+        view.gold.innerHtml = "Gold: " + game.player.getGold().toString();
+        view.life.innerHtml = "Life: " + game.life.toString();
       });
 
       if (waveEndTimer == null) {
@@ -406,27 +404,24 @@ class Controller {
             game.evaluateKilledMinions(true);
             /* Player wins */
             if (game.life <= 0) {
-              this.view.nameLabel.innerHtml = "Game over! You have " +
-                  game.player.getHighscore().toString() +
-                  " Points!";
+              this.view.playerLabel.innerHtml = "Game over!";
+              view.life.innerHtml = "Life: " + game.life.toString();
               /* Player loses */
             } else {
-              this.view.nameLabel.innerHtml = "Congratz," +
-                  game.player.getName() +
-                  ", you win with " +
-                  game.player.getHighscore().toString() +
-                  " Points!";
+              this.view.playerLabel.innerHtml = "Congratz!";
             }
             endOfWave = true;
             game.endOfGame();
             stopControllerTimer();
             view.showDifficultyMenu();
+            this.view.stop.hidden = true;
             this.view.clearMinionToolTip();
           } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel() ||
               game.lAdmin.getCurrentWave().isWaveClear()) {
             endOfWave = true;
             clearPath();
             this.startWaveTimer();
+            this.view.stop.hidden = true;
             this.view.clearMinionToolTip();
           }
         });
@@ -453,12 +448,14 @@ class Controller {
           startControllerTimer();
           view.stop.hidden = false;
           view.time.hidden = true;
+          view.timerhr.hidden = true;
           stopListener();
           endOfWave = false;
         } else {
           counter--;
         }
         view.time.innerHtml = "Next Wave starts in: " + counter.toString();
+        if (counter != 0) view.timerhr.hidden = false;
       });
     }
   }
@@ -473,7 +470,7 @@ class Controller {
   void setMinionInfo() {
     this.game.lAdmin.currentWave.getDistinctMinions().forEach((m) {
       String name = m.getName();
-      String armor = m.getArmor().toString();
+      String armor = m.getArmor().value.toString();
       String hitPoints = m.getHitpoints().toString();
       String movementSpeed = m.getMovementSpeed().inMilliseconds.toString();
       String droppedGold = m.getDroppedGold().toString();

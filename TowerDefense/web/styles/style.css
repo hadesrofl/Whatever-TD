@@ -7,10 +7,6 @@ body{
   text-align: center;
   color: white;
 }
-#player{
-  color: white;
-}
-
 #navigation > ul, #helpBox > ul{   
   padding: 4px;
 }
@@ -22,33 +18,45 @@ body{
   margin-left: 50%;
   margin-right: 50%;
 }
-#counter{
-  float:right;
-  margin-bottom: 2px;
-  margin-right: 20px;
-  text-align: center;
-  background-color: lightgreen;
-  with: 250px;
-}
 #navigation{
    float: left;
    text-align: center;
    text-style: bold;
    background-color: lightgreen;
-   margin: 100px 200px 15px 15px;
+   margin: 50px 200px 15px 15px;
    width: 250px;
+   border-radius: 10px;
+   border: solid black 2px;
+   padding-left: 10px;
+   padding-right: 10px;
+   padding-bottom: 10px;
+}
+#playerLabel, #points, #gold, #life{
+  text-align: left;
+  font-family: serif;
+  font-weight: bold;
+}
+#line{
+  color: black;
+}
+#m{
+  font-size: 22px;
+  text-decoration: underline;
 }
 #navigation td{
   background-color: lightgreen;
 }
 #helpBox{
+  border-radius: 10px;
    float: right;
    text-align: center;
    text-style: bold;
    background-color: lightgreen;
+   margin-top: 50px;
    margin-left: 10px;
    margin-right: 75px;
    width: 250px;
+   border: solid black 2px;
 }
 #stop{
    /* background: #262626; */
@@ -204,8 +212,4 @@ body{
 }
 #stop:hover{
   color:red;
-}
-#minioninfo{
-  width: 250px;
-  background-color: lightgreen;
 }

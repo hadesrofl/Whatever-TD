@@ -15,7 +15,7 @@ class Game {
   final row = 11;
   final col = 11;
   final highScoreModifier = 0.2;
-  final maxLife = 2;
+  final maxLife = 15;
   View view;
   Player player;
   int life;
@@ -45,15 +45,16 @@ class Game {
     if (this.lAdmin == null) {
       setLevelAdmin();
     }
-    if (this.lAdmin.currentLevel == 0 ) {
+    if (this.lAdmin.currentLevel == 0) {
       this.lAdmin.loadNextLevel();
     }
-    if(this.lAdmin.currentLevel != 0 && this.lAdmin.getCurrentWave() != null){
+    if (this.lAdmin.currentLevel != 0 && this.lAdmin.getCurrentWave() != null) {
       if (this.lAdmin.isLevelEnd()) {
         this.lAdmin.loadNextLevel();
-      }else {
-      this.lAdmin.loadNextWave();
-    }}
+      } else {
+        this.lAdmin.loadNextWave();
+      }
+    }
     runGame();
     /** if (!runningGame) {
       startWave = new Timer.periodic((buildingPhase), (_) {

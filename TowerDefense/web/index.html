@@ -10,15 +10,24 @@
   <body>   
   <div id="top">   
    <h1 id="gameHeader">Welcome to Nyan Cat TD</h1>
-    <p id="gameDescription">War...war never changes...</p>
     <input type="text" id="playerName"/>
     <button id="start">Start</button></div>
-    <p id="gold"></p>
-    <div id="counter">
-      <strong id="time"></strong>
-    </div>
+    
     <div id="navigation">
-      <strong>Menu</strong>
+     <p>
+      <strong id="time"></strong>
+      <hr id="timerhr">
+     </p>
+     <section>
+       <p id="playerLabel">Name: </p>
+       <p id="points">Points: </p>
+       <p id="gold">Gold: </p>
+       <p id="life">Life: </p>
+     </section>
+     <hr id="line">
+      <p>
+        <strong id="m">Menu</strong>
+      </p>
       <ul id="menu">
         <p id="difficulty">Which difficulty you want to play with?</p>
         <button type="button" class="LevelButton" id="easyGame">Easy</button>
@@ -56,13 +65,14 @@
         <li><button type="button" class="MenuButton" id="sell">Sell</button></li>
         <li><button type="button" class="MenuButton" id="upgrade">Upgrade</button></li>
       </ul>
+      <hr id=line">
       <div id="minioninfo">
         <strong>Minion Info: </strong>
         <table id="mList">
         </table>
       </div>
     </div>
-    <h3 id="player"></h3>
+    
     <div id="helpBox">
       <ul>
         <li><button type="button" class="MenuButton" id="restart">Start</button></li>
