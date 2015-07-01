@@ -1,7 +1,7 @@
 part of tower;
 
 /**
- * Instance of a LigthningTower
+ * LigthningTower
  * 
  * @author Florian Winzek
  */
