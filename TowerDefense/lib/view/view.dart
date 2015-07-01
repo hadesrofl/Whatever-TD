@@ -67,6 +67,9 @@ class View {
   Element gold;
   Element life;
   Element timerhr;
+  Element level;
+  Element wave;
+  Element minionsleft;
 
 /**
    * Constructor of the view
@@ -106,6 +109,9 @@ class View {
     gold = querySelector("#gold");
     life = querySelector("#life");
     timerhr = querySelector("#timerhr");
+    level = querySelector("#level");
+    wave = querySelector("#wave");
+    minionsleft = querySelector("#minionsleft");
 
     menuContainer.hidden = true;
     buyMenu.hidden = true;

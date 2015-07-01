@@ -15,11 +15,12 @@ class Game {
   final row = 11;
   final col = 11;
   final highScoreModifier = 0.2;
-  final maxLife = 15;
+  final maxLife = 5;
   View view;
   Player player;
   int life;
   int startCounter = 15;
+  int earnendMoneyFromMinions = 0;
   /* TODO: Get Difficulty from User Input (button or something else) */
   String difficulty;
   Timer spawnTimer;
@@ -39,6 +40,9 @@ class Game {
    * 
    */
   void startGame() {
+    if(earnendMoneyFromMinions != 0){
+      earnendMoneyFromMinions = 0;
+    }
     if (this.life != maxLife) {
       this.life = maxLife;
     }
@@ -73,8 +77,7 @@ class Game {
     startGameTimer();
   }
   void evaluateKilledMinions(bool endOfGame) {
-    int income = this.lAdmin.getCurrentWave().deadMinions *
-        this.lAdmin.getCurrentWave().getMinions()[0].getDroppedGold();
+    int income = this.lAdmin.getCurrentWave().getDroppedGold() - earnendMoneyFromMinions;
     this.player.setGold(this.player.getGold() + income);
     if (endOfGame) {
       this.player.setHighscore(this.player.getHighscore() +

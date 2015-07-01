@@ -29,6 +29,10 @@ class Wave {
    * List of Minions of this wave
    */
   List<Minion> minions = new List<Minion>();
+  /**
+   * droppedGold in this wave
+   */
+  int droppedGold = 0;
 
   /**
    * Constructor of a wave object
@@ -138,7 +142,24 @@ class Wave {
     this.minions.add(m);
     this.numberOfMinions++;
   }
+  /**
+   * Increases the number of leakedMinions
+   */
   void incLeakedMinions(){
     this.leakedMinions++;
+  }
+  /**
+   * Gets the amount of dropped gold
+   * @return the dropped gold
+   */
+  int getDroppedGold(){
+    return this.droppedGold;
+  }
+  /**
+   * Increases the amount of dropped gold of this wave
+   * @param is the amount of gold dropped by a minion
+   */
+  void incDroppedGold(int droppedMinionsGold){
+    this.droppedGold += droppedMinionsGold;
   }
 }

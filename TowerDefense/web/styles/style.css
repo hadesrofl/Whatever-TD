@@ -31,7 +31,7 @@ body{
    padding-right: 10px;
    padding-bottom: 10px;
 }
-#playerLabel, #points, #gold, #life{
+#playerLabel, #points, #gold, #life, #level, #wave, #minionsleft{
   text-align: left;
   font-family: serif;
   font-weight: bold;
