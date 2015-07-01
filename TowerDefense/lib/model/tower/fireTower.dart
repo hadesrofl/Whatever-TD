@@ -1,7 +1,7 @@
 part of tower;
 
 /**
- * Instance of a FireTower
+ * FireTower
  * 
  * @author Florian Winzek
  */

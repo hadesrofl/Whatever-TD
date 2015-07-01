@@ -82,6 +82,9 @@ body{
 #player{
   margin-left: 200px;
 }
+#board td.Shot{
+  background-image: url("../img/38px/towers/Start Explosion.png");
+}
 #board td.Path{
     background-image: url("../img/background/dirt.jpg");
       background-repeat: no-repeat;

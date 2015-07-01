@@ -4,20 +4,51 @@ import "dart:html";
 
 /**
    * This Class handles the appearance of our game and manipulates the DOM-Tree of HTML
+   * 
+   * @author Florian Winzek, René Kremer
    */
 class View {
+  /**
+   * Button Element to buy a tower 
+   */
   ButtonElement buy;
+  /**
+   * Button Element to cancel the current action
+   */
   ButtonElement cancel;
+  /**
+   * Button Element to sell a tower
+   */
   ButtonElement sell;
+  /**
+   * Button Element to upgrade a tower
+   */
   ButtonElement upgrade;
+  /**
+   * Button Element to choose a CanonTower after clicking on "buy"
+   */
   ButtonElement canonTower;
+  /**
+   * Button Element to choose an ArrowTower after clicking on "buy"
+   */
   ButtonElement arrowTower;
+  /**
+   * Button Element to choose a LightningTower after clicking on "buy"
+   */
   ButtonElement lightningTower;
+  /**
+   * Button Element to choose a FireTower after clicking on "buy"
+   */
   ButtonElement fireTower;
+  /**
+   * Table for the buy/sell/upgrade menu
+   */
   TableElement buyMenu;
+  /**
+   * Container for the start/stop/help buttons
+   */
   Element helpBox;
-
-/**
+  /**
    * An inputElement so that the user can type in his name
    */
   InputElement nameInput;
@@ -53,19 +84,61 @@ class View {
    * Columns for the Board
    */
   int col;
+  /**
+   * Button to choose level diffifculty "easy"
+   */
   ButtonElement easy;
+  /**
+   * Button to choose level diffifculty "medium"
+   */
   ButtonElement medium;
+  /**
+   * Button to choose level diffifculty "hard"
+   */
   ButtonElement hard;
+  /**
+   * Container for the difficulty button
+   */
   Element p;
+  /**
+   * Button for game instuctions and help information
+   */
   ButtonElement help;
+  /**
+   * Button to restart the game
+   */
   ButtonElement restart;
+  /**
+   * Container for the current Wave Counter
+   */
   Element time;
+  /**
+   * Content of Game Instructions and help information
+   */
   Element helpText;
+  /**
+   * Container for minion information
+   */
   TableElement mList;
+  /**
+   * help variable to create new rows of the mList table
+   */
   int mListRowCounter = 0;
+  /**
+   * current points of the player
+   */
   Element points;
+  /**
+   * current among of gold 
+   */
   Element gold;
+  /**
+   * current lifes
+   */
   Element life;
+  /**
+   * horizontal line in the navigation menu
+   */
   Element timerhr;
 
 /**
@@ -157,6 +230,9 @@ class View {
       }
     }
   }
+  /**
+   * Sets images to Elements by classes
+   */
   Element setImageToView(String id, String objectName) {
     Element e;
     this.board.children.forEach((c) {
@@ -169,6 +245,9 @@ class View {
     });
     return e;
   }
+  /**
+   * Deletes Images from Elements
+   */
   void deleteImage(String id, String objectName) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
@@ -188,6 +267,9 @@ class View {
       });
     });
   }
+  /**
+   * Delets images when minions reach their last field on the board
+   */
   void deleteImageOnLastPathField(String id) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
@@ -202,6 +284,9 @@ class View {
       });
     });
   }
+  /**
+   * Sets images when a tower is upgraded
+   */
   void upgradeImage(String id, String towerName, int level) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
@@ -219,6 +304,9 @@ class View {
       });
     });
   }
+  /**
+   * hides the menu with difficulties
+   */
   void hideDifficultyMenu() {
     hard.hidden = true;
     medium.hidden = true;
@@ -228,6 +316,9 @@ class View {
     upgrade.hidden = false;
     p.hidden = true;
   }
+  /**
+   * shows the menu with difficulties
+   */
   void showDifficultyMenu() {
     hard.hidden = false;
     medium.hidden = false;
@@ -237,6 +328,9 @@ class View {
     upgrade.hidden = true;
     p.hidden = false;
   }
+  /**
+   * sets tooltips to each tower objects
+   */
   void setToolTip() {
     canonTower.setAttribute("title",
         "Price: 300\nBasicDamage: 7.0\nRange: 2\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
@@ -247,6 +341,9 @@ class View {
     lightningTower.setAttribute("title",
         "Price: 1000\nBasicDamage: 10.0\nRange: 2\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
+  /**
+   * sets tooltips to each minions
+   */
   void setMinionToolTip(String name, String armor, String hitpoints,
       String movementSpeed, String droppedGold) {
     /** FIXME! */
@@ -278,9 +375,15 @@ class View {
       tr.append(m);
     }
   }
+  /**
+   * delets the tooltips from the minions
+   */
   void clearMinionToolTip() {
     mList.children.clear();
   }
+  /**
+   * delets all tower/minion images and sets grass-img´s on the board
+   */
   void clearBoard() {
     Element e;
     this.board.children.forEach((c) {
