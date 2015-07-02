@@ -391,6 +391,7 @@ class Controller {
       }
     });
   }
+<<<<<<< HEAD
   /**
    * Clears the path of all miniom images
    */
@@ -536,6 +537,13 @@ class Controller {
     if (_updateMinionTimer == null) {
       _updateMinionTimer = new Timer.periodic(_updateMinion, (_) {
         this._view.minionsLeft.innerHtml = "Minions left: " + (_game.getLevelAdmin().getCurrentWave().getNumberOfMinions() - _game.getLevelAdmin().getCurrentWave().getDeadMinions()).toString();
+=======
+
+  void startControllerTimer() {
+    if (updateMinionTimer == null) {
+      updateMinionTimer = new Timer.periodic(updateMinion, (_) {
+        this.view.minionsleft.innerHtml = "Minions left: " + (game.lAdmin.getCurrentWave().getNumberOfMinions() - game.lAdmin.getCurrentWave().getDeadMinions()).toString();
+>>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
         String id;
         Field lastField =
             _game.getLevelAdmin().getPath()[_game.getLevelAdmin().getPath().length - 1];
@@ -565,8 +573,13 @@ class Controller {
               for(int i = 0; i < 2; i++){
                 id = (m.getPosition().getX() - i).toString() +
                                          (m.getPosition().getY() - i).toString();
+<<<<<<< HEAD
                 _game.getLevelAdmin().getCurrentWave().getDistinctMinions().forEach((m){
                   _view.deleteImage(id, m.getName());
+=======
+                game.lAdmin.getCurrentWave().getDistinctMinions().forEach((m){
+                  view.deleteImage(id, m.getName());
+>>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
                 });
               }
               deadMinions.add(m);
@@ -591,9 +604,15 @@ class Controller {
         /* Delete Dead Minions from active minion list of the map */
         if (deadMinions.isNotEmpty) {
           deadMinions.forEach((m) {
+<<<<<<< HEAD
             _game.getLevelAdmin().getCurrentWave().incDeadMinions();
             _game.getLevelAdmin().getCurrentWave().incDroppedGold(m.getDroppedGold());
             _game.getLevelAdmin().getActiveMinions().remove(m);
+=======
+            game.lAdmin.getCurrentWave().incDeadMinions();
+            game.lAdmin.getCurrentWave().incDroppedGold(m.getDroppedGold());
+            game.lAdmin.getActiveMinions().remove(m);
+>>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
           });
         }
         /* remove leaked minions from list of active minions */
@@ -605,6 +624,7 @@ class Controller {
         }
       });
     }
+<<<<<<< HEAD
   }
   /**
    * Stops the updateMinionTimer
@@ -615,4 +635,123 @@ class Controller {
     _updateMinionTimer = null; 
     }
   }
+=======
+      if (waveEndTimer == null) {
+        waveEndTimer = new Timer.periodic(waveEndCheck, (_) {
+          this.view.minionsleft.innerHtml = "Minions left: " + (game.lAdmin.getCurrentWave().getNumberOfMinions() - game.lAdmin.getCurrentWave().getDeadMinions()).toString();
+          if (game.lAdmin.isLevelEnd() && game.lAdmin.isFinalLevel() ||
+              game.life <= 0) {
+            clearPath();
+            game.evaluateKilledMinions(true);
+            /* Player wins */
+            if (game.life <= 0) {
+              this.view.playerLabel.innerHtml = "Game over!";
+              view.life.innerHtml = "Life: " + game.life.toString();
+              /* Player loses */
+            } else {
+              this.view.playerLabel.innerHtml = "Congratz!";
+            }
+            endOfWave = true;
+            game.endOfGame();
+            stopControllerTimer();
+            stopUpdatePlayerDataTimer();
+            view.showDifficultyMenu();
+            this.view.stop.hidden = true;
+            this.view.clearMinionToolTip();
+          } else if (game.lAdmin.isLevelEnd() && !game.lAdmin.isFinalLevel() ||
+              game.lAdmin.getCurrentWave().isWaveClear()) {
+            endOfWave = true;
+            clearPath();
+            this.startWaveTimer();
+            this.view.stop.hidden = true;
+            this.view.clearMinionToolTip();
+          }
+        });
+      }
+  }
+  void clearPath() {
+    game.lAdmin.getPath().forEach((f) {
+      String id = f.getX().toString() + f.getY().toString();
+      this.game.lAdmin.getCurrentWave().getDistinctMinions().forEach((m){
+        view.deleteImage(
+                  id, m.getName());
+      });
+    });
+  }
+  void startWaveTimer() {
+    view.time.hidden = false;
+    int counter = this.startCounter;
+    startUpdatePlayerDataTimer();
+    if (startWave == null) {
+      startWave = new Timer.periodic((buildingPhase), (_) {
+        if (counter == 0) {
+          game.startGame();
+          this.view.level.innerHtml = "Level: " + game.lAdmin.currentLevel.toString();
+          this.view.wave.innerHtml = "Wave: " + game.lAdmin.getCurrentWave().getWaveNumber().toString();
+          this.view.minionsleft.innerHtml = "Minions left: " + (game.lAdmin.getCurrentWave().getNumberOfMinions() - game.lAdmin.getCurrentWave().getDeadMinions()).toString();
+          this.setMinionInfo();
+          startWave.cancel();
+          startWave = null;
+          startControllerTimer();
+          view.stop.hidden = false;
+          view.time.hidden = true;
+          view.timerhr.hidden = true;
+          stopListener();
+          endOfWave = false;
+        } else {
+          counter--;
+        }
+        view.time.innerHtml = "Next Wave starts in: " + counter.toString();
+        if (counter != 0) view.timerhr.hidden = false;
+      });
+    }
+  }
+  void stopControllerTimer() {
+    if(updateMinionTimer != null){
+    updateMinionTimer.cancel();
+    updateMinionTimer = null; 
+    }
+    if(waveEndTimer != null){
+      waveEndTimer.cancel();
+      waveEndTimer = null;
+    }
+  }
+  void setMinionInfo() {
+    this.game.lAdmin.currentWave.getDistinctMinions().forEach((m) {
+      String name = m.getName();
+      String armor = m.getArmor().value.toString();
+      String hitPoints = m.getHitpoints().toString();
+      String movementSpeed = (m.getMovementSpeed().inMilliseconds.roundToDouble()/1000).toString();
+      String droppedGold = m.getDroppedGold().toString();
+      this.view.setMinionToolTip(
+          name, armor, hitPoints, movementSpeed, droppedGold);
+    });
+  }
+  void startUpdatePlayerDataTimer(){
+    if (updatePlayerDataTimer == null) {
+      updatePlayerDataTimer = new Timer.periodic(playerData, (_) {
+        if (!endOfWave) {
+          if(this.game.lAdmin != null && this.game.lAdmin.getCurrentWave() != null){
+            this.game.evaluateKilledMinions(false);
+          }
+        }
+        int gold = game.player.getGold();
+        if (gold < 0) {
+          gold = 0;
+        }
+        view.playerLabel.innerHtml = "Name: " + game.player.getName();
+        view.points.innerHtml =
+            "Points: " + game.player.getHighscore().toString();
+        view.gold.innerHtml = "Gold: " + game.player.getGold().toString();
+        view.life.innerHtml = "Life: " + game.life.toString();
+      });
+    }
+  }
+  void stopUpdatePlayerDataTimer(){
+    if(updatePlayerDataTimer != null){
+      updatePlayerDataTimer.cancel();
+      updatePlayerDataTimer = null;
+    }
+  }
+>>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
 }

@@ -1,5 +1,10 @@
 part of tower;
 
+/**
+ * CanonTower
+ * 
+ * @author Florian Winzek
+ */
 class CanonTower extends Tower {
   CanonTower() {
     this.setName("CanonTower");

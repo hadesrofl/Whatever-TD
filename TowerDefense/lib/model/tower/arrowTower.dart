@@ -1,5 +1,10 @@
 part of tower;
 
+/**
+ * ArrowTower 
+ * @author Florian Winzek
+ * 
+ */
 class ArrowTower extends Tower {
   ArrowTower() {
     this.setName("ArrowTower");
