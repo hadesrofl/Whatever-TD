@@ -1,32 +1,32 @@
 part of tower;
 
 class Target {
-  Damage damage;
-  Minion target;
-  Condition condition;
+  Damage _damage;
+  Minion _target;
+  Condition _condition;
 
   Target(Damage damage, Minion target, Condition condition) {
-    this.damage = damage;
-    this.target = target;
-    this.condition = condition;
+    this._damage = damage;
+    this._target = target;
+    this._condition = condition;
   }
 
   Damage getDamage() {
-    return this.damage;
+    return this._damage;
   }
   void setDamage(Damage dmg) {
-    this.damage = dmg;
+    this._damage = dmg;
   }
   Minion getMinion() {
-    return this.target;
+    return this._target;
   }
   void setMinion(Minion tgt) {
-    this.target = tgt;
+    this._target = tgt;
   }
   Condition getCondition(){
-   return this.condition;
+   return this._condition;
   }
   void setCondition(Condition con){
-    this.condition = con;
+    this._condition = con;
   }
 }

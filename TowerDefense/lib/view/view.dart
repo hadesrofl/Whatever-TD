@@ -6,15 +6,45 @@ import "dart:html";
    * This Class handles the appearance of our game and manipulates the DOM-Tree of HTML
    */
 class View {
+  /**
+   * Buy button
+   */
   ButtonElement buy;
+  /**
+   * Cancel button
+   */
   ButtonElement cancel;
+  /**
+   * Sell button
+   */
   ButtonElement sell;
+  /**
+   * Upgrade button
+   */
   ButtonElement upgrade;
+  /**
+   * Canon Tower buy button
+   */
   ButtonElement canonTower;
+  /**
+   * Arrow Tower buy button
+   */
   ButtonElement arrowTower;
+  /**
+   * Lightning Tower buy button
+   */
   ButtonElement lightningTower;
+  /**
+   * Fire Tower buy button
+   */
   ButtonElement fireTower;
+  /**
+   * Table for the buy menu
+   */
   TableElement buyMenu;
+  /**
+   * Helpbox Element
+   */
   Element helpBox;
 
 /**
@@ -53,26 +83,95 @@ class View {
    * Columns for the Board
    */
   int col;
+  /**
+   * Easy button for difficulty
+   */
   ButtonElement easy;
+  /**
+   * Medium button for difficulty
+   */
   ButtonElement medium;
+  /**
+   * Hard button for difficulty
+   */
   ButtonElement hard;
-  Element p;
-  ButtonElement help;
+  /**
+   * Element for the difficulty box
+   */
+  Element difficulty;
+  /**
+   * Help button of the game help
+   */
+  ButtonElement helpButtonGame;
+  /**
+   * Help button of the tower help
+   */
+  ButtonElement helpButtonTower;
+  /**
+   * Help button of the armor help
+   */
+  ButtonElement helpButtonArmor;
+  /**
+   * Restart button
+   */
   ButtonElement restart;
-  Element time;
-  Element helpText;
-  TableElement mList;
-  int mListRowCounter = 0;
+  /**
+   * Element for the Countdown till a wave starts
+   */
+  Element tillWave;
+  /**
+   * Element for the the help text of the game
+   */
+  Element helpGame;
+  /**
+   * Element for the help text of the tower types
+   */
+  Element helpTower;
+  /**
+   * Element for help text of the armor types
+   */
+  Element helpArmor;
+  /**
+   * Table for the Minion Info
+   */
+  TableElement minionInfo;
+  /**
+   * Counter for the current items on the row
+   */
+  int minionInfoRowCounter = 0;
+  /**
+   * Label for the points
+   */
   Element points;
+  /**
+   * Label for the gold
+   */
   Element gold;
+  /**
+   * Label for the life
+   */
   Element life;
+  /**
+   * Horizontal line of time
+   */
   Element timerhr;
+  /**
+   * Label for the level
+   */
+  Element level;
+  /**
+   * Label for the wave
+   */
+  Element wave;
+  /**
+   * Label for the minions that are left of this wave
+   */
+  Element minionsLeft;
 
 /**
    * Constructor of the view
-   * @param board - this is the datastructure for our board in dart. 
-   * It cointains informations about the objects on the board which 
-   * will be displayed in the view as images
+   * @param row is the integer of the rows
+   * @param col is the integer of the cols
    */
   View(int row, int col) {
     this.row = row;
@@ -95,37 +194,47 @@ class View {
     easy = querySelector("#easyGame");
     medium = querySelector("#mediumGame");
     hard = querySelector("#hardGame");
-    p = querySelector("#difficulty");
-    help = querySelector("#help");
+    difficulty = querySelector("#difficulty");
+    helpButtonGame = querySelector("#helpButtonGame");
     helpBox = querySelector("#helpBox");
     restart = querySelector("#restart");
-    time = querySelector("#time");
-    helpText = querySelector("#helpText");
-    mList = querySelector("#mList");
+    tillWave = querySelector("#time");
+    helpGame = querySelector("#helpGame");
+    minionInfo = querySelector("#minionInfo");
     points = querySelector("#points");
     gold = querySelector("#gold");
     life = querySelector("#life");
     timerhr = querySelector("#timerhr");
-
+    level = querySelector("#level");
+    wave = querySelector("#wave");
+    minionsLeft = querySelector("#minionsleft");
+    helpTower = querySelector("#helpTower");
+    helpArmor = querySelector("#helpArmor");
+    helpButtonTower = querySelector("#helpButtonTower");
+    helpButtonArmor = querySelector("#helpButtonArmor");
+    
+    
     menuContainer.hidden = true;
     buyMenu.hidden = true;
     cancel.hidden = true;
     buy.hidden = true;
     upgrade.hidden = true;
     sell.hidden = true;
-    help.hidden = true;
+    helpButtonGame.hidden = true;
     stop.hidden = true;
     restart.hidden = true;
     helpBox.hidden = true;
-    time.hidden = true;
+    tillWave.hidden = true;
     timerhr.hidden = true;
-    helpText.hidden = true;
-    setToolTip();
+    helpGame.hidden = true;
+    helpTower.hidden = true;
+    helpArmor.hidden = true;
+    setTowerToolTip();
   }
 /**
    * Method to create a board 
-   * @param board - contains all information which shall be displayed in the view
-   * @return is a table element for the DOM-Tree
+   * @param row is the integer of the rows
+   * @param col is the integer of the cols
    */
   void createBoard(int row, int col) {
     final table = new TableElement();
@@ -144,7 +253,6 @@ class View {
 /**
    * Method to update a board 
    * @param board - contains all current information which shall be displayed in the view
-   * @param table - Table Element of the Dom Tree to display informations of the board in html
    */
   void updateBoard(Map<String, String> board) {
     for (int i = 0; i < this.board.children.length; i++) {
@@ -157,18 +265,25 @@ class View {
       }
     }
   }
-  Element setImageToView(String id, String objectName) {
-    Element e;
+  /**
+   * Sets an image to the view
+   * @param id is the field id
+   * @param objectName is the name of the object that shall be viewed as image
+   */
+ void setImageToView(String id, String objectName) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
           children.classes.add(objectName);
-          e = children;
         }
       });
     });
-    return e;
   }
+ /**
+  * Deletes an image from the view
+   * @param id is the field id
+   * @param objectName is the name of the object that shall be viewed as image
+  */
   void deleteImage(String id, String objectName) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
@@ -188,6 +303,10 @@ class View {
       });
     });
   }
+  /**
+   * Deletes an image on the last field of the path
+   * @param id is the id of the field
+   */
   void deleteImageOnLastPathField(String id) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
@@ -202,6 +321,12 @@ class View {
       });
     });
   }
+  /**
+   * Sets an upgrade image of a tower
+   * @param id is the id of the field
+   * @param towerName is the name of the tower
+   * @param level is the number of the level of the tower
+   */
   void upgradeImage(String id, String towerName, int level) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
@@ -219,6 +344,9 @@ class View {
       });
     });
   }
+  /**
+   * Hides the difficulty menu
+   */
   void hideDifficultyMenu() {
     hard.hidden = true;
     medium.hidden = true;
@@ -226,8 +354,11 @@ class View {
     buy.hidden = false;
     sell.hidden = false;
     upgrade.hidden = false;
-    p.hidden = true;
+    difficulty.hidden = true;
   }
+  /**
+   * Shows the difficulty menu
+   */
   void showDifficultyMenu() {
     hard.hidden = false;
     medium.hidden = false;
@@ -235,9 +366,12 @@ class View {
     buy.hidden = true;
     sell.hidden = true;
     upgrade.hidden = true;
-    p.hidden = false;
+    difficulty.hidden = false;
   }
-  void setToolTip() {
+  /**
+   * Sets the tool tip of the towers
+   */
+  void setTowerToolTip() {
     canonTower.setAttribute("title",
         "Price: 300\nBasicDamage: 7.0\nRange: 2\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
     arrowTower.setAttribute("title",
@@ -247,9 +381,16 @@ class View {
     lightningTower.setAttribute("title",
         "Price: 1000\nBasicDamage: 10.0\nRange: 2\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
+  /**
+   * Sets the tool tip of a minion
+   * @param name is the name of the minion
+   * @param armor is the type of armor 
+   * @param hitpoints is the amount of hitpoints it has at max
+   * @param movementSpeed is the value of the movement speed in seconds
+   * @param droppedGold is the amount of gold a minion drops
+   */
   void setMinionToolTip(String name, String armor, String hitpoints,
       String movementSpeed, String droppedGold) {
-    /** FIXME! */
     TableCellElement m = new TableCellElement();
     m.setAttribute("data-toggle", "tooltip");
     m.setAttribute("title", name +
@@ -262,27 +403,32 @@ class View {
         "\n Dropped Gold= " +
         droppedGold);
     m.classes.add(name);
-    if (mList.children.length != 0) {
-      for (int i = 0; i < mList.children.length; i++) {
-        if (mList.children[i].children.length < 4) {
-          mList.children[i].append(m);
+    if (minionInfo.children.length != 0) {
+      for (int i = 0; i < minionInfo.children.length; i++) {
+        if (minionInfo.children[i].children.length < 4) {
+          minionInfo.children[i].append(m);
         } else {
           TableRowElement tr = new TableRowElement();
-          this.mList.append(tr);
+          this.minionInfo.append(tr);
           tr.append(m);
         }
       }
     } else {
       TableRowElement tr = new TableRowElement();
-      this.mList.append(tr);
+      this.minionInfo.append(tr);
       tr.append(m);
     }
   }
+  /**
+   * Clears all minion tool tips
+   */
   void clearMinionToolTip() {
-    mList.children.clear();
+    minionInfo.children.clear();
   }
+  /**
+   * Clears the board of all object images
+   */
   void clearBoard() {
-    Element e;
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         children.classes.clear();

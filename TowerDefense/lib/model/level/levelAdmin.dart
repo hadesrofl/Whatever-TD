@@ -17,59 +17,60 @@ class LevelAdmin {
   /**
    * The File containing all informations for the levels of this game
    */
-  XmlDocument levelFile;
+  XmlDocument _levelFile;
   /**
    * The number of the current level
    */
-  int currentLevel;
+  int _currentLevel;
   /**
    * The number of the current wave
    */
-  Wave currentWave;
+  Wave _currentWave;
   /**
    * List of Levels
    */
-  List<XmlElement> levels;
+  List<XmlElement> _levels;
   /**
    * Map of all Waves of this current Level
    * Key - integer of the wave number
    * Value - the wave
    */
-  Map<int, Wave> waves = new Map<int, Wave>();
+  Map<int, Wave> _waves = new Map<int, Wave>();
 /**
  * Path the minions have to follow
  */
-  List<Field> path = new List<Field>();
+  List<Field> _path = new List<Field>();
   /**
    * All Minions currently active on the board
    */
-  List<Minion> activeMinions = new List<Minion>();
+  List<Minion> _activeMinions = new List<Minion>();
 
   /**
    * Constructor for the Level Administration object
    * @param levelFile - XML Document containing the information about the levels of this game
+   * @param difficulty is the chosen difficulty
    */
   LevelAdmin(String levelFile, String difficulty) {
-    this.levelFile = parse(levelFile);
+    this._levelFile = parse(levelFile);
     this.evaluateFile(difficulty);
-    this.currentLevel = 0;
-    this.currentWave = null;
+    this._currentLevel = 0;
+    this._currentWave = null;
   }
   /**
    * Method to calculate the hitpoints of every single Minion
-   * @param targets - a list of targets from the tower administation
+   * @param targets is a list of targets from the tower administation
    */
   void calculateHPOfMinions(List<Target> targets) {
     targets.forEach((target) {
       if (target != null) {
         bool foundMinion = false;
-        for (int i = 0; i < activeMinions.length; i++) {
+        for (int i = 0; i < _activeMinions.length; i++) {
           /* Didn't found the minion yet */
           if (foundMinion == false) {
             /* found minion */
-            if (activeMinions[i].equals(target.getMinion()) == true) {
-              activeMinions[i].calculateHitPoints(target);
-              print(activeMinions[i].getHitpoints().toString());
+            if (_activeMinions[i].equals(target.getMinion()) == true) {
+              _activeMinions[i].calculateHitPoints(target);
+              print(_activeMinions[i].getHitpoints().toString());
               /* mark minion as found */
               foundMinion = true;
             }
@@ -85,14 +86,14 @@ class LevelAdmin {
   Minion minionSpawn() {
     bool foundMinion = false;
     Minion m = null;
-    for (int i = 0; i < currentWave.getMinions().length; i++) {
+    for (int i = 0; i < _currentWave.getMinions().length; i++) {
       if (foundMinion == false) {
-        if (currentWave.getMinions()[i].isSpawned() == false) {
-          currentWave.getMinions()[i].spawn();
-          m = currentWave.getMinions()[i];
-          activeMinions.add(m);
+        if (_currentWave.getMinions()[i].isSpawned() == false) {
+          _currentWave.getMinions()[i].spawn();
+          m = _currentWave.getMinions()[i];
+          _activeMinions.add(m);
           foundMinion = true;
-          m.setPath(path);
+          m.setPath(_path);
           m.setStartPosition();
         }
       }
@@ -106,7 +107,7 @@ class LevelAdmin {
   void evaluateFile(String difficulty) {
     String chosenDifficulty = "";
     chosenDifficulty = translateDifficulty(difficulty);
-    levels = levelFile.findElements("allLevels").first
+    _levels = _levelFile.findElements("allLevels").first
         .findElements(chosenDifficulty).first.findElements("level").toList();
   }
   /**
@@ -136,7 +137,7 @@ class LevelAdmin {
     bool finalWave;
     bool nextLevelLoaded = false;
     if (!isFinalLevel()) {
-      currentLevel++;
+      _currentLevel++;
       XmlElement level = getCurrentLevelFromXml();
       /* Extract Waves of XML */
 
@@ -148,9 +149,9 @@ class LevelAdmin {
         } else {
           finalWave = false;
         }
-        waves[waveNumber] = new Wave(waveNumber, finalWave);
+        _waves[waveNumber] = new Wave(waveNumber, finalWave);
       });
-      currentWave = null;
+      _currentWave = null;
       loadNextWave();
       nextLevelLoaded = true;
     }
@@ -164,14 +165,14 @@ class LevelAdmin {
   bool loadNextWave() {
     bool nextWaveLoaded;
     /* there is no current wave, load first one */
-    if (currentWave == null) {
-      currentWave = waves[1];
+    if (_currentWave == null) {
+      _currentWave = _waves[1];
       nextWaveLoaded = getMinionsForWave();
       /* Wave is clear, load next one */
     } else if (isLevelEnd()) {
       nextWaveLoaded = false;
-    } else if (currentWave.isWaveClear()) {
-      currentWave = waves[currentWave.getWaveNumber() + 1];
+    } else if (_currentWave.isWaveClear()) {
+      _currentWave = _waves[_currentWave.getWaveNumber() + 1];
       nextWaveLoaded = getMinionsForWave();
     } else {
       /* The Wave is still running */
@@ -189,7 +190,7 @@ class LevelAdmin {
         board.forEach((f) {
           if (f.getX() == pathCoords[i + 1] && f.getY() == pathCoords[i]) {
             f.setPathField(true);
-            this.path.add(f);
+            this._path.add(f);
           }
         });
       }
@@ -199,8 +200,8 @@ class LevelAdmin {
      * @return the current level as xml element
      */
     XmlElement getCurrentLevelFromXml() {
-      XmlElement level = levels.firstWhere(
-          (x) => (x.attributes[0].value.compareTo(currentLevel.toString()) == 0));
+      XmlElement level = _levels.firstWhere(
+          (x) => (x.attributes[0].value.compareTo(_currentLevel.toString()) == 0));
       return level;
     }
   /**
@@ -215,15 +216,15 @@ class LevelAdmin {
 
   /**
    * Reads the Minions for this level from the xml and gets the specific minion of the current wave
-   * @return if it was successful
+   * @return if it was successful or not
    */
   bool getMinionsForWave() {
     bool minionsLoaded;
-    XmlElement level = levels.firstWhere(
-        (x) => (x.attributes[0].value.compareTo(currentLevel.toString()) == 0));
+    XmlElement level = _levels.firstWhere(
+        (x) => (x.attributes[0].value.compareTo(_currentLevel.toString()) == 0));
     List<XmlNode> waves = getCurrentWavesFromXml();
     XmlElement wave = waves.firstWhere((x) => x.attributes[0].value
-            .compareTo(currentWave.getWaveNumber().toString()) ==
+            .compareTo(_currentWave.getWaveNumber().toString()) ==
         0);
     List<XmlElement> levelMinions = wave.findElements("minion").toList();
 
@@ -241,7 +242,7 @@ class LevelAdmin {
               int.parse(minion.findElements("droppedGold").single.text);
           /* create minion objects and save them in the minions list */
           for (int j = 0; j < int.parse(levelMinions[i].attributes[1].value); j++) {
-            currentWave.addMinion(new Minion(
+            _currentWave.addMinion(new Minion(
                 minionName, hitpoints, armor, movementSpeed, droppedGold));
           }
         }
@@ -251,12 +252,12 @@ class LevelAdmin {
   
   /**
    * Gets the Minions from XML
-   * @param the name of the minion
+   * @param minionName is the name of the minion
    * @return a list of xml elements containing the minion
    */
   XmlElement getMinionFromXml(String minionName) {
     bool found = false;
-    List<XmlElement> minions = levelFile.findElements("allLevels").first
+    List<XmlElement> minions = _levelFile.findElements("allLevels").first
         .findElements("minions").first.findElements("minion").toList();
     XmlElement minion;
     minions.forEach((m){
@@ -272,11 +273,10 @@ class LevelAdmin {
   /**
    * Extracts the Wave Data from XML, removes prettyFormatNodes and returns a list 
    * with the ids of the fields that are path fields
-   * @param level is the current level
    * @return a list of integer containing the field ids, which are path fields
    */
   List<int> transformPathFromXml() {
-    List<XmlNode> paths = levelFile.findElements("allLevels").first
+    List<XmlNode> paths = _levelFile.findElements("allLevels").first
         .findElements("paths").first.findElements("path").toList();
     List<int> coords = new List<int>();
     Random rand = new Random(new DateTime.now().millisecondsSinceEpoch);
@@ -291,6 +291,23 @@ class LevelAdmin {
     }
     return coords;
   }
+  
+  /**
+   * Stops all active minions movement timer
+   */
+  void stopActiveMinions(){
+    this._activeMinions.forEach((m){
+      m.stopMoveTimer();
+    });
+  }
+  /**
+   * Restarts all active minions movement timer
+   */
+  void restartActiveMinions(){
+    this._activeMinions.forEach((m){
+      m.restartMoveTimer();
+    });
+  }
   /**
    * ---------------Getter and Setter Methods---------------------
    */
@@ -299,14 +316,14 @@ class LevelAdmin {
    * @return the number of this current level as integer
    */
   int getLevelNumber() {
-    return currentLevel;
+    return _currentLevel;
   }
   /**
    * Checks if the Wave is clear
    * @return true if the wave is clear else false
    */
   bool isWaveClear() {
-    return waves[currentWave.getWaveNumber()].isWaveClear();
+    return _waves[_currentWave.getWaveNumber()].isWaveClear();
   }
   /**
    * Checks if the Level ends
@@ -315,7 +332,7 @@ class LevelAdmin {
   bool isLevelEnd() {
     bool levelEnd;
     if (isWaveClear() == true &&
-        waves[currentWave.getWaveNumber()].isFinalWave()) {
+        _waves[_currentWave.getWaveNumber()].isFinalWave()) {
       levelEnd = true;
     } else {
       levelEnd = false;
@@ -327,11 +344,11 @@ class LevelAdmin {
    */
   bool isFinalLevel() {
     bool finalLevel;
-    if (currentLevel == 0) {
+    if (_currentLevel == 0) {
       finalLevel = false;
     } else {
-      String value = levels.firstWhere(
-          (x) => (x.attributes[0].value.compareTo(currentLevel.toString()) ==
+      String value = _levels.firstWhere(
+          (x) => (x.attributes[0].value.compareTo(_currentLevel.toString()) ==
               0)).attributes[1].value;
       if (value.compareTo("true") == 0) {
         finalLevel = true;
@@ -346,36 +363,27 @@ class LevelAdmin {
    * @return list of all minions
    */
   List<Minion> getActiveMinions() {
-    return this.activeMinions;
+    return this._activeMinions;
   }
   /**
    * Gets the Path Fields
    * @return a list of path fields
    */
   List<Field> getPath() {
-    return this.path;
+    return this._path;
   }
   /**
    * Returns the current wave object
    * @return the current wave
    */
   Wave getCurrentWave() {
-    return this.currentWave;
+    return this._currentWave;
   }
   /**
-   * Stops all active minions movement timer
+   * Gets the number of the current level
+   * @return the number of the level
    */
-  void stopActiveMinions(){
-    this.activeMinions.forEach((m){
-      m.stopMoveTimer();
-    });
-  }
-  /**
-   * Restarts all active minions movement timer
-   */
-  void restartActiveMinions(){
-    this.activeMinions.forEach((m){
-      m.restartMoveTimer();
-    });
+  int getCurrentLevel(){
+    return this._currentLevel;
   }
 }

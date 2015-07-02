@@ -7,35 +7,35 @@ class Condition {
   /**
    * Identifies the condition by a name e.g. "Fire";
    */
-  String identifier;
+  String _identifier;
   /**
    * The duration of the condition
    */
-  int duration;
+  int _duration;
   /**
    * The max duration the condition has
    */
-  int maxDuration;
+  int _maxDuration;
   /**
    * Damage a minion receives per Turn
    */
-  double damagePerTurn;
+  double _damagePerTurn;
 /**
  * Constructor for a condition object
  * @param identifier - name of the condition
  */
   Condition(String identifier) {
-    this.identifier = identifier;
-    switch (this.identifier) {
+    this._identifier = identifier;
+    switch (this._identifier) {
       case "Fire":
-        this.duration = 5;
-        this.maxDuration = 5;
-        this.damagePerTurn = 2.0;
+        this._duration = 5;
+        this._maxDuration = 5;
+        this._damagePerTurn = 2.0;
         break;
       case "Lightning":
-        this.duration = 1;
-        this.maxDuration = 1;
-        this.damagePerTurn = 10.0;
+        this._duration = 1;
+        this._maxDuration = 1;
+        this._damagePerTurn = 10.0;
         break;
     }
   }
@@ -44,9 +44,9 @@ class Condition {
    * @return the value of the damage the condition does
    */
   double apply() {
-    if (duration > 0) {
+    if (_duration > 0) {
       decDuration();
-      return damagePerTurn;
+      return _damagePerTurn;
     } else {
       return 0.0;
     }
@@ -55,7 +55,7 @@ class Condition {
    * Decreases the duration of this condition
    */
   void decDuration() {
-    this.duration--;
+    this._duration--;
   }
   /**
    * Checks if this condition is eqal to the given condition
@@ -64,10 +64,10 @@ class Condition {
   bool equals(Condition c) {
     bool same;
     if(c != null){
-    if (this.identifier.compareTo(c.getIdentifier()) == 0 &&
-        this.duration == c.getDuration() &&
-        this.maxDuration == c.getMaxDuration() &&
-        this.damagePerTurn == c.getDamagePerTurn()) {
+    if (this._identifier.compareTo(c.getIdentifier()) == 0 &&
+        this._duration == c.getDuration() &&
+        this._maxDuration == c.getMaxDuration() &&
+        this._damagePerTurn == c.getDamagePerTurn()) {
       same = true;
     }else{
      same = false; 
@@ -81,18 +81,18 @@ class Condition {
    * ---------------Getter and Setter Methods---------------------
    */
   int getDuration() {
-    return this.duration;
+    return this._duration;
   }
   void resetDuration() {
-    this.duration = this.maxDuration;
+    this._duration = this._maxDuration;
   }
   String getIdentifier() {
-    return this.identifier;
+    return this._identifier;
   }
   int getMaxDuration() {
-    return this.maxDuration;
+    return this._maxDuration;
   }
   double getDamagePerTurn() {
-    return this.damagePerTurn;
+    return this._damagePerTurn;
   }
 }

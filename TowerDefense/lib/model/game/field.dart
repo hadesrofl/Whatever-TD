@@ -7,34 +7,34 @@ class Field {
   /**
    * Identifier for the field
    */
-  String identifier;
+  String _identifier;
   /**
    * x position of this field
    */
-  int x;
+  int _x;
   /**
    * y position of this field
    */
-  int y;
+  int _y;
   /**
    * Bool if this field is a field of the path the minions have to follow
    */
-  bool pathField;
+  bool _pathField;
   /**
    * Bool if this fiel is covered with a tower or not
    */
-  bool covered;
+  bool _covered;
   /**
    * Constructor
    * @param x - x coordinate of this field
    * @param y - y coordinate of this field
    */
   Field(int x, int y, bool pathField) {
-    this.identifier = x.toString() + y.toString();
-    this.x = x;
-    this.y = y;
-    this.pathField = pathField;
-    this.covered = false;
+    this._identifier = x.toString() + y.toString();
+    this._x = x;
+    this._y = y;
+    this._pathField = pathField;
+    this._covered = false;
   }
   /**
    * Checks if a given field object is the same as this field object
@@ -43,7 +43,7 @@ class Field {
    */
   bool equals(Field f) {
     bool same;
-    if (this.identifier.compareTo(f.getIdentifier()) == 0 &&
+    if (this._identifier.compareTo(f.getIdentifier()) == 0 &&
         this.getX() == f.getX() &&
         this.getY() == f.getY()) {
       same = true;
@@ -60,43 +60,52 @@ class Field {
    * @return the value of x
     */
   int getX() {
-    return this.x;
+    return this._x;
   }
   /**
    * Returns the y coordinate of this field
    * @return the value of y
     */
   int getY() {
-    return this.y;
+    return this._y;
   }
   /**
    * Returns the identifier of this field
    * @return the identifier of this field as string
     */
   String getIdentifier() {
-    return this.identifier;
+    return this._identifier;
   }
   /**
    * Checks if this field is a field of the path the minions have to follow
    * @return true if it is else false
    */
   bool isPathField() {
-    return this.pathField;
+    return this._pathField;
   }
   /**
    * Checks if this field is covered
    *  
    */
   bool isCovered() {
-    return this.covered;
+    return this._covered;
   }
+  /**
+   * Sets this field as covered
+   */
   void setCovered(bool covered) {
-    this.covered = covered;
+    this._covered = covered;
   }
+  /**
+   * Returns the field object as string
+   */
   String toString() {
     return this.getX().toString() + this.getY().toString();
   }
+  /**
+   * Sets this field as path field
+   */
   void setPathField(bool b){
-    this.pathField = b;
+    this._pathField = b;
   }
 }

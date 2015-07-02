@@ -13,6 +13,9 @@ body{
 #navigation ul, #helpBox ul{
   list-style-type: none;
 }
+#helpText td, #light{
+  text-align: center;
+}
 
 #nameInput{
   margin-left: 50%;
@@ -31,7 +34,7 @@ body{
    padding-right: 10px;
    padding-bottom: 10px;
 }
-#playerLabel, #points, #gold, #life{
+#playerLabel, #points, #gold, #life, #level, #wave, #minionsleft{
   text-align: left;
   font-family: serif;
   font-weight: bold;
@@ -69,7 +72,7 @@ body{
    width: 500px;
    margin: auto;
 }
-#mList td{
+#minionInfo td{
   height: 38px;
   width: 38px;
 }
@@ -88,62 +91,62 @@ body{
       background-size: cover;
 }
 /* Minion Images */
-#board td.amazon, #mList td.amazon{
+#board td.amazon, #minionInfo td.amazon{
       background-image: url("../img/minions/amazon.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.apple, #mList td.apple{
+#board td.apple, #minionInfo td.apple{
       background-image: url("../img/minions/apple.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.cookieMonster, #mList td.cookieMonster{
+#board td.cookieMonster, #minionInfo td.cookieMonster{
       background-image: url("../img/minions/cookiemonster.jpg");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.dart, #mList td.dart{
+#board td.dart, #minionInfo td.dart{
       background-image: url("../img/minions/dart.jpg");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.docker, #mList td.docker{
+#board td.docker, #minionInfo td.docker{
       background-image: url("../img/minions/docker.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.facebook, #mList td.facebook{
+#board td.facebook, #minionInfo td.facebook{
       background-image: url("../img/minions/facebook.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.google, #mList td.google{
+#board td.google, #minionInfo td.google{
       background-image: url("../img/minions/google.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.internetExplorer, #mList td.internetExplorer{
+#board td.internetExplorer, #minionInfo td.internetExplorer{
       background-image: url("../img/minions/internetexplorer.jpg");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.strongKratzke, #mList td.strongKratzke{
+#board td.strongKratzke, #minionInfo td.strongKratzke{
       background-image: url("../img/minions/strongkratzke.jpg");
             background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.twitter, #mList td.twitter{
+#board td.twitter, #minionInfo td.twitter{
       background-image: url("../img/minions/twitter.jpg");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.weakKratzke, #mList td.weakKratzke{
+#board td.weakKratzke, #minionInfo td.weakKratzke{
       background-image: url("../img/minions/weakkratzke.jpeg");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.whatsapp, #mList td.whatsapp{
+#board td.whatsapp, #minionInfo td.whatsapp{
       background-image: url("../img/minions/whatsapp.png");
       background-repeat: no-repeat;
       background-size: cover;

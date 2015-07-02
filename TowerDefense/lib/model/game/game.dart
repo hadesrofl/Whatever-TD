@@ -8,51 +8,54 @@ part "field.dart";
 part "player.dart";
 
 class Game {
-  TowerAdmin tAdmin;
-  LevelAdmin lAdmin;
-  String levels;
-  List<Field> board;
-  final row = 11;
-  final col = 11;
-  final highScoreModifier = 0.2;
-  final maxLife = 15;
-  View view;
-  Player player;
-  int life;
-  int startCounter = 15;
-  /* TODO: Get Difficulty from User Input (button or something else) */
-  String difficulty;
-  Timer spawnTimer;
-  Timer checkLifeTimer;
-  Timer towerShootTimer;
-  bool runningGame = false;
-  Duration spawn = const Duration(milliseconds: 2500);
-  Duration checkLife = const Duration(milliseconds: 1000);
-  Duration shoot = const Duration(milliseconds: 2000);
+  TowerAdmin _tAdmin;
+  LevelAdmin _lAdmin;
+  String _levels;
+  List<Field> _board;
+  final _row = 11;
+  final _col = 11;
+  final _highScoreModifier = 0.2;
+  final _maxLife = 5;
+  View _view;
+  Player _player;
+  int _life;
+  int _startCounter = 15;
+  int _earnendMoneyFromMinions = 0;
+  String _difficulty;
+  Timer _spawnTimer;
+  Timer _checkLifeTimer;
+  Timer _towerShootTimer;
+  bool _runningGame = false;
+  Duration _spawn = const Duration(milliseconds: 2500);
+  Duration _checkLife = const Duration(milliseconds: 1000);
+  Duration _shoot = const Duration(milliseconds: 2000);
 
   Game(String levels) {
-    this.levels = levels;
-    this.board = createBoard(this.row, this.col);
-    this.life = maxLife;
+    this._levels = levels;
+    this._board = createBoard(this._row, this._col);
+    this._life = _maxLife;
   }
   /**
    * 
    */
   void startGame() {
-    if (this.life != maxLife) {
-      this.life = maxLife;
+    if(_earnendMoneyFromMinions != 0){
+      _earnendMoneyFromMinions = 0;
     }
-    if (this.lAdmin == null) {
+    if (this._life != _maxLife) {
+      this._life = _maxLife;
+    }
+    if (this._lAdmin == null) {
       setLevelAdmin();
     }
-    if (this.lAdmin.currentLevel == 0) {
-      this.lAdmin.loadNextLevel();
+    if (this._lAdmin.getCurrentLevel() == 0) {
+      this._lAdmin.loadNextLevel();
     }
-    if (this.lAdmin.currentLevel != 0 && this.lAdmin.getCurrentWave() != null) {
-      if (this.lAdmin.isLevelEnd()) {
-        this.lAdmin.loadNextLevel();
+    if (this._lAdmin.getCurrentLevel() != 0 && this._lAdmin.getCurrentWave() != null) {
+      if (this._lAdmin.isLevelEnd()) {
+        this._lAdmin.loadNextLevel();
       } else {
-        this.lAdmin.loadNextWave();
+        this._lAdmin.loadNextWave();
       }
     }
     runGame();
@@ -69,20 +72,24 @@ class Game {
    * 
    */
   void runGame() {
-    runningGame = true;
+    _runningGame = true;
     startGameTimer();
   }
   void evaluateKilledMinions(bool endOfGame) {
-    int income = this.lAdmin.getCurrentWave().deadMinions *
-        this.lAdmin.getCurrentWave().getMinions()[0].getDroppedGold();
-    this.player.setGold(this.player.getGold() + income);
+    int income = this._lAdmin.getCurrentWave().getDroppedGold() - _earnendMoneyFromMinions;
+    if(income > 0){
+      _earnendMoneyFromMinions += income;
+    }else{
+      income = 0;
+    }
+    this._player.setGold(this._player.getGold() + income);
     if (endOfGame) {
-      this.player.setHighscore(this.player.getHighscore() +
-          (this.player.getGold() * highScoreModifier).toInt());
-      this.player.setGold(0);
+      this._player.setHighscore(this._player.getHighscore() +
+          (this._player.getGold() * _highScoreModifier).toInt());
+      this._player.setGold(0);
     } else {
-      this.player.setHighscore(
-          this.player.getHighscore() + (income * highScoreModifier).toInt());
+      this._player.setHighscore(
+          this._player.getHighscore() + (income * _highScoreModifier).toInt());
     }
   }
   /**
@@ -90,8 +97,8 @@ class Game {
    */
   void endOfGame() {
     stopGameTimer();
-    this.lAdmin = null;
-    this.tAdmin = null;
+    this._lAdmin = null;
+    this._tAdmin = null;
   }
   /**
    * 
@@ -111,40 +118,48 @@ class Game {
     return board;
   }
   void startGameTimer() {
-    if (spawnTimer == null) {
-      spawnTimer = new Timer.periodic(spawn, (_) {
-        this.lAdmin.minionSpawn();
+    if (_spawnTimer == null) {
+      _spawnTimer = new Timer.periodic(_spawn, (_) {
+        this._lAdmin.minionSpawn();
       });
     }
 
-    if (towerShootTimer == null) {
-      towerShootTimer = new Timer.periodic(shoot, (_) {
-        List<Target> targets = tAdmin.attack(lAdmin.getActiveMinions());
-        lAdmin.calculateHPOfMinions(targets);
+    if (_towerShootTimer == null) {
+      _towerShootTimer = new Timer.periodic(_shoot, (_) {
+        List<Target> targets = _tAdmin.attack(_lAdmin.getActiveMinions());
+        _lAdmin.calculateHPOfMinions(targets);
       });
     }
-    if (checkLifeTimer == null) {
-      checkLifeTimer = new Timer.periodic(checkLife, (_) {
-        List<Minion> tmp = new List<Minion>();
-        this.lAdmin.activeMinions.forEach((m) {
-          if (m.getStepsOnPath() >= this.lAdmin.path.length &&
+    if (_checkLifeTimer == null) {
+      _checkLifeTimer = new Timer.periodic(_checkLife, (_) {
+        this._lAdmin.getActiveMinions().forEach((m) {
+          if (m.getStepsOnPath() >= this._lAdmin.getPath().length &&
               m.getHitpoints() > 0 &&
               m.getDestroyedALife() == false) {
-            this.life--;
+            this._life--;
             m.setDestroyedALife(true);
-            print("Life remaining: $life");
+            print("Life remaining: $_life");
           }
         });
       });
     }
   }
   void stopGameTimer() {
-    this.spawnTimer.cancel();
-    this.spawnTimer = null;
-    this.checkLifeTimer.cancel();
-    this.checkLifeTimer = null;
-    this.towerShootTimer.cancel();
-    this.towerShootTimer = null;
+    if(_spawnTimer != null){
+      this._spawnTimer.cancel();
+      this._spawnTimer = null;
+    }
+
+    if(_checkLifeTimer != null){
+      this._checkLifeTimer.cancel();
+      this._checkLifeTimer = null;
+    }
+
+    if(_towerShootTimer != null){
+      this._towerShootTimer.cancel();
+      this._towerShootTimer = null;
+    }
+
   }
   /**
    * ---------------Getter and Setter Methods---------------------
@@ -154,36 +169,54 @@ class Game {
    * @return the number of rows
    */
   int getRow() {
-    return row;
+    return _row;
   }
   /**
    * Gets the number of cols of the board
    * @return the number of cols
    */
   int getCol() {
-    return col;
+    return _col;
   }
   /**
    * Sets a view object to the game
    * @param view - the view object to interact with
    */
   void setView(View view) {
-    this.view = view;
+    this._view = view;
   }
   /**
    * Sets a player to this game
    * @param name - is the name of the player
    */
   void setPlayer(String name) {
-    this.player = new Player(name);
+    if(this._player != null){
+      this._player = null;
+    }
+    this._player = new Player(name);
   }
   void setDifficulty(String dif) {
-    this.difficulty = dif;
+    this._difficulty = dif;
   }
   void setLevelAdmin() {
-    this.lAdmin = new LevelAdmin(levels, difficulty);
+    this._lAdmin = new LevelAdmin(_levels, _difficulty);
   }
   void setTowerAdmin() {
-    this.tAdmin = new TowerAdmin();
+    this._tAdmin = new TowerAdmin();
+  }
+  Player getPlayer(){
+    return this._player;
+  }
+  int getLife(){
+    return this._life;
+  }
+  LevelAdmin getLevelAdmin(){
+    return this._lAdmin;
+  }
+  TowerAdmin getTowerAdmin(){
+    return this._tAdmin;
+  }
+  List<Field> getBoard(){
+    return this._board;
   }
 }

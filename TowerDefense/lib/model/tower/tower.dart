@@ -10,59 +10,59 @@ class Tower {
   /**
    * Name of the Tower
    */
-  String name;
+  String _name;
   /**
    * Range of the Tower
    */
-  int range;
+  int _range;
   /**
    * Buying price
    */
-  int price;
+  int _price;
   /**
    * Selling Price
    */
-  int sellingPrice;
+  int _sellingPrice;
   /**
    * Level of the Tower
    */
-  int upgradeLevel;
+  int _upgradeLevel;
   /**
    * Attack Speed
    */
-  double attackSpeed;
+  double _attackSpeed;
   /**
    * The Target which the Tower is shooting at
    */
-  Target target;
+  Target _target;
   /**
    * Object of a Damage Class of the Tower
    */
-  Damage damage;
+  Damage _damage;
   /**
    * Position on the board
    */
-  Field position;
+  Field _position;
   /**
    * basic Damage
    */
-  double basicDamage;
+  double _basicDamage;
   /**
    * given Type of Damage
    */
-  int damageType;
+  int _damageType;
   /**
    * all the Fields on the Board, which the Tower can shoot
    */
-  List<Field> attackFields = new List<Field>();
+  List<Field> _attackFields = new List<Field>();
   /**
    * a special ability 
    */
-  bool ability;
+  bool _ability;
   /**
    * amount of ability power
    */
-  int abilityFactor;
+  int _abilityFactor;
 
   /**
   * Selects a Minion to shoot at
@@ -76,15 +76,15 @@ class Tower {
     bool check = false;
     minions.forEach((minion) {
       if (!check) {
-        attackFields.forEach((fields) {
+        _attackFields.forEach((fields) {
           if (!check) {
             if (minion.getPosition().equals(fields)) {
               Condition con = null;
               if (this.getAbility() != null || this.getAbility() != false) {
-                this.damage = new Damage(this.getBasicDamage(), this.damageType,
+                this._damage = new Damage(this.getBasicDamage(), this._damageType,
                     this.abilityCalculation());
-                if (this.damage.applyCondition == true) {
-                  switch (this.name) {
+                if (this._damage._applyCondition == true) {
+                  switch (this._name) {
                     case "FireTower":
                       con = new Condition("Fire");
                       break;
@@ -97,19 +97,19 @@ class Tower {
                   }
                 }
               } else {
-                this.damage =
-                    new Damage(this.getBasicDamage(), this.damageType, false);
+                this._damage =
+                    new Damage(this.getBasicDamage(), this._damageType, false);
               }
-              this.target = new Target(this.damage, minion, con);
+              this._target = new Target(this._damage, minion, con);
               check = true;
             } else {
-              this.target = null;
+              this._target = null;
             }
           }
         });
       }
     });
-    return this.target;
+    return this._target;
   }
 /**
  * Calculates all the fields on the board which the tower can aim at
@@ -133,7 +133,7 @@ class Tower {
       for (int y = startY; y <= endY; y++) {
         board.forEach((field) {
           if (field.getX() == x && field.getY() == y) {
-            this.attackFields.add(field);
+            this._attackFields.add(field);
           }
         });
       }
@@ -144,13 +144,13 @@ class Tower {
    * Upgrades the tower with the upcoming level factor
    */
   void upgrade() {
+    this.setPrice(this.newPriceAfterUpgrade());
     this.setUpgradeLevel(this.getUpgradeLevel() + 1);
-    this.setPrice(this.getPrice() + (500 * this.getUpgradeLevel()));
     this.setAttackSpeed(this.getAttackSpeed() * (this.getUpgradeLevel()));
     this.setRange(this.getRange() + (this.getUpgradeLevel()));
     this.setSellingPrice(this.getSellingPrice() * (this.getUpgradeLevel()));
     this.setBasicDamage(this.getBasicDamage() * (this.getUpgradeLevel()));
-    if (this.name != "ArrowTower") this
+    if (this._name != "ArrowTower") this
         .setAbilityFactor(this.getAbilityFactor() + 5);
   }
 /**
@@ -172,70 +172,73 @@ class Tower {
   // --------------getter-/setter methods-----------------//
 
   void setCoordinates(Field f) {
-    position = f;
+    _position = f;
   }
   int getRange() {
-    return this.range;
+    return this._range;
   }
   void setRange(int range) {
-    this.range = range;
+    this._range = range;
   }
   int getPrice() {
-    return this.price;
+    return this._price;
   }
   void setPrice(int price) {
-    this.price = price;
+    this._price = price;
   }
   int getSellingPrice() {
-    return this.sellingPrice;
+    return this._sellingPrice;
   }
   void setSellingPrice(int p) {
-    this.sellingPrice = p;
+    this._sellingPrice = p;
   }
   int getUpgradeLevel() {
-    return this.upgradeLevel;
+    return this._upgradeLevel;
   }
   void setUpgradeLevel(int ul) {
-    this.upgradeLevel = ul;
+    this._upgradeLevel = ul;
   }
   double getAttackSpeed() {
-    return this.attackSpeed;
+    return this._attackSpeed;
   }
   void setAttackSpeed(double as) {
-    this.attackSpeed = as;
+    this._attackSpeed = as;
   }
   double getBasicDamage() {
-    return this.basicDamage;
+    return this._basicDamage;
   }
   void setBasicDamage(double bSD) {
-    this.basicDamage = bSD;
+    this._basicDamage = bSD;
   }
   Field getPosition() {
-    return this.position;
+    return this._position;
   }
   void setDmgType(int dmgType) {
-    this.damageType = dmgType;
+    this._damageType = dmgType;
   }
   bool getAbility() {
-    return this.ability;
+    return this._ability;
   }
   void setAbility(bool ability) {
-    this.ability = ability;
+    this._ability = ability;
   }
   int getAbilityFactor() {
-    return this.abilityFactor;
+    return this._abilityFactor;
   }
   void setAbilityFactor(int abF) {
-    this.abilityFactor = abF;
+    this._abilityFactor = abF;
   }
   void setName(String name) {
-    this.name = name;
+    this._name = name;
+  }
+  String getName(){
+    return this._name;
   }
 
   /*
    * TODO: 500 need to be fixed by this.getPrice()
    */
   int newPriceAfterUpgrade() {
-    return this.getPrice() + (this.getUpgradeLevel() * 500);
+    return (this.getUpgradeLevel() + 1) * 500;
   }
 }

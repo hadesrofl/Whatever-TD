@@ -3,13 +3,11 @@
 		<level no="1" finalLevel="false">
 				<wave no="1" finalWave="false">
 					<minion ref="weakKratzke" numberOfMinions="10"></minion>
-					<minion ref="docker" numberOfMinions="2"></minion>					
-					<minion ref="internetExplorer" numberOfMinions="4"></minion>
-					<minion ref="dart" numberOfMinions="2"></minion>
-					<minion ref="cookieMonster" numberOfMinions="3"></minion>	
+					<minion ref="dart" numberOfMinions="2"></minion>	
+					<minion ref="docker" numberOfMinions="2"></minion>		
 				</wave>
 				<wave no="2" finalWave="false">
-					<minion ref="internetExplorer" numberOfMinions="4"></minion>				
+					<minion ref="internetExplorer" numberOfMinions="4"></minion>			
 				</wave>
 				<wave no="3" finalWave="false">
 					<minion ref="docker" numberOfMinions="10"></minion>										

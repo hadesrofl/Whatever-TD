@@ -10,7 +10,7 @@
   <body>   
   <div id="top">   
    <h1 id="gameHeader">Welcome to Nyan Cat TD</h1>
-    <input type="text" id="playerName"/>
+    <input type="text" id="playerName" placeholder="What's your name?"></input>
     <button id="start">Start</button></div>
     
     <div id="navigation">
@@ -65,21 +65,85 @@
         <li><button type="button" class="MenuButton" id="sell">Sell</button></li>
         <li><button type="button" class="MenuButton" id="upgrade">Upgrade</button></li>
       </ul>
-      <hr id=line">
-      <div id="minioninfo">
-        <strong>Minion Info: </strong>
-        <table id="mList">
-        </table>
-      </div>
     </div>
     
     <div id="helpBox">
       <ul>
         <li><button type="button" class="MenuButton" id="restart">Start</button></li>
         <li><button type="button" class="MenuButton" id="stop">Stop</button></li>
-        <li><button type="button" class="MenuButton" id="help">Help</button></li>
-        <li><p id="helpText"></p></li>
+        <li><button type="button" class="MenuButton" id="helpButtonGame">Game Help</button></li>
+        <li>
+          <div id="helpGame">
+            <p>Every Level has 5 Waves with different Minions.</p>
+            <p>You have to stop them with your towers.</p>
+            <p>You lose a life every time one minion reaches the end of the path.</p>
+            <p>At 0 Life you have lost, prevent it to happen!</p>
+          </div>
+        </li>
+        
+        <li><button type="button" class="MenuButton" id="helpButtonTower">Tower Help</button></li>
+        
+        <li>
+          <div id="helpTower">
+            <p>There are four kinds of Tower you can buy.</p>
+            <p><strong>1: CanonTower</strong>
+              <p>(Damage Type: Siege)</p>
+            </p>
+            <p><strong>2: ArrowTower</strong>
+              <p>(Damage Type: Piercing)</p>
+            </p>
+            <p><strong>3: FireTower</strong>
+              <p>(Damage Type: Fire)</p>
+            </p>
+            <p><strong>4: LightningTower</strong>
+              <p>(Damage Type: Lightning)</p>
+            </p> 
+            <p>Every tower has 3 upgrade levels improving the damage and ability factor of the tower</p>
+          </div>
+        </li>
+        <li><button type="button" class="MenuButton" id="helpButtonArmor">Armor Help</button></li>
+        <li>
+          <div id="helpArmor">
+           <p><strong>Armor vs Damage Type:</strong></p>
+            <p id="light"><strong>Light</strong></p>
+            <table>
+                <tr>
+                  <td>Siege (75%)</td>
+                  <td>Piercing (125%)</td>
+                  <td>Fire (125%)</td>
+                  <td>Lightning (75%)</td>
+                </tr>
+            </table>
+            <p id="medium"><strong>Medium</strong></p>
+                <table>
+                <tr>
+                  <td>Siege (100%)</td>
+                  <td>Piercing (100%)</td>
+                  <td>Fire (75%)</td>
+                  <td>Lightning (75%)</td>
+                </tr>
+            </table>
+            <p id="heavy"><strong>Heavy</strong></p>
+                <table>
+                <tr>
+                  <td>Siege (125%)</td>
+                  <td>Piercing (75%)</td>
+                  <td>Fire (100%)</td>
+                  <td>Lightning (125%)</td>
+                </tr>
+            </table>
+           </div>
+        </li>
       </ul>
+     <hr id=line">
+        <p id="level">Level: </p>
+        <p id="wave">Wave: </p>
+        <p id="minionsleft">Minions left: </p>
+      <div id="minioninfo">
+        <strong>Minion Info: </strong>
+        <table id="minionInfo">
+        </table>
+      </div>
     </div>
     <div id="board"></div>
     

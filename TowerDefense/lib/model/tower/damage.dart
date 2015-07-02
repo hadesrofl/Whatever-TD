@@ -9,15 +9,15 @@ class Damage {
   /**
    * basic damage value 
    */
-  double dmg;
+  double _dmg;
   /**
    * type of damage
    */
-  int damageType;
+  int _damageType;
   /**
    * special condition
    */
-  bool applyCondition;
+  bool _applyCondition;
 /**
  * Constructor
  * 
@@ -33,21 +33,21 @@ class Damage {
 
   //-------------------------getter/setter-methods---------------------------//
   double getDamageValue() {
-    return this.dmg;
+    return this._dmg;
   }
   void setDamage(double dmg) {
-    this.dmg = dmg;
+    this._dmg = dmg;
   }
   int getDamageType() {
-    return this.damageType;
+    return this._damageType;
   }
   void setDamageType(int dmgType) {
-    this.damageType = dmgType;
+    this._damageType = dmgType;
   }
   bool getApplyCondition() {
-    return this.applyCondition;
+    return this._applyCondition;
   }
   void setApplayCondition(bool applCon) {
-    this.applyCondition = applCon;
+    this._applyCondition = applCon;
   }
 }

@@ -22,7 +22,7 @@ class TowerAdmin {
   /**
    * List with all tower
    */
-  List<Tower> allTower;
+  List<Tower> _allTower;
   /**
    * max level number
    */
@@ -47,7 +47,7 @@ class TowerAdmin {
    * Constructor 
    */
   TowerAdmin() {
-    allTower = new List<Tower>();
+    _allTower = new List<Tower>();
   }
 
   /**
@@ -57,7 +57,7 @@ class TowerAdmin {
    */
   List<Target> attack(List<Minion> minions) {
     List<Target> targets = new List<Target>();
-    allTower.forEach((tower) {
+    _allTower.forEach((tower) {
       Target newTarget = tower.shoot(minions);
       targets.add(newTarget);
     });
@@ -87,7 +87,7 @@ class TowerAdmin {
           ausgabe = false;
         } else {
           player.setGold(player.getGold() - newTower.getPrice());
-          allTower.add(newTower);
+          _allTower.add(newTower);
           ausgabe = true;
         }
         break;
@@ -99,7 +99,7 @@ class TowerAdmin {
           ausgabe = false;
         } else {
           player.setGold(player.getGold() - newTower.getPrice());
-          allTower.add(newTower);
+          _allTower.add(newTower);
           ausgabe = true;
         }
         break;
@@ -111,7 +111,7 @@ class TowerAdmin {
           ausgabe = false;
         } else {
           player.setGold(player.getGold() - newTower.getPrice());
-          allTower.add(newTower);
+          _allTower.add(newTower);
           ausgabe = true;
         }
         break;
@@ -123,7 +123,7 @@ class TowerAdmin {
           ausgabe = false;
         } else {
           player.setGold(player.getGold() - newTower.getPrice());
-          allTower.add(newTower);
+          _allTower.add(newTower);
           ausgabe = true;
         }
         break;
@@ -146,7 +146,7 @@ class TowerAdmin {
   void sellTower(Tower tower, Player player) {
     player.setGold(player.getGold() + tower.getSellingPrice());
     tower.getPosition().setCovered(false);
-    this.allTower.remove(tower);
+    this._allTower.remove(tower);
     tower = null;
   }
 
@@ -182,13 +182,14 @@ class TowerAdmin {
    */
   bool upgradeTower(Tower tower, Player player, List<Field> board,
       final row, final col) {
-    if (tower.newPriceAfterUpgrade() <= player.getGold() &&
-        tower.upgradeLevel < this.MAX_UPGRADE) {
+    int newPrice = tower.newPriceAfterUpgrade();
+    if (tower.newPriceAfterUpgrade() <= player.getGold()){
+      if(tower._upgradeLevel < this.MAX_UPGRADE) {
       tower.upgrade();
       tower.findFieldsToAttack(board, row, col);
       player.setGold(player.getGold() - tower.getPrice());
       return true;
-    } else {
+    }} else {
       print("Not enough Money to upgrade the Tower");
       return false;
     }
@@ -203,5 +204,12 @@ bool enoughMoney(Tower tower, Player player) {
   if (player.getGold() < tower.getPrice()) return false;
 
   return true;
+}
+/**
+ * Gets the all tower list containing all towers of the game
+ * @return a list of all towers
+ */
+List<Tower> getAllTower(){
+  return this._allTower;
 }
 }

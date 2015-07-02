@@ -1,9 +1,9 @@
 part of game;
 
 class Player {
-  String name;
-  int gold;
-  int highscore;
+  String _name;
+  int _gold;
+  int _highscore;
 
   Player(String name) {
     this.setName(name);
@@ -11,21 +11,21 @@ class Player {
     this.setHighscore(0);
   }
   String getName() {
-    return this.name;
+    return this._name;
   }
   void setName(String name) {
-    this.name = name;
+    this._name = name;
   }
   int getGold() {
-    return this.gold;
+    return this._gold;
   }
   void setGold(int gold) {
-    this.gold = gold;
+    this._gold = gold;
   }
   int getHighscore() {
-    return this.highscore;
+    return this._highscore;
   }
   void setHighscore(int highscore) {
-    this.highscore = highscore;
+    this._highscore = highscore;
   }
 }
