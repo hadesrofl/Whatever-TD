@@ -8,7 +8,6 @@ part "field.dart";
 part "player.dart";
 
 class Game {
-<<<<<<< HEAD
   TowerAdmin _tAdmin;
   LevelAdmin _lAdmin;
   String _levels;
@@ -30,30 +29,6 @@ class Game {
   Duration _spawn = const Duration(milliseconds: 2500);
   Duration _checkLife = const Duration(milliseconds: 1000);
   Duration _shoot = const Duration(milliseconds: 2000);
-=======
-  TowerAdmin tAdmin;
-  LevelAdmin lAdmin;
-  String levels;
-  List<Field> board;
-  final row = 11;
-  final col = 11;
-  final highScoreModifier = 0.2;
-  final maxLife = 5;
-  View view;
-  Player player;
-  int life;
-  int startCounter = 15;
-  int earnendMoneyFromMinions = 0;
-  /* TODO: Get Difficulty from User Input (button or something else) */
-  String difficulty;
-  Timer spawnTimer;
-  Timer checkLifeTimer;
-  Timer towerShootTimer;
-  bool runningGame = false;
-  Duration spawn = const Duration(milliseconds: 2500);
-  Duration checkLife = const Duration(milliseconds: 1000);
-  Duration shoot = const Duration(milliseconds: 2000);
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
 
   Game(String levels) {
     this._levels = levels;
@@ -64,16 +39,8 @@ class Game {
    * 
    */
   void startGame() {
-<<<<<<< HEAD
     if(_earnendMoneyFromMinions != 0){
       _earnendMoneyFromMinions = 0;
-=======
-    if(earnendMoneyFromMinions != 0){
-      earnendMoneyFromMinions = 0;
-    }
-    if (this.life != maxLife) {
-      this.life = maxLife;
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
     }
     if (this._life != _maxLife) {
       this._life = _maxLife;
@@ -92,14 +59,6 @@ class Game {
       }
     }
     runGame();
-    /** if (!runningGame) {
-      startWave = new Timer.periodic((buildingPhase), (_) {
-        if (this.startCounter == 0) runGame();
-        else {
-          startCounter--;
-        }
-      });
-    }*/
   }
   /**
    * 
@@ -109,7 +68,6 @@ class Game {
     startGameTimer();
   }
   void evaluateKilledMinions(bool endOfGame) {
-<<<<<<< HEAD
     int income = this._lAdmin.getCurrentWave().getDroppedGold() - _earnendMoneyFromMinions;
     if(income > 0){
       _earnendMoneyFromMinions += income;
@@ -117,10 +75,6 @@ class Game {
       income = 0;
     }
     this._player.setGold(this._player.getGold() + income);
-=======
-    int income = this.lAdmin.getCurrentWave().getDroppedGold() - earnendMoneyFromMinions;
-    this.player.setGold(this.player.getGold() + income);
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
     if (endOfGame) {
       this._player.setHighscore(this._player.getHighscore() +
           (this._player.getGold() * _highScoreModifier).toInt());
@@ -131,17 +85,13 @@ class Game {
     }
   }
   /**
-   * TODO: End Game Somehow
+   * Ends the game
    */
   void endOfGame() {
     stopGameTimer();
     this._lAdmin = null;
     this._tAdmin = null;
   }
-  /**
-   * 
-   */
-  void calculateHighScore() {}
   /**
    * Creates the board of this level
    * @return a map of this level

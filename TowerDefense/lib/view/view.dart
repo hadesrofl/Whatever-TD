@@ -9,7 +9,6 @@ import "dart:html";
    */
 class View {
   /**
-<<<<<<< HEAD
    * Buy button
    */
   ButtonElement buy;
@@ -47,45 +46,6 @@ class View {
   TableElement buyMenu;
   /**
    * Helpbox Element
-=======
-   * Button Element to buy a tower 
-   */
-  ButtonElement buy;
-  /**
-   * Button Element to cancel the current action
-   */
-  ButtonElement cancel;
-  /**
-   * Button Element to sell a tower
-   */
-  ButtonElement sell;
-  /**
-   * Button Element to upgrade a tower
-   */
-  ButtonElement upgrade;
-  /**
-   * Button Element to choose a CanonTower after clicking on "buy"
-   */
-  ButtonElement canonTower;
-  /**
-   * Button Element to choose an ArrowTower after clicking on "buy"
-   */
-  ButtonElement arrowTower;
-  /**
-   * Button Element to choose a LightningTower after clicking on "buy"
-   */
-  ButtonElement lightningTower;
-  /**
-   * Button Element to choose a FireTower after clicking on "buy"
-   */
-  ButtonElement fireTower;
-  /**
-   * Table for the buy/sell/upgrade menu
-   */
-  TableElement buyMenu;
-  /**
-   * Container for the start/stop/help buttons
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   Element helpBox;
   /**
@@ -125,16 +85,15 @@ class View {
    */
   int col;
   /**
-<<<<<<< HEAD
-   * Easy button for difficulty
+   * Button to choose level diffifculty "easy"
    */
   ButtonElement easy;
   /**
-   * Medium button for difficulty
+   * Button to choose level diffifculty "medium"
    */
   ButtonElement medium;
   /**
-   * Hard button for difficulty
+   * Button to choose level diffifculty "hard"
    */
   ButtonElement hard;
   /**
@@ -209,66 +168,10 @@ class View {
    * Label for the minions that are left of this wave
    */
   Element minionsLeft;
-=======
-   * Button to choose level diffifculty "easy"
-   */
-  ButtonElement easy;
-  /**
-   * Button to choose level diffifculty "medium"
-   */
-  ButtonElement medium;
-  /**
-   * Button to choose level diffifculty "hard"
-   */
-  ButtonElement hard;
   /**
    * Container for the difficulty button
    */
-  Element p;
-  /**
-   * Button for game instuctions and help information
-   */
-  ButtonElement help;
-  /**
-   * Button to restart the game
-   */
-  ButtonElement restart;
-  /**
-   * Container for the current Wave Counter
-   */
-  Element time;
-  /**
-   * Content of Game Instructions and help information
-   */
-  Element helpText;
-  /**
-   * Container for minion information
-   */
-  TableElement mList;
-  /**
-   * help variable to create new rows of the mList table
-   */
-  int mListRowCounter = 0;
-  /**
-   * current points of the player
-   */
-  Element points;
-  /**
-   * current among of gold 
-   */
-  Element gold;
-  /**
-   * current lifes
-   */
-  Element life;
-  /**
-   * horizontal line in the navigation menu
-   */
-  Element timerhr;
-  Element level;
-  Element wave;
-  Element minionsleft;
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
+  Element difficultyContainer;
 
 /**
    * Constructor of the view
@@ -309,18 +212,11 @@ class View {
     timerhr = querySelector("#timerhr");
     level = querySelector("#level");
     wave = querySelector("#wave");
-<<<<<<< HEAD
     minionsLeft = querySelector("#minionsleft");
     helpTower = querySelector("#helpTower");
     helpArmor = querySelector("#helpArmor");
     helpButtonTower = querySelector("#helpButtonTower");
     helpButtonArmor = querySelector("#helpButtonArmor");
-    
-    
-=======
-    minionsleft = querySelector("#minionsleft");
-
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
     menuContainer.hidden = true;
     buyMenu.hidden = true;
     cancel.hidden = true;
@@ -373,18 +269,11 @@ class View {
     }
   }
   /**
-<<<<<<< HEAD
    * Sets an image to the view
    * @param id is the field id
    * @param objectName is the name of the object that shall be viewed as image
    */
  void setImageToView(String id, String objectName) {
-=======
-   * Sets images to Elements by classes
-   */
-  Element setImageToView(String id, String objectName) {
-    Element e;
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
     this.board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
@@ -393,17 +282,11 @@ class View {
       });
     });
   }
-<<<<<<< HEAD
  /**
   * Deletes an image from the view
    * @param id is the field id
    * @param objectName is the name of the object that shall be viewed as image
   */
-=======
-  /**
-   * Deletes Images from Elements
-   */
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
   void deleteImage(String id, String objectName) {
     this.board.children.forEach((c) {
       c.children.forEach((children) {
@@ -424,12 +307,9 @@ class View {
     });
   }
   /**
-<<<<<<< HEAD
    * Deletes an image on the last field of the path
    * @param id is the id of the field
-=======
    * Delets images when minions reach their last field on the board
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void deleteImageOnLastPathField(String id) {
     this.board.children.forEach((c) {
@@ -446,14 +326,11 @@ class View {
     });
   }
   /**
-<<<<<<< HEAD
    * Sets an upgrade image of a tower
    * @param id is the id of the field
    * @param towerName is the name of the tower
    * @param level is the number of the level of the tower
-=======
    * Sets images when a tower is upgraded
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void upgradeImage(String id, String towerName, int level) {
     this.board.children.forEach((c) {
@@ -473,11 +350,8 @@ class View {
     });
   }
   /**
-<<<<<<< HEAD
    * Hides the difficulty menu
-=======
    * hides the menu with difficulties
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void hideDifficultyMenu() {
     hard.hidden = true;
@@ -489,11 +363,8 @@ class View {
     difficulty.hidden = true;
   }
   /**
-<<<<<<< HEAD
    * Shows the difficulty menu
-=======
    * shows the menu with difficulties
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void showDifficultyMenu() {
     hard.hidden = false;
@@ -505,15 +376,9 @@ class View {
     difficulty.hidden = false;
   }
   /**
-<<<<<<< HEAD
    * Sets the tool tip of the towers
    */
   void setTowerToolTip() {
-=======
-   * sets tooltips to each tower objects
-   */
-  void setToolTip() {
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
     canonTower.setAttribute("title",
         "Price: 300\nBasicDamage: 7.0\nRange: 2\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
     arrowTower.setAttribute("title",
@@ -524,16 +389,13 @@ class View {
         "Price: 1000\nBasicDamage: 10.0\nRange: 2\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
   /**
-<<<<<<< HEAD
    * Sets the tool tip of a minion
    * @param name is the name of the minion
    * @param armor is the type of armor 
    * @param hitpoints is the amount of hitpoints it has at max
    * @param movementSpeed is the value of the movement speed in seconds
    * @param droppedGold is the amount of gold a minion drops
-=======
-   * sets tooltips to each minions
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
+   *
    */
   void setMinionToolTip(String name, String armor, String hitpoints,
       String movementSpeed, String droppedGold) {
@@ -566,21 +428,13 @@ class View {
     }
   }
   /**
-<<<<<<< HEAD
    * Clears all minion tool tips
-=======
-   * delets the tooltips from the minions
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void clearMinionToolTip() {
     minionInfo.children.clear();
   }
   /**
-<<<<<<< HEAD
    * Clears the board of all object images
-=======
-   * delets all tower/minion images and sets grass-img´s on the board
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void clearBoard() {
     this.board.children.forEach((c) {
