@@ -182,14 +182,16 @@ class TowerAdmin {
    */
   bool upgradeTower(Tower tower, Player player, List<Field> board,
       final row, final col) {
-    int newPrice = tower.newPriceAfterUpgrade();
     if (tower.newPriceAfterUpgrade() <= player.getGold()){
       if(tower._upgradeLevel < this.MAX_UPGRADE) {
       tower.upgrade();
       tower.findFieldsToAttack(board, row, col);
       player.setGold(player.getGold() - tower.getPrice());
       return true;
-    }} else {
+    }else{
+      return false;
+    }
+      } else {
       print("Not enough Money to upgrade the Tower");
       return false;
     }

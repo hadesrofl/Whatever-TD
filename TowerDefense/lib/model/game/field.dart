@@ -5,10 +5,6 @@ part of game;
  */
 class Field {
   /**
-   * Identifier for the field
-   */
-  String _identifier;
-  /**
    * x position of this field
    */
   int _x;
@@ -30,7 +26,6 @@ class Field {
    * @param y - y coordinate of this field
    */
   Field(int x, int y, bool pathField) {
-    this._identifier = x.toString() + y.toString();
     this._x = x;
     this._y = y;
     this._pathField = pathField;
@@ -43,8 +38,7 @@ class Field {
    */
   bool equals(Field f) {
     bool same;
-    if (this._identifier.compareTo(f.getIdentifier()) == 0 &&
-        this.getX() == f.getX() &&
+    if (this.getX() == f.getX() &&
         this.getY() == f.getY()) {
       same = true;
     } else {
@@ -68,13 +62,6 @@ class Field {
     */
   int getY() {
     return this._y;
-  }
-  /**
-   * Returns the identifier of this field
-   * @return the identifier of this field as string
-    */
-  String getIdentifier() {
-    return this._identifier;
   }
   /**
    * Checks if this field is a field of the path the minions have to follow

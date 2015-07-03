@@ -138,7 +138,6 @@ class LevelAdmin {
     bool nextLevelLoaded = false;
     if (!isFinalLevel()) {
       _currentLevel++;
-      XmlElement level = getCurrentLevelFromXml();
       /* Extract Waves of XML */
 
       List<XmlElement> waveList = getCurrentWavesFromXml();
@@ -220,8 +219,6 @@ class LevelAdmin {
    */
   bool getMinionsForWave() {
     bool minionsLoaded;
-    XmlElement level = _levels.firstWhere(
-        (x) => (x.attributes[0].value.compareTo(_currentLevel.toString()) == 0));
     List<XmlNode> waves = getCurrentWavesFromXml();
     XmlElement wave = waves.firstWhere((x) => x.attributes[0].value
             .compareTo(_currentWave.getWaveNumber().toString()) ==

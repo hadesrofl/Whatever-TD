@@ -8,267 +8,22 @@ import "dart:html";
    * @author Florian Winzek, René Kremer
    */
 class View {
-  /**
-<<<<<<< HEAD
-   * Buy button
-   */
-  ButtonElement buy;
-  /**
-   * Cancel button
-   */
-  ButtonElement cancel;
-  /**
-   * Sell button
-   */
-  ButtonElement sell;
-  /**
-   * Upgrade button
-   */
-  ButtonElement upgrade;
-  /**
-   * Canon Tower buy button
-   */
-  ButtonElement canonTower;
-  /**
-   * Arrow Tower buy button
-   */
-  ButtonElement arrowTower;
-  /**
-   * Lightning Tower buy button
-   */
-  ButtonElement lightningTower;
-  /**
-   * Fire Tower buy button
-   */
-  ButtonElement fireTower;
-  /**
-   * Table for the buy menu
-   */
-  TableElement buyMenu;
-  /**
-   * Helpbox Element
-=======
-   * Button Element to buy a tower 
-   */
-  ButtonElement buy;
-  /**
-   * Button Element to cancel the current action
-   */
-  ButtonElement cancel;
-  /**
-   * Button Element to sell a tower
-   */
-  ButtonElement sell;
-  /**
-   * Button Element to upgrade a tower
-   */
-  ButtonElement upgrade;
-  /**
-   * Button Element to choose a CanonTower after clicking on "buy"
-   */
-  ButtonElement canonTower;
-  /**
-   * Button Element to choose an ArrowTower after clicking on "buy"
-   */
-  ButtonElement arrowTower;
-  /**
-   * Button Element to choose a LightningTower after clicking on "buy"
-   */
-  ButtonElement lightningTower;
-  /**
-   * Button Element to choose a FireTower after clicking on "buy"
-   */
-  ButtonElement fireTower;
-  /**
-   * Table for the buy/sell/upgrade menu
-   */
-  TableElement buyMenu;
-  /**
-   * Container for the start/stop/help buttons
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
-   */
-  Element helpBox;
-  /**
-   * An inputElement so that the user can type in his name
-   */
-  InputElement nameInput;
-  /**
-   * Label for the name and points of a player
-   */
-  Element playerLabel;
-  /**
-   * Container of the menu
-   */
-  Element menuContainer;
-/**
-   * A start button to start or continue the game
-   */
-  ButtonElement start;
-/**
-   * A stop button if the player wants to stop the game
-   */
-  ButtonElement stop;
 /**
    * The board as table. The board has a given size
    */
-  TableElement board;
+  TableElement _board;
   /**
    * Element to append the board to in the dom tree
    */
-  Element boardElement;
-  /**
-   * Rows for the Board
-   */
-  int row;
-  /**
-   * Columns for the Board
-   */
-  int col;
-  /**
-<<<<<<< HEAD
-   * Easy button for difficulty
-   */
-  ButtonElement easy;
-  /**
-   * Medium button for difficulty
-   */
-  ButtonElement medium;
-  /**
-   * Hard button for difficulty
-   */
-  ButtonElement hard;
+  Element _boardElement;
   /**
    * Element for the difficulty box
    */
-  Element difficulty;
-  /**
-   * Help button of the game help
-   */
-  ButtonElement helpButtonGame;
-  /**
-   * Help button of the tower help
-   */
-  ButtonElement helpButtonTower;
-  /**
-   * Help button of the armor help
-   */
-  ButtonElement helpButtonArmor;
-  /**
-   * Restart button
-   */
-  ButtonElement restart;
-  /**
-   * Element for the Countdown till a wave starts
-   */
-  Element tillWave;
-  /**
-   * Element for the the help text of the game
-   */
-  Element helpGame;
-  /**
-   * Element for the help text of the tower types
-   */
-  Element helpTower;
-  /**
-   * Element for help text of the armor types
-   */
-  Element helpArmor;
+  Element _difficulty;
   /**
    * Table for the Minion Info
    */
-  TableElement minionInfo;
-  /**
-   * Counter for the current items on the row
-   */
-  int minionInfoRowCounter = 0;
-  /**
-   * Label for the points
-   */
-  Element points;
-  /**
-   * Label for the gold
-   */
-  Element gold;
-  /**
-   * Label for the life
-   */
-  Element life;
-  /**
-   * Horizontal line of time
-   */
-  Element timerhr;
-  /**
-   * Label for the level
-   */
-  Element level;
-  /**
-   * Label for the wave
-   */
-  Element wave;
-  /**
-   * Label for the minions that are left of this wave
-   */
-  Element minionsLeft;
-=======
-   * Button to choose level diffifculty "easy"
-   */
-  ButtonElement easy;
-  /**
-   * Button to choose level diffifculty "medium"
-   */
-  ButtonElement medium;
-  /**
-   * Button to choose level diffifculty "hard"
-   */
-  ButtonElement hard;
-  /**
-   * Container for the difficulty button
-   */
-  Element p;
-  /**
-   * Button for game instuctions and help information
-   */
-  ButtonElement help;
-  /**
-   * Button to restart the game
-   */
-  ButtonElement restart;
-  /**
-   * Container for the current Wave Counter
-   */
-  Element time;
-  /**
-   * Content of Game Instructions and help information
-   */
-  Element helpText;
-  /**
-   * Container for minion information
-   */
-  TableElement mList;
-  /**
-   * help variable to create new rows of the mList table
-   */
-  int mListRowCounter = 0;
-  /**
-   * current points of the player
-   */
-  Element points;
-  /**
-   * current among of gold 
-   */
-  Element gold;
-  /**
-   * current lifes
-   */
-  Element life;
-  /**
-   * horizontal line in the navigation menu
-   */
-  Element timerhr;
-  Element level;
-  Element wave;
-  Element minionsleft;
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
+  TableElement _minionInfo;
 
 /**
    * Constructor of the view
@@ -276,66 +31,22 @@ class View {
    * @param col is the integer of the cols
    */
   View(int row, int col) {
-    this.row = row;
-    this.col = col;
-    nameInput = querySelector("#playerName");
-    start = querySelector("#start");
-    stop = querySelector("#stop");
-    boardElement = querySelector("#board");
-    playerLabel = querySelector("#playerLabel");
-    menuContainer = querySelector("#navigation");
-    buyMenu = querySelector("#buyMenu");
-    buy = querySelector("#buy");
-    cancel = querySelector("#cancel");
-    sell = querySelector("#sell");
-    upgrade = querySelector("#upgrade");
-    canonTower = querySelector("#CanonTower");
-    arrowTower = querySelector("#ArrowTower");
-    lightningTower = querySelector("#LightningTower");
-    fireTower = querySelector("#FireTower");
-    easy = querySelector("#easyGame");
-    medium = querySelector("#mediumGame");
-    hard = querySelector("#hardGame");
-    difficulty = querySelector("#difficulty");
-    helpButtonGame = querySelector("#helpButtonGame");
-    helpBox = querySelector("#helpBox");
-    restart = querySelector("#restart");
-    tillWave = querySelector("#time");
-    helpGame = querySelector("#helpGame");
-    minionInfo = querySelector("#minionInfo");
-    points = querySelector("#points");
-    gold = querySelector("#gold");
-    life = querySelector("#life");
-    timerhr = querySelector("#timerhr");
-    level = querySelector("#level");
-    wave = querySelector("#wave");
-<<<<<<< HEAD
-    minionsLeft = querySelector("#minionsleft");
-    helpTower = querySelector("#helpTower");
-    helpArmor = querySelector("#helpArmor");
-    helpButtonTower = querySelector("#helpButtonTower");
-    helpButtonArmor = querySelector("#helpButtonArmor");
-    
-    
-=======
-    minionsleft = querySelector("#minionsleft");
-
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
-    menuContainer.hidden = true;
-    buyMenu.hidden = true;
-    cancel.hidden = true;
-    buy.hidden = true;
-    upgrade.hidden = true;
-    sell.hidden = true;
-    helpButtonGame.hidden = true;
-    stop.hidden = true;
-    restart.hidden = true;
-    helpBox.hidden = true;
-    tillWave.hidden = true;
-    timerhr.hidden = true;
-    helpGame.hidden = true;
-    helpTower.hidden = true;
-    helpArmor.hidden = true;
+    _boardElement = querySelector("#board");
+    _difficulty = querySelector("#difficulty");
+    _minionInfo = querySelector("#minionInfo");
+    hideNavigation();
+    hideBuyMenu();
+   hideCancelButton();
+   hideBuyButton();
+    hideUpgradeButton();
+    hideSellButton();
+    hideStopButton();
+    hideRestartButton();
+   hideHelpBox();
+    hideTillWaveLabel();
+    hideHelpGame();
+    hideHelpTower();
+    hideHelpArmor();
     setTowerToolTip();
   }
 /**
@@ -354,38 +65,31 @@ class View {
         table.children.elementAt(i).append(cellElement);
       }
     }
-    this.board = table;
-    boardElement.append(this.board);
+    this._board = table;
+    _boardElement.append(this._board);
   }
 /**
    * Method to update a board 
    * @param board - contains all current information which shall be displayed in the view
    */
   void updateBoard(Map<String, String> board) {
-    for (int i = 0; i < this.board.children.length; i++) {
+    for (int i = 0; i < this._board.children.length; i++) {
       for (int j = 0;
-          j < this.board.children.elementAt(0).children.length;
+          j < this._board.children.elementAt(0).children.length;
           j++) {
         TableCellElement cell =
-            this.board.children.elementAt(i).children.elementAt(j);
+            this._board.children.elementAt(i).children.elementAt(j);
         cell.setInnerHtml(board[cell.id]);
       }
     }
   }
   /**
-<<<<<<< HEAD
    * Sets an image to the view
    * @param id is the field id
    * @param objectName is the name of the object that shall be viewed as image
    */
  void setImageToView(String id, String objectName) {
-=======
-   * Sets images to Elements by classes
-   */
-  Element setImageToView(String id, String objectName) {
-    Element e;
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
-    this.board.children.forEach((c) {
+    this._board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
           children.classes.add(objectName);
@@ -393,19 +97,13 @@ class View {
       });
     });
   }
-<<<<<<< HEAD
  /**
   * Deletes an image from the view
    * @param id is the field id
    * @param objectName is the name of the object that shall be viewed as image
   */
-=======
-  /**
-   * Deletes Images from Elements
-   */
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
   void deleteImage(String id, String objectName) {
-    this.board.children.forEach((c) {
+    this._board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
           children.attributes.remove("data-toggle");
@@ -424,15 +122,12 @@ class View {
     });
   }
   /**
-<<<<<<< HEAD
    * Deletes an image on the last field of the path
    * @param id is the id of the field
-=======
    * Delets images when minions reach their last field on the board
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void deleteImageOnLastPathField(String id) {
-    this.board.children.forEach((c) {
+    this._board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
           if (children.classes.length > 1) {
@@ -446,17 +141,14 @@ class View {
     });
   }
   /**
-<<<<<<< HEAD
    * Sets an upgrade image of a tower
    * @param id is the id of the field
    * @param towerName is the name of the tower
    * @param level is the number of the level of the tower
-=======
    * Sets images when a tower is upgraded
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void upgradeImage(String id, String towerName, int level) {
-    this.board.children.forEach((c) {
+    this._board.children.forEach((c) {
       c.children.forEach((children) {
         if (children.id == id) {
           children.classes.remove(towerName);
@@ -473,67 +165,52 @@ class View {
     });
   }
   /**
-<<<<<<< HEAD
    * Hides the difficulty menu
-=======
    * hides the menu with difficulties
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void hideDifficultyMenu() {
-    hard.hidden = true;
-    medium.hidden = true;
-    easy.hidden = true;
-    buy.hidden = false;
-    sell.hidden = false;
-    upgrade.hidden = false;
-    difficulty.hidden = true;
+   getEasyButton().hidden = true;
+   getMediumButton().hidden = true;
+   getHardButton().hidden = true;
+   showBuyButton();
+   showSellButton();
+    showUpgradeButton();
+    _difficulty.hidden = true;
   }
   /**
-<<<<<<< HEAD
    * Shows the difficulty menu
-=======
    * shows the menu with difficulties
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void showDifficultyMenu() {
-    hard.hidden = false;
-    medium.hidden = false;
-    easy.hidden = false;
-    buy.hidden = true;
-    sell.hidden = true;
-    upgrade.hidden = true;
-    difficulty.hidden = false;
+    getEasyButton().hidden = false;
+    getMediumButton().hidden = false;
+    getHardButton().hidden = false;
+    hideBuyButton();
+    hideSellButton();
+    hideUpgradeButton();
+    _difficulty.hidden = false;
   }
   /**
-<<<<<<< HEAD
    * Sets the tool tip of the towers
    */
   void setTowerToolTip() {
-=======
-   * sets tooltips to each tower objects
-   */
-  void setToolTip() {
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
-    canonTower.setAttribute("title",
+    getCanonTowerButton().setAttribute("title",
         "Price: 300\nBasicDamage: 7.0\nRange: 2\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
-    arrowTower.setAttribute("title",
+    getArrowTowerButton().setAttribute("title",
         "Price: 150\nBasicDamage: 5.0\nRange: 3\nDamageType: Piercing\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
-    fireTower.setAttribute("title",
+    getFireTowerButton().setAttribute("title",
         "Price: 1000\nBasicDamage: 10.0\nRange: 2\nDamageType: Fire\nSpecial Ability: does dmg/seconds\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
-    lightningTower.setAttribute("title",
+    getLightningTowerButton().setAttribute("title",
         "Price: 1000\nBasicDamage: 10.0\nRange: 2\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
   }
   /**
-<<<<<<< HEAD
    * Sets the tool tip of a minion
    * @param name is the name of the minion
    * @param armor is the type of armor 
    * @param hitpoints is the amount of hitpoints it has at max
    * @param movementSpeed is the value of the movement speed in seconds
    * @param droppedGold is the amount of gold a minion drops
-=======
-   * sets tooltips to each minions
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
+   *
    */
   void setMinionToolTip(String name, String armor, String hitpoints,
       String movementSpeed, String droppedGold) {
@@ -549,44 +226,474 @@ class View {
         "\n Dropped Gold= " +
         droppedGold);
     m.classes.add(name);
-    if (minionInfo.children.length != 0) {
-      for (int i = 0; i < minionInfo.children.length; i++) {
-        if (minionInfo.children[i].children.length < 4) {
-          minionInfo.children[i].append(m);
+    if (_minionInfo.children.length != 0) {
+      for (int i = 0; i < _minionInfo.children.length; i++) {
+        if (_minionInfo.children[i].children.length < 4) {
+          _minionInfo.children[i].append(m);
         } else {
           TableRowElement tr = new TableRowElement();
-          this.minionInfo.append(tr);
+          this._minionInfo.append(tr);
           tr.append(m);
         }
       }
     } else {
       TableRowElement tr = new TableRowElement();
-      this.minionInfo.append(tr);
+      this._minionInfo.append(tr);
       tr.append(m);
     }
   }
   /**
-<<<<<<< HEAD
    * Clears all minion tool tips
-=======
-   * delets the tooltips from the minions
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void clearMinionToolTip() {
-    minionInfo.children.clear();
+    _minionInfo.children.clear();
   }
   /**
-<<<<<<< HEAD
    * Clears the board of all object images
-=======
-   * delets all tower/minion images and sets grass-img´s on the board
->>>>>>> 6541d693ddc15e0060d8d8fd1a1061867bde377a
    */
   void clearBoard() {
-    this.board.children.forEach((c) {
+    this._board.children.forEach((c) {
       c.children.forEach((children) {
         children.classes.clear();
       });
     });
+  }
+  /**
+   * Shows the Help Game Element
+   */
+  void showHelpGame(){
+    querySelector("#helpGame").hidden = false;
+  }
+  /**
+   * Hides the Help Game Element
+   */
+  void hideHelpGame(){
+    querySelector("#helpGame").hidden = true;
+  }
+  /**
+   * Returns if the element is hidden or not
+   * @return true if it is hidden, else false
+   */
+  bool isHelpGameHidden(){
+   return querySelector("#helpGame").hidden;
+  }
+  /**
+   * Shows the Help Tower Element
+   */
+  void showHelpTower(){
+    querySelector("#helpTower").hidden = false;
+  }
+  /**
+   * Hides the Help Tower Element
+   */
+  void hideHelpTower(){
+    querySelector("#helpTower").hidden = true;
+  }
+  /**
+   * Returns if the element is hidden or not
+   * @return true if it is hidden, else false
+   */
+  bool isHelpTowerHidden(){
+    return querySelector("#helpTower").hidden;
+  }
+  /**
+   * Shows the Help Armor Element
+   */
+  void showHelpArmor(){
+    querySelector("#helpArmor").hidden = false;
+  }
+  /**
+   * Hides the Help Armor Element
+   */
+  void hideHelpArmor(){
+    querySelector("#helpArmor").hidden = true;
+  }
+  /**
+   * Returns if the element is hidden or not
+   * @return true if it is hidden, else false
+   */
+  bool isHelpArmorHidden(){
+    return querySelector("#helpArmor").hidden;
+  }
+  /**
+   * Gets the Help Button for the Game Rules. Can be used to set Listeners
+   * @return the Help Button for the Game Rules
+   */
+  Element getHelpButtonGame(){
+    return querySelector("#helpButtonGame");
+  }
+  /**
+   * Gets the Help Button for the Tower Infos. Can be used to set Listeners
+   * @return the Help Button for the Tower Infos
+   */
+  Element getHelpButtonTower(){
+   return querySelector("#helpButtonTower");
+  }
+  /**
+   * Gets the Help Button for the Armor Types. Can be used to set Listeners
+   * @return the Help Button for the Armor Types
+   */
+  Element getHelpButtonArmor(){
+    return querySelector("#helpButtonArmor");
+  }
+  /**
+   * Shows the Buy Button
+   */
+  void showBuyButton(){
+    querySelector("#buy").hidden = false;
+  }
+  /**
+   * Hides the Buy Button
+   */
+  void hideBuyButton(){
+    querySelector("#buy").hidden = true;
+  }
+  /**
+   * Gets the Buy Button. Can be used to set Listeners
+   * @return the buy button
+   */
+  Element getBuyButton(){
+   return querySelector("#buy");
+  }
+  /**
+   * Shows the Arrow Tower Button to buy an Arrow Tower
+   */
+  void showArrowTowerButton(){
+    querySelector("#ArrowTower").hidden = false;
+  }
+  /**
+   * Hides the Arrow Tower Button
+   */
+  void hideArrowTowerButton(){
+    querySelector("#ArrowTower").hidden = true;
+  }
+  /**
+   * Gets the Arrow Tower Button. Can be used to set Listeners
+   * @return the Arrow Tower Button
+   */
+  Element getArrowTowerButton(){
+    return querySelector("#ArrowTower");
+  }
+  /**
+   * Shows the Canon Tower Button to buy Canon Towers
+   */
+  void showCanonTowerButton(){
+    querySelector("#CanonTower").hidden = false;
+  }
+  /**
+   * Hides the Canon Tower Button
+   */
+  void hideCanonTowerButton(){
+    querySelector("#CanonTower").hidden = true;
+  }
+  /**
+   * Gets the Canon Tower Button. Can be used to set Listeners
+   * @return the Canon Tower Button
+   */
+  Element getCanonTowerButton(){
+    return querySelector("#CanonTower");
+  }
+  /**
+   * Shows the Fire Tower Button
+   */
+  void showFireTowerButton(){
+    querySelector("#FireTower").hidden = false;
+  }
+  /**
+   * Hides the Fire Tower Button
+   */
+  void hideFireTowerButton(){
+    querySelector("#FireTower").hidden = true;
+  }
+  /**
+   * Gets the Fire Tower Button. Can be used to set Listeners
+   * @return the Fire Tower Button
+   */
+  Element getFireTowerButton(){
+    return querySelector("#FireTower");
+  }
+  /**
+   * Shows the Lightning Tower Button to buy Lightning Towers
+   */
+  void showLightningTowerButton(){
+    querySelector("#LightningTower").hidden = false;
+  }
+  /**
+   * Hides the Lightning Tower Button
+   */
+  void hideLightningTowerButton(){
+    querySelector("#LightningTower").hidden = true;
+  }
+  /**
+   * Gets the Lightning Tower Button . Can be used to set Listeners
+   * @return the Lightning Tower Button
+   */
+  Element getLightningTowerButton(){
+    return querySelector("#LightningTower");
+  }
+  /**
+   * Shows the Cancel Button
+   */
+  void showCancelButton(){
+    querySelector("#cancel").hidden = false;
+  }
+  /**
+   * Hides the Cancel Button
+   */
+  void hideCancelButton(){
+    querySelector("#cancel").hidden = true;
+  }
+  /**
+   * Gets the Cancel Button. Can be used to set listeners
+   * @®eturn the Cancel Button
+   */
+  Element getCancelButton(){
+    return querySelector("#cancel");
+  }
+  /**
+   * Shows the Sell Button
+   */
+  void showSellButton(){
+    querySelector("#sell").hidden = false;
+  }
+  /**
+   * Hides the Sell Button
+   */
+  void hideSellButton(){
+    querySelector("#sell").hidden = true;
+  }
+  /**
+   * Gets the Sell Button. Can be used to set Listeners
+   * @return the sell button
+   */
+  Element getSellButton(){
+   return querySelector("#sell");
+  }
+  /**
+   * Shows the Upgrade Button
+   */
+  void showUpgradeButton(){
+    querySelector("#upgrade").hidden = false;
+  }
+  /**
+   * Hides the Upgrade Button
+   */
+  void hideUpgradeButton(){
+    querySelector("#upgrade").hidden = true;
+  }
+  /**
+   * Gets the Upgrade Button. Can be used to set Listeners
+   * @return the Upgrade Button
+   */
+  Element getUpgradeButton(){
+    return querySelector("#upgrade");
+  }
+  /**
+   * Shows the Start Button
+   */
+  void showStartButton(){
+    querySelector("#start").hidden = false;
+  }
+  /**
+   * Hides the Start Button
+   */
+  void hideStartButton(){
+    querySelector("#start").hidden = true;
+  }
+  /**
+   * Gets the Start Button. Can be used to set Listeners
+   * @return the Start Button
+   */
+  Element getStartButton(){
+   return querySelector("#start");
+  }
+  /**
+   * Gets the Easy Difficulty Button. Can be used to set Listeners
+   * @return the Easy Button
+   */
+  Element getEasyButton(){
+    return querySelector("#easyGame");
+  } 
+  /**
+   * Gets the Medium Difficulty Button. Can be used to set Listeners
+   * @return the Medium Button
+   */
+Element getMediumButton(){
+  return querySelector("#mediumGame");
+}
+/**
+ * Gets the Hard Difficulty Button. Can be used to set Listeners
+ * @return the Hard Button
+ */
+Element getHardButton(){
+  return querySelector("#hardGame");
+}
+  /**
+   * Shows the Restart Button
+   */
+  void showRestartButton(){
+    querySelector("#restart").hidden = false;
+  }
+  /**
+   * Hides the Restart Button
+   */
+  void hideRestartButton(){
+    querySelector("#restart").hidden = true;
+  }
+  /**
+   * Gets the Restart Button. Can be used to set Listeners
+   * @return the Restart Button
+   */
+  Element getRestartButton(){
+    return  querySelector("#restart");
+  }
+  /**
+   * Shows the Stop Button
+   */
+  void showStopButton(){
+    querySelector("#stop").hidden = false;
+  }
+  /**
+   * Hides the Stop Button
+   */
+  void hideStopButton(){
+    querySelector("#stop").hidden = true;
+  }
+  /**
+   * Gets the Stop Button. Can be used to set Listeners
+   * @return the Stop Button
+   */
+  Element getStopButton(){
+   return querySelector("#stop");
+  }
+  /**
+   * Shows the Name Input Element
+   */
+  void showNameInput(){
+    querySelector("#playerName").hidden = false;
+  }
+  /**
+   * Hides the Name Input Element
+   */
+  void hideNameInput(){
+    querySelector("#playerName").hidden = true;
+  }
+  /**
+   * Gets the Text entered into the Name Input Element
+   * @return 
+   */
+  String getNameInputText(){
+   InputElement input =  querySelector("#playerName");
+   return input.value;
+  }
+  /**
+   * Shows the Navigation Area
+   */
+  void showNavigation(){
+    querySelector("#navigation").hidden = false;
+  }
+  /**
+   * Hides the Navigation Area
+   */
+  void hideNavigation(){
+    querySelector("#navigation").hidden = true;
+  }
+  /**
+   * Shows the Help Box
+   */
+  void showHelpBox(){
+    querySelector("#helpBox").hidden = false;
+  }
+  /**
+   * Hides the Help Box
+   */
+  void hideHelpBox(){
+    querySelector("#helpBox").hidden = true;
+  }
+  void showTillWaveLabel(){
+    querySelector("#time").hidden = false;
+    querySelector("#timerhr").hidden = false;
+  }
+  void hideTillWaveLabel(){
+    querySelector("#time").hidden = true;
+    querySelector("#timerhr").hidden = true;
+  }
+  void setTillWaveLabel(String text){
+    querySelector("#time").innerHtml = text;
+  }
+  /**
+   * Sets the text for the player label
+   * @param text is the text to set 
+   */
+  void setPlayerLabel(String text){
+    querySelector("#playerLabel").innerHtml = text;
+  }
+  /**
+   * Sets the text for the gold label
+   * @param text is the text to set
+   */
+  void setGoldLabel(String text){
+    querySelector("#gold").innerHtml = text;
+  }
+  /**
+   * Sets the text for the point label
+   * @param text is the text to set
+   */
+  void setPointLabel(String text){
+    querySelector("#points").innerHtml = text;
+  }
+  /**
+   * Sets the text for the life label
+   * @param text is the text to set
+   */
+  void setLifeLabel(String text){
+    querySelector("#life").innerHtml = text;
+  }
+  /**
+   * Sets the text for the Level label
+   * @param text is the text to set
+   */
+  void setLevelLabel(String text){
+    querySelector("#level").innerHtml = text;
+  }
+  /**
+   * Sets the text for the Wave label
+   * @param text is the text to set
+   */
+  void setWaveLabel(String text){
+    querySelector("#wave").innerHtml = text;
+  }
+  /**
+   * Sets the text for the Minions left label
+   * @param text is the text to set
+   */
+  void setMinionsLeftLabel(String text){
+    querySelector("#minionsleft").innerHtml = text;
+  }
+  /**
+   * Shows the Buy Menu
+   */
+  void showBuyMenu(){
+    querySelector("#buyMenu").hidden = false;
+  }
+  /**
+   * Hides the Buy Menu
+   */
+  void hideBuyMenu(){
+    querySelector("#buyMenu").hidden = true;
+  }
+  /**
+   * Gets a Table Row Element on the Board
+   * @return a Table Row of that index
+   */
+  Element getTableRowInBoard(int i){
+    return _board.children.elementAt(i);
+  }
+  /**
+   * Gets a Table Data Element in the a Table Row Element
+   * @return a Table Data Element
+   */
+  Element getTableDataInRow(Element tableRow, int i){
+    return tableRow.children.elementAt(i);
   }
 }
