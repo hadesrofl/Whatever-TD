@@ -8,69 +8,6 @@ import "dart:html";
    * @author Florian Winzek, René Kremer
    */
 class View {
-<<<<<<< HEAD
-=======
-  /**
-   * Buy button
-   */
-  ButtonElement buy;
-  /**
-   * Cancel button
-   */
-  ButtonElement cancel;
-  /**
-   * Sell button
-   */
-  ButtonElement sell;
-  /**
-   * Upgrade button
-   */
-  ButtonElement upgrade;
-  /**
-   * Canon Tower buy button
-   */
-  ButtonElement canonTower;
-  /**
-   * Arrow Tower buy button
-   */
-  ButtonElement arrowTower;
-  /**
-   * Lightning Tower buy button
-   */
-  ButtonElement lightningTower;
-  /**
-   * Fire Tower buy button
-   */
-  ButtonElement fireTower;
-  /**
-   * Table for the buy menu
-   */
-  TableElement buyMenu;
-  /**
-   * Helpbox Element
-   */
-  Element helpBox;
-  /**
-   * An inputElement so that the user can type in his name
-   */
-  InputElement nameInput;
-  /**
-   * Label for the name and points of a player
-   */
-  Element playerLabel;
-  /**
-   * Container of the menu
-   */
-  Element menuContainer;
-/**
-   * A start button to start or continue the game
-   */
-  ButtonElement start;
-/**
-   * A stop button if the player wants to stop the game
-   */
-  ButtonElement stop;
->>>>>>> 23f422e865246b45406c0f9ea7ad5581c9d272aa
 /**
    * The board as table. The board has a given size
    */
@@ -78,31 +15,7 @@ class View {
   /**
    * Element to append the board to in the dom tree
    */
-<<<<<<< HEAD
   Element _boardElement;
-=======
-  Element boardElement;
-  /**
-   * Rows for the Board
-   */
-  int row;
-  /**
-   * Columns for the Board
-   */
-  int col;
-  /**
-   * Button to choose level diffifculty "easy"
-   */
-  ButtonElement easy;
-  /**
-   * Button to choose level diffifculty "medium"
-   */
-  ButtonElement medium;
-  /**
-   * Button to choose level diffifculty "hard"
-   */
-  ButtonElement hard;
->>>>>>> 23f422e865246b45406c0f9ea7ad5581c9d272aa
   /**
    * Element for the difficulty box
    */
@@ -110,47 +23,7 @@ class View {
   /**
    * Table for the Minion Info
    */
-<<<<<<< HEAD
   TableElement _minionInfo;
-=======
-  TableElement minionInfo;
-  /**
-   * Counter for the current items on the row
-   */
-  int minionInfoRowCounter = 0;
-  /**
-   * Label for the points
-   */
-  Element points;
-  /**
-   * Label for the gold
-   */
-  Element gold;
-  /**
-   * Label for the life
-   */
-  Element life;
-  /**
-   * Horizontal line of time
-   */
-  Element timerhr;
-  /**
-   * Label for the level
-   */
-  Element level;
-  /**
-   * Label for the wave
-   */
-  Element wave;
-  /**
-   * Label for the minions that are left of this wave
-   */
-  Element minionsLeft;
-  /**
-   * Container for the difficulty button
-   */
-  Element difficultyContainer;
->>>>>>> 23f422e865246b45406c0f9ea7ad5581c9d272aa
 
 /**
    * Constructor of the view
@@ -158,7 +31,6 @@ class View {
    * @param col is the integer of the cols
    */
   View(int row, int col) {
-<<<<<<< HEAD
     _boardElement = querySelector("#board");
     _difficulty = querySelector("#difficulty");
     _minionInfo = querySelector("#minionInfo");
@@ -175,61 +47,6 @@ class View {
     hideHelpGame();
     hideHelpTower();
     hideHelpArmor();
-=======
-    this.row = row;
-    this.col = col;
-    nameInput = querySelector("#playerName");
-    start = querySelector("#start");
-    stop = querySelector("#stop");
-    boardElement = querySelector("#board");
-    playerLabel = querySelector("#playerLabel");
-    menuContainer = querySelector("#navigation");
-    buyMenu = querySelector("#buyMenu");
-    buy = querySelector("#buy");
-    cancel = querySelector("#cancel");
-    sell = querySelector("#sell");
-    upgrade = querySelector("#upgrade");
-    canonTower = querySelector("#CanonTower");
-    arrowTower = querySelector("#ArrowTower");
-    lightningTower = querySelector("#LightningTower");
-    fireTower = querySelector("#FireTower");
-    easy = querySelector("#easyGame");
-    medium = querySelector("#mediumGame");
-    hard = querySelector("#hardGame");
-    difficulty = querySelector("#difficulty");
-    helpButtonGame = querySelector("#helpButtonGame");
-    helpBox = querySelector("#helpBox");
-    restart = querySelector("#restart");
-    tillWave = querySelector("#time");
-    helpGame = querySelector("#helpGame");
-    minionInfo = querySelector("#minionInfo");
-    points = querySelector("#points");
-    gold = querySelector("#gold");
-    life = querySelector("#life");
-    timerhr = querySelector("#timerhr");
-    level = querySelector("#level");
-    wave = querySelector("#wave");
-    minionsLeft = querySelector("#minionsleft");
-    helpTower = querySelector("#helpTower");
-    helpArmor = querySelector("#helpArmor");
-    helpButtonTower = querySelector("#helpButtonTower");
-    helpButtonArmor = querySelector("#helpButtonArmor");
-    menuContainer.hidden = true;
-    buyMenu.hidden = true;
-    cancel.hidden = true;
-    buy.hidden = true;
-    upgrade.hidden = true;
-    sell.hidden = true;
-    helpButtonGame.hidden = true;
-    stop.hidden = true;
-    restart.hidden = true;
-    helpBox.hidden = true;
-    tillWave.hidden = true;
-    timerhr.hidden = true;
-    helpGame.hidden = true;
-    helpTower.hidden = true;
-    helpArmor.hidden = true;
->>>>>>> 23f422e865246b45406c0f9ea7ad5581c9d272aa
     setTowerToolTip();
   }
 /**
@@ -272,11 +89,7 @@ class View {
    * @param objectName is the name of the object that shall be viewed as image
    */
  void setImageToView(String id, String objectName) {
-<<<<<<< HEAD
     this._board.children.forEach((c) {
-=======
-    this.board.children.forEach((c) {
->>>>>>> 23f422e865246b45406c0f9ea7ad5581c9d272aa
       c.children.forEach((children) {
         if (children.id == id) {
           children.classes.add(objectName);
@@ -381,11 +194,7 @@ class View {
    * Sets the tool tip of the towers
    */
   void setTowerToolTip() {
-<<<<<<< HEAD
     getCanonTowerButton().setAttribute("title",
-=======
-    canonTower.setAttribute("title",
->>>>>>> 23f422e865246b45406c0f9ea7ad5581c9d272aa
         "Price: 300\nBasicDamage: 7.0\nRange: 2\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
     getArrowTowerButton().setAttribute("title",
         "Price: 150\nBasicDamage: 5.0\nRange: 3\nDamageType: Piercing\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
