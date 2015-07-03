@@ -418,8 +418,14 @@ class Controller {
           _startWave = null;
           startUpdateMinionTimer();
           startWaveEndTimer();
+<<<<<<< HEAD
           _view.showStopButton();
           _view.hideTillWaveLabel();
+=======
+          _view.stop.hidden = false;
+          _view.tillWave.hidden = true;
+          _view.timerhr.hidden = true;
+>>>>>>> 23f422e865246b45406c0f9ea7ad5581c9d272aa
           stopListener();
           _endOfWave = false;
         } else {
@@ -528,7 +534,11 @@ class Controller {
   void startUpdateMinionTimer(){
     if (_updateMinionTimer == null) {
       _updateMinionTimer = new Timer.periodic(_updateMinion, (_) {
+<<<<<<< HEAD
         this._view.setMinionsLeftLabel("Minions left: " + (_game.getLevelAdmin().getCurrentWave().getNumberOfMinions() - _game.getLevelAdmin().getCurrentWave().getDeadMinions()).toString());
+=======
+        this._view.minionsLeft.innerHtml = "Minions left: " + (_game.getLevelAdmin().getCurrentWave().getNumberOfMinions() - _game.getLevelAdmin().getCurrentWave().getDeadMinions()).toString();
+>>>>>>> 23f422e865246b45406c0f9ea7ad5581c9d272aa
         String id;
         Field lastField =
             _game.getLevelAdmin().getPath()[_game.getLevelAdmin().getPath().length - 1];
