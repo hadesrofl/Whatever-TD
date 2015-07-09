@@ -86,8 +86,6 @@ class TowerAdmin {
           newTower = null;
           ausgabe = false;
         } else {
-          player.setGold(player.getGold() - newTower.getPrice());
-          _allTower.add(newTower);
           ausgabe = true;
         }
         break;
@@ -98,8 +96,6 @@ class TowerAdmin {
           newTower = null;
           ausgabe = false;
         } else {
-          player.setGold(player.getGold() - newTower.getPrice());
-          _allTower.add(newTower);
           ausgabe = true;
         }
         break;
@@ -110,8 +106,6 @@ class TowerAdmin {
           newTower = null;
           ausgabe = false;
         } else {
-          player.setGold(player.getGold() - newTower.getPrice());
-          _allTower.add(newTower);
           ausgabe = true;
         }
         break;
@@ -122,8 +116,6 @@ class TowerAdmin {
           newTower = null;
           ausgabe = false;
         } else {
-          player.setGold(player.getGold() - newTower.getPrice());
-          _allTower.add(newTower);
           ausgabe = true;
         }
         break;
@@ -131,8 +123,14 @@ class TowerAdmin {
       default:
         break;
     }
-    if (ausgabe == true) {
+    if (ausgabe) {
       ausgabe = setTowerChoords(newTower, field, board, row, col);
+    }
+    if (ausgabe) {
+      player.setGold(player.getGold() - newTower.getPrice());
+      _allTower.add(newTower);
+    } else {
+      newTower = null;
     }
     return ausgabe;
   }
@@ -180,18 +178,18 @@ class TowerAdmin {
    * @param row number of rows of the board
    * @param col number of colums of the board
    */
-  bool upgradeTower(Tower tower, Player player, List<Field> board,
-      final row, final col) {
-    if (tower.newPriceAfterUpgrade() <= player.getGold()){
-      if(tower._upgradeLevel < this.MAX_UPGRADE) {
-      tower.upgrade();
-      tower.findFieldsToAttack(board, row, col);
-      player.setGold(player.getGold() - tower.getPrice());
-      return true;
-    }else{
-      return false;
-    }
+  bool upgradeTower(
+      Tower tower, Player player, List<Field> board, final row, final col) {
+    if (tower.newPriceAfterUpgrade() <= player.getGold()) {
+      if (tower._upgradeLevel < this.MAX_UPGRADE) {
+        tower.upgrade();
+        tower.findFieldsToAttack(board, row, col);
+        player.setGold(player.getGold() - tower.getPrice());
+        return true;
       } else {
+        return false;
+      }
+    } else {
       print("Not enough Money to upgrade the Tower");
       return false;
     }
@@ -202,16 +200,16 @@ class TowerAdmin {
  * @param tower current tower to buy
  * @param player current player of the game
  */
-bool enoughMoney(Tower tower, Player player) {
-  if (player.getGold() < tower.getPrice()) return false;
+  bool enoughMoney(Tower tower, Player player) {
+    if (player.getGold() < tower.getPrice()) return false;
 
-  return true;
-}
+    return true;
+  }
 /**
  * Gets the all tower list containing all towers of the game
  * @return a list of all towers
  */
-List<Tower> getAllTower(){
-  return this._allTower;
-}
+  List<Tower> getAllTower() {
+    return this._allTower;
+  }
 }

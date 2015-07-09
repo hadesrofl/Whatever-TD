@@ -91,17 +91,18 @@ class Controller {
       _view.showNavigation();
       _view.showHelpBox();
       _view.setPlayerLabel("Name: " + _game.getPlayer().getName());
-      _view.setPointLabel("Points: " + _game.getPlayer().getHighscore().toString());
+      _view.setPointLabel(
+          "Points: " + _game.getPlayer().getHighscore().toString());
       _view.setGoldLabel("Gold: " + _game.getPlayer().getGold().toString());
       _view.setLifeLabel("Life: " + _game.getLife().toString());
     });
-    
+
     buyListener();
     sellListener();
     upgradeListener();
     difficultyListener();
     helpListener();
-    
+
 /* Listener of the cancel button */
     _view.getCancelButton().onClick.listen((ev) {
       _view.hideBuyMenu();
@@ -143,23 +144,23 @@ class Controller {
    */
   void helpListener() {
     _view.getHelpButtonGame().onClick.listen((ev) {
-      if(_view.isHelpGameHidden()){
+      if (_view.isHelpGameHidden()) {
         _view.showHelpGame();
-      }else{
+      } else {
         _view.hideHelpGame();
       }
     });
-    _view.getHelpButtonTower().onClick.listen((ev){
-      if(_view.isHelpTowerHidden()){
+    _view.getHelpButtonTower().onClick.listen((ev) {
+      if (_view.isHelpTowerHidden()) {
         _view.showHelpTower();
-      }else{
+      } else {
         _view.hideHelpTower();
       }
     });
-    _view.getHelpButtonArmor().onClick.listen((ev){
-      if(_view.isHelpArmorHidden()){
+    _view.getHelpButtonArmor().onClick.listen((ev) {
+      if (_view.isHelpArmorHidden()) {
         _view.showHelpArmor();
-      }else{
+      } else {
         _view.hideHelpArmor();
       }
     });
@@ -211,7 +212,8 @@ class Controller {
       for (int i = 0; i < _game.getCol(); i++) {
         for (int j = 0; j < _game.getRow(); j++) {
           _streams.add(
-              _view.getTableDataInRow(_view.getTableRowInBoard(i), j).onClick.listen((ev) {
+              _view.getTableDataInRow(_view.getTableRowInBoard(i), j).onClick
+                  .listen((ev) {
             if (b) {
               _game.getTowerAdmin().getAllTower().forEach((tower) {
                 if (tower.getPosition() != null &&
@@ -220,8 +222,9 @@ class Controller {
                   String id = tower.getPosition().getX().toString() +
                       tower.getPosition().getY().toString();
                   tmp = tower;
-                  enoughMoney = _game.getTowerAdmin().upgradeTower(
-                      tmp, _game.getPlayer(), _game.getBoard(), _game.getRow(), _game.getCol());
+                  enoughMoney = _game.getTowerAdmin().upgradeTower(tmp,
+                      _game.getPlayer(), _game.getBoard(), _game.getRow(),
+                      _game.getCol());
                   if (enoughMoney) _view.upgradeImage(
                       id, tmp.getName(), tmp.getUpgradeLevel());
                 }
@@ -263,10 +266,12 @@ class Controller {
                   tmp = tower;
                 }
               });
-              if (tmp != null) _game.getTowerAdmin().sellTower(tmp, _game.getPlayer());
+              if (tmp != null) _game
+                  .getTowerAdmin()
+                  .sellTower(tmp, _game.getPlayer());
               print(_game.getTowerAdmin().getAllTower().length);
               check = false;
-              _view.hideBuyButton();
+              _view.showBuyButton();
               _view.showUpgradeButton();
               _view.showSellButton();
             }
@@ -291,60 +296,68 @@ class Controller {
       _view.hideUpgradeButton();
       _view.showCancelButton();
     });
-    _view.getCanonTowerButton().onClick.listen((ev) => setTowerImg(_CANONTOWER));
-    _view.getArrowTowerButton().onClick.listen((ev) => setTowerImg(_ARROWTOWER));
+    _view.getCanonTowerButton().onClick
+        .listen((ev) => setTowerImg(_CANONTOWER));
+    _view.getArrowTowerButton().onClick
+        .listen((ev) => setTowerImg(_ARROWTOWER));
     _view.getFireTowerButton().onClick.listen((ev) => setTowerImg(_FIRETOWER));
-    _view.getLightningTowerButton().onClick.listen((ev) => setTowerImg(_LIGHTNINGTOWER));
+    _view.getLightningTowerButton().onClick
+        .listen((ev) => setTowerImg(_LIGHTNINGTOWER));
   }
 /**
  * Sets the tower image to a field
  * @param towerDescription is the identifier of a tower type
  */
   void setTowerImg(int towerDescription) {
-      _view.hideBuyMenu();
-      Field field;
-      bool enough;
-      for (int i = 0; i < _game.getCol(); i++) {
-        for (int j = 0; j < _game.getRow(); j++) {
-          _streams.add(
-              _view.getTableDataInRow(_view.getTableRowInBoard(i), j).onClick
-                  .listen((ev) {
-            String f = j.toString() + i.toString();
-            field = lookUpField(f);
-            switch (towerDescription) {
-              case _CANONTOWER:
-                enough = _game.getTowerAdmin().buyTower(towerDescription, _game.getPlayer(),
-                    field, _game.getBoard(), _game.getRow(), _game.getCol());
-                break;
-              case _ARROWTOWER:
-                enough = _game.getTowerAdmin().buyTower(towerDescription, _game.getPlayer(),
-                    field, _game.getBoard(), _game.getRow(), _game.getCol());
-                break;
-              case _FIRETOWER:
-                enough = _game.getTowerAdmin().buyTower(towerDescription, _game.getPlayer(),
-                    field, _game.getBoard(), _game.getRow(), _game.getCol());
-                break;
-              case _LIGHTNINGTOWER:
-                enough = _game.getTowerAdmin().buyTower(towerDescription, _game.getPlayer(),
-                    field, _game.getBoard(), _game.getRow(), _game.getCol());
-                break;
-              default:
-                break;
-            }
-            if (enough) {
-              _view.showSellButton();
-              _view.showUpgradeButton();
-              _view.showBuyButton();
-              _view..hideCancelButton();
-              _view.setImageToView(f, _game.getTowerAdmin().getAllTower().last.getName());
-            } else {
-              if (towerDescription != 0) {}
-            }
-            towerDescription = 0;
-            endStreamSubscription();
-          }));
-        }
+    _view.hideBuyMenu();
+    Field field;
+    bool enough;
+    for (int i = 0; i < _game.getCol(); i++) {
+      for (int j = 0; j < _game.getRow(); j++) {
+        _streams.add(
+            _view.getTableDataInRow(_view.getTableRowInBoard(i), j).onClick
+                .listen((ev) {
+          String f = j.toString() + i.toString();
+          field = lookUpField(f);
+          switch (towerDescription) {
+            case _CANONTOWER:
+              enough = _game.getTowerAdmin().buyTower(towerDescription,
+                  _game.getPlayer(), field, _game.getBoard(), _game.getRow(),
+                  _game.getCol());
+              break;
+            case _ARROWTOWER:
+              enough = _game.getTowerAdmin().buyTower(towerDescription,
+                  _game.getPlayer(), field, _game.getBoard(), _game.getRow(),
+                  _game.getCol());
+              break;
+            case _FIRETOWER:
+              enough = _game.getTowerAdmin().buyTower(towerDescription,
+                  _game.getPlayer(), field, _game.getBoard(), _game.getRow(),
+                  _game.getCol());
+              break;
+            case _LIGHTNINGTOWER:
+              enough = _game.getTowerAdmin().buyTower(towerDescription,
+                  _game.getPlayer(), field, _game.getBoard(), _game.getRow(),
+                  _game.getCol());
+              break;
+            default:
+              break;
+          }
+          if (enough) {
+            _view.showSellButton();
+            _view.showUpgradeButton();
+            _view.showBuyButton();
+            _view..hideCancelButton();
+            _view.setImageToView(
+                f, _game.getTowerAdmin().getAllTower().last.getName());
+          } else {
+            if (towerDescription != 0) {}
+          }
+          towerDescription = 0;
+          endStreamSubscription();
+        }));
       }
+    }
   }
   /**
    * Looks up a field on the board comparing it to a given string with a field id
@@ -393,9 +406,12 @@ class Controller {
   void clearPath() {
     _game.getLevelAdmin().getPath().forEach((f) {
       String id = f.getX().toString() + f.getY().toString();
-      this._game.getLevelAdmin().getCurrentWave().getDistinctMinions().forEach((m){
-        _view.deleteImage(
-                  id, m.getName());
+      this._game
+          .getLevelAdmin()
+          .getCurrentWave()
+          .getDistinctMinions()
+          .forEach((m) {
+        _view.deleteImage(id, m.getName());
       });
     });
   }
@@ -410,9 +426,18 @@ class Controller {
       _startWave = new Timer.periodic((_startWavePhase), (_) {
         if (counter == 0) {
           _game.startGame();
-          this._view.setLevelLabel("Level: " + _game.getLevelAdmin().getCurrentLevel().toString());
-          this._view.setWaveLabel("Wave: " + _game.getLevelAdmin().getCurrentWave().getWaveNumber().toString());
-          this._view.setMinionsLeftLabel("Minions left: " + (_game.getLevelAdmin().getCurrentWave().getNumberOfMinions() - _game.getLevelAdmin().getCurrentWave().getDeadMinions()).toString());
+          this._view.setLevelLabel(
+              "Level: " + _game.getLevelAdmin().getCurrentLevel().toString());
+          this._view.setWaveLabel("Wave: " +
+              _game
+                  .getLevelAdmin()
+                  .getCurrentWave()
+                  .getWaveNumber()
+                  .toString());
+          this._view.setMinionsLeftLabel("Minions left: " +
+              (_game.getLevelAdmin().getCurrentWave().getNumberOfMinions() -
+                      _game.getLevelAdmin().getCurrentWave().getDeadMinions())
+                  .toString());
           this.setMinionInfo();
           _startWave.cancel();
           _startWave = null;
@@ -426,7 +451,7 @@ class Controller {
           counter--;
         }
         _view.setTillWaveLabel("Next Wave starts in: " + counter.toString());
-      //  if (counter != 0) _view.timerhr.hidden = false;
+        //  if (counter != 0) _view.timerhr.hidden = false;
       });
     }
   }
@@ -434,11 +459,17 @@ class Controller {
    * Sets the tool tip for the minion info images
    */
   void setMinionInfo() {
-    this._game.getLevelAdmin().getCurrentWave().getDistinctMinions().forEach((m) {
+    this._game
+        .getLevelAdmin()
+        .getCurrentWave()
+        .getDistinctMinions()
+        .forEach((m) {
       String name = m.getName();
       String armor = m.getArmor().value.toString();
       String hitPoints = m.getHitpoints().toString();
-      String movementSpeed = (m.getMovementSpeed().inMilliseconds.roundToDouble()/1000).toString();
+      String movementSpeed =
+          (m.getMovementSpeed().inMilliseconds.roundToDouble() / 1000)
+              .toString();
       String droppedGold = m.getDroppedGold().toString();
       this._view.setMinionToolTip(
           name, armor, hitPoints, movementSpeed, droppedGold);
@@ -447,20 +478,22 @@ class Controller {
   /**
    * Starts the updatePlayerDataTimer
    */
-  void startUpdatePlayerDataTimer(){
+  void startUpdatePlayerDataTimer() {
     if (_updatePlayerDataTimer == null) {
       _updatePlayerDataTimer = new Timer.periodic(_playerData, (_) {
         if (!_endOfWave) {
-          if(this._game.getLevelAdmin() != null && this._game.getLevelAdmin().getCurrentWave() != null){
+          if (this._game.getLevelAdmin() != null &&
+              this._game.getLevelAdmin().getCurrentWave() != null) {
             this._game.evaluateKilledMinions(false);
           }
         }
         int gold = _game.getPlayer().getGold();
         _view.setPlayerLabel("Name: " + _game.getPlayer().getName());
-        _view.setPointLabel( "Points: " + _game.getPlayer().getHighscore().toString());
+        _view.setPointLabel(
+            "Points: " + _game.getPlayer().getHighscore().toString());
         if (gold < 0) {
-                 gold = 0;
-               }
+          gold = 0;
+        }
         _view.setGoldLabel("Gold: " + _game.getPlayer().getGold().toString());
         _view.setLifeLabel("Life: " + _game.getLife().toString());
       });
@@ -469,8 +502,8 @@ class Controller {
   /**
    * Stops the updatePlayerDataTimer
    */
-  void stopUpdatePlayerDataTimer(){
-    if(_updatePlayerDataTimer != null){
+  void stopUpdatePlayerDataTimer() {
+    if (_updatePlayerDataTimer != null) {
       _updatePlayerDataTimer.cancel();
       _updatePlayerDataTimer = null;
     }
@@ -478,46 +511,51 @@ class Controller {
   /**
    * Starts the waveEndTimer
    */
-  void startWaveEndTimer(){
+  void startWaveEndTimer() {
     if (_waveEndTimer == null) {
-           _waveEndTimer = new Timer.periodic(_waveEndCheck, (_) {
-             this._view.setMinionsLeftLabel("Minions left: " + (_game.getLevelAdmin().getCurrentWave().getNumberOfMinions() - _game.getLevelAdmin().getCurrentWave().getDeadMinions()).toString());
-             if (_game.getLevelAdmin().isLevelEnd() && _game.getLevelAdmin().isFinalLevel() ||
-                 _game.getLife() <= 0) {
-               clearPath();
-               _game.evaluateKilledMinions(true);
-               /* Player wins */
-               if (_game.getLife() <= 0) {
-                 this._view.setPlayerLabel("Game over!");
-                 _view.setLifeLabel("Life: " + _game.getLife().toString());
-                 /* Player loses */
-               } else {
-                 this._view.setPlayerLabel("Congratz!");
-               }
-               _endOfWave = true;
-               _game.endOfGame();
-               stopWaveEndTimer();
-               stopUpdateMinionTimer();
-               stopUpdatePlayerDataTimer();
-               _view.showDifficultyMenu();
-               this._view.hideStopButton();
-               this._view.clearMinionToolTip();
-             } else if (_game.getLevelAdmin().isLevelEnd() && !_game.getLevelAdmin().isFinalLevel() ||
-                 _game.getLevelAdmin().getCurrentWave().isWaveClear()) {
-               _endOfWave = true;
-               clearPath();
-               this.startWaveTimer();
-               this._view.hideStopButton();
-               this._view.clearMinionToolTip();
-             }
-           });
-         }
+      _waveEndTimer = new Timer.periodic(_waveEndCheck, (_) {
+        this._view.setMinionsLeftLabel("Minions left: " +
+            (_game.getLevelAdmin().getCurrentWave().getNumberOfMinions() -
+                    _game.getLevelAdmin().getCurrentWave().getDeadMinions())
+                .toString());
+        if (_game.getLevelAdmin().isLevelEnd() &&
+                _game.getLevelAdmin().isFinalLevel() ||
+            _game.getLife() <= 0) {
+          clearPath();
+          _game.evaluateKilledMinions(true);
+          /* Player wins */
+          if (_game.getLife() <= 0) {
+            this._view.setPlayerLabel("Game over!");
+            _view.setLifeLabel("Life: " + _game.getLife().toString());
+            /* Player loses */
+          } else {
+            this._view.setPlayerLabel("Congratz!");
+          }
+          _endOfWave = true;
+          _game.endOfGame();
+          stopWaveEndTimer();
+          stopUpdateMinionTimer();
+          stopUpdatePlayerDataTimer();
+          _view.showDifficultyMenu();
+          this._view.hideStopButton();
+          this._view.clearMinionToolTip();
+        } else if (_game.getLevelAdmin().isLevelEnd() &&
+                !_game.getLevelAdmin().isFinalLevel() ||
+            _game.getLevelAdmin().getCurrentWave().isWaveClear()) {
+          _endOfWave = true;
+          clearPath();
+          this.startWaveTimer();
+          this._view.hideStopButton();
+          this._view.clearMinionToolTip();
+        }
+      });
+    }
   }
   /**
    * Stops the waveEndTimer
    */
-  void stopWaveEndTimer(){
-    if(_waveEndTimer != null){
+  void stopWaveEndTimer() {
+    if (_waveEndTimer != null) {
       _waveEndTimer.cancel();
       _waveEndTimer = null;
     }
@@ -525,13 +563,17 @@ class Controller {
   /**
    * Starts the updateMinionTimer
    */
-  void startUpdateMinionTimer(){
+  void startUpdateMinionTimer() {
     if (_updateMinionTimer == null) {
       _updateMinionTimer = new Timer.periodic(_updateMinion, (_) {
-        this._view.setMinionsLeftLabel("Minions left: " + (_game.getLevelAdmin().getCurrentWave().getNumberOfMinions() - _game.getLevelAdmin().getCurrentWave().getDeadMinions()).toString());
+        this._view.setMinionsLeftLabel("Minions left: " +
+            (_game.getLevelAdmin().getCurrentWave().getNumberOfMinions() -
+                    _game.getLevelAdmin().getCurrentWave().getDeadMinions())
+                .toString());
         String id;
-        Field lastField =
-            _game.getLevelAdmin().getPath()[_game.getLevelAdmin().getPath().length - 1];
+        Field lastField = _game
+            .getLevelAdmin()
+            .getPath()[_game.getLevelAdmin().getPath().length - 1];
         List<Minion> deadMinions = new List<Minion>();
         List<Minion> leakedMinions = new List<Minion>();
         /* Delete image on last field of path if there are no active minions */
@@ -541,8 +583,10 @@ class Controller {
           for (int i = 0;
               i < _game.getLevelAdmin().getCurrentWave().getMinions().length;
               i++) {
-            _view.deleteImage(
-                id, _game.getLevelAdmin().getCurrentWave().getMinions()[i].getName());
+            _view.deleteImage(id, _game
+                .getLevelAdmin()
+                .getCurrentWave()
+                .getMinions()[i].getName());
           }
           /* There are minions on the board */
         } else {
@@ -555,10 +599,14 @@ class Controller {
             String oldId;
             /* Minion is dead */
             if (m.getHitpoints() <= 0) {
-              for(int i = 0; i < 2; i++){
+              for (int i = 0; i < 2; i++) {
                 id = (m.getPosition().getX() - i).toString() +
-                                         (m.getPosition().getY() - i).toString();
-                _game.getLevelAdmin().getCurrentWave().getDistinctMinions().forEach((m){
+                    (m.getPosition().getY() - i).toString();
+                _game
+                    .getLevelAdmin()
+                    .getCurrentWave()
+                    .getDistinctMinions()
+                    .forEach((m) {
                   _view.deleteImage(id, m.getName());
                 });
               }
@@ -567,9 +615,9 @@ class Controller {
             } else {
               if (m.getStepsOnPath() < _game.getLevelAdmin().getPath().length) {
                 if (m.getStepsOnPath() != 0) {
-                  oldId = _game.getLevelAdmin().getPath()[m.getStepsOnPath() - 1]
-                          .getX()
-                          .toString() +
+                  oldId = _game
+                          .getLevelAdmin()
+                          .getPath()[m.getStepsOnPath() - 1].getX().toString() +
                       m.getPath()[m.getStepsOnPath() - 1].getY().toString();
                   _view.deleteImage(oldId, m.getName());
                 }
@@ -585,7 +633,10 @@ class Controller {
         if (deadMinions.isNotEmpty) {
           deadMinions.forEach((m) {
             _game.getLevelAdmin().getCurrentWave().incDeadMinions();
-            _game.getLevelAdmin().getCurrentWave().incDroppedGold(m.getDroppedGold());
+            _game
+                .getLevelAdmin()
+                .getCurrentWave()
+                .incDroppedGold(m.getDroppedGold());
             _game.getLevelAdmin().getActiveMinions().remove(m);
           });
         }
@@ -602,10 +653,10 @@ class Controller {
   /**
    * Stops the updateMinionTimer
    */
-  void stopUpdateMinionTimer(){
-    if(_updateMinionTimer != null){
-    _updateMinionTimer.cancel();
-    _updateMinionTimer = null; 
+  void stopUpdateMinionTimer() {
+    if (_updateMinionTimer != null) {
+      _updateMinionTimer.cancel();
+      _updateMinionTimer = null;
     }
   }
-  }
+}
