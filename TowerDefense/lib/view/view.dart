@@ -696,4 +696,24 @@ Element getHardButton(){
   Element getTableDataInRow(Element tableRow, int i){
     return tableRow.children.elementAt(i);
   }
+  /**
+   * Sets the Game Over Text after the player lost the game
+   */
+  void setGameOver(){
+    querySelector("#gameOver").style.color = "red";
+    querySelector("#gameOver").innerHtml = "Game Over!";
+  }
+  /**
+   * Sets the Congratz Text after the player won the game
+   */
+  void setCongratz(){
+    querySelector("#gameOver").style.color = "white";
+    querySelector("#gameOver").innerHtml = "Congratz, You won!";
+  }
+  /**
+   * Clears the Game Over Tag
+   */
+  void clearGameOver(){
+    querySelector("#gameOver").innerHtml = "";
+  }
 }

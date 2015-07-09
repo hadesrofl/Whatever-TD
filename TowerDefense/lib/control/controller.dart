@@ -421,6 +421,7 @@ class Controller {
   void startWaveTimer() {
     _view.showTillWaveLabel();
     int counter = this._startCounter;
+    this._view.clearGameOver();
     startUpdatePlayerDataTimer();
     if (_startWave == null) {
       _startWave = new Timer.periodic((_startWavePhase), (_) {
@@ -525,11 +526,11 @@ class Controller {
           _game.evaluateKilledMinions(true);
           /* Player wins */
           if (_game.getLife() <= 0) {
-            this._view.setPlayerLabel("Game over!");
+            this._view.setGameOver();
             _view.setLifeLabel("Life: " + _game.getLife().toString());
             /* Player loses */
           } else {
-            this._view.setPlayerLabel("Congratz!");
+            this._view.setCongratz();
           }
           _endOfWave = true;
           _game.endOfGame();

@@ -1,7 +1,7 @@
 <allLevels>
 	<easyLevels>
-		<level no="1" finalLevel="false">
-				<wave no="1" finalWave="false">
+		<level no="1" finalLevel="true">
+				<wave no="1" finalWave="true">
 					<minion ref="weakKratzke" numberOfMinions="10"></minion>
 					<minion ref="dart" numberOfMinions="2"></minion>	
 					<minion ref="docker" numberOfMinions="2"></minion>		
