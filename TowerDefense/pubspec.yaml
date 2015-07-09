@@ -4,6 +4,7 @@ description: A sample command-line application.
 environment:
   sdk: '>=1.0.0 <2.0.0'
 dependencies:
+  browser: any
   html5lib: any
   start: any
   xml: any
