@@ -3,6 +3,7 @@ part of level;
 /**
  * This class represents a wave object. A wave has a specific number of minions. 
  * Many waves together are one level
+ * @author René Kremer
  */
 class Wave {
   /**

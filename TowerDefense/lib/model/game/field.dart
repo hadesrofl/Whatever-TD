@@ -2,6 +2,7 @@ part of game;
 
 /**
  * Class to represent a field on our board
+ * @author Florian Winzek
  */
 class Field {
   /**

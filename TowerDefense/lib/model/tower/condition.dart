@@ -2,6 +2,7 @@ part of tower;
 
 /**
  * This Class represents a condition object, which can be applied to a minion
+ * @author René Kremer
  */
 class Condition {
   /**

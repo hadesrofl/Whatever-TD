@@ -5,6 +5,11 @@ import "../view/view.dart";
 import 'dart:async';
 import 'package:TowerDefense/model/level/levelAdmin.dart';
 
+/**
+ * Controller of the Tower Defense. The Controller is the interface
+ * to the view and model and reacts to the inputs of the player
+ * @author Florian Winzek, René Kremer
+ */
 class Controller {
   /**
    * Static for identifying a Canon Tower

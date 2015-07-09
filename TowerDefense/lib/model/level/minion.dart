@@ -2,6 +2,7 @@ part of level;
 
 /**
    * This class represents a minion object.
+   * @author René Kremer
    */
 class Minion {
   /**

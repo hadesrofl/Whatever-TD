@@ -1,6 +1,7 @@
 part of level;
 /**
    * Enum for Armor Types
+   * @author René Kremer
    */
 class Armor{
 	/**

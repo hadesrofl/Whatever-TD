@@ -12,6 +12,7 @@ part "armor.dart";
 
 /**
  * This Class manages different levels
+ * @author René Kremer
  */
 class LevelAdmin {
   /**
