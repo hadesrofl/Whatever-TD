@@ -1,11 +1,22 @@
 body{
-  background-image: url(../img/background/background2.gif);
+  background-image: url(../img/background/background.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
 #top{
   text-align: center;
   color: white;
+}
+footer{
+  text-align: center;
+  font-size: 22px;
+  color: white;  
+}
+a:link {
+    color: lightgrey;
+}
+a:visited {
+    color: lightgrey;
 }
 #navigation > ul, #helpBox > ul{   
   padding: 4px;
@@ -26,7 +37,7 @@ body{
    text-align: center;
    text-style: bold;
    background-color: lightgreen;
-   margin: 50px 200px 15px 15px;
+   margin: 50px 325px 15px 150px;
    width: 250px;
    border-radius: 10px;
    border: solid black 2px;
@@ -57,12 +68,11 @@ body{
    background-color: lightgreen;
    margin-top: 50px;
    margin-left: 10px;
-   margin-right: 75px;
+   margin-right: 150px;
    width: 250px;
    border: solid black 2px;
 }
 #stop{
-   /* background: #262626; */
     background: lightgrey;
 }
 #board{
@@ -73,20 +83,17 @@ body{
    margin: auto;
 }
 #minionInfo td{
-  height: 38px;
-  width: 38px;
+  height: 32px;
+  width: 32px;
 }
 #board td {
   text-align: right;
-  height: 38px;
-  width: 38px;
+  height: 32px;
+  width: 32px;
   background-image: url("../img/background/grass.jpg");
 }
 #player{
   margin-left: 200px;
-}
-#board td.Shot{
-  background-image: url("../img/38px/towers/Start Explosion.png");
 }
 #board td.Path{
     background-image: url("../img/background/dirt.jpg");
@@ -94,71 +101,71 @@ body{
       background-size: cover;
 }
 /* Minion Images */
-#board td.amazon, #minionInfo td.amazon{
-      background-image: url("../img/minions/amazon.png");
+#board td.dinosaur, #minionInfo td.dinosaur{
+      background-image: url("../img/minions/dinosaur.gif");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.apple, #minionInfo td.apple{
-      background-image: url("../img/minions/apple.png");
+#board td.dragon, #minionInfo td.dragon{
+      background-image: url("../img/minions/dragon.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.cookieMonster, #minionInfo td.cookieMonster{
-      background-image: url("../img/minions/cookiemonster.jpg");
+#board td.eye, #minionInfo td.eye{
+      background-image: url("../img/minions/eye.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.dart, #minionInfo td.dart{
-      background-image: url("../img/minions/dart.jpg");
+#board td.gaia, #minionInfo td.gaia{
+      background-image: url("../img/minions/gaia.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.docker, #minionInfo td.docker{
-      background-image: url("../img/minions/docker.png");
+#board td.goblin, #minionInfo td.goblin{
+      background-image: url("../img/minions/goblin.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.facebook, #minionInfo td.facebook{
-      background-image: url("../img/minions/facebook.png");
+#board td.lurker, #minionInfo td.lurker{
+      background-image: url("../img/minions/lurker.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.google, #minionInfo td.google{
-      background-image: url("../img/minions/google.png");
+#board td.oneeyedbee, #minionInfo td.oneeyedbee{
+      background-image: url("../img/minions/oneeyedbee.gif");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.internetExplorer, #minionInfo td.internetExplorer{
-      background-image: url("../img/minions/internetexplorer.jpg");
+#board td.ratking, #minionInfo td.ratking{
+      background-image: url("../img/minions/ratking.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.strongKratzke, #minionInfo td.strongKratzke{
-      background-image: url("../img/minions/strongkratzke.jpg");
+#board td.skeleton, #minionInfo td.skeleton{
+      background-image: url("../img/minions/skeleton.png");
             background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.twitter, #minionInfo td.twitter{
-      background-image: url("../img/minions/twitter.jpg");
+#board td.slime, #minionInfo td.slime{
+      background-image: url("../img/minions/slime.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.weakKratzke, #minionInfo td.weakKratzke{
-      background-image: url("../img/minions/weakkratzke.jpeg");
+#board td.turtle, #minionInfo td.turtle{
+      background-image: url("../img/minions/turtle.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
-#board td.whatsapp, #minionInfo td.whatsapp{
-      background-image: url("../img/minions/whatsapp.png");
+#board td.wizard, #minionInfo td.wizard{
+      background-image: url("../img/minions/wizard.png");
       background-repeat: no-repeat;
       background-size: cover;
 }
 
 /* Tower Images */
 .TowerButton{
-  height: 38px;
-  width: 38px;
+  height: 32px;
+  width: 32px;
   background-repeat: no-repeat;
   background-size: cover;
   border: solid black 2px;
@@ -170,37 +177,37 @@ body{
 }
 
 #board td.CanonTower, .TowerButton.CanonTower{
-  background-image: url("../img/towers/canontower.jpg");
+  background-image: url("../img/towers/canontower.png");
 }
 #board td.CanonTower2{
-    background-image: url("../img/towers/canontower2.jpg");
+    background-image: url("../img/towers/canontower2.png");
 }
 #board td.CanonTower3{
-    background-image: url("../img/towers/canontower3.jpg");
+    background-image: url("../img/towers/canontower3.png");
 }
 #board td.ArrowTower, .TowerButton.ArrowTower{
-  background-image: url("../img/towers/arrowtower.jpg");
+  background-image: url("../img/towers/arrowtower.png");
 }
 #board td.ArrowTower2 {
-    background-image: url("../img/towers/arrowtower2.jpg");
+    background-image: url("../img/towers/arrowtower2.png");
 }
 #board td.ArrowTower3{
-    background-image: url("../img/towers/arrowtower3.jpg");
+    background-image: url("../img/towers/arrowtower3.png");
 }
 #board td.LightningTower, .TowerButton.LightningTower{
-  background-image: url("../img/towers/lightningtower.jpg");
+  background-image: url("../img/towers/lightningtower.png");
 }
 #board td.LightningTower2{
-    background-image: url("../img/towers/lightningtower2.png");
+    background-image: url("../img/towers/lightningtower2.jpg");
 }
 #board td.LightningTower3{
     background-image: url("../img/towers/lightningtower3.jpg");
 }
 #board td.FireTower, .TowerButton.FireTower{
-  background-image: url("../img/towers/firetower.jpg");
+  background-image: url("../img/towers/firetower.png");
 }
 #board td.FireTower2{
-    background-image: url("../img/towers/firetower2.jpg");
+    background-image: url("../img/towers/firetower2.png");
 }
 #board td.FireTower3{
     background-image: url("../img/towers/firetower3.png");

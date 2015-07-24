@@ -10,7 +10,7 @@ class CanonTower extends Tower {
     this.setName("CanonTower");
     this.setRange(2);
     this.setPrice(300);
-    this.setSellingPrice(70);
+    this.setSellingPrice(150);
     this.setUpgradeLevel(1);
     this.setAttackSpeed(1.1);
     this.setBasicDamage(7.0);

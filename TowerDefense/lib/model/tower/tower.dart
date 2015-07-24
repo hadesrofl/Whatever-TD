@@ -147,7 +147,7 @@ class Tower {
     this.setPrice(this.newPriceAfterUpgrade());
     this.setUpgradeLevel(this.getUpgradeLevel() + 1);
     this.setAttackSpeed(this.getAttackSpeed() * (this.getUpgradeLevel()));
-    this.setRange(this.getRange() + (this.getUpgradeLevel()));
+    this.setRange(this.getRange() + 1);
     this.setSellingPrice(this.getSellingPrice() * (this.getUpgradeLevel()));
     this.setBasicDamage(this.getBasicDamage() * (this.getUpgradeLevel()));
     if (this._name != "ArrowTower") this
@@ -239,6 +239,6 @@ class Tower {
    * TODO: 500 need to be fixed by this.getPrice()
    */
   int newPriceAfterUpgrade() {
-    return (this.getUpgradeLevel() + 1) * 500;
+    return (this.getUpgradeLevel() + 1) * this._price;
   }
 }

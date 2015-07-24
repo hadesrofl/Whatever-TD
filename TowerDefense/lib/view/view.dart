@@ -195,13 +195,13 @@ class View {
    */
   void setTowerToolTip() {
     getCanonTowerButton().setAttribute("title",
-        "Price: 300\nBasicDamage: 7.0\nRange: 2\nDamageType: Siege\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+        "Price: 300\nBasicDamage: 7.0\nRange: 2\nDamageType: Siege\nWith Upgrade the values are multiplied by its level and current value(Level 2: x2 etc.)");
     getArrowTowerButton().setAttribute("title",
-        "Price: 150\nBasicDamage: 5.0\nRange: 3\nDamageType: Piercing\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+        "Price: 150\nBasicDamage: 5.0\nRange: 3\nDamageType: Piercing\nWith Upgrade the values are multiplied by its level and current value(Level 2: x2 etc.)");
     getFireTowerButton().setAttribute("title",
-        "Price: 1000\nBasicDamage: 10.0\nRange: 2\nDamageType: Fire\nSpecial Ability: does dmg/seconds\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+        "Price: 600\nBasicDamage: 10.0\nRange: 2\nDamageType: Fire\nSpecial Ability: does dmg/seconds\nWith Upgrade the values are multiplied by its level and current value (Level 2: x2 etc.)");
     getLightningTowerButton().setAttribute("title",
-        "Price: 1000\nBasicDamage: 10.0\nRange: 2\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level(Level 2: x2 etc.)");
+        "Price: 600\nBasicDamage: 10.0\nRange: 2\nDamageType: Lightning\nWith Upgrade the values are multiplied by its level and current value(Level 2: x2 etc.)");
   }
   /**
    * Sets the tool tip of a minion
